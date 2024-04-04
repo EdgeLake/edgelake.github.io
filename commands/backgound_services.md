@@ -8,21 +8,27 @@ Connecting to an EdgeLake Network requires 2 services:
 
 ### run tcp server
 
-Usage:
-<pre><code>
-        run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
-</code></pre>
+**Usage**:
+<pre>
+    <code>
+run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
+    </code>
+</pre>
 
-Explanation:
-        Set a TCP server in a listening mode on the specified IP and port.
-        The first pair of IP and Port that are used by a listener process to receive messages from members of the network.
-        The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.
-        threads - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.
+**Explanation**: Set a TCP server in a listening mode on the specified IP and port.
 
-Examples:
-        run tcp server where external_ip = !ip and external_port = !port  and threads = 3
-        run tcp server where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
+* The first pair of IP and Port that are used by a listener process to receive messages from members of the network.
+* The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.
+* _threads_ - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.
 
+**Examples**:
+<pre>
+    <code>
+run tcp server where external_ip = !ip and external_port = !port  and threads = 3
+
+run tcp server where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
+    </code>
+</pre>
 
 
 
