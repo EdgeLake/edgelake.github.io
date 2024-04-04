@@ -7,27 +7,29 @@ Connecting to an EdgeLake Network requires 2 services:
 2. ** run blockchain sync** - A service that continuously synchronizes the metadata 
 
 ### run tcp server
-
-**Usage:**
-<pre><code>
+**Usage**:
+<pre>
+    <code>
 run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
-</code></pre>
+    </code>
+</pre>
 
-**Explanation:**
+**Explanation**: Set a TCP server in a listening mode on the specified IP and port.
 
-Set a TCP server in a listening mode on the specified IP and port.  
-The first pair of IP and Port that are used by a listener process to receive messages from members of the network.  
-The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.  
-threads - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.  
+* The first pair of IP and Port that are used by a listener process to receive messages from members of the network.
+* The second pair of IP and Port are optional, to indicate the IP and Port that are accessible from a local network.
+* _threads_ - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.
 
-**Examples:**
+**Examples**:
+<pre>
+    <code>
+run tcp server where external_ip = !ip and external_port = !port  and threads = 3
 
-run tcp server where external_ip = !ip and external_port = !port  and threads = 3  
-run tcp server where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6  
+run tcp server where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
+    </code>
+</pre>
 
-**Details**
-
-[run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
+**Details**: [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
 
 
 ### run blockchain sync
