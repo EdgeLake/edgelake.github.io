@@ -58,7 +58,9 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
    * _Docker_
    * _docker-compose_
    * _Makefile_
-```shell
+
+<pre>
+    <code class="language-shell">
 sudo snap install docker
 sudo apt-get -y install docker-compose 
 sudo apt-get -y install make
@@ -68,13 +70,17 @@ USER=`whoami`
 sudo groupadd docker 
 sudo usermod -aG docker ${USER} 
 newgrp docker
-```
+    </code>
+</pre>
+
 
 2. Clone _docker-compose_ repository from EdgeLake
-```shell
+<pre>
+    <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
 cd docker-compose
-```
+    </code>
+</pre>
 
 **Deploy EdgeLake**:
 
@@ -83,7 +89,8 @@ cd docker-compose
    * [operator node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env)
    * [query node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env)
 
-```dotenv
+<pre>
+    <code class="language-dotenv">
 #--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
@@ -109,17 +116,20 @@ LEDGER_CONN=127.0.0.1:32048
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
 DEPLOY_LOCAL_SCRIPT=false
-```
+    </code>
+</pre>
 
 2. Start Node using _makefile_
-```shell
+<pre>
+    <code class="language-shell">
 make up [NODE_TYPE]
 
 # examples
 make up master
 make up operator
 make up query
-```
+    </code>
+</pre>
 
 ## Prerequisite and Setup considerations
 <table>
