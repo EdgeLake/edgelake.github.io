@@ -122,22 +122,72 @@ make up query
 ```
 
 ## Prerequisite and Setup considerations
-| Feature               | Requirement  |
-| --------------------- | ------------| 
-| Operating System      | Linux (Ubuntu, RedHat, Alpine, Suse), Windows, OSX |
-| Memory footprint      | 100 MB available for EdgeLake deployed without Docker |
-|                       | 300 MB available for EdgeLake deployed with Docker |
-| Databases             | PostgreSQL installed (optional) |
-|                       | SQLite (default, no need to install) |
-|                       | MongoDB installed (Only if blob storage is needed) |
-| CPU                   | Intel, ARM and AMD are supported. |
-|                       | EdgeLake can be deployed on a single CPU machine and up to the largest servers (can be deployed on gateways, Raspberry PI, and all the way to the largest multi-core machines).|
-| Storage               | EdgeLake supports horizontal scaling - nodes (and storage) are added dynamically as needed, therefore less complexity in scaling considerations. Requirements are based on expected volume and duration of data on each node. EdgeLake supports automated archival and transfer to larger nodes (if needed). |
-| Network               | Required: a TCP based network (local TCP based networks, over the internet and combinations are supported) |
-|                       | An overlay network is recommended. Most overlay networks can be used transparently. Nebula used as a default overlay network. |
-|                       | Static IP and 3 ports open and accessible on each node (either via an Overlay Network, or without an Overlay). |
-| Cloud Integration     | Build in integration using REST, Pub-Sub, and Kafka. |
-| Deployment options    | Executable (can be deployed as a background process), or Docker or Kubernetes. |
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Requirement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Operating System</td>
+      <td>Linux (Ubuntu, RedHat, Alpine, Suse), Windows, OSX</td>
+    </tr>
+    <tr>
+      <td>Memory footprint</td>
+      <td>100 MB available for EdgeLake deployed without Docker</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>300 MB available for EdgeLake deployed with Docker</td>
+    </tr>
+    <tr>
+      <td>Databases</td>
+      <td>PostgreSQL installed (optional)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>SQLite (default, no need to install)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>MongoDB installed (Only if blob storage is needed)</td>
+    </tr>
+    <tr>
+      <td>CPU</td>
+      <td>Intel, ARM and AMD are supported.</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>EdgeLake can be deployed on a single CPU machine and up to the largest servers (can be deployed on gateways, Raspberry PI, and all the way to the largest multi-core machines).</td>
+    </tr>
+    <tr>
+      <td>Storage</td>
+      <td>EdgeLake supports horizontal scaling - nodes (and storage) are added dynamically as needed, therefore less complexity in scaling considerations. Requirements are based on expected volume and duration of data on each node. EdgeLake supports automated archival and transfer to larger nodes (if needed).</td>
+    </tr>
+    <tr>
+      <td>Network</td>
+      <td>Required: a TCP based network (local TCP based networks, over the internet and combinations are supported)</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>An overlay network is recommended. Most overlay networks can be used transparently. Nebula used as a default overlay network.</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Static IP and 3 ports open and accessible on each node (either via an Overlay Network, or without an Overlay).</td>
+    </tr>
+    <tr>
+      <td>Cloud Integration</td>
+      <td>Build in integration using REST, Pub-Sub, and Kafka.</td>
+    </tr>
+    <tr>
+      <td>Deployment options</td>
+      <td>Executable (can be deployed as a background process), or Docker or Kubernetes.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 **Comments**:
