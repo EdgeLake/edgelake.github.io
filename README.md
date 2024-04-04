@@ -1,3 +1,8 @@
+<div align="right">
+<img src="imgs/edgelake_logo.png" height="5%" width="5%" align="right"/>
+</div>
+
+
 # EdgeLake
 
 Transform your edge nodes into members of a permissioned decentralized network, optimized to manage and monitor data and resources at the edge.
