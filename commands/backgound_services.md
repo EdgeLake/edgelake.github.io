@@ -9,7 +9,9 @@ Connecting to an EdgeLake Network requires 2 services:
 ### run tcp server
 
 Usage:
+<pre><code>
         run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
+</code></pre>
 
 Explanation:
         Set a TCP server in a listening mode on the specified IP and port.
