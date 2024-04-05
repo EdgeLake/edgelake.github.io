@@ -5,13 +5,14 @@
 [list the background services and their status](#list-the-background-services-and-their-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
-[REST Services](#rest-services)
-[The message broker services](#message-broker-services)
-[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)
-[Subscribe to Kafka](#subscribe-to-kafka)
-[gRPC Client Service](#grpc-client-service)
-[SMTP Client](#run-smtp-client)
-[The Scheduler Services](#the-scheduler-services)
+[REST Services](#rest-services)  
+[The message broker services](#message-broker-services)  
+[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)  
+[Subscribe to Kafka](#subscribe-to-kafka)  
+[gRPC Client Service](#grpc-client-service)  
+[SMTP Client](#run-smtp-client)  
+[The Scheduler Services](#the-scheduler-services)  
+[The Blobs Archiver Services](#blob-archiver-services)  
 
 ## list the background services and their status
 
