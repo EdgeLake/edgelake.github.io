@@ -53,3 +53,9 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+theme: minima
+plugins:
+  - jekyll-toc
+markdown: kramdown
+kramdown:
+  input: GFM
