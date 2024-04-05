@@ -1,6 +1,6 @@
 # FLEDGE Connection
 
-The following code is based on [fledge-http-north](https://github.com/fledge-iot/fledge-north-http), but instead of 
+AnyLog's fledge-connector is based on [fledge-http-north](https://github.com/fledge-iot/fledge-north-http), but instead of 
 sending data between FLEDGE nodes, it allows sending data into AnyLog via _POST_ or _PUT_. 
 
 * [Docker Hub](https://hub.docker.com/r/robraesemann/fledge)
@@ -13,10 +13,7 @@ sending data between FLEDGE nodes, it allows sending data into AnyLog via _POST_
    * FLEDGE-GUI
    * FLEDGE Southbound services OpenWeatherMap
  
-## Acccepting Data from FLEDGE into EdgeLake
-The following deployment is using docker-compose packages created by [Rob Raesemann](https://hub.docker.com/u/robraesemann)
- 
-
+## Accepting Data from FLEDGE into EdgeLake
 1. Clone AnyLog's fledge-connector
 <pre>
    <code>
