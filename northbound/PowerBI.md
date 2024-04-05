@@ -8,15 +8,18 @@ In order to support PowerBI, return data as a list of JSON values without the st
 
 
 **Sample cURL request**
-```bash
+<pre>
+   <code>
  curl -X GET 10.1.2.10:2149 \
     -H 'command: sql aiops format=json:list and stat=false "SELECT date(timestamp) as timestamp, min(value) as min, avg(value) as avg, max(value) as max FROM lic1_mv group by timestamp ORDER by timestamp limit 10"' \
     -H "User-Agent: AnyLog/1.23" \ 
     -H "destination: network" -w "\n"
-```
+   </code>
+</pre>
 
 **Sample Output** (the data is returned as a list of JSON objects).
-```json
+<pre>
+   <code>
 [
     {"timestamp": "2021-12-17", "min": 16.07562231854013, "avg": 16.07562231854013, "max": 16.07562231854013},
     {"timestamp": "2021-12-18", "min": 0.7819949317261932, "avg": 37.58098167042068, "max": 85.13897566679766},
@@ -29,7 +32,8 @@ In order to support PowerBI, return data as a list of JSON values without the st
     {"timestamp": "2022-01-08", "min": 53.17291222256768, "avg": 78.21358089166576, "max": 93.42429844531414},
     {"timestamp": "2022-01-09", "min": 54.664901456750904, "avg": 75.73146536262269, "max": 96.79802926849446}
 ]
-```
+   </code>
+</pre>
 
 ## Using PowerBI
 
