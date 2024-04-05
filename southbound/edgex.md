@@ -126,3 +126,5 @@ side to accept data.
 )&gt;
     </code>
 </pre>
+
+EdgeLake deployment comes with a sample connection to EdgeX that accepts data IoTech System _lighting_ and _retail-device1_.
