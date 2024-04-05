@@ -6,6 +6,8 @@
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
 [REST Services](#rest-services)
+[The message broker services](#message-broker-services)
+[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)
 
 
 ## list the background services and their status
@@ -109,7 +111,7 @@ get synchronizer
 
 Return the synchronizer status.
 
-**details:** [Synchronier Status](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#synchronizer-status).
+**Details:** [Synchronier Status](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#synchronizer-status).
 
 ## The local data storage service
 
@@ -148,7 +150,7 @@ run operator where create_table = true and update_tsd_info = true and archive_js
     </code>
 </pre>
 
-**details:** [Operator Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
+**Details:** [Operator Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
 
 ### get operator
@@ -211,7 +213,7 @@ run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0
 </pre>
 
 
-**details:** [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
+**Details:** [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
 
 
 ### get rest server info
@@ -223,17 +225,69 @@ Statistics on the REST calls.
 ### get rest pool
 Status of REST threads.
 
+## message broker services
+Enable and monitor a service that operates as a message broker, allowing to publish data on the EdgeLake Node.
+
+### run message broker
+**Usage:**
+<pre>
+    <code>
+run message broker where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
+    </code>
+</pre>
+
+**Explanation:**  Set a message broker in a listening mode on the specified IP and port. **Threads count** represents the number of threads supporting the service.
+
+**Examples:**
+<pre>
+    <code>
+run message broker where external_ip = !ip and external_port = !port  and threads = 3
+run message broker where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
+    </code>
+</pre>
+
+**Details:** [Message Broker SErvices]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
+
+### get local broker
+Statistics on the local broker (if the data is published to the IP and Port of the node's message broker server).
+
+## Subscribe to a 3rd party broker
+
+Retrieve data from a 3rd party broker and monitor the streaming process.
+
+### run msg client
+The command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.
+The mapping can be done using command variables, or by associating a mapping policy (from the metadata). See details below and with 
+the details link.
+
+**Usage:**
+<pre>
+    <code>
+run msg client where broker = [url] and port = [port] and user = [user] and password = [password] and topic = (name = [topic name] and dbms = [dbms name] and table = [table name] and [participating columns info])
+</pre>
+
+**Explanation:**  
+
+**Examples:**
+<pre>
+    <code>
+run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]
+" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
+
+
+    </code>
+</pre>
+
+**Details:** [Message Broker SErvices]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
 
 
 
 
 
  get blobs archiver
- get rest server info
  run blobs archiver
  run grpc client
  run kafka consumer
- run message broker
  run msg client
  run scheduler
  run smtp client
