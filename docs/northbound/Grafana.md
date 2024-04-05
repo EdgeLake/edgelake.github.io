@@ -50,7 +50,7 @@ docker run --name=grafana \
 ## Setting Up Grafana 
 1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
 
-<img src="../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+<img src="../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
 
 2. In _Data Sources_ section, create a new JSON data source
    * select a JSON data source.
@@ -59,11 +59,11 @@ docker run --name=grafana \
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query
 
-|<img src="../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
+|<img src="../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
 | :---: | :---: |
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
-<img src="../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
+<img src="../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
 
 ### Enabling Authentication
 
@@ -72,11 +72,11 @@ Enabling authentication is explained at [Authenticating HTTP requests](../authen
 When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
 the Grafana configuration should have _basic auth_ enabled.
 
-<img src="../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
+<img src="../../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
 
 While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
 
-<img src="../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
+<img src="../../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
 
 **Notes**: Failure to connect may be the result of one of the following
 * AnyLog instance is not running or not configured to support REST calls.
@@ -156,7 +156,7 @@ The additional information is provided using a JSON script with the following at
 </table>
 
 
-<img src="../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
+<img src="../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 
 ### Blockchain based Visualization
 
@@ -177,7 +177,7 @@ The additional information is provided using a JSON script with the following at
     </code>
 </pre>
 
-<img src="../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
+<img src="../../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
 
 
 **Creating Table from Blockchain**
@@ -196,7 +196,7 @@ The additional information is provided using a JSON script with the following at
     </code>
 </pre>
 
-<img src="../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+<img src="../../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
 
 ### Using the Time-Series Data Visualization
 
@@ -279,7 +279,7 @@ More information on increments and period types of queries are available in [que
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
-<img src="../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
+<img src="../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
 
 **Period Graphs**
 1. In the _Visualizations_ section, select _Gauge_
@@ -303,7 +303,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
 
-<img src="../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
+<img src="../../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
 
 
 **Other Examples**

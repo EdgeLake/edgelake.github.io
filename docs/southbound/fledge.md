@@ -58,7 +58,7 @@ cp -r $HOME/fledge-connector/anylog_rest_conn/ /usr/local/fledge/python/fledge/p
    * **Asset List**: - Comma separated list of assets to send using this AnyLog connection. If no assets set, then data 
    from all assets will be sent
    * **Database Name** - logical database to store data in AnyLog
-![North Plugin Configs](../imgs/fledge_north_plugin.png)
+![North Plugin Configs](../../imgs/fledge_north_plugin.png)
 
 At this point data will send into EdgeLake via REST. 
 

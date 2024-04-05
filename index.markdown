@@ -5,7 +5,3 @@
 layout: home
 ---
 
-[Commands]
-[Southbound]
-[Northbound]
-[Examples]
