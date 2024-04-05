@@ -166,7 +166,7 @@ curl -X POST \
   -H 'command: blockchain push !new_policy' \
   -H 'User-Agent: AnyLog/1.23' \
   -H 'Content-Type: application/json' \
-  -d '<new_policy={"panel": {"name": "panel 1", "city": "Los Angeles, CA", "loc": "33.8121, -117.91899", "owner": "AFG"}}>'
+  -d '&lt;new_policy={"panel": {"name": "panel 1", "city": "Los Angeles, CA", "loc": "33.8121, -117.91899", "owner": "AFG"}}&gt;'
     </code>
 </pre>
 
