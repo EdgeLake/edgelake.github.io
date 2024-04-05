@@ -5,10 +5,14 @@
 [list the background services and their status](#list-the-background-services-and-their-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
-[REST Services](#rest-services)
-[The message broker services](#message-broker-services)
-[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)
-
+[REST Services](#rest-services)  
+[The message broker services](#message-broker-services)  
+[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)  
+[Subscribe to Kafka](#subscribe-to-kafka)  
+[gRPC Client Service](#grpc-client-service)  
+[SMTP Client](#run-smtp-client)  
+[The Scheduler Services](#the-scheduler-services)  
+[The Blobs Archiver Services](#blob-archiver-services)  
 
 ## list the background services and their status
 
@@ -246,7 +250,7 @@ run message broker where external_ip = !external_ip and external_port = 7850 and
     </code>
 </pre>
 
-**Details:** [Message Broker SErvices]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
+**Details:** [Message Broker Services](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
 
 ### get local broker
 Statistics on the local broker (if the data is published to the IP and Port of the node's message broker server).
@@ -254,6 +258,9 @@ Statistics on the local broker (if the data is published to the IP and Port of t
 ## Subscribe to a 3rd party broker
 
 Retrieve data from a 3rd party broker and monitor the streaming process.
+
+* [run msg client](#run-msg-client)
+* [get msg client](#get-msg-client)
 
 ### run msg client
 The command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.
@@ -264,32 +271,187 @@ the details link.
 <pre>
     <code>
 run msg client where broker = [url] and port = [port] and user = [user] and password = [password] and topic = (name = [topic name] and dbms = [dbms name] and table = [table name] and [participating columns info])
+    </code>
 </pre>
 
-**Explanation:**  
+**Explanation:**  Subscribe to a broker according to the url provided to receive data on the provided topic.
 
 **Examples:**
 <pre>
     <code>
 run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]
 " and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-
-
     </code>
 </pre>
 
-**Details:** [Message Broker SErvices]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
+**Details:** [Message Client](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker)
+
+### get msg client
+**Usage:**
+<pre>
+    <code>
+get msg clients where [options]
+    </code>
+</pre>
+
+**Explanation:** Information on messages received by clients subscribed to message brokers.
+      
+**Examples:**
+<pre>
+    <code>
+        get msg clients
+        get msg client where id = 3
+        get msg client where topic = anylogedgex
+        get msg client where broker = driver.cloudmqtt.com:18785 and topic = anylogedgex
+    </code>
+</pre>
+
+**Details:** [get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)
 
 
+## Subscribe to Kafka
+
+The command is similar to the [run msg client](#run-msg-client) command. Monitoring is with the [get msg client](#get-msg-client) command.
+**Usage:**
+<pre>
+    <code>
+run kafka consumer where ip = [ip] and port = [port]] and reset = [latest/earliest] and topic = [topic and mapping instructions]
+    </code>
+</pre>
+
+**Explanation:** Initialize a Kafka consumer that subscribes to one or more topics of a kafka instance and continuously 
+polls data assigned to the subscribed topics using the provided IP and Port. The reset value determines the offset whereas the default is latest.
+
+**Examples:**
+<pre>
+    <code>
+run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = earliest and topic = (name = sensor and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")
+    </code>
+</pre>
+
+**Details:** [Data consumers services](https://github.com/AnyLog-co/documentation/blob/master/using%20kafka.md#anylog-serves-as-a-data-consumer).
+
+## gRPC Client Service
+
+Subscribe to a gRPC broker and monitor the data flow.
+[run grpc client](#run-grpc-client)
+[get grpc client](#get-grpc-client)
+
+### run grpc client
+**Usage:**
+<pre>
+    <code>
+run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id]
+    </code>
+</pre>
+
+**Explanation:** Subscribe to a gRPC broker on the provided IP and Port and map data using the designated mapping policy.
+
+**Examples:**
+<pre>
+    <code>
+run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and policy = deff520f1096bcd054b22b50458a5d1c
+    </code>
+</pre>
+
+**Details:** [gRPC Client Service](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md#initiating-a-grpc-client).
+
+### get grpc client
+List the active gRPC clients and the data exchange info.
+
+##  run smtp client
+
+**Usage:**
+<pre>
+    <code>
+run smtp client where host = [host name] and port = [port] and email = [email address] and password = [email password] and ssl = [true/false]
+    </code>
+</pre>
+
+**Explanation:** Initiates an SMTP instance encapsulates an SMTP connection to a server.
+
+**Examples:**
+<pre>
+    <code>
+run smtp client where email = anylog.iot@gmail.com and password = google4anylog
+    </code>
+</pre>
+
+**Details:** [SMTP Client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client).
+
+## The Scheduler Services
+Users can enable multiple schedulers. A scheduler contains a group of tasks that are executed periodically.
+[run scheduler](#run-scheduler) - enable the service
+[get scheduler]()
+
+### Run Scheduler
+
+**Usage:**
+<pre>
+    <code>
+run scheduler [id]
+    </code>
+</pre>
+
+[id] - Optional value, representing the scheduler ID. The default value is 1, representing a user scheduler.
+
+**Explanation:**  Repeatedly execute scheduled jobs.
+
+**Examples:**
+<pre>
+    <code>
+run scheduler 1
+    </code>
+</pre>
+
+**Details:** [The Scehdualer](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#invoking-a-scheduler).
+
+### Get Scheduler
+Monitor the scheduler
+**Usage:**
+<pre>
+    <code>
+get scheduler [n]
+    </code>
+</pre>
+
+**Explanation:** Information on the scheduled tasks. [n] - an optional ID for the scheduler. Scheduler 1 manage user scheduled tasks, 0 is the system scheduler. 
+
+**Examples:**
+<pre>
+    <code>
+get scheduler
+get scheduler 1
+    </code>
+</pre>
+
+**Details:** [View Scheduled Commands](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#view-scheduled-commands).
 
 
+## Blob Archiver Services
+The Blob Archiver is a service that manage blob data on the node.
+* [run blobs archiver] - Enables the service.
+* [get blobs archiver] - Monitors the service.
+ 
+### run blobs archiver
+  
+**Usage:**
+<pre>
+    <code>
+run blobs archiver where blobs_dir = [data directory location] and archive_dir = [archive directory location] and dbms = [true/false] and file = [true/false] and compress = [true/f
+    </code>
+</pre>
 
- get blobs archiver
- run blobs archiver
- run grpc client
- run kafka consumer
- run msg client
- run scheduler
- run smtp client
- run streamer
- set data distribution
+**Explanation:**  Archive large objects.
+
+**Examples:**
+<pre>
+    <code>
+run blobs archiver where dbms = true and file = true and compress = false
+    </code>
+</pre>
+
+**Details:** [The Blobs Archiver]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
+
+### get blobs archiver
+Return information on the Blobs Archiver processes.
