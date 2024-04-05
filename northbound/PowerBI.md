@@ -1,4 +1,4 @@
-# EdgeLake with PowerBI + Microsoft Office Suite 
+# EdgeLake with PowerBI 
 
 The following provides insight as to how to generate graphs and images using [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/downloads/) with data from EdgeLake. 
 The same process can be done with _Excel_ and other Microsoft tools. 
