@@ -59,8 +59,12 @@ docker run --name=grafana \
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query
 
-|<img src="../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /> | 
-| :---: | :---: |
+<table>
+  <tr>
+    <td><img src="../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
+    <td><img src="../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /></td>
+  </tr>
+</table>
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
 <img src="../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />

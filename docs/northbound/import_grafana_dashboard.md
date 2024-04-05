@@ -50,9 +50,13 @@ Log into Grafana and Declare a _(JSON) Data Source_
    * On the URL tab add the REST address offered by the EdgeLake node (i.e. http://10.0.0.25:2049)
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all EdgeLake hosted databases will be available to a query process.
 
+<table>
+  <tr>
+    <td><img src="../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
+    <td><img src="../../imgs/grafana_datasource_configuration.png" alt="Data Source Config" /></td>
+  </tr>
+</table>
 
-|<img src="../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /> | <img src="../../imgs/grafana_datasource_configuration.png" alt="Data Source Config" /> | 
-| :---: | :---: |
 
 
 ## Uploading Dashboard
@@ -63,17 +67,28 @@ Log into Grafana and Declare a _(JSON) Data Source_
 
 2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](../docs/examples/grafana_json/edgex_dashboard.json)).
 
-| <img src="../../imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /> | <img src="../../imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%"/> |
-|:--------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------:|
+<table>
+  <tr>
+    <td><img src="../../imgs/grafana_json_model_empty.png" alt="Empty JSON Model" width="75%" height="75%" /></td>
+    <td><img src="../../imgs/grafana_json_model.png" alt="JSON Model" width="75%" height="75%" /></td>
+  </tr>
+</table>
 
 3. Save Changes
 
 
 4. Once the changes are saved, you should see a new Dashboard 
 
-| Before |                                After                                |
-| :---: |:-------------------------------------------------------------------:|
-| <img src="../../imgs/grafana_no_dashboard.png" alt="No Dashboards" /> | <img src="../../imgs/grafana_new_dashboard.png" alt="New Dashboard" /> | 
+<table>
+  <tr>
+    <td align="center">Before</td>
+    <td align="center">After</td>
+  </tr>
+  <tr>
+    <td><img src="../../imgs/grafana_no_dashboard.png" alt="No Dashboards" /></td>
+    <td><img src="../../imgs/grafana_new_dashboard.png" alt="New Dashboard" /></td>
+  </tr>
+</table>
 
 5. For each of the widgets update the following information:
    * Data Source 
@@ -81,6 +96,17 @@ Log into Grafana and Declare a _(JSON) Data Source_
 
 Once these changes are saved, the outcome should look something like this:
 
-|          View when accessing Dashboard          |                             Update Data Source                              | Update Metric Value | Outcome | 
-|:-----------------------------------------------:|:---------------------------------------------------------------------------:| :---: | :---:  |
-| ![Edit Widget](../../imgs/grafana_edit_button.png) | ![grafana_update_datasource.png](..%2Fimgs%2Fgrafana_update_datasource.png) | ![grafana_update_table.png](..%2Fimgs%2Fgrafana_update_table.png) | ![grafana_outcome.png](..%2Fimgs%2Fgrafana_outcome.png) |   
+<table>
+  <tr>
+    <td align="center">View when accessing Dashboard</td>
+    <td align="center">Update Data Source</td>
+    <td align="center">Update Metric Value</td>
+    <td align="center">Outcome</td>
+  </tr>
+  <tr>
+    <td><img src="../../imgs/grafana_edit_button.png" alt="Edit Widget" /></td>
+    <td><img src="../../imgs/grafana_update_datasource.png" alt="Update Data Source" /></td>
+    <td><img src="../../imgs/grafana_update_table.png" alt="Update Metric Value" /></td>
+    <td><img src="../../imgs/grafana_outcome.png" alt="Outcome" /></td>
+  </tr>
+</table>
