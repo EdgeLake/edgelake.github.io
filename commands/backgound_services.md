@@ -5,6 +5,7 @@
 [list the background services and their status](#list-the-background-services-and-their-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
+[REST Services](#rest-services)
 
 
 ## list the background services and their status
@@ -12,7 +13,7 @@
 **Usage**:
 <pre>
     <code>
-get processes
+get processes [where format = json]
     </code>
 </pre>
 
@@ -152,6 +153,79 @@ run operator where create_table = true and update_tsd_info = true and archive_js
 
 ### get operator
 
+**Usage:**
+<pre>
+    <code>
+get operator [options] [where format = json]
+    </code>
+</pre>
+
+**Explanation:**
+
+Return information on the Operator processes and configuration.
+
+**Examples:**
+<pre>
+    <code>
+get operator
+get operator inserts
+get operator summary
+get operator config
+get operator summary where format = json
+    </code>
+</pre>
+
+**details:** [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator)
+
+## REST Services
+Enable and monitor a service that receives commands and data via REST from 3rd parties applications and data sources.
+
+* Enable the service: [run rest server](#run-rest-server)
+* Monitor the REST service:
+    * [get rest server info]
+    * [get rest calls]
+    * [get rest pool]
+
+###  run rest server
+**Usage:**
+<pre>
+    <code>
+ run rest server where external_ip = [external_ip ip] and external_port = [external port] and internal_ip = [internal ip] and internal_port = [internal port] and timeout = [timeout]
+ and ssl = [true/false] and bind = [true/false]
+   </code>
+</pre>
+
+**Explanation:**
+
+Enable a REST server in a listening mode on the specified ip and port.
+* The IP and Ports associate the service with external and internal IPs and Ports.
+* [timeout] - Max wait time in seconds. A 0 value means no wait limit, and the default value is 20 seconds. A timeout returns an error message to the calling application. 
+* If ssl is set to True, connection is using HTTPS.
+* If bind is **true**, only the specified IP is allowed (with 2 IPs, the external is ignored).
+
+Examples:
+<pre>
+    <code>
+run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0 and threads = 6 and ssl = true
+    </code>
+</pre>
+
+
+**details:** [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
+
+
+### get rest server info
+Provide configuration information of the REST server.
+
+### get rest calls
+Statistics on the REST calls.
+
+### get rest pool
+Status of REST threads.
+
+
+
+
 
 
  get blobs archiver
@@ -161,9 +235,7 @@ run operator where create_table = true and update_tsd_info = true and archive_js
  run kafka consumer
  run message broker
  run msg client
- run rest server
  run scheduler
  run smtp client
  run streamer
- run tcp server
  set data distribution
