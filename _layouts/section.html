@@ -4,10 +4,10 @@ layout: default
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 order-md-1"> <!-- Change order to 1 to move to the left -->
       {% include toc.html html=content %}
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 order-md-2"> <!-- Change order to 2 to keep content on right -->
       {{ content }}
     </div>
   </div>
