@@ -2,7 +2,7 @@
 
 **Table of content:**
 
-[list the background services and their status](#list-the-background-services-and-their-status)    
+[List of background services and their status](#background-services-and-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
 [REST Services](#rest-services)  
@@ -14,7 +14,7 @@
 [The Scheduler Services](#the-scheduler-services)  
 [The Blobs Archiver Services](#blob-archiver-services)  
 
-## list the background services and their status
+## Background services and status
 
 **Usage**:
 <pre>
