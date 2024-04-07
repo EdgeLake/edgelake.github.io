@@ -148,7 +148,7 @@ drop partition [partition name] where dbms = [dbms name] and table = [table name
 </pre>
 
 **Explanation**: Drops a partition in the named database and table.
-* [partition name] is optional. If partition name is ommited, the oldest partition of the table is dropped.
+* [partition name] is optional. If partition name is omitted, the oldest partition of the table is dropped.
 * keep = [value] is optional. If a value is provided, the oldest partitions will be dropped to keep the number of partitions 
   as the value provided.If the table has only one partition, an error value is returned.
 * If table name is asterisk (*), a partition from every table from the specified database is dropped.
