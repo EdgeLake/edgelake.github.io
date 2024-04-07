@@ -4,7 +4,9 @@ The metadata commands are agnostic to the metadata platform used. When an EdgeLa
 select a blockchain platform or a master node as their metadata storage, The metadata commands operate indistinguishably 
 on the platform used.
 
-Note: The metadata commands start with the keyword blockchain, regardless if the metadata platform used.
+Notes: 
+* The metadata commands start with the keyword blockchain, regardless if the metadata platform used.
+* Run **blockchain help** on the EdgeLake CLI for a complete list of the blockchain commands.
 
 ## Blockchain Seed
 The **blockchain seed** command pulls a copy of the metadata from a peer node. When a node is properly configured,
@@ -54,6 +56,30 @@ blockchain insert where policy = !policy and local = true and blockchain = ether
 
 **Details**: [Blockchain Insert Command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-blockchain-insert-command)
 
+## Delete a policy from the metadata
+
+**Usage**:
+<pre>
+    <code>
+blockchain delete policy where id = [policy id] and master = [IP:Port] and local =[true/false] and blockchain = [platform]
+    </code>
+</pre>
+
+Identify the metadata platform by including one of these 2 values: 
+* blockchain - the blockchain platform to use
+* master - the ip and port of the master node.
+
+**Explanation**:  Delete a policy from the ledger.
+
+**Examples**:
+<pre>
+    <code>
+blockchain delete policy where id = 64283dba96a4c818074d564c6be20d5c and master = !master_node
+blockchain delete policy where id = 64283dba96a4c818074d564c6be20d5c and local = true and blockchain = ethereum
+    </code>
+</pre>
+
+
 ## Connect to a blockchain platform
 The **blockchain connect** and **blockchain set account info** commands are used to connect to the blockchain platform. 
 Ignore these commands if a master node is used.
@@ -99,7 +125,8 @@ blockchain set account info where platform = ethereum and private_key = !private
 
 ## Enable a master Node
 If a master node is used, prepare a database table called **ledger** to host a local copy of the ledger using the 
-**blockchain create table** command.
+**blockchain create table** command.  
+If a master node failed, use the **blockchain update dbms** command to update a new master with an existing ledger file.
 
 ### blockchain create table
 
@@ -122,31 +149,81 @@ blockchain create table
 </pre>
 
 
+### blockchain update dbms
 
+**Usage**:
+<pre>
+    <code>
+blockchain update dbms [path and file name]
+    </code>
+</pre>
 
+**Explanation**:  Update the local DBMS with the policies in the named file. If file name is not provided, use the default **blockchain.json** file.
 
+**Examples**:
+<pre>
+    <code>
+blockchain update dbms
+    </code>
+</pre>
 
-
-blockchain delete local file
-blockchain delete policy where id = [policy id] and master = [IP:Port] and local =[true/false]
-blockchain deploy contract where platform = [platform name] and public_key = [public key]
-blockchain drop by host [ip]
-blockchain drop policy where id = [policy id]
-blockchain drop policy [policy]
-blockchain drop table
-blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
-blockchain insert where policy = [policy] and blockchain = [platform] and local = [true/false] and master = [IP:Port]
-blockchain load metadata
-blockchain prepare policy [policy]
-blockchain pull to [json | sql | stdout] [file name]
-blockchain push [policy]
-blockchain query metadata
-blockchain read [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
-blockchain reload metadata
-blockchain replace policy [policy id] with [new policy]
-blockchain set account info where platform = [platform name] and [platform parameters]
-blockchain state where platform = [platform name]
-blockchain switch network where master = [IP:Port]
+## Test that the local copy of the ledger is with correct format
+**Usage**:
+<pre>
+    <code>
 blockchain test
-blockchain test cluster
-blockchain update dbms [path and file name] [ignore message]
+    </code>
+</pre>
+
+**Explanation**:  Validate the structure of the local copy of the ledger.
+
+**Examples**:
+<pre>
+    <code>
+blockchain test
+    </code>
+</pre>
+
+
+## Delete a local copy of the ledger 
+**Usage**:
+<pre>
+    <code>
+blockchain delete local file
+    </code>
+</pre>
+
+**Explanation**: Delete the local JSON file with the blockchain data.
+
+**Examples**:
+<pre>
+    <code>
+blockchain delete local file
+    </code>
+</pre>
+
+## Retrieve metadata from the ledger
+
+**Usage**:
+<pre>
+    <code>
+blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
+    </code>
+</pre>
+
+**Explanation**:  Get the metadata policies or information from the policies that satisfy the search criteria.
+
+
+**Examples**:
+<pre>
+    <code>
+blockchain get *
+blockchain get operator where dbms = lsl_demo
+blockchain get cluster where table[dbms] = purpleair and table[name] = air_data bring [cluster][id] separator = ,
+blockchain get operator bring.table [*] [*][name] [*][ip] [*][port]
+blockchain get * bring.table.unique [*]
+    </code>
+</pre>
+
+**Details**: [Query Policies](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies).
+
