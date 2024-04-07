@@ -25,10 +25,69 @@ connect dbms sensor_data where type = psql and user = anylog and password = demo
     </code>
 </pre>
 
+**Details**: [Connect to a local DBMS](https://github.com/AnyLog-co/documentation/blob/master/sql%20setup.md#connecting-to-a-local-database).
 
+### Get associations between logical and physical databases
 
+**Usage**:
+<pre>
+    <code>
+get databases
+    </code>
+</pre>
 
+**Explanation**: Get the list of connected databases on this node.
 
+**Examples**:
+<pre>
+    <code>
+get databases
+    </code>
+</pre>
 
+## Partition Data
 
+### Partition table's data by time
+**Usage**:
+<pre>
+    <code>
+partition [dbms name] [table name] using [column name] by [time interval]
+    </code>
+</pre>
+
+**Explanation**: 
+* Partition a table or a group of tables by time interval
+* Time intervals options are: year, month, week, days in a month
+
+**Examples**:
+<pre>
+    <code>
+partition lsl_demo ping_sensor using timestamp by 2 days
+partition lsl_demo ping_sensor using timestamp by month
+partition lsl_demo * using timestamp by month
+    </code>
+</pre>
+
+**Details**: [Data Partitioning](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
+
+### Get partition information
+**Usage**:
+<pre>
+    <code>
+get partitions [info string]
+    </code>
+</pre>
+
+**Explanation**: Get partitions declarations for all tables or a designated table or the recently dropped partitions.
+
+**Examples**:
+<pre>
+    <code>
+get partitions
+get partitioned dropped
+get partitions where dbms = lsl_demo and table = ping_sensor
+    </code>
+</pre>
+
+**Details**: [Data Partitioning](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
 
