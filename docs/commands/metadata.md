@@ -97,13 +97,36 @@ blockchain set account info where platform = ethereum and private_key = !private
 
 **Details**: [Using Ethereum as a Global Metadata Platform](https://github.com/AnyLog-co/documentation/blob/master/using%20ethereum.md#using-ethereum-as-a-global-metadata-platform).
 
+## Enable a master Node
+If a master node is used, prepare a database table called **ledger** to host a local copy of the ledger using the 
+**blockchain create table** command.
 
+### blockchain create table
 
-
-
-
-
+**Usage**:
+<pre>
+    <code>
 blockchain create table
+    </code>
+</pre>
+
+**Explanation**: Create the 'ledger' table on the local **blockchain** DBMS.    
+Note: Associate a physical database (like PostgreSQL) to the logical DBMS (**blockchain**) prior to creating the 
+ledger table. A physical database is associated to a logical database using the [connect dbms](data_management.md#associate-a-physical-database-to-a-logical-database) command.
+
+**Examples**:
+<pre>
+    <code>
+blockchain create table
+    </code>
+</pre>
+
+
+
+
+
+
+
 blockchain delete local file
 blockchain delete policy where id = [policy id] and master = [IP:Port] and local =[true/false]
 blockchain deploy contract where platform = [platform name] and public_key = [public key]
@@ -121,7 +144,6 @@ blockchain query metadata
 blockchain read [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
 blockchain reload metadata
 blockchain replace policy [policy id] with [new policy]
-blockchain seed from [ip:port]
 blockchain set account info where platform = [platform name] and [platform parameters]
 blockchain state where platform = [platform name]
 blockchain switch network where master = [IP:Port]
