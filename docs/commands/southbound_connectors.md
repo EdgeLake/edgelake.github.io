@@ -9,7 +9,9 @@ Users stream their data into Operator Nodes. These nodes are configured to host 
 * Optionally, users defile a **Mapping Policy** to instruct a schema and the mapping rules.
 * Additional logic on the streaming data can be added by rules in one of the following manners:
     * Specifying rules in the **Mapping Policy**.
+      Details are available in the [Mapping Data](https://github.com/AnyLog-co/documentation/blob/master/mapping%20data%20to%20tables.md#mapping-data) section.
     * Specifying rules with the node's **Rule Engine**.
+      Details are available in the [Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section.
     
 
 ## Southbound connectors
@@ -24,6 +26,7 @@ Users can transfer data to nodes in the network using one of the following metho
 * [Using Kafka](https://github.com/AnyLog-co/documentation/blob/master/using%20kafka.md)
 * [Using Syslog](https://github.com/AnyLog-co/documentation/blob/master/using%20syslog.md).
 * [Using gRPC](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md).
+* [Using Node-Red](https://github.com/AnyLog-co/documentation/blob/master/node_red.md).
 
 
 
