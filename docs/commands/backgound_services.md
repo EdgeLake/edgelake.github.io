@@ -286,7 +286,7 @@ Retrieve data from a 3rd party broker and monitor the streaming process.
 * [Get subscription info](#get-subscription-info)
 
 ### Subscribe to a broker
-The **run msg client** command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.
+The **run msg client** command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.  
 The mapping can be done using command variables, or by associating a mapping policy (from the metadata). See details below and with 
 the details link.
 
@@ -310,6 +310,7 @@ run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user =
 
 ### Get subscription info
 Get configuration and statistics information from the subscription process. 
+
 **Usage:**
 <pre>
     <code>
@@ -335,6 +336,7 @@ get msg clients where [options]
 ## Subscribe to Kafka
 
 The command is similar to the [run msg client](#subscribe-to-a-broker) command. Monitoring is with the [get msg client](#get-subscription-info) command.
+
 **Usage:**
 <pre>
     <code>
@@ -381,6 +383,7 @@ run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and p
 
 ### Get gRPC connection info
 List the active gRPC clients and the data exchange info.
+
 **Usage:**
 <pre>
     <code>
@@ -440,6 +443,7 @@ run scheduler 1
 
 ### Get Scheduler
 Monitor the scheduler
+
 **Usage:**
 <pre>
     <code>
@@ -487,6 +491,7 @@ run blobs archiver where dbms = true and file = true and compress = false
 
 ### Get blobs archiver info
 Return information on the Blobs Archiver processes.
+
 **Usage:**
 <pre>
     <code>
