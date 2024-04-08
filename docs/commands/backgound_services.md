@@ -2,7 +2,7 @@
 
 **Table of content:**
 
-[List of background services and their status](#background-services-and-status)    
+[List of background services and their status](#get-the-list-of-data-services-and-their-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 [The local data storage service](#the-local-data-storage-service)  
 [REST Services](#rest-services)  
@@ -10,11 +10,11 @@
 [Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)  
 [Subscribe to Kafka](#subscribe-to-kafka)  
 [gRPC Client Service](#grpc-client-service)  
-[SMTP Client](#run-smtp-client)  
+[SMTP Client](#enable-smtp-client-service)  
 [The Scheduler Services](#the-scheduler-services)  
 [The Blobs Archiver Services](#blob-archiver-services)  
 
-## Background services and status
+### Get the list of data services and their status 
 
 **Usage**:
 <pre>
@@ -31,15 +31,16 @@ get processes [where format = json]
 ## Connect to the EdgeLake Network
 
 Connecting to an EdgeLake Network requires 2 services:
-1. [run tcp server](#run-tcp-server) - A listener service for incoming messages.
-2. [run blockchain sync](#run-blockchain-sync) - A service that continuously synchronizes the metadata.
+1. [Enable the TCP service](#enable-the-tcp-service) - A listener service for incoming messages.
+2. [Enable the blockchain synchronization service](#enable-the-blockchain-synchronization-service) - A service that continuously synchronizes the metadata.
 
 Monitoring the services' status:
-1. [get connections](#get-connections) - Return the node's connection information.
-2. [get synchronizer](#get-synchronizer) - Return the metadata synchronization information.
+1. [get connections](#get-the-network-configuration-info) - Return the node's connection information.
+2. [get synchronizer](#get-the-metadata-synchronization-info) - Return the metadata synchronization information.
 
 
-### run tcp server
+### Enable the TCP service
+The TCP service provides the functionality to send and recieve messages from peer nodes using the EdgeLake Network Protocol.
 **Usage**:
 <pre>
     <code>
@@ -64,7 +65,7 @@ run tcp server where external_ip = !external_ip and external_port = 7850 and int
 
 **Details**: [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
 
-### get connections
+### Get the network configuration info
 **Usage**:
 <pre>
     <code>
@@ -76,7 +77,7 @@ get connections
 
 Return the node's connection information including the TCP service information.
 
-### run blockchain sync
+### Enable the blockchain synchronization service
 **Usage**:
 <pre>
     <code>
@@ -103,7 +104,7 @@ run blockchain sync where source = blockchain and time = !sync_time and dest = f
 </pre>
 
 
-### get synchronizer
+### Get the metadata synchronization info
 **Usage**:
 <pre>
     <code>
@@ -119,9 +120,9 @@ Return the synchronizer status.
 
 ## The local data storage service
 
-### run operator
-
-A service that captures the data streams, identifies or creates schemas and ingest the data into a local database.
+### Configure the Operator service
+The Operator service provides the local data storage functionalities.  
+The service captures the data streams, identifies or creates schemas and ingest the data into a local database.
 
 **Usage**:
 <pre>
@@ -157,7 +158,8 @@ run operator where create_table = true and update_tsd_info = true and archive_js
 **Details:** [Operator Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
 
-### get operator
+### Get Operator info
+The **get operator** command returns info on the configuration and data processed by the Operator service.
 
 **Usage:**
 <pre>
@@ -186,13 +188,13 @@ get operator summary where format = json
 ## REST Services
 Enable and monitor a service that receives commands and data via REST from 3rd parties applications and data sources.
 
-* Enable the service: [run rest server](#run-rest-server)
+* Enable the service: [run rest server](#enable-the-rest-service)
 * Monitor the REST service:
-    * [get rest server info]
-    * [get rest calls]
-    * [get rest pool]
+    * [get rest server info](#rest-service-info-commands)
+    * [get rest calls](#rest-service-info-commands)
+    * [get rest pool](#rest-service-info-commands)
 
-###  run rest server
+###  Enable the REST service
 **Usage:**
 <pre>
     <code>
@@ -219,20 +221,35 @@ run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0
 
 **Details:** [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
 
+### REST service info commands
+The following commands return info on the REST service configuration and processes:
 
-### get rest server info
-Provide configuration information of the REST server.
+Configuration information of the REST service:
+<pre>
+    <code>
+get rest server info
+    </code>
+</pre>
 
-### get rest calls
-Statistics on the REST calls.
+Statistics on the REST calls:
+<pre>
+    <code>
+get rest calls
+    </code>
+</pre>
 
-### get rest pool
-Status of REST threads.
+Status of REST threads:
+<pre>
+    <code>
+get rest pool
+    </code>
+</pre>
 
-## message broker services
+
+## Message broker services
 Enable and monitor a service that operates as a message broker, allowing to publish data on the EdgeLake Node.
 
-### run message broker
+### Enable the message broker service
 **Usage:**
 <pre>
     <code>
@@ -252,18 +269,24 @@ run message broker where external_ip = !external_ip and external_port = 7850 and
 
 **Details:** [Message Broker Services](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
 
-### get local broker
-Statistics on the local broker (if the data is published to the IP and Port of the node's message broker server).
+### Get info on the Message Broker service
+The following command returns statistics on the local broker:
+
+<pre>
+    <code>
+get local broker
+    </code>
+</pre>
 
 ## Subscribe to a 3rd party broker
 
 Retrieve data from a 3rd party broker and monitor the streaming process.
 
-* [run msg client](#run-msg-client)
-* [get msg client](#get-msg-client)
+* [Subscribe to a broker](#subscribe-to-a-3rd-party-broker)
+* [Get subscription info](#get-subscription-info)
 
-### run msg client
-The command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.
+### Subscribe to a broker
+The **run msg client** command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.
 The mapping can be done using command variables, or by associating a mapping policy (from the metadata). See details below and with 
 the details link.
 
@@ -286,7 +309,8 @@ run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user =
 
 **Details:** [Message Client](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker)
 
-### get msg client
+### Get subscription info
+Get configuration and statistics information from the subscription process. 
 **Usage:**
 <pre>
     <code>
@@ -311,7 +335,7 @@ get msg clients where [options]
 
 ## Subscribe to Kafka
 
-The command is similar to the [run msg client](#run-msg-client) command. Monitoring is with the [get msg client](#get-msg-client) command.
+The command is similar to the [run msg client](#subscribe-to-a-broker) command. Monitoring is with the [get msg client](#get-subscription-info) command.
 **Usage:**
 <pre>
     <code>
@@ -334,10 +358,10 @@ run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = earliest
 ## gRPC Client Service
 
 Subscribe to a gRPC broker and monitor the data flow.
-[run grpc client](#run-grpc-client)
-[get grpc client](#get-grpc-client)
+* [run grpc client](#enable-grpc-client-service)
+* [get grpc client](#get-grpc-connection-info)
 
-### run grpc client
+### Enable gRPC client service
 **Usage:**
 <pre>
     <code>
@@ -356,10 +380,17 @@ run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and p
 
 **Details:** [gRPC Client Service](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md#initiating-a-grpc-client).
 
-### get grpc client
+### Get gRPC connection info
 List the active gRPC clients and the data exchange info.
+**Usage:**
+<pre>
+    <code>
+get grpc client
+    </code>
+</pre>
 
-##  run smtp client
+
+##  Enable smtp client service
 
 **Usage:**
 <pre>
@@ -381,8 +412,10 @@ run smtp client where email = anylog.iot@gmail.com and password = google4anylog
 
 ## The Scheduler Services
 Users can enable multiple schedulers. A scheduler contains a group of tasks that are executed periodically.
-[run scheduler](#run-scheduler) - enable the service
-[get scheduler]()
+* [run scheduler](#run-scheduler) - Enable the service.    
+* [get scheduler](#get-scheduler) - Get the scheduler service info.
+
+A detailed description is available in the [](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring) section.
 
 ### Run Scheduler
 
@@ -430,10 +463,10 @@ get scheduler 1
 
 ## Blob Archiver Services
 The Blob Archiver is a service that manage blob data on the node.
-* [run blobs archiver] - Enables the service.
-* [get blobs archiver] - Monitors the service.
+* [Enable the blobs archiver service](#enable-the-blobs-archiver-service)
+* [Get blobs archiver info](#get-blobs-archiver-info)
  
-### run blobs archiver
+### Enable the blobs archiver service
   
 **Usage:**
 <pre>
@@ -453,5 +486,11 @@ run blobs archiver where dbms = true and file = true and compress = false
 
 **Details:** [The Blobs Archiver]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
 
-### get blobs archiver
+### Get blobs archiver info
 Return information on the Blobs Archiver processes.
+**Usage:**
+<pre>
+    <code>
+get blobs archiver
+    </code>
+</pre>
