@@ -27,8 +27,13 @@ description: ""
 #  Google search results) and in your feed.xml site description.
 baseurl: "/" # Set baseurl to root
 url: "https://edgelake.github.io" # Update URL to include protocol and domain
-twitter_username: ""
+#twitter_username: ""
 github_username:  edgelake
+external_links:
+  slack_community: "https://edgelake.slack.com"  # Replace with your Slack community URL
+
+
+
 
 # Build settings
 theme: minima
