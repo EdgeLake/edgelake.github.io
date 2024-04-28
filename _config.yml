@@ -43,6 +43,19 @@ markdown: kramdown
 kramdown:
   input: GFM
 
+aux_links:
+  "Home":
+   - "/"
+  "Quick Start":
+   - "/commands/"
+  "Northbound":
+   - "/northbound/"
+  "Southbound":
+   - "/southbound/"
+  "Deploy EdgeLake":
+   - "//github.com/EdgeLake/docker-compose"
+
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
@@ -66,3 +79,5 @@ exclude:
 
 # Add logo to the URL tab
 favicon: "/imgs/edgelake_logo.png"
+
+
