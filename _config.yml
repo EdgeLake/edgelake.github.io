@@ -52,6 +52,8 @@ aux_links:
    - "/northbound/"
   "Southbound":
    - "/southbound/"
+  "Sample Code":
+    - "/examples/"
   "Deploy EdgeLake":
    - "//github.com/EdgeLake/docker-compose"
 
