@@ -60,7 +60,7 @@ callouts:
 
 
 # Build settings
-theme: default
+theme: "just-the-docs"
 plugins:
   - jekyll-toc
   - jekyll-seo-tag
