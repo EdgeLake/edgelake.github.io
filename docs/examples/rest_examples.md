@@ -17,7 +17,15 @@ requests.
 following command on the EdgeLake command line:
 <pre>
     <code>
-run rest server where external_ip = [external_ip ip] and external_port = [external port] and internal_ip = [internal ip] and internal_port = [internal port] and timeout = [timeout] and ssl = [true/false] and bind = [true/false] 
+<run rest server where 
+   external_ip = [external_ip ip] and 
+   external_port = [external port] and 
+   internal_ip = [internal ip] and 
+   internal_port = [internal port] and 
+   timeout = [timeout] and 
+   ssl = [true/false] and 
+   bind = [true/false] 
+>
     </code>
 </pre>
 
