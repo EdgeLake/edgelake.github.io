@@ -1,3 +1,9 @@
+---
+layout: default
+title: Background Services
+parent: Commands 
+nav_order: 1
+---
 # Background services
 
 **Table of content:**

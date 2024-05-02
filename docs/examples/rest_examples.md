@@ -1,4 +1,10 @@
- # Using REST
+---
+layout: default
+title: Using REST
+nav_order: 3
+---
+ 
+# Using REST
 
 Users can interact with the nodes in the network using REST.
 

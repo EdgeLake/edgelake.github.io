@@ -1,3 +1,9 @@
+---
+layout: default
+parent: Southbound Examples
+title: FLEDGE
+nav_order: 2
+---
 # FLEDGE Connection
 
 AnyLog's fledge-connector is based on [fledge-http-north](https://github.com/fledge-iot/fledge-north-http), but instead of 

@@ -1,3 +1,9 @@
+---
+layout: default
+parent: Northbound Examples
+title: Using PowerBI
+nav_order: 2
+---
 # EdgeLake with PowerBI 
 
 The following provides insight as to how to generate graphs and images using [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/downloads/) with data from EdgeLake. 

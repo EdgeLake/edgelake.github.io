@@ -1,3 +1,9 @@
+---
+layout: default
+parent: Northbound Examples
+title: Using Grafana - importing dashboards
+nav_order: 3
+---
 # Importing EdgeLake related dashboards into Grafana
 
 Instructions to create and manage your Grafana instance with EdgeLake, can be found in [Using Grafana](using%20grafana.md) 

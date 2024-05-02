@@ -1,3 +1,9 @@
+---
+layout: default
+parent: Commands
+title: Data Management
+nav_order: 2
+---
 ## Data management commands
 
 The data management commands organize the node's local databases and provide the functionalities to monitor the state of the

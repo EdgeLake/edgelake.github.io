@@ -1,3 +1,9 @@
+---
+layout: default
+title: Northbound Services
+parent: Commands
+nav_order: 5
+---
 # Connect to the network
 
 Users and applications connect to the network by issuing commands to a single node in the network. This node serves as a

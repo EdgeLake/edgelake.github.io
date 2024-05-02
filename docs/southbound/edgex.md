@@ -1,3 +1,9 @@
+---
+layout: default
+title: EdgeX 
+parent: Southbound Examples
+nav_order: 1
+---
 # EdgeX connection 
 
 EdgeX allows to send data _REST_, _MQTT_ and _Kafka_ which requires `run msg client` on the EdgeLake 

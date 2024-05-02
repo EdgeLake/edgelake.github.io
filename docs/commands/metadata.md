@@ -1,3 +1,9 @@
+---
+layout: default
+title: Metadata 
+parent: Commands
+nav_order: 3
+---
 # Metadata commands
 
 The metadata commands are agnostic to the metadata platform used. When an EdgeLake network is deployed, users can 

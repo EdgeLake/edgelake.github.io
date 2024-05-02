@@ -1,3 +1,9 @@
+---
+layout: default
+title: Query Data 
+parent: Commands
+nav_order: 4
+---
 # Query Data
 
 EdgeLake is a SQL native data management platform for real-time / IoT data. 

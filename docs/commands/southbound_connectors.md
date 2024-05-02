@@ -1,3 +1,9 @@
+---
+layout: default
+title: Southbound Services 
+parent: Commands
+nav_order: 6
+---
 # Streaming data to the EdgeLake Network
 
 Users stream their data into Operator Nodes. These nodes are configured to host the data and operate as follows:
