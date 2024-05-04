@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Grafana
+parent: Using Grafana
 title: Using Grafana - importing dashboards
 nav_order: 1
 ---
