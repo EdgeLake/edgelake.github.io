@@ -1,7 +1,7 @@
 ---
 layout: default
 parent: Northbound Examples
-title: Using Postgres to view Data (Tableau/Lookr)
+title: Using Postgres to view Data (Tableau)
 nav_order: 5
 ---
 # PSQL Connector & Tableau Visualization
@@ -98,15 +98,15 @@ Disclaimer: [Full list of SQL options](../queries.md#query-options)
 1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
 2. Under _Data_ → _Data Sources_ select PostgresSQL connector type 
 
-| ![data](../imgs/tableau_img2a.png) | ![data source](../imgs/tableau_img2b.png) |
+| ![data](../../imgs/tableau_img2a.png) | ![data source](../../imgs/tableau_img2b.png) |
 | --- | --- |
 
 3. Fill-out the information to connect to database & Press "Ok"
-![connection information](../imgs/tableau_img3.png)
+![connection information](../../imgs/tableau_img3.png)
 
 
 4. Double-click on the table you want to use (in this case `new_table`) and goto worksheet
-![prep worksheet data](../imgs/tableau_img4.png)
+![prep worksheet data](../../imgs/tableau_img4.png)
 
 
 ## Generating Graphs
@@ -117,7 +117,7 @@ the user. As such, generating graphs from the final results is a bit complicated
    * Min 3 - is column `MIN(value)`
    * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column `AVG(value)`
    * MAX 5 - is column `MAX(value)`
-![column explanation](../imgs/tableau_img5.png)
+![column explanation](../../imgs/tableau_img5.png)
 
 To generate a graph, use "Min 2" as _Columns_ and all others for _Rows_
-![generated image](../imgs/tableau_img6.png)
+![generated image](../../imgs/tableau_img6.png)
