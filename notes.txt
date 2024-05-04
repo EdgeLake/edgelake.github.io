@@ -2,3 +2,4 @@ Issues with Northbound:
 1. northbound/notifciation.md missing "_rest_ command" file
 2. northbound/postgres_connector.md missing "to run in repeat"
 3. northbound/postgres_connector.md missing "Full list of SQL options"
+4. northbound/remote_cli.md missing "../deployments/Support/Remote-CLI.md#remote-cli"

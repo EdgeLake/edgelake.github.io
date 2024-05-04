@@ -2,7 +2,7 @@
 layout: default
 parent: Northbound Examples
 title: Using Postgres to view Data (Tableau/Lookr)
-nav_order: 4
+nav_order: 5
 ---
 # PSQL Connector & Tableau Visualization
   
