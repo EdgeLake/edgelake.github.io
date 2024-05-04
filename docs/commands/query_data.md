@@ -11,7 +11,7 @@ EdgeLake is a SQL native data management platform for real-time / IoT data.
 It allows to query across your entire (edge) data lake of nodes from a single point, as though the entire data-set is 
 centralized. 
 
-In addition, EdgeLake provides the ability to optomizes SQL queries specifically for real-time data analysis. 
+In addition, EdgeLake provides the ability to optimize SQL queries specifically for real-time data analysis. 
 
 In depth details can be found as part of [AnyLog's documentation](https://github.com/AnyLog-co/documentation/blob/master/queries.md).
 
@@ -59,7 +59,7 @@ statistics is enabled, it is assigned to the key "Statistics". To remove Statist
   * `format=json:output	` returns results data in rows whereas each row is a JSON structure - this format is identical to the 
 data load structure.
   * `format=json;list` returns results data in an organized in a list, every entry in the list represents a row (use this format 
-with [PowerBI](../northbound/PowerBI.md)).
+with [PowerBI](../northbound/PowerBI.md).
   * `format=table` returns results data that's simply organized as a table.
 
 ## Built-in Query Functions

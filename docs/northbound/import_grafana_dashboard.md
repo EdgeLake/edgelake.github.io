@@ -2,7 +2,7 @@
 layout: default
 parent: Northbound Examples
 title: Using Grafana - importing dashboards
-nav_order: 3
+nav_order: 20
 ---
 # Importing EdgeLake related dashboards into Grafana
 
