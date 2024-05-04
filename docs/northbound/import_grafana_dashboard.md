@@ -6,21 +6,21 @@ nav_order: 8
 ---
 # Importing EdgeLake related dashboards into Grafana
 
-Instructions to create and manage your Grafana instance with EdgeLake, can be found in [Using Grafana](using%20grafana.md) 
+Instructions to create and manage your Grafana instance with EdgeLake, can be found in [Using Grafana](Grafana.md) 
 
 
 The following document provides 3 sample Grafana dashboards
 * [Network Map](jsons/network_summary.json) - The dashboard consists of a map showing all the nodes 
 in the network, a list of operator nodes and a list of  tables supported in the network.
 
-![grafana_network_map.png](..%2Fimgs%2Fgrafana_network_map.png)
+![grafana_network_map.png](../../imgs/grafana_network_map.png)
 
   
 * [Random Data Diagram](jsons/rand_data_dashboard.json) - The dashboard consists of a line graph demonstrating min/avg/max, as well gages showing 
 the overall number of rows as well as the number of rows per node. The content for these widgets is via our third-party
 MQTT client sample connection.  
 
-![grafana_edgex_dashboard.png](..%2Fimgs%2Fgrafana_edgex_dashboard.png)
+![grafana_edgex_dashboard.png](../../imgs/grafana_edgex_dashboard.png)
 
 ## Setting Up Grafana
 
@@ -71,7 +71,7 @@ Log into Grafana and Declare a _(JSON) Data Source_
 <img src="../../imgs/grafana_base_dashboard.png" alt="Empty Dashboard" />
 
 
-2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](../docs/examples/grafana_json/edgex_dashboard.json)).
+2. Go _JSON Model_ and add desired model - A model is the JSON object being used to generate the grafana dashboard (for example: [EdgeX Dashboard](jsons/rand_data_dashboard.json)).
 
 <table>
   <tr>
