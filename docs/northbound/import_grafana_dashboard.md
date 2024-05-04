@@ -1,7 +1,7 @@
 ---
 layout: default
 parent: Using Grafana
-title: Using Grafana - importing dashboards
+title: Importing Dashboards
 nav_order: 1
 ---
 # Importing EdgeLake related dashboards into Grafana

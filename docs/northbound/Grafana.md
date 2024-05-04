@@ -3,7 +3,7 @@ layout: default
 parent: Northbound Examples
 title: Using Grafana
 nav_order: 1
-has_children: true 
+has_children: true
 ---
 # Using Grafana
 
