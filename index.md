@@ -75,7 +75,8 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
    * _Makefile_
 
 <pre class="code-frame">
-    <code class="language-shell">
+  <button class="copy-button" onclick="copyToClipboard('.shell')"><i class="fas fa-copy"></i></button>
+  <code class="language-shell">
 sudo snap install docker
 sudo apt-get -y install docker-compose 
 sudo apt-get -y install make
@@ -85,7 +86,7 @@ USER=`whoami`
 sudo groupadd docker 
 sudo usermod -aG docker ${USER} 
 newgrp docker
-    </code>
+  </code>
 </pre>
 
 

@@ -250,6 +250,18 @@ pre.highlight {
   margin-bottom: 20px;
   background-color: #f2f2f2; /* Light gray background */
 }
+/* Copy button styles */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  cursor: pointer;
+}
 .language-shell {
   color: #FF5733;
 }
