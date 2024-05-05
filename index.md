@@ -74,7 +74,7 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
    * _docker-compose_
    * _Makefile_
 
-<pre>
+<pre class="code-frame">
     <code class="language-shell">
 sudo snap install docker
 sudo apt-get -y install docker-compose 

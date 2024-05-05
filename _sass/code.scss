@@ -243,4 +243,17 @@ pre.highlight {
   background: $code-background-color; // Code Background
 }
 
+// documentation code coloring
+.code-frame {
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.language-shell {
+  color: #FF5733;
+}
+.config {
+  color: #33FFEC;
+}
+
 // {% endraw %}
