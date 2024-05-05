@@ -245,32 +245,34 @@ pre.highlight {
 
 // documentation code coloring
 /* Common styles */
+/* Common styles */
 .code-frame {
   border: 2px solid #ccc;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #1e1e1e; /* Light gray background */
+  background-color: #f2f2f2; /* Light gray background */
   overflow-x: auto; /* Add horizontal scrollbar if content overflows */
 }
 
 /* Config language (gruvbox/molokai) */
 .language-config {
-  color: #fabd2f; /* Gruvbox yellow */
+  color: #9d0006; /* Dark red for better contrast */
 }
 
 /* Shell language (Solarized/Tomorrow Night) */
 .language-shell {
-  color: #859900; /* Solarized green */
+  color: #000080; /* Dark blue for better contrast */
 }
 
 /* Python3 language (Monokai/Jellybeans) */
 .language-python3 {
-  color: #f92672; /* Monokai pink */
+  color: #8b0000; /* Dark red for better contrast */
 }
 
 /* Text (AnyLog) language (Desert) */
 .language-text {
-  color: #cc9933; /* Desert yellow */
+  color: #663300; /* Dark brown for better contrast */
 }
+
 
 // {% endraw %}
