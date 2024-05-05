@@ -28,8 +28,12 @@ twitter_username: ""
 github_username:  edgelake
 
 # Build settings
-#theme: just-the-docs
+{% if site.github.repository_branch == 'main' %}
 remote_theme: pmarsceill/just-the-docs
+{% else %}
+theme: just-the-docs
+{% endif %}
+
 plugins:
   - jekyll-feed
 
