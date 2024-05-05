@@ -249,11 +249,13 @@ pre.highlight {
   padding: 10px;
   margin-bottom: 20px;
   background-color: #f2f2f2; /* Light gray background */
+  overflow-x: auto; /* Add horizontal scrollbar if content overflows */
+
 }
 .language-shell {
   color: #FF5733;
 }
 .language-config {
-  color: #33FFEC;
+  color: #007acc;
 }
 // {% endraw %}
