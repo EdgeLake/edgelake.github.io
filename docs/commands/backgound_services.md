@@ -6,7 +6,7 @@ nav_order: 1
 ---
 # Background services
 
-**Table of content:**
+**The background commands:**
 
 [List of background services and their status](#get-the-list-of-data-services-and-their-status)    
 [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
