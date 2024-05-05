@@ -76,6 +76,9 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
     <li>Makefile</li>
   </ul>
 </ol>
+<ol start="2">
+  <li>Clone <i>docker-compose</i> repository from EdgeLake</li>
+</ol>
 
 <pre class="code-frame">
     <code class="language-shell">
