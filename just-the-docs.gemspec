@@ -1,7 +1,7 @@
 # coding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name          = "EdgeLake Specs"
+  spec.name          = "edgelake-specs"
   spec.version       = "1.0.0"
   spec.authors       = ["Ori Shadmon"]
   spec.email         = ["ori@anylog.co"]
