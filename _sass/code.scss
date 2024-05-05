@@ -244,18 +244,33 @@ pre.highlight {
 }
 
 // documentation code coloring
+/* Common styles */
 .code-frame {
-  border: 2px solid #f2f2f2;
+  border: 2px solid #ccc;
   padding: 10px;
   margin-bottom: 20px;
   background-color: #f2f2f2; /* Light gray background */
   overflow-x: auto; /* Add horizontal scrollbar if content overflows */
+}
 
-}
-.language-shell {
-  color: #FF5733;
-}
+/* Config language (gruvbox/molokai) */
 .language-config {
-  color: #007acc;
+  color: #fabd2f; /* Gruvbox yellow */
 }
+
+/* Shell language (Solarized/Tomorrow Night) */
+.language-shell {
+  color: #859900; /* Solarized green */
+}
+
+/* Python3 language (Monokai/Jellybeans) */
+.language-python3 {
+  color: #f92672; /* Monokai pink */
+}
+
+/* Text (AnyLog) language (Desert) */
+.language-text {
+  color: #cc9933; /* Desert yellow */
+}
+
 // {% endraw %}
