@@ -76,7 +76,6 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
     <li>Makefile</li>
   </ul>
 
-
 <pre class="code-frame">
     <code class="language-shell">
 sudo snap install docker
@@ -101,8 +100,8 @@ cd docker-compose
 
 <b>Deploy EdgeLake</b>:
 
-<li>Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes</li>  
-<ul>
+<li>Update `.env` configurations for the node(s) being deployed -- specifically <i>LEDGER_CONN</i> for <i>Query</i> and <i>Operator</i> Nodes</li> 
+<ul style="padding-left: 20px;">
   <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
   <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
   <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
@@ -138,7 +137,7 @@ DEPLOY_LOCAL_SCRIPT=false
     </code>
 </pre>
 
-<li>Start Node using _makefile_</li>
+<li>Start Node using <i>makefile</i></li>
 <pre class="code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
