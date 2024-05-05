@@ -89,8 +89,7 @@ newgrp docker
     </code>
 </pre>
 
-
-* Clone _docker-compose_ repository from EdgeLake
+<ol start="2" tabindex="2"><li>Clone <b>docker-compose</b> repository from EdgeLake</li></ol>
 <pre class="code-frame">
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
