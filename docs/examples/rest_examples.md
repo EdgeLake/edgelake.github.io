@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Using REST
-nav_order: 3
+nav_order: 6
 ---
  
 # Using REST
