@@ -13,11 +13,15 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Just the Docs
-description: A Jekyll theme for documentation
+title: EdgeLake Documentation
+email: support@anylog.co
+description: "Your data lake on the edge"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://just-the-docs.com" # the base hostname & protocol for your site, e.g. http://example.com
-repository: just-the-docs/just-the-docs # for github-metadata
+url: https://lfedge.org/projects/edgelake/ # the base hostname & protocol for your site, e.g. http://example.com
+favicon: "/imgs/edgelake_logo.png"
+twitter_username: ""
+github_username:  edgelake
+repository: edgelake/edgelake # for github-metadata
 
 permalink: pretty
 
@@ -103,8 +107,8 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
-    - "https://github.com/just-the-docs/just-the-docs"
+  "EdgeLake":
+    - "https://github.com/EdgeLake/EdgeLake"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
@@ -119,8 +123,8 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # External navigation links
 nav_external_links:
-  - title: Just the Docs on GitHub
-    url: https://github.com/just-the-docs/just-the-docs
+  - title: Download EdgeLake
+    url: https://github.com/EdgeLake/docker-compose
 
 liquid:
    error_mode: strict
