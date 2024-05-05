@@ -68,13 +68,14 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-<ol start="1" >
-  <li>Install requirements</li>
-  <ul style="padding-left: 20px;">
-    <li>Docker</li>
-    <li>docker-compose</li>
-    <li>Makefile</li>
-  </ul>
+<ol start="1">
+  <li>Install requirements
+    <ul style="padding-left: 20px;">
+        <li>Docker</li>
+        <li>docker-compose</li>
+        <li>Makefile</li>
+    </ul>
+  </li>
 
 <pre class="code-frame">
     <code class="language-shell">
@@ -100,15 +101,15 @@ cd docker-compose
 
 <b>Deploy EdgeLake</b>:
 
-<li>Update `.env` configurations for the node(s) being deployed -- specifically <i>LEDGER_CONN</i> for <i>Query</i> and <i>Operator</i> Nodes</li> 
-<ul style="padding-left: 20px;">
-  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
-  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
-  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
-</ul>
+<li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <i>LEDGER_CONN</i> for <i>Query</i> and <i>Operator</i> Nodes 
+    <ul style="padding-left: 20px;">
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
+    </ul>
+</li>
 
-<pre class="code-frame">
-    <code class="language-config">
+<pre class="code-frame"><code class="language-config">
 #--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
@@ -134,8 +135,7 @@ LEDGER_CONN=127.0.0.1:32048
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
 DEPLOY_LOCAL_SCRIPT=false
-    </code>
-</pre>
+</code></pre>
 
 <li>Start Node using <i>makefile</i></li>
 <pre class="code-frame">
