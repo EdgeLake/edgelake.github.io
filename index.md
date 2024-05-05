@@ -69,7 +69,7 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
 
 **Prepare Node(s)**:
 <div markdown="1">
-- Install requirements
+1. Install requirements
    * _Docker_
    * _docker-compose_
    * _Makefile_
@@ -89,7 +89,7 @@ newgrp docker
 </pre>
 
 
-- Clone _docker-compose_ repository from EdgeLake
+2. Clone _docker-compose_ repository from EdgeLake
 <pre>
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
