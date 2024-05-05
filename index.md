@@ -68,12 +68,14 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-<ol start="1" tabindex="1"><li>Install requirements</li></ol>
-<ul>
-  <li>Docker</li>
-  <li>docker-compose</li>
-  <li>Makefile</li>
-</ul>
+<ol start="1" >
+  <li>Install requirements</li>
+  <ul style="padding-left: 20px;">
+    <li>Docker</li>
+    <li>docker-compose</li>
+    <li>Makefile</li>
+  </ul>
+</ol>
 
 <pre class="code-frame">
     <code class="language-shell">
@@ -89,7 +91,10 @@ newgrp docker
     </code>
 </pre>
 
-<ol start="2" tabindex="2"><li>Clone <b>docker-compose</b> repository from EdgeLake</li></ol>
+<ol start="2">
+  <li>Clone <i>docker-compose</i> repository from EdgeLake</li>
+</ol>
+
 <pre class="code-frame">
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
