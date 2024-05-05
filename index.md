@@ -74,25 +74,23 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
    * _docker-compose_
    * _Makefile_
 
-<pre class="code-frame">
-  <button class="copy-button" onclick="copyToClipboard('.language-shell')"><i class="fas fa-copy"></i></button>
-  <code class="language-shell">
-    sudo snap install docker
-    sudo apt-get -y install docker-compose 
-    sudo apt-get -y install make
+<pre class"code-frame">
+    <code class="language-shell">
+sudo snap install docker
+sudo apt-get -y install docker-compose 
+sudo apt-get -y install make
  
-    # Grant non-root user permissions to use docker
-    USER=`whoami` 
-    sudo groupadd docker 
-    sudo usermod -aG docker ${USER} 
-    newgrp docker
-  </code>
+# Grant non-root user permissions to use docker
+USER=`whoami` 
+sudo groupadd docker 
+sudo usermod -aG docker ${USER} 
+newgrp docker
+    </code>
 </pre>
 
 
-
 2. Clone _docker-compose_ repository from EdgeLake
-<pre>
+<pre class"code-frame">
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
 cd docker-compose
@@ -106,8 +104,8 @@ cd docker-compose
    * [operator node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env)
    * [query node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env)
 
-<pre>
-    <code class="language-dotenv">
+<pre class"code-frame">
+    <code class="language-config">
 #--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
@@ -137,7 +135,7 @@ DEPLOY_LOCAL_SCRIPT=false
 </pre>
 
 - Start Node using _makefile_
-<pre>
+<pre class"code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
 
