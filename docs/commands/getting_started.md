@@ -6,6 +6,30 @@ This document provides the following:
 * A high-level summary of the main functionalities supported by the EdgeLake Network.
 * Install, configure, and deploy instructions.
 
+Note: The EdgeLake software is derived from AnyLog. To provide additional info, some links reference the AnyLog documentation. 
+
+## Table of Content
+[About EdgeLake](#about-edgelake)
+[The member nodes](#the-member-nodes)
+[The Network Metadata](#the-network-metadata)
+[The Users Data](#the-users-data)
+[EdgeLake Install](#edgelake-install)
+[Node's directory structure](#nodes-directory-structure)
+[Basic operations](#basic-operations)
+* [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
+* [The EdgeLake CLI](#the-edgelake-command-line-interface)
+* [The help command](#the-help-command)
+* [The local dictionary](#the-local-dictionary)
+* [Retrieving environment variables](#retrieving-environment-variables)
+* [Retrieving the services status](#retrieving-the-services-status)
+* [The dynamic logs](#the-dynamic-logs)
+[Making a node a member of the network](#making-a-node-a-member-of-the-network)
+[The Seed command](#the-seed-command) 
+[Dynamically connecting to a master node](#dynamically-connecting-to-a-master-node)
+[Using the REST API to issue EdgeLake commands](#using-the-rest-api-to-issue-edgelake-commands)
+[Sending messages to peers in the network](#sending-messages-to-peers-in-the-network)  
+[Querying and updating metadata](#querying-and-updating-metadata-in-the-blockchain)  
+
 ## About EdgeLake
 
 EdgeLake is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the EdgeLake Software.    
@@ -13,7 +37,7 @@ Joining a network requires the following steps:
 1) Install the EdgeLake Software on a computer instance.
 2) Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
 
-## Type of instances
+## The member nodes
 A node in the network is assigned with one or more roles. The optional roles are the following:  
 
 | Node Type     | Comment | Role  |
@@ -58,7 +82,7 @@ The metadata is shared by all the nodes of the network, and includes the followi
   EdgeLake instances ensure necessary metadata availability by distributing local policies across member nodes.  
   For example, users can leverage the metadata to represent **Device Shadow** (a virtual representation of the physical Sensor or Device).
 
-## The Data
+## The Users Data
 The users' data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently EdgeLake Operators can use the following databases:  
 [PostgresSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
@@ -90,9 +114,9 @@ Related documentation:
 EdgeLake can be installed from Docker, Kubernetes or by downloading the codebase from GitHub and calling an installation script. 
 Directions for deployment can be found [here](https://github.com/EdgeLake/docker-compose). 
 
-An install training session is available with this [Training Session Link](https://github.com/AnyLog-co/documentation/blob/master/training/Overview.md) 
+An installation training session is available with the [Training Session Link](https://github.com/AnyLog-co/documentation/blob/master/training/Overview.md) 
 
-## Local directory structure
+## Node's directory structure
 
 The EdgeLake directory setup is configurable. The default setup is detailed below: 
 
@@ -227,7 +251,7 @@ help index s
 Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
 
 
-### The node dictionary
+### The local dictionary
 
 Every node contains a dictionary. The dictionary maps keys to values. When users or applications interact with a node,
 they can use the key names prefixed with an exclamation point (!) rather than specifying the values.  
@@ -269,10 +293,10 @@ The node dictionary is detailed in the [local dictionary](https://github.com/Any
 By adding the $ sign to a variable name, users can retrieve the values assigned to an environment variable.
 For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the assigned value to PATH.
 
-### Retrieving info on active background processes
+### Retrieving the services status
 
-An active node is configured such that some background processes are enabled.
-To view the list of active processes issue the following command:
+An active node is configured such that some services are enabled.
+To view the list of services and their status issue the following command:
 ```EdgeLake
 get processes
 ```
@@ -320,7 +344,7 @@ seed from [ip:port]
 ```
 More details are in the [Metadata](metadata.md) section.
 
-### Switching between different master nodes
+### Dynamically connecting to a master node
 
 Users may need to switch between different master nodes.
 The following command makes the [blockchain synchronizer process](backgound_services.md)
@@ -347,7 +371,7 @@ The format to send a command from the node's CLI is the following:
 ```edgelake
 run client (destination) command
 ```
-### The message sections:  
+### The message sections:
 **run client** - Making the current node a client of a peer node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
 
