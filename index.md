@@ -71,13 +71,13 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
 <ol start="1">
   <li>Install requirements
     <ul style="padding-left: 20px;">
-        <li>Docker</li>
-        <li>docker-compose</li>
-        <li>Makefile</li>
+      <li>Docker</li>
+      <li>docker-compose</li>
+      <li>Makefile</li>
     </ul>
   </li>
-
-<pre class="code-frame">
+  <li>Clone <i>docker-compose</i> repository from EdgeLake</li>
+  <pre class="code-frame">
     <code class="language-shell">
 sudo snap install docker
 sudo apt-get -y install docker-compose 
@@ -89,27 +89,20 @@ sudo groupadd docker
 sudo usermod -aG docker ${USER} 
 newgrp docker
     </code>
-</pre>
-
-<li>Clone <i>docker-compose</i> repository from EdgeLake</li>
-<pre class="code-frame">
-    <code class="language-shell">
-git clone https://github.com/EdgeLake/docker-compose
-cd docker-compose
-    </code>
-</pre>
-
-<b>Deploy EdgeLake</b>:
-
-<li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <i>LEDGER_CONN</i> for <i>Query</i> and <i>Operator</i> Nodes 
+  </pre>
+  <li>Deploy EdgeLake:
     <ul style="padding-left: 20px;">
-      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
-      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
-      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
+      <li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <i>LEDGER_CONN</i> for <i>Query</i> and <i>Operator</i> Nodes
+        <ul style="padding-left: 20px;">
+          <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a></li>
+          <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
+          <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
+        </ul>
+      </li>
     </ul>
-</li>
-
-<pre class="code-frame"><code class="language-config">
+  </li>
+  <pre class="code-frame">
+    <code class="language-config">
 #--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
@@ -135,10 +128,10 @@ LEDGER_CONN=127.0.0.1:32048
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
 DEPLOY_LOCAL_SCRIPT=false
-</code></pre>
-
-<li>Start Node using <i>makefile</i></li>
-<pre class="code-frame">
+    </code>
+  </pre>
+  <li>Start Node using <i>makefile</i></li>
+  <pre class="code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
 
@@ -147,8 +140,9 @@ make up master
 make up operator
 make up query
     </code>
-</pre>
+  </pre>
 </ol>
+
 
 ## Prerequisite and Setup considerations
 <table>
