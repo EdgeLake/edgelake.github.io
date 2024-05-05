@@ -68,8 +68,7 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-<div class="code-example" markdown="1">
-* Install requirements
+<ol start="1" tabindex="1"><li>Install requirements</li></ol>
 <ul>
   <li>Docker</li>
   <li>docker-compose</li>
