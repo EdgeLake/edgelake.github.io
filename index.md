@@ -75,8 +75,6 @@ Detailed directions for Install EdgeLke can be found in [docker-compose reposito
     <li>docker-compose</li>
     <li>Makefile</li>
   </ul>
-<li>Clone <i>docker-compose</i> repository from EdgeLake</li>
-</ol>
 
 
 <pre class="code-frame">
@@ -93,10 +91,7 @@ newgrp docker
     </code>
 </pre>
 
-<ol start="2">
-  <li>Clone <i>docker-compose</i> repository from EdgeLake</li>
-</ol>
-
+<li>Clone <i>docker-compose</i> repository from EdgeLake</li>
 <pre class="code-frame">
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
@@ -106,7 +101,7 @@ cd docker-compose
 
 <b>Deploy EdgeLake</b>:
 
-* Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
+<li>Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes</li>  
 <ul>
   <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
   <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
@@ -143,7 +138,7 @@ DEPLOY_LOCAL_SCRIPT=false
     </code>
 </pre>
 
-* Start Node using _makefile_
+<li>Start Node using _makefile_</li>
 <pre class="code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
@@ -154,7 +149,7 @@ make up operator
 make up query
     </code>
 </pre>
-</div>
+</ol>
 
 ## Prerequisite and Setup considerations
 <table>
