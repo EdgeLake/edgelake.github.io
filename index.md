@@ -68,11 +68,13 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-<div markdown="1">
-1. Install requirements
-   * _Docker_
-   * _docker-compose_
-   * _Makefile_
+<div class="code-example" markdown="1">
+* Install requirements
+<ul>
+  <li>Docker</li>
+  <li>docker-compose</li>
+  <li>Makefile</li>
+</ul>
 
 <pre class="code-frame">
     <code class="language-shell">
@@ -89,7 +91,7 @@ newgrp docker
 </pre>
 
 
-2. Clone _docker-compose_ repository from EdgeLake
+* Clone _docker-compose_ repository from EdgeLake
 <pre class="code-frame">
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
@@ -97,12 +99,14 @@ cd docker-compose
     </code>
 </pre>
 
-**Deploy EdgeLake**:
+<b>Deploy EdgeLake</b>:
 
-- Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
-   * [master node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env)
-   * [operator node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env)
-   * [query node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env)
+* Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
+<ul>
+  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a>   
+  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
+  <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
+</ul>
 
 <pre class="code-frame">
     <code class="language-config">
@@ -134,7 +138,7 @@ DEPLOY_LOCAL_SCRIPT=false
     </code>
 </pre>
 
-- Start Node using _makefile_
+* Start Node using _makefile_
 <pre class="code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
