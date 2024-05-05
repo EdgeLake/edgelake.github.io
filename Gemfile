@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-gemspec name: "edgelake"
+# gemspec name: "edgelake"
 gemspec
 
 gem "jekyll-github-metadata", ">= 2.15"
