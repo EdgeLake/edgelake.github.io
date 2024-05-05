@@ -1,6 +1,11 @@
+---
+layout: default
+title: Getting Started
+nav_order: 2
+---
+
 # Getting Started
- 
- 
+  
 This document provides the following:
 
 * A high-level summary of the main functionalities supported by the EdgeLake Network.
@@ -65,14 +70,14 @@ It allows users to leverage one type of repository, and change to a different ty
 The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
 When a node operates, it considers the local copy of the metadata and therefore, nodes processes are agnostic to the metadata platform used. If a connection 
 to the metadata platform is lost, the node continues to operate based on the latest copy of the metadata that is maintained locally on the node.      
-Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](backgound_services.md#enable-the-blockchain-synchronization-service).  
+Synchronizing the local copy of the metadata is explained in the following section: [Blockchain Synchronizer](commands/backgound_services.md#enable-the-blockchain-synchronization-service).  
 
 The metadata is organized as **policies**. Each policy is a JSON structure that is associated to a type (i.e. security, member, distribution).
 The policies are updated in 2 ways:
 * Dynamically, by the network protocol, for example, when a node joins the network.
 * By users through APIs or with the EdgeLake CLI.
   
-Applications and users can query the metadata. The metadata commands are detailed in the [metadata section](metadata.md).
+Applications and users can query the metadata. The metadata commands are detailed in the [metadata section](commands/metadata.md).
 
 The metadata is shared by all the nodes of the network, and includes the following:
 * Information utilized by the Network Members. 
@@ -300,7 +305,7 @@ To view the list of services and their status issue the following command:
 ```EdgeLake
 get processes
 ```
-More information on the background processes is available the [background services](backgound_services.md) section.
+More information on the background processes is available the [background services](commands/backgound_services.md) section.
 
 ### The dynamic logs
 Every node maintains 4 dynamic logs that capture different types of events:
@@ -342,12 +347,12 @@ and assign a node to a metadata using the following command:
 ```edgelake
 seed from [ip:port]
 ```
-More details are in the [Metadata](metadata.md) section.
+More details are in the [Metadata](commands/metadata.md) section.
 
 ### Dynamically connecting to a master node
 
 Users may need to switch between different master nodes.
-The following command makes the [blockchain synchronizer process](backgound_services.md)
+The following command makes the [blockchain synchronizer process](commands/backgound_services.md)
  connect to a different master node:
 ```edgelake
 blockchain switch network where master = [IP:Port]
@@ -376,7 +381,7 @@ run client (destination) command
  delivered to one or more destination nodes and is executed on the destination nodes.    
 
 **(destination)** - the destination nodes identified by the IP and Port assigned to their
-[TCP Server configuration](backgound_services.md#enable-the-tcp-service).
+[TCP Server configuration](commands/backgound_services.md#enable-the-tcp-service).
 Destination can be represented in any of the following ways:
 * As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: `(139.162.126.241 2048, 172.105.13.202 2048)`    
 * For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  `10.0.0.78:20348`  
@@ -412,7 +417,7 @@ Additional information is available at [Queries and info requests to the Network
 
 The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    
-Additional information on the blockchain commands is available in the [Metadata](metadata.md) section.
+Additional information on the blockchain commands is available in the [Metadata](commands/metadata.md) section.
 
 
 
