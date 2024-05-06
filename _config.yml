@@ -24,9 +24,8 @@ github_username:  edgelake
 repository: edgelake/edgelake # for github-metadata
 
 permalink: pretty
-#remote_theme: pmarsceill/just-the-docs
-theme: just-the-docs
-
+remote_theme: pmarsceill/just-the-docs
+#theme: just-the-docs
 
 exclude:
  # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
