@@ -8,26 +8,22 @@ nav_order: 1
 
 **The background commands:**
 
-[List of background services and their status](#get-the-list-of-data-services-and-their-status)    
-[Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
-[The local data storage service](#the-local-data-storage-service)  
-[REST Services](#rest-services)  
-[The message broker services](#message-broker-services)  
-[Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)  
-[Subscribe to Kafka](#subscribe-to-kafka)  
-[gRPC Client Service](#grpc-client-service)  
-[SMTP Client](#enable-smtp-client-service)  
-[The Scheduler Services](#the-scheduler-services)  
-[The Blobs Archiver Services](#blob-archiver-services)  
+- [List of background services and their status](#get-the-list-of-data-services-and-their-status)    
+- [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
+- [The local data storage service](#the-local-data-storage-service)  
+- [REST Services](#rest-services)  
+- [The message broker services](#message-broker-services)  
+- [Subscribe to a 3rd party broker](#subscribe-to-a-3rd-party-broker)  
+- [Subscribe to Kafka](#subscribe-to-kafka)  
+- [gRPC Client Service](#grpc-client-service)  
+- [SMTP Client](#enable-smtp-client-service)  
+- [The Scheduler Services](#the-scheduler-services)  
+- [The Blobs Archiver Services](#blob-archiver-services)  
 
 ### Get the list of data services and their status 
 
 **Usage**:
-<pre>
-    <code>
-get processes [where format = json]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get processes [where format = json]</code></pre>
 
 **Explanation**: List the background processes and their status.
 
@@ -48,11 +44,11 @@ Monitoring the services' status:
 ### Enable the TCP service
 The TCP service provides the functionality to send and recieve messages from peer nodes using the EdgeLake Network Protocol.
 **Usage**:
-<pre>
-    <code>
-run tcp server where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">lt;run tcp server where 
+  external_ip = [ip] and external_port = [port] and 
+  internal_ip = [local_ip] and internal_port = [local_port] and 
+  bind = [true/false] and threads = [threads count]gt;
+</code></pre>
 
 **Explanation**: Set a TCP server in a listening mode on the specified IP and port.
 
@@ -61,23 +57,20 @@ run tcp server where external_ip = [ip] and external_port = [port] and internal_
 * _threads_ - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.
 
 **Examples**:
-<pre>
-    <code>
+<pre class="code-frame"><code class="language-anylog">
 run tcp server where external_ip = !ip and external_port = !port  and threads = 3
 
-run tcp server where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
-    </code>
-</pre>
+&lt;run tcp server where 
+  external_ip = !external_ip and external_port = 7850 and 
+  internal_ip = !ip and internal_port = 7850 and 
+  bind=false and threads = 6&gt;
+</code></pre>
 
 **Details**: [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
 
 ### Get the network configuration info
 **Usage**:
-<pre>
-    <code>
-get connections
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get connections</code></pre>
 
 **Explanation:**
 
@@ -85,11 +78,7 @@ Return the node's connection information including the TCP service information.
 
 ### Enable the blockchain synchronization service
 **Usage**:
-<pre>
-    <code>
-run blockchain sync [options]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run blockchain sync [options]</code></pre>
         
 
 **Explanation:**  
@@ -102,21 +91,14 @@ Repeatedly update the local copy of the blockchain
 * time - The frequency of updates.
 
 **Examples:**  
-<pre>
-    <code>
-run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
+<pre><code>run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
 run blockchain sync where source = blockchain and time = !sync_time and dest = file and platform = ethereum
-    </code>
-</pre>
+</code></pre>
 
 
 ### Get the metadata synchronization info
 **Usage**:
-<pre>
-    <code>
-get synchronizer
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get synchronizer</code></pre>
 
 **Explanation:**
 
@@ -131,11 +113,7 @@ The Operator service provides the local data storage functionalities.
 The service captures the data streams, identifies or creates schemas and ingest the data into a local database.
 
 **Usage**:
-<pre>
-    <code>
-run operator where [option] = [value] and [option] = [value] ...
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run operator where [option] = [value] and [option] = [value] ...</code></pre>
 
 **Explanation:**
 
@@ -154,12 +132,9 @@ Monitors new data added to the watch directory and load the new data to a local 
 * update_tsd_info - True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingeste
 
 **Examples:**  
-<pre>
-    <code>
-run operator where create_table = true and update_tsd_info = true and archive_json = true and distributor = true and master_node = !master_node and policy = !operator_policy  and threads = 3
+<pre class="code-frame"><code class="language-anylog">run operator where create_table = true and update_tsd_info = true and archive_json = true and distributor = true and master_node = !master_node and policy = !operator_policy  and threads = 3
 run operator where create_table = true and update_tsd_info = true and archive_json = true and distributor = true and blockchain = ethereum and policy = !operator_policy  and threads = 3
-    </code>
-</pre>
+</code></pre>
 
 **Details:** [Operator Process](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#operator-process).
 
@@ -168,26 +143,19 @@ run operator where create_table = true and update_tsd_info = true and archive_js
 The **get operator** command returns info on the configuration and data processed by the Operator service.
 
 **Usage:**
-<pre>
-    <code>
-get operator [options] [where format = json]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get operator [options] [where format = json]</code></pre>
 
 **Explanation:**
 
 Return information on the Operator processes and configuration.
 
 **Examples:**
-<pre>
-    <code>
-get operator
+<pre class="code-frame"><code class="language-anylog">get operator
 get operator inserts
 get operator summary
 get operator config
 get operator summary where format = json
-    </code>
-</pre>
+</code></pre>
 
 **details:** [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator)
 
@@ -202,12 +170,12 @@ Enable and monitor a service that receives commands and data via REST from 3rd p
 
 ###  Enable the REST service
 **Usage:**
-<pre>
-    <code>
- run rest server where external_ip = [external_ip ip] and external_port = [external port] and internal_ip = [internal ip] and internal_port = [internal port] and timeout = [timeout]
- and ssl = [true/false] and bind = [true/false]
-   </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">
+&lt;run rest server where 
+  external_ip = [external_ip ip] and external_port = [external port] and 
+  internal_ip = [internal ip] and internal_port = [internal port] and 
+  timeout = [timeout] and ssl = [true/false] and bind = [true/false]&gt;
+</code></pre>
 
 **Explanation:**
 
@@ -218,11 +186,10 @@ Enable a REST server in a listening mode on the specified ip and port.
 * If bind is **true**, only the specified IP is allowed (with 2 IPs, the external is ignored).
 
 Examples:
-<pre>
-    <code>
-run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0 and threads = 6 and ssl = true
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run rest server where 
+  internal_ip = !ip and internal_port = 7849 and 
+  timeout = 0 and threads = 6 and ssl = true&gt;
+</code></pre>
 
 
 **Details:** [Rest Requests](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
@@ -231,25 +198,13 @@ run rest server where internal_ip = !ip and internal_port = 7849 and timeout = 0
 The following commands return info on the REST service configuration and processes:
 
 Configuration information of the REST service:
-<pre>
-    <code>
-get rest server info
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get rest server info</code></pre>
 
 Statistics on the REST calls:
-<pre>
-    <code>
-get rest calls
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get rest calls</code></pre>
 
 Status of REST threads:
-<pre>
-    <code>
-get rest pool
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get rest pool</code></pre>
 
 
 ## Message broker services
@@ -257,32 +212,25 @@ Enable and monitor a service that operates as a message broker, allowing to publ
 
 ### Enable the message broker service
 **Usage:**
-<pre>
-    <code>
-run message broker where external_ip = [ip] and external_port = [port] and internal_ip = [local_ip] and internal_port = [local_port] and bind = [true/false] and threads = [threads count]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run message broker where 
+  external_ip = [ip] and external_port = [port] and 
+  internal_ip = [local_ip] and internal_port = [local_port] and 
+  bind = [true/false] and threads = [threads count]&gt;
+</code></pre>
 
 **Explanation:**  Set a message broker in a listening mode on the specified IP and port. **Threads count** represents the number of threads supporting the service.
 
 **Examples:**
-<pre>
-    <code>
-run message broker where external_ip = !ip and external_port = !port  and threads = 3
+<pre class="code-frame"><code class="language-anylog">run message broker where external_ip = !ip and external_port = !port  and threads = 3
 run message broker where external_ip = !external_ip and external_port = 7850 and internal_ip = !ip and internal_port = 7850 and threads = 6
-    </code>
-</pre>
+</code></pre>
 
 **Details:** [Message Broker Services](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#message-broker)
 
 ### Get info on the Message Broker service
 The following command returns statistics on the local broker:
 
-<pre>
-    <code>
-get local broker
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get local broker</code></pre>
 
 ## Subscribe to a 3rd party broker
 
@@ -297,20 +245,30 @@ The mapping can be done using command variables, or by associating a mapping pol
 the details link.
 
 **Usage:**
-<pre>
-    <code>
-run msg client where broker = [url] and port = [port] and user = [user] and password = [password] and topic = (name = [topic name] and dbms = [dbms name] and table = [table name] and [participating columns info])
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
+  broker = [url] and port = [port] and 
+  user = [user] and password = [password] and log=[true/false] 
+  topic = (
+    name = [topic name] and 
+    dbms = [dbms name] and 
+    table = [table name] and 
+    [participating columns info]
+)&gt;</code></pre>
 
 **Explanation:**  Subscribe to a broker according to the url provided to receive data on the provided topic.
 
 **Examples:**
-<pre>
-    <code>
-run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user = mqwdtklv and password = uRimssLO4dIo and topic = (name = test and dbms = "bring [metadata][company]" and table = "bring [metadata][machine_name] _ [metadata][serial_number]" and column.timestamp.timestamp = "bring [ts]" and column.value.int = "bring [value]")
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
+  broker = "driver.cloudmqtt.com" and port = 18975 and 
+  user = mqwdtklv and password = uRimssLO4dIo and 
+  topic = (
+    name = test and 
+    dbms = "bring [metadata][company]" and 
+    table = "bring [metadata][machine_name] _ [metadata][serial_number]" and 
+    column.timestamp.timestamp = "bring [ts]" and 
+    column.value.int = "bring [value]"
+)&gt;
+</code></pre>
 
 **Details:** [Message Client](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#subscribing-to-a-third-party-broker)
 
@@ -318,47 +276,44 @@ run msg client where broker = "driver.cloudmqtt.com" and port = 18975 and user =
 Get configuration and statistics information from the subscription process. 
 
 **Usage:**
-<pre>
-    <code>
-get msg clients where [options]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get msg clients where [options]</code></pre>
 
 **Explanation:** Information on messages received by clients subscribed to message brokers.
       
 **Examples:**
-<pre>
-    <code>
-        get msg clients
-        get msg client where id = 3
-        get msg client where topic = anylogedgex
-        get msg client where broker = driver.cloudmqtt.com:18785 and topic = anylogedgex
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get msg clients
+get msg client where id = 3
+get msg client where topic = anylogedgex
+get msg client where broker = driver.cloudmqtt.com:18785 and topic = anylogedgex
+</code></pre>
 
 **Details:** [get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)
-
 
 ## Subscribe to Kafka
 
 The command is similar to the [run msg client](#subscribe-to-a-broker) command. Monitoring is with the [get msg client](#get-subscription-info) command.
 
 **Usage:**
-<pre>
-    <code>
-run kafka consumer where ip = [ip] and port = [port]] and reset = [latest/earliest] and topic = [topic and mapping instructions]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
+  ip = [ip] and port = [port] and 
+  reset = [latest/earliest] and 
+  topic = [topic and mapping instructions]&gt;
+</code></pre>
 
 **Explanation:** Initialize a Kafka consumer that subscribes to one or more topics of a kafka instance and continuously 
 polls data assigned to the subscribed topics using the provided IP and Port. The reset value determines the offset whereas the default is latest.
 
 **Examples:**
-<pre>
-    <code>
-run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = earliest and topic = (name = sensor and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
+  ip = 198.74.50.131 and port = 9092 and 
+  reset = earliest and topic = (
+    name = sensor and 
+    dbms = lsl_demo and 
+    table = ping_sensor and 
+    column.timestamp.timestamp = "bring [timestamp]" and 
+    column.value.int = "bring [value]"
+)&gt;
+</code></pre>
 
 **Details:** [Data consumers services](https://github.com/AnyLog-co/documentation/blob/master/using%20kafka.md#anylog-serves-as-a-data-consumer).
 
@@ -370,20 +325,12 @@ Subscribe to a gRPC broker and monitor the data flow.
 
 ### Enable gRPC client service
 **Usage:**
-<pre>
-    <code>
-run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id]</code></pre>
 
 **Explanation:** Subscribe to a gRPC broker on the provided IP and Port and map data using the designated mapping policy.
 
 **Examples:**
-<pre>
-    <code>
-run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and policy = deff520f1096bcd054b22b50458a5d1c
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and policy = deff520f1096bcd054b22b50458a5d1c</code></pre>
 
 **Details:** [gRPC Client Service](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md#initiating-a-grpc-client).
 
@@ -391,30 +338,22 @@ run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and p
 List the active gRPC clients and the data exchange info.
 
 **Usage:**
-<pre>
-    <code>
-get grpc client
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get grpc client</code></pre>
 
 
 ##  Enable smtp client service
 
 **Usage:**
-<pre>
-    <code>
-run smtp client where host = [host name] and port = [port] and email = [email address] and password = [email password] and ssl = [true/false]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run smtp client where 
+  host = [host name] and port = [port] and 
+  email = [email address] and password = [email password] and 
+  ssl = [true/false]&gt;
+</code></pre>
 
 **Explanation:** Initiates an SMTP instance encapsulates an SMTP connection to a server.
 
 **Examples:**
-<pre>
-    <code>
-run smtp client where email = anylog.iot@gmail.com and password = google4anylog
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run smtp client where email = anylog.iot@gmail.com and password = google4anylog</code></pre>
 
 **Details:** [SMTP Client](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#smtp-client).
 
@@ -428,22 +367,14 @@ A detailed description is available in the [](https://github.com/AnyLog-co/docum
 ### Run Scheduler
 
 **Usage:**
-<pre>
-    <code>
-run scheduler [id]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run scheduler [id]</code></pre>
 
 [id] - Optional value, representing the scheduler ID. The default value is 1, representing a user scheduler.
 
 **Explanation:**  Repeatedly execute scheduled jobs.
 
 **Examples:**
-<pre>
-    <code>
-run scheduler 1
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run scheduler 1</code></pre>
 
 **Details:** [The Scehdualer](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#invoking-a-scheduler).
 
@@ -451,21 +382,14 @@ run scheduler 1
 Monitor the scheduler
 
 **Usage:**
-<pre>
-    <code>
-get scheduler [n]
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get scheduler [n]</code></pre>
 
 **Explanation:** Information on the scheduled tasks. [n] - an optional ID for the scheduler. Scheduler 1 manage user scheduled tasks, 0 is the system scheduler. 
 
 **Examples:**
-<pre>
-    <code>
-get scheduler
+<pre class="code-frame"><code class="language-anylog">get scheduler
 get scheduler 1
-    </code>
-</pre>
+</code></pre>
 
 **Details:** [View Scheduled Commands](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#view-scheduled-commands).
 
@@ -478,20 +402,14 @@ The Blob Archiver is a service that manage blob data on the node.
 ### Enable the blobs archiver service
   
 **Usage:**
-<pre>
-    <code>
-run blobs archiver where blobs_dir = [data directory location] and archive_dir = [archive directory location] and dbms = [true/false] and file = [true/false] and compress = [true/f
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run blobs archiver where 
+  blobs_dir = [data directory location] and archive_dir = [archive directory location] and 
+  dbms = [true/false] and file = [true/false] and compress = [true/false]&gt;</code></pre>
 
 **Explanation:**  Archive large objects.
 
 **Examples:**
-<pre>
-    <code>
-run blobs archiver where dbms = true and file = true and compress = false
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run blobs archiver where dbms = true and file = true and compress = false</code></pre>
 
 **Details:** [The Blobs Archiver]( https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-blobs-archiver).
 
@@ -499,8 +417,4 @@ run blobs archiver where dbms = true and file = true and compress = false
 Return information on the Blobs Archiver processes.
 
 **Usage:**
-<pre>
-    <code>
-get blobs archiver
-    </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">get blobs archiver</code></pre>
