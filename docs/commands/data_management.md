@@ -27,7 +27,7 @@ process is per node, to determine, when a data table is created, the physical da
   password = [db passwd] and 
   ip = [db ip] and 
   port = [db port] and 
-  memory = [true/false]
+  memory = [true/false]&gt;
 </code></pre>
 
 **Explanation**: Associate a physical database to a logical database.
