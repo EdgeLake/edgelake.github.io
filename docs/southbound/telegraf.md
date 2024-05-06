@@ -10,11 +10,12 @@ Created by InfluxDB, [Telegraf](https://www.influxdata.com/time-series-platform/
 
 ## Configuring EdgeLake
 
-EdgeLake / AnyLog is able to accept data from _Telegraf_ via REST POST or its message broker using a generic [mapping 
-policy](generic_mapping_policy).  
+EdgeLake / AnyLog is able to accept data from _Telegraf_ via REST POST or its message broker using a generic mapping 
+policy.  
 
-1. Create a mapping policy to accept data  - notice that excpet for `timestamp`,  all other columns will   
-<pre class="code-frame"><code class="language-anylog"># create policy 
+<ol start="1"></ol>
+<li>Create a mapping policy to accept data  - notice that except for `timestamp`,  all other columns will</li>   
+<pre class="code-frame"><ol class="language-anylog"># create policy 
 policy_id = telegraf-mapping
 topic_name = telegraf-data
 default_dbms = new_company 
@@ -43,7 +44,8 @@ default_dbms = new_company
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 </code></pre>
 
-2. Enable a message client to accept the data from Telegraf. 
+<li>Enable a message client to accept the data from Telegraf.</li> 
+
 <pre class="code-frame"><code class="language-anylog"># REST message client 
 &lt;run msg client where broker=rest and user-agent=anylog and log=false and topic=(
     name=!topic_name and
@@ -55,7 +57,8 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
     name=!topic_name and
     policy=!policy_id
 )&gt;
-</code></pre>
+</code></pre></ol>
+
 ## Configuring Telegraf
 
 At its core, _Telegraf_ returns a list of JSONs (shown below). This data can be published into EdgeLake via _REST_ POST 
