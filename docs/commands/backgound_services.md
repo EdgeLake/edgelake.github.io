@@ -4,9 +4,7 @@ title: Background Services
 parent: Commands 
 nav_order: 1
 ---
-# Background services
-
-**The background commands:**
+# Background Services
 
 - [List of background services and their status](#get-the-list-of-data-services-and-their-status)    
 - [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
