@@ -199,8 +199,7 @@ keys and values in the header
   </tr>
 </table>
 
-<pre class="code-frame"><code class="language-shell">
-curl --location --request PUT '10.0.0.226:32149' \
+<pre class="code-frame"><code class="language-shell">curl --location --request PUT '10.0.0.226:32149' \
     --header 'type: json' \
     --header 'dbms: test' \
     --header 'table: table1' \
