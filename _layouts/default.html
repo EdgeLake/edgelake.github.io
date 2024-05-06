@@ -11,12 +11,6 @@ layout: table_wrappers
 </head>
 <body>
   <a class="skip-to-main" href="#main-content">Skip to main content</a>
-  <div align="right">
-    <img src="imgs/edgelake.png" align="right"/>
-    <br/>
-    <br/>
-    <br/>
-  </div>
   {% include icons/icons.html %}
   {% if page.nav_enabled == true %}
     {% include components/sidebar.html %}
@@ -47,8 +41,16 @@ layout: table_wrappers
     {% if site.search_enabled != false %}
       {% include components/search_footer.html %}
     {% endif %}
-  </div>
 
+    <!-- Place the image below the search bar on the right -->
+    <div align="right">
+      <img src="{{ site.baseurl }}/imgs/edgelake.png" align="right"/>
+      <br/>
+      <br/>
+      <br/>
+    </div>
+
+  </div>
   {% if site.mermaid %}
     {% include components/mermaid.html %}
   {% endif %}
