@@ -98,8 +98,7 @@ newgrp docker
       <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
     </ul>
 </li>
-  <pre class="code-frame">
-    <code class="language-config">
+<pre class="code-frame"><code class="language-config">
 #--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
@@ -125,10 +124,10 @@ LEDGER_CONN=127.0.0.1:32048
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
 DEPLOY_LOCAL_SCRIPT=false
-    </code>
-  </pre>
-  <li>Start Node using <i>makefile</i></li>
-  <pre class="code-frame">
+</code></pre>
+
+<li>Start Node using <i>makefile</i></li>
+<pre class="code-frame">
     <code class="language-shell">
 make up [NODE_TYPE]
 
@@ -137,7 +136,7 @@ make up master
 make up operator
 make up query
     </code>
-  </pre>
+</pre>
 </ol>
 
 
