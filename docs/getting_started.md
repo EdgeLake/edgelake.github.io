@@ -126,7 +126,7 @@ An installation training session is available with the [Training Session Link](h
 The EdgeLake directory setup is configurable. The default setup (used on docker deployment) is detailed below: 
 
 <pre style="border: 2px ; border: none; overflow-x: auto;padding: 10px;"><code style="textcolor: black;">
-<b>Directory Structure                 Explabnation</b>
+<b>Directory Structure                 Explanation</b>
 -------------------                 -----------------------------------------
 /app                                [EdgeLake Root]
 ├── EdgeLake                        [Directory containing authentication keys and passwords]
@@ -156,15 +156,13 @@ The EdgeLake directory setup is configurable. The default setup (used on docker 
 
 Notes: 
 * The following command creates the work folders if they do not exist:
-    ```EdgeLake
-    create work directories
-    ```
+    <pre class="code-frame"><code class="language-anylog">create work directories</code></pre>
+    
     The command needs to be issued only once on the physical or virtual machine.
     
 * The following command list the directories on an EdgeLake node:
-     ```EdgeLake
-    get dictionary _dir
-    ``` 
+     <pre class="code-frame"><code class="language-anylog">get dictionary _dir</code></pre>
+
 ## Basic operations
 
 ### Initiating and Configuring EdgeLake Instances
@@ -181,9 +179,7 @@ EdgeLake can be configured in many ways:
 
 When a node starts, it provides the **EdgeLake Command Line Interface (CLI)**.    
 The command line prompt appear as **EL >**, and it can be updated by issuing the following command on the CLI:
-```EdgeLake
-set node name [node name]
-```
+<pre class="code-frame"><code class="language-anylog">set node name [node name]</code></pre>
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
 A more detailed description of the EdgeLake CLI is available at [The EdgeLake CLI](https://github.com/AnyLog-co/documentation/blob/master/cli.md#the-anylog-cli) section. 
@@ -198,29 +194,25 @@ The ***help*** command provides dynamic information on EdgeLake commands.
 The help command is issued on the CLI and can be used in multiple ways:
 
 * List the commands by typing ***help*** on the CLI.
-```EdgeLake
-help
-```
+<pre class="code-frame"><code class="language-anylog">help</code></pre>
 * List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
   These commands can be listed by typing ***help get***.   
   
 Additional Examples:
- ```EdgeLake
-help get 
+ <pre class="code-frame"><code class="language-anylog">help get 
 help set
 help reset
-help blockchain
-```
+help blockchain</code></pre>
 * List command usage and examples - type ***help*** followed by the command text.  
   Examples:
-```EdgeLake
+<pre class="code-frame"><code class="language-anylog">
 help connect dbms
 help blockchain insert
 help get msg client
-```
+</code></pre>
 The help provides the usage, examples, explanation and a link to the relevant documentation.
 For example:
-```EdgeLake
+<pre class="code-frame"><code class="language-anylog">
 help blockchain get
 
 Usage:
@@ -242,21 +234,15 @@ Index:
 Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
 
 Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
-```
+</code></pre>
 
 * List an index that classifies the commands.
-```EdgeLake
-help index
-```
+<pre class="code-frame"><code class="language-anylog">help index</code></pre>
 * List commands associated with an index key.
-```EdgeLake
-help index index-key
-```
+<pre class="code-frame"><code class="language-anylog">help index index-key</code></pre>
 Note: **help index** followed by a key prefix, returns all the EdgeLake commands associated with the key prefix.   
 For example:
-```EdgeLake
-help index s
-```
+<pre class="code-frame"><code class="language-anylog">help index s</code></pre>
 Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
 
 
@@ -267,33 +253,21 @@ they can use the key names prefixed with an exclamation point (!) rather than sp
 The keys and values are organized in a dictionary and can be processed using the following commands:
 
 * Assigning a value to a key:
-```EdgeLake
- key = value
-```
+<pre class="code-frame"><code class="language-anylog"> key = value</code></pre>
  Example:
-```EdgeLake
- master_node = 126.32.47.29:2048
-```
+<pre class="code-frame"><code class="language-anylog"> master_node = 126.32.47.29:2048</code></pre>
  
 If the value string is identical to a command name, setting a value returns an error, and the user can enforce the value using the command ***set***.    
 Example:
-```EdgeLake
-set dbms_name = test
-```
+<pre class="code-frame"><code class="language-anylog">set dbms_name = test</code></pre>
  
 * Retrieve a value assigned to a key is by executing ***!key***. For example:
-```EdgeLake
-!dbms_name
-```
+<pre class="code-frame"><code class="language-anylog">!dbms_name</code></pre>
 or using the get command:
-```EdgeLake
-get !dbms_name
-```
+<pre class="code-frame"><code class="language-anylog">get !dbms_name</code></pre>
 
 * Retrieve all the assigned values:
-```EdgeLake
-get dictionary
-```
+<pre class="code-frame"><code class="language-anylog">get dictionary</code></pre>
 
 The node dictionary is detailed in the [local dictionary](https://github.com/AnyLog-co/documentation/blob/master/dictionary.md#the-local-dictionary) section.
 
@@ -306,9 +280,7 @@ For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the 
 
 An active node is configured such that some services are enabled.
 To view the list of services and their status issue the following command:
-```EdgeLake
-get processes
-```
+<pre class="code-frame"><code class="language-anylog">get processes</code></pre>
 More information on the background processes is available the [background services](commands/backgound_services.md) section.
 
 ### The dynamic logs
@@ -319,38 +291,28 @@ Every node maintains 4 dynamic logs that capture different types of events:
 Additional information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
-```EdgeLake
-get event log
+<pre class="code-frame"><code class="language-anylog">get event log
 get error log
-get query log
-```
+get query log</code></pre>
 
 The content of the logs can be reset using the following commands:
-```EdgeLake
-reset event log
+<pre class="code-frame"><code class="language-anylog">reset event log
 reset error log
-reset query log
-```
+reset query log</code></pre>
 
 ## Making a node a member of the network
 
 Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#network-configuration).
 
 The basic configuration of a node can be tested using the command:
-```edgelake
-test node
-```
+<pre class="code-frame"><code class="language-anylog">test node</code></pre>
 The following command tests the availability of the network members:
-```edgelake
-test network
-```
+<pre class="code-frame"><code class="language-anylog">test network</code></pre>
 
 ## The Seed command
 When a new node starts, or when a user wants to connect to a new network on the same root directory, user can retrieve 
 and assign a node to a metadata using the following command:
-```edgelake
-seed from [ip:port]
-```
+<pre class="code-frame"><code class="language-anylog">seed from [ip:port]</code></pre>
 More details are in the [Metadata](commands/metadata.md) section.
 
 ### Dynamically connecting to a master node
@@ -358,9 +320,7 @@ More details are in the [Metadata](commands/metadata.md) section.
 Users may need to switch between different master nodes.
 The following command makes the [blockchain synchronizer process](commands/backgound_services.md)
  connect to a different master node:
-```edgelake
-blockchain switch network where master = [IP:Port]
-```
+<pre class="code-frame"><code class="language-anylog">blockchain switch network where master = [IP:Port]</code></pre>
 
 ## Using the REST API to issue EdgeLake commands
 
@@ -377,9 +337,7 @@ Depending on the command in the message, some messages trigger a reply (for exam
 and some types of commands are only executed on the destination node (for example, a command to change a state, or a command to display a message).    
 
 The format to send a command from the node's CLI is the following:
-```edgelake
-run client (destination) command
-```
+<pre class="code-frame"><code class="language-anylog">run client (destination) command</code></pre>
 ### The message sections:
 **run client** - Making the current node a client of a peer node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
@@ -398,22 +356,16 @@ Note: If more than a single destination is specified, the destinations are conta
 
 ### Examples:
 
-```EdgeLake
-run client 10.0.0.78:20348 get status
+<pre class="code-frame"><code class="language-anylog">run client 10.0.0.78:20348 get status
 run client (139.162.126.241:2048, 172.105.13.202:2048) get processes   
-run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
-```
+run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator</code></pre>
 Queries are not required to specify destinations (and the parentheses are left empty).  
 If destination is not specified, the network protocol identifies the destination nodes.  
 For example:
-```EdgeLake
-run client () sql my_dbms "select count(*) from my_table"
-```
+<pre class="code-frame"><code class="language-anylog">run client () sql my_dbms "select count(*) from my_table"</code></pre>
 Destination can be a query to the metadata that generates a list of IPs and Ports.  
 The example below returns the CPU usage from all the Operator nodes in the US: 
-```EdgeLake
-run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage
-```
+<pre class="code-frame"><code class="language-anylog">run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage</code></pre>
 
 Additional information is available at [Queries and info requests to the Network](https://github.com/AnyLog-co/documentation/blob/master/queries.md).
 
