@@ -89,18 +89,20 @@ input filters.
 </code></pre>
 
 ### Configuring REST 
-1. Create a configurations file for REST 
+<ol start="1">
+<li>Create a configurations file for REST 
 <pre class="code-frame"><code class="language-shell">telegraf --input-filter cpu:mem:net:swap  --output-filter http config > telegraf.conf</code></pre>
+</li>
 
-2. The following parameters under `[[outputs.http]]` for `telegraf.conf` 
-* url - REST connection information  
-* method - set as POST 
-* data_format - set as JSON
-* Update headers information under `[outputs.http.headers]`  -- notice the topic value is the same as the topic in 
-`run msg client`
-
-Sample configurations 
-<pre class="code-frame"><code class="language-config">...
+<li>The following parameters under `[[outputs.http]]` for `telegraf.conf`
+    <ul style="padding-left: 20px;">
+        <li>user - REST connection information</li> 
+        <li>method - set as POST</li>
+        <li>data_format - set as JSON</li>
+        <li>Update headers information under <code class="language-config">[outputs.http.headers]</code> -- notice the topic value is the same as the topic in <code class="language-config">run msg client</code></li>
+    </ul> 
+<b>Sample configurations</b> 
+<pre class="code-frame"><ol class="language-config">...
 # A plugin that can transmit metrics over HTTP
 [[outputs.http]]
   ## URL is the address to send metrics to
@@ -132,11 +134,11 @@ Sample configurations
     User-Agent = "AnyLog/1.23"
     Content-Type = "text/plain"
 ...
-</code></pre>
+</code></pre></li>
 
-3. Start Telegraf 
+<li>Start Telegraf 
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
-
+</li></ol>
 
 ### Configuring MQTT 
 1. Create a configurations file for REST 
