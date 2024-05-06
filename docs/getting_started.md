@@ -125,7 +125,7 @@ An installation training session is available with the [Training Session Link](h
 
 The EdgeLake directory setup is configurable. The default setup (used on docker deployment) is detailed below: 
 
-<pre><code style="textcolor: black;">
+<pre style="overflow-x: auto;padding: 10px;"><code style="textcolor: black;">
 <b>Directory Structure                 Explabnation</b>
 -------------------                 -----------------------------------------
 /app                                [EdgeLake Root]
