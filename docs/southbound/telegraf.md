@@ -102,7 +102,7 @@ input filters.
         <li>Update headers information under <code class="language-config">[outputs.http.headers]</code> -- notice the topic value is the same as the topic in <code class="language-config">run msg client</code></li>
     </ul> 
 <b>Sample Configurations</b> 
-<pre class="code-frame"><ol class="language-config">...
+<pre class="code-frame"><class class="language-config">...
 # A plugin that can transmit metrics over HTTP
 [[outputs.http]]
   ## URL is the address to send metrics to
