@@ -108,9 +108,9 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "Home":
-    - "index.md"
+    - "/"
   "Quick Start":
-    - "docs/getting_started.md"
+    - "/getting_started.md"
   "Get The Source":
     - "https://github.com/EdgeLake/EdgeLake"
   "Download EdgeLake":
