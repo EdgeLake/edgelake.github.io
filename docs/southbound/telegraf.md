@@ -159,13 +159,12 @@ Sample configurations
   servers = ["10.0.0.78:7850", ] # or ["mqtts://tls.example.com:1883"]
   
   ...
-  
   ## MQTT Topic for Producer Messages
   ## MQTT outputs send metrics to this topic format:
-  ## {{ .TopicPrefix }}/{{ .Hostname }}/{{ .PluginName }}/{{ .Tag "tag_key" }}
+  ## <!-- {{ .TopicPrefix }}/{{ .Hostname }}/{{ .PluginName }}/{{ .Tag "tag_key" }} --> 
   ## (e.g. prefix/web01.example.com/mem/some_tag_value)
   ## Each path segment accepts either a template placeholder, an environment variable, or a tag key
-  ## of the form `{{.Tag "tag_key_name"}}`. Empty path elements as well as special MQTT characters
+  ## of the form <!-- `{{.Tag "tag_key_name"}}` -->. Empty path elements as well as special MQTT characters
   ## (such as `+` or `#`) are invalid to form the topic name and will lead to an error.
   ## In case a tag is missing in the metric, that path segment omitted for the final topic.
   topic = "telegraf-broker"
@@ -179,7 +178,7 @@ Sample configurations
   
   ...
   
-    ## Each data format has its own unique set of configuration options, read
+  ## Each data format has its own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "json"
