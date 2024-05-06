@@ -1,9 +1,14 @@
-<div align="right">
-<img src="imgs/edgelake.png" align="right"/>
-<br/>
-<br/>
-<br/>
-</div>
+[//]: # (<div align="right">)
+
+[//]: # (<img src="imgs/edgelake.png" align="right"/>)
+
+[//]: # (<br/>)
+
+[//]: # (<br/>)
+
+[//]: # (<br/>)
+
+[//]: # (</div>)
 
 
 # EdgeLake
