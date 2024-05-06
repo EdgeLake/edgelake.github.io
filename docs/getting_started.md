@@ -14,27 +14,50 @@ This document provides the following:
 Note: The EdgeLake software is derived from AnyLog. To provide additional info, some links reference the AnyLog documentation. 
 
 ## Table of Contents
+{: .no_toc .text-delta }
+* TOC
+{:toc}
 
-- [The Member Nodes](#the-member-nodes)
-- [The Network Metadata](#the-network-metadata)
-- [The Users Data](#the-users-data)
-- [EdgeLake Install](#edgelake-install)
-- [Node's Directory Structure](#nodes-directory-structure)
-- [Basic Operations](#basic-operations)
-  - [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
-  - [The EdgeLake CLI](#the-edgelake-command-line-interface)
-  - [The help Command](#the-help-command)
-  - [The Local Dictionary](#the-local-dictionary)
-  - [Retrieving Environment Variables](#retrieving-environment-variables)
-  - [Retrieving the Services Status](#retrieving-the-services-status)
-  - [The Dynamic Logs](#the-dynamic-logs)
-- [Making a Node a Member of the Network](#making-a-node-a-member-of-the-network)
-- [The Seed Command](#the-seed-command)
-- [Dynamically Connecting to a Master Node](#dynamically-connecting-to-a-master-node)
-- [Using the REST API to Issue EdgeLake Commands](#using-the-rest-api-to-issue-edgelake-commands)
-- [Sending Messages to Peers in the Network](#sending-messages-to-peers-in-the-network)
-- [Querying and Updating Metadata](#querying-and-updating-metadata-in-the-blockchain)
+[//]: # ()
+[//]: # (- [The Member Nodes]&#40;#the-member-nodes&#41;)
 
+[//]: # (- [The Network Metadata]&#40;#the-network-metadata&#41;)
+
+[//]: # (- [The Users Data]&#40;#the-users-data&#41;)
+
+[//]: # (- [EdgeLake Install]&#40;#edgelake-install&#41;)
+
+[//]: # (- [Node's Directory Structure]&#40;#nodes-directory-structure&#41;)
+
+[//]: # (- [Basic Operations]&#40;#basic-operations&#41;)
+
+[//]: # (  - [Initiating and Configuring EdgeLake Instances]&#40;#initiating-and-configuring-edgelake-instances&#41;)
+
+[//]: # (  - [The EdgeLake CLI]&#40;#the-edgelake-command-line-interface&#41;)
+
+[//]: # (  - [The help Command]&#40;#the-help-command&#41;)
+
+[//]: # (  - [The Local Dictionary]&#40;#the-local-dictionary&#41;)
+
+[//]: # (  - [Retrieving Environment Variables]&#40;#retrieving-environment-variables&#41;)
+
+[//]: # (  - [Retrieving the Services Status]&#40;#retrieving-the-services-status&#41;)
+
+[//]: # (  - [The Dynamic Logs]&#40;#the-dynamic-logs&#41;)
+
+[//]: # (- [Making a Node a Member of the Network]&#40;#making-a-node-a-member-of-the-network&#41;)
+
+[//]: # (- [The Seed Command]&#40;#the-seed-command&#41;)
+
+[//]: # (- [Dynamically Connecting to a Master Node]&#40;#dynamically-connecting-to-a-master-node&#41;)
+
+[//]: # (- [Using the REST API to Issue EdgeLake Commands]&#40;#using-the-rest-api-to-issue-edgelake-commands&#41;)
+
+[//]: # (- [Sending Messages to Peers in the Network]&#40;#sending-messages-to-peers-in-the-network&#41;)
+
+[//]: # (- [Querying and Updating Metadata]&#40;#querying-and-updating-metadata-in-the-blockchain&#41;)
+
+[//]: # ()
 
 ## About EdgeLake
 
