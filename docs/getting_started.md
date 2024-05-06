@@ -22,6 +22,26 @@ Note: The EdgeLake software is derived from AnyLog. To provide additional info, 
 1. TOC
 {:toc}
 
+- [The Member Nodes](#the-member-nodes)
+- [The Network Metadata](#the-network-metadata)
+- [The Users Data](#the-users-data)
+- [EdgeLake Install](#edgelake-install)
+- [Node's Directory Structure](#nodes-directory-structure)
+- [Basic Operations](#basic-operations)
+  - [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
+  - [The EdgeLake CLI](#the-edgelake-command-line-interface)
+  - [The help Command](#the-help-command)
+  - [The Local Dictionary](#the-local-dictionary)
+  - [Retrieving Environment Variables](#retrieving-environment-variables)
+  - [Retrieving the Services Status](#retrieving-the-services-status)
+  - [The Dynamic Logs](#the-dynamic-logs)
+- [Making a Node a Member of the Network](#making-a-node-a-member-of-the-network)
+- [The Seed Command](#the-seed-command)
+- [Dynamically Connecting to a Master Node](#dynamically-connecting-to-a-master-node)
+- [Using the REST API to Issue EdgeLake Commands](#using-the-rest-api-to-issue-edgelake-commands)
+- [Sending Messages to Peers in the Network](#sending-messages-to-peers-in-the-network)
+- [Querying and Updating Metadata](#querying-and-updating-metadata-in-the-blockchain)
+
 
 ## About EdgeLake
 
