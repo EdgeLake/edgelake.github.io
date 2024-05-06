@@ -107,8 +107,14 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "EdgeLake":
+  "Home":
+    - "index.md"
+  "Quick Start":
+    - "docs/getting_started.md"
+  "Get The Source":
     - "https://github.com/EdgeLake/EdgeLake"
+  "Download EdgeLake":
+    - "https://github.com/EdgeLake/docker-compose"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
