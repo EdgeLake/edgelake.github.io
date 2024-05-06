@@ -91,16 +91,12 @@ newgrp docker
     </code>
   </pre>
 <b>Deploy EdgeLake</b>:
-<li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <code>LEDGER_CONN</code> for <i>Query</i> and <i>Operator</i> Nodes
-<li>
-<ul style="padding-left: 20px;">
+<li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <code>LEDGER_CONN</code> for <i>Query Nodes</i> and <i>Operator Nodes</i>
     <ul style="padding-left: 20px;">
       <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a></li>
       <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
       <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
     </ul>
-  </li>
-</ul>
 </li>
   <pre class="code-frame">
     <code class="language-config">
