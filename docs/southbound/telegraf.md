@@ -140,17 +140,20 @@ input filters.
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
 </li></code>
 
-### Configuring MQTT 
-1. Create a configurations file for REST 
+### Configuring MQTT
+<ol start="1">
+<li>Create a configurations file for REST 
 <pre class="code-frame"><code class="language-shell">telegraf --input-filter cpu:mem:net:swap  --output-filter mqtt config > telegraf.conf</code></pre>
+</li>
 
-2. The following parameters under `[[outputs.mqtt]]` for `telegraf.conf` 
-* servers - Message broker connection information
-* topic - specify the MQTT topic, should be the same as the topic used in `run mesg client`.
-* bath - should be set _true_
-* data_format - set as JSON
-
-Sample configurations 
+<li>The following parameters under <code class="language-config">[[outputs.mqtt]]</code> for <code>telegraf.conf</code> 
+    <ul style="padding-left: 20px;">
+        <li>servers - Message broker connection information</li>
+        <li>topic - specify the MQTT topic, should be the same as the topic used in <code>run msg client</code></li>
+        <li>bath - should be set <i>true</i></li>
+        <li>data_format - set as JSON</li>
+    </ul>
+<b>Sample configurations</b> 
 <pre class="code-frame"><code class="language-config">...
 [[outputs.mqtt]]
   ## MQTT Brokers
@@ -179,8 +182,8 @@ Sample configurations
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
   data_format = "json"
-</code></pre>
+</code></pre></li>
 
-3. Start Telegraf 
+<li>Start Telegraf 
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
-
+</li></ol>
