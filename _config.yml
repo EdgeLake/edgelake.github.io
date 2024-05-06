@@ -110,7 +110,7 @@ aux_links:
   "Home":
     - "/"
   "Quick Start":
-    - "/getting_started.md"
+    - "/docs/getting_started/"
   "Get The Source":
     - "https://github.com/EdgeLake/EdgeLake"
   "Download EdgeLake":
