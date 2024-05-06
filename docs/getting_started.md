@@ -14,26 +14,14 @@ This document provides the following:
 Note: The EdgeLake software is derived from AnyLog. To provide additional info, some links reference the AnyLog documentation. 
 
 ## Table of Content
-[About EdgeLake](#about-edgelake)
-[The member nodes](#the-member-nodes)
-[The Network Metadata](#the-network-metadata)
-[The Users Data](#the-users-data)
-[EdgeLake Install](#edgelake-install)
-[Node's directory structure](#nodes-directory-structure)
-[Basic operations](#basic-operations)
-* [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
-* [The EdgeLake CLI](#the-edgelake-command-line-interface)
-* [The help command](#the-help-command)
-* [The local dictionary](#the-local-dictionary)
-* [Retrieving environment variables](#retrieving-environment-variables)
-* [Retrieving the services status](#retrieving-the-services-status)
-* [The dynamic logs](#the-dynamic-logs)
-[Making a node a member of the network](#making-a-node-a-member-of-the-network)
-[The Seed command](#the-seed-command) 
-[Dynamically connecting to a master node](#dynamically-connecting-to-a-master-node)
-[Using the REST API to issue EdgeLake commands](#using-the-rest-api-to-issue-edgelake-commands)
-[Sending messages to peers in the network](#sending-messages-to-peers-in-the-network)  
-[Querying and updating metadata](#querying-and-updating-metadata-in-the-blockchain)  
+{: .no_toc }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
 
 ## About EdgeLake
 
