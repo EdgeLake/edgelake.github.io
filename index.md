@@ -139,7 +139,6 @@ make up query
 </pre>
 </ol>
 
-
 ## Prerequisite and Setup considerations
 <table>
   <thead>
