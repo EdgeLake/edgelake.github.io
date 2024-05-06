@@ -6,12 +6,6 @@ layout: home
 title: EdgeLake
 nav_order: 1
 ---
-
-<div align="right">
-<img src="imgs/edgelake_logo.png" height="5%" width="5%" align="right"/>
-</div>
-
-
 # EdgeLake
 
 Transform your edge nodes into members of a permissioned decentralized network, optimized to manage and monitor data and resources at the edge.
@@ -68,14 +62,16 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-1. Install requirements
-   * _Docker_
-   * _docker-compose_
-   * _Makefile_
-
-<pre>
-    <code class="language-shell">
-sudo snap install docker
+<ol start="1">
+  <li>Install requirements
+    <ul style="padding-left: 20px;">
+      <li>Docker</li>
+      <li>docker-compose</li>
+      <li>Makefile</li>
+    </ul>
+  </li>
+  <li>Clone <i>docker-compose</i> repository from EdgeLake</li>
+  <pre class="code-frame"><code class="language-shell">sudo snap install docker
 sudo apt-get -y install docker-compose 
 sudo apt-get -y install make
  
@@ -84,28 +80,17 @@ USER=`whoami`
 sudo groupadd docker 
 sudo usermod -aG docker ${USER} 
 newgrp docker
-    </code>
-</pre>
+</code></pre>
 
-
-2. Clone _docker-compose_ repository from EdgeLake
-<pre>
-    <code class="language-shell">
-git clone https://github.com/EdgeLake/docker-compose
-cd docker-compose
-    </code>
-</pre>
-
-**Deploy EdgeLake**:
-
-3. Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
-   * [master node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env)
-   * [operator node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env)
-   * [query node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env)
-
-<pre>
-    <code class="language-dotenv">
-#--- General ---
+<b>Deploy EdgeLake</b>:
+<li>Update <code>.env</code> configurations for the node(s) being deployed -- specifically <code>LEDGER_CONN</code> for <i>Query Nodes</i> and <i>Operator Nodes</i>
+    <ul style="padding-left: 20px;">
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env" target="_blank">master node</a></li>
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env" target="_blank">operator node</a></li>
+      <li><a href="https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env" target="_blank">query node</a></li>
+    </ul>
+</li>
+<pre class="code-frame"><code class="language-config">#--- General ---
 # Information regarding which EdgeLake node configurations to enable. By default, even if everything is disabled, EdgeLake starts TCP and REST connection services.
 NODE_TYPE=master
 # Name of the EdgeLake instance
@@ -130,20 +115,16 @@ LEDGER_CONN=127.0.0.1:32048
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
 DEPLOY_LOCAL_SCRIPT=false
-    </code>
-</pre>
+</code></pre>
 
-2. Start Node using _makefile_
-<pre>
-    <code class="language-shell">
-make up [NODE_TYPE]
+<li>Start Node using <i>makefile</i></li>
+<pre class="code-frame"><code class="language-shell">make up [NODE_TYPE]
 
 # examples
 make up master
 make up operator
 make up query
-    </code>
-</pre>
+</code></pre></ol>
 
 ## Prerequisite and Setup considerations
 <table>

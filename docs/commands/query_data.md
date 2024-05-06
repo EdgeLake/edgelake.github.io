@@ -40,15 +40,12 @@ In depth details can be found as part of [AnyLog's documentation](https://github
 
 ## Query Format 
 **Sample Query**: 
-<pre>
-    <code>
-# Query Format Breakdown 
+<pre class="code-frame"><code class="language-anylog"># Query Format Breakdown 
 run client () sql [db_name] format=[output_type] and stats=[true/false] [select statement] 
 
 # Sample Query 
 run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
-    </code>
-</pre>
+</code></pre>
 
 * `run client ()` directs the query to the relevant nodes in the network. When [executing via REST](../examples/rest_examples.md), 
 the `--headers "destination: network"` is instead of the `run client ()`.
@@ -70,22 +67,14 @@ the occurrence needs also to satisfy the filter-criteria, considering the readin
 by the type of the time interval (_Minutes_, _Hours_, _Days_, _Weeks_, _Months_ or _Years_) and the number of units of 
 the time interval (i.e. 3 days - whereas time-interval is day and unit is 3).
 
-**Sampel Call**: 
-<pre>
-  <code>
-run client () sql edgex format=table "select min(timestamp), max(timestamp), count(value) from rand_data WHERE period(day, 1, now(), timestamp);"
-  </code>
-</pre>
+**Sample Call**: 
+<pre class="code-frame"><code class="language-anylog">run client () sql edgex format=table "select min(timestamp), max(timestamp), count(value) from rand_data WHERE period(day, 1, now(), timestamp);"</code></pre>
 
 ### Increments Function
 The `increments` functions considers data in increments of time within a time range. The function is compose 3 parts 
 `date-column` or column name (ex. _timestamp_), `time-interval` (_Minutes_, _Hours_, _Days_, _Weeks_, _Months_ or _Years_)
 and `units` associated with the time interval. 
 
-<pre>
-  <code>
-run client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data" 
-  </code>
-</pre>
+<pre class="code-frame"><code class="language-anylog">run client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), count(value) from rand_data"</code></pre>
 
 

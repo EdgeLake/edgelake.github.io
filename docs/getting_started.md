@@ -13,27 +13,27 @@ This document provides the following:
 
 Note: The EdgeLake software is derived from AnyLog. To provide additional info, some links reference the AnyLog documentation. 
 
-## Table of Content
-[About EdgeLake](#about-edgelake)
-[The member nodes](#the-member-nodes)
-[The Network Metadata](#the-network-metadata)
-[The Users Data](#the-users-data)
-[EdgeLake Install](#edgelake-install)
-[Node's directory structure](#nodes-directory-structure)
-[Basic operations](#basic-operations)
-* [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
-* [The EdgeLake CLI](#the-edgelake-command-line-interface)
-* [The help command](#the-help-command)
-* [The local dictionary](#the-local-dictionary)
-* [Retrieving environment variables](#retrieving-environment-variables)
-* [Retrieving the services status](#retrieving-the-services-status)
-* [The dynamic logs](#the-dynamic-logs)
-[Making a node a member of the network](#making-a-node-a-member-of-the-network)
-[The Seed command](#the-seed-command) 
-[Dynamically connecting to a master node](#dynamically-connecting-to-a-master-node)
-[Using the REST API to issue EdgeLake commands](#using-the-rest-api-to-issue-edgelake-commands)
-[Sending messages to peers in the network](#sending-messages-to-peers-in-the-network)  
-[Querying and updating metadata](#querying-and-updating-metadata-in-the-blockchain)  
+## Table of Contents
+- [The Member Nodes](#the-member-nodes)
+- [The Network Metadata](#the-network-metadata)
+- [The Users Data](#the-users-data)
+- [EdgeLake Install](#edgelake-install)
+- [Node's Directory Structure](#nodes-directory-structure)
+- [Basic Operations](#basic-operations)
+  - [Initiating and Configuring EdgeLake Instances](#initiating-and-configuring-edgelake-instances)
+  - [The EdgeLake CLI](#the-edgelake-command-line-interface)
+  - [The help Command](#the-help-command)
+  - [The Local Dictionary](#the-local-dictionary)
+  - [Retrieving Environment Variables](#retrieving-environment-variables)
+  - [Retrieving the Services Status](#retrieving-the-services-status)
+  - [The Dynamic Logs](#the-dynamic-logs)
+- [Making a Node a Member of the Network](#making-a-node-a-member-of-the-network)
+- [The Seed Command](#the-seed-command)
+- [Dynamically Connecting to a Master Node](#dynamically-connecting-to-a-master-node)
+- [Using the REST API to Issue EdgeLake Commands](#using-the-rest-api-to-issue-edgelake-commands)
+- [Sending Messages to Peers in the Network](#sending-messages-to-peers-in-the-network)
+- [Querying and Updating Metadata](#querying-and-updating-metadata-in-the-blockchain)
+
 
 ## About EdgeLake
 
@@ -64,7 +64,9 @@ The metadata is stored in a repository which is accessible to all the nodes in t
 The interaction with the metadata is not dependent on the repository used. When a member node operates, it is configured to use a particular metadata repository and
 there are no operational differences which are dependent on the repository used.
 
-**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.**
+**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if 
+the metadata is maintained in a blockchain platform or in a master node.**
+
 It allows users to leverage one type of repository, and change to a different type without the need to make changes to their processes and logic.
 
 The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
@@ -90,9 +92,9 @@ The metadata is shared by all the nodes of the network, and includes the followi
 ## The Users Data
 The users' data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently EdgeLake Operators can use the following databases:  
-[PostgresSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
-[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
-[MongoDB](https://www.mongodb.com/) - recommended for unstructured data.
+* [PostgresSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
+* [SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
+* [MongoDB](https://www.mongodb.com/) - recommended for unstructured data.
 
 The data managed by the network is distributed to many nodes, but the network protocol provides a unified view over the distributed data -
 the users or applications issuing the queries do not need to identify the nodes that host the relevant data - for each query, the network protocol 
@@ -123,44 +125,46 @@ An installation training session is available with the [Training Session Link](h
 
 ## Node's directory structure
 
-The EdgeLake directory setup is configurable. The default setup is detailed below: 
+The EdgeLake directory setup is configurable. The default setup (used on docker deployment) is detailed below: 
 
-```EdgeLake
-Directory Structure   Explabnation
--------------------   -----------------------------------------
---> EdgeLake-Network  [EdgeLake Root]
-    -->EdgeLake       [Directory containing authentication keys and passwords]
-    -->blockchain     [A JSON file representing the metadata relevant to the node]
-    -->data           [Users data and intermediate data processed by this node]
-       -->archive     [The root directory of and archival directory]
-       -->bkup        [Optional location for backup of user data]
-       -->blobs       [Directory containing unstructured data]
-       -->dbms        [Optional location for persistent database data. If using SQLite, used for persistent SQLIte data]
-       -->distr       [Directory used in the High Availability processes]
-       -->error       [The storage location for new data that failed database storage]
-       -->pem         [Directory containing keys and certificates]
-       -->prep        [Directory for system intermediate data]
-       -->test        [Directory location for output data of test queries] 
-       -->watch       [Directory monitored by the system, data files placed in the directory are being processed] 
-       -->bwatch      [Directory monitored by the system, managing unstructured data]
-    -->source         [The root directory for source or executable files]
-    -->scripts        [System scripts to install and configure the EdgeLake node]
-       -->install     [Installation scripts]
-       -->EdgeLake      [Configuration Scripts]
-    -->local_scripts  [Users scripts]
-```
+<pre style="border: 2px ; border: none; overflow-x: auto;padding: 10px;"><code style="textcolor: black;">
+<b>Directory Structure                 Explanation</b>
+-------------------                 -----------------------------------------
+/app                                [EdgeLake Root]
+├── EdgeLake                        [Directory containing authentication keys and passwords]
+│   ├── blockchain                  [A JSON file representing the metadata relevant to the node]
+│   └── data                        [Users data and intermediate data processed by this node]
+│       ├── archive                 [The root directory of and archival directory]
+│       ├── bkup                    [Optional location for backup of user data]
+│       ├── blobs                   [Directory containing unstructured data]
+│       ├── dbms                    [Optional location for persistent database data. If using SQLite, used for persistent SQLIte data]
+│       ├── distr                   [Directory used in the High Availability processes]
+│       ├── error                   [The storage location for new data that failed database storage]
+│       ├── pem                     [Directory containing keys and certificates]
+│       ├── prep                    [Directory for system intermediate data]
+│       ├── test                    [Directory location for output data of test queries]
+│       ├── watch                   [Directory monitored by the system, data files placed in the directory are being processed]
+│       └── bwatch                  [Directory monitored by the system, managing unstructured data]
+├── deployment-scripts              [Directory consisting of scripts used to deploy & test EdgeLake]
+│   ├── demo-scripts                [Directory consisting of examples for running different processes / services]
+│   ├── grpc                        [Directory consisting of examples for compiling <i>gRPC</i> proto file and accepting data from KubeArmor]
+│   ├── node-deployment             [Directory consisting of scripts that utilize user-defined configurations in order to deploy different node types]
+│   │   ├── database                [Directory consisting of scripts to deploy database(s) based on configurations and node type]
+│   │   └── policies                [Directory consisting of different policy definitions for both configurations and cluster / node policies]
+│   ├── test-network-local-scripts  [Directory consisting of scripts used by AnyLog's demo / test network setup]
+│   └── tests                       [Directory consisting of using test cases]
+└── edgelake_v0.0.0_x86_64          [Compiled code of either EdgeLake or AnyLog. Namimg slightly changes based on version / CPU architecture]
+</code></pre>
 
 Notes: 
 * The following command creates the work folders if they do not exist:
-    ```EdgeLake
-    create work directories
-    ```
+    <pre class="code-frame"><code class="language-anylog">create work directories</code></pre>
+    
     The command needs to be issued only once on the physical or virtual machine.
     
 * The following command list the directories on an EdgeLake node:
-     ```EdgeLake
-    get dictionary _dir
-    ``` 
+     <pre class="code-frame"><code class="language-anylog">get dictionary _dir</code></pre>
+
 ## Basic operations
 
 ### Initiating and Configuring EdgeLake Instances
@@ -177,9 +181,7 @@ EdgeLake can be configured in many ways:
 
 When a node starts, it provides the **EdgeLake Command Line Interface (CLI)**.    
 The command line prompt appear as **EL >**, and it can be updated by issuing the following command on the CLI:
-```EdgeLake
-set node name [node name]
-```
+<pre class="code-frame"><code class="language-anylog">set node name [node name]</code></pre>
 
 Using the CLI, a user can interact with the node or peer nodes in the network.  
 A more detailed description of the EdgeLake CLI is available at [The EdgeLake CLI](https://github.com/AnyLog-co/documentation/blob/master/cli.md#the-anylog-cli) section. 
@@ -194,30 +196,24 @@ The ***help*** command provides dynamic information on EdgeLake commands.
 The help command is issued on the CLI and can be used in multiple ways:
 
 * List the commands by typing ***help*** on the CLI.
-```EdgeLake
-help
-```
+<pre class="code-frame"><code class="language-anylog">help</code></pre>
 * List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
   These commands can be listed by typing ***help get***.   
   
 Additional Examples:
- ```EdgeLake
-help get 
+ <pre class="code-frame"><code class="language-anylog">help get 
 help set
 help reset
-help blockchain
-```
+help blockchain</code></pre>
 * List command usage and examples - type ***help*** followed by the command text.  
   Examples:
-```EdgeLake
-help connect dbms
+<pre class="code-frame"><code class="language-anylog">help connect dbms
 help blockchain insert
 help get msg client
-```
+</code></pre>
 The help provides the usage, examples, explanation and a link to the relevant documentation.
 For example:
-```EdgeLake
-help blockchain get
+<pre class="code-frame"><code class="language-anylog">help blockchain get
 
 Usage:
         blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
@@ -238,22 +234,19 @@ Index:
 Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#query-policies
 
 Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md
-```
+</code></pre>
 
 * List an index that classifies the commands.
-```EdgeLake
-help index
-```
+<pre class="code-frame"><code class="language-anylog">help index</code></pre>
 * List commands associated with an index key.
-```EdgeLake
-help index index-key
-```
+<pre class="code-frame"><code class="language-anylog">help index index-key</code></pre>
 Note: **help index** followed by a key prefix, returns all the EdgeLake commands associated with the key prefix.   
 For example:
-```EdgeLake
-help index s
-```
-Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
+<pre class="code-frame"><code class="language-anylog">help index s</code></pre>
+Returns all commands associated with **_s_** in the index key prefix:
+* <code class="language-anylog">script</code> 
+* <code class="language-anylog">secure network</code> 
+* <code class="language-anylog">streaming</code>
 
 
 ### The local dictionary
@@ -263,33 +256,21 @@ they can use the key names prefixed with an exclamation point (!) rather than sp
 The keys and values are organized in a dictionary and can be processed using the following commands:
 
 * Assigning a value to a key:
-```EdgeLake
- key = value
-```
+<pre class="code-frame"><code class="language-anylog"> key = value</code></pre>
  Example:
-```EdgeLake
- master_node = 126.32.47.29:2048
-```
+<pre class="code-frame"><code class="language-anylog"> master_node = 126.32.47.29:2048</code></pre>
  
 If the value string is identical to a command name, setting a value returns an error, and the user can enforce the value using the command ***set***.    
 Example:
-```EdgeLake
-set dbms_name = test
-```
+<pre class="code-frame"><code class="language-anylog">set dbms_name = test</code></pre>
  
 * Retrieve a value assigned to a key is by executing ***!key***. For example:
-```EdgeLake
-!dbms_name
-```
+<pre class="code-frame"><code class="language-anylog">!dbms_name</code></pre>
 or using the get command:
-```EdgeLake
-get !dbms_name
-```
+<pre class="code-frame"><code class="language-anylog">get !dbms_name</code></pre>
 
 * Retrieve all the assigned values:
-```EdgeLake
-get dictionary
-```
+<pre class="code-frame"><code class="language-anylog">get dictionary</code></pre>
 
 The node dictionary is detailed in the [local dictionary](https://github.com/AnyLog-co/documentation/blob/master/dictionary.md#the-local-dictionary) section.
 
@@ -302,51 +283,39 @@ For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the 
 
 An active node is configured such that some services are enabled.
 To view the list of services and their status issue the following command:
-```EdgeLake
-get processes
-```
+<pre class="code-frame"><code class="language-anylog">get processes</code></pre>
 More information on the background processes is available the [background services](commands/backgound_services.md) section.
 
 ### The dynamic logs
 Every node maintains 4 dynamic logs that capture different types of events:
-* The event log - registers the executed commands
-* The error log - registers the commands that failed to execute.
-* The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
+* <code class="language-anylog">The event log</code> - registers the executed commands
+* <code class="language-anylog">The error log</code> - registers the commands that failed to execute.
+* <code class="language-anylog">The query log</code> - registers the executed SQL queries. This log needs to be enabled and configured as needed.
 Additional information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
-```EdgeLake
-get event log
+<pre class="code-frame"><code class="language-anylog">get event log
 get error log
-get query log
-```
+get query log</code></pre>
 
 The content of the logs can be reset using the following commands:
-```EdgeLake
-reset event log
+<pre class="code-frame"><code class="language-anylog">reset event log
 reset error log
-reset query log
-```
+reset query log</code></pre>
 
 ## Making a node a member of the network
 
 Connecting a node to the network is explained in [network configuration](https://github.com/AnyLog-co/documentation/blob/master/network%20configuration.md#network-configuration).
 
 The basic configuration of a node can be tested using the command:
-```edgelake
-test node
-```
+<pre class="code-frame"><code class="language-anylog">test node</code></pre>
 The following command tests the availability of the network members:
-```edgelake
-test network
-```
+<pre class="code-frame"><code class="language-anylog">test network</code></pre>
 
 ## The Seed command
 When a new node starts, or when a user wants to connect to a new network on the same root directory, user can retrieve 
 and assign a node to a metadata using the following command:
-```edgelake
-seed from [ip:port]
-```
+<pre class="code-frame"><code class="language-anylog">seed from [ip:port]</code></pre>
 More details are in the [Metadata](commands/metadata.md) section.
 
 ### Dynamically connecting to a master node
@@ -354,9 +323,7 @@ More details are in the [Metadata](commands/metadata.md) section.
 Users may need to switch between different master nodes.
 The following command makes the [blockchain synchronizer process](commands/backgound_services.md)
  connect to a different master node:
-```edgelake
-blockchain switch network where master = [IP:Port]
-```
+<pre class="code-frame"><code class="language-anylog">blockchain switch network where master = [IP:Port]</code></pre>
 
 ## Using the REST API to issue EdgeLake commands
 
@@ -373,9 +340,7 @@ Depending on the command in the message, some messages trigger a reply (for exam
 and some types of commands are only executed on the destination node (for example, a command to change a state, or a command to display a message).    
 
 The format to send a command from the node's CLI is the following:
-```edgelake
-run client (destination) command
-```
+<pre class="code-frame"><code class="language-anylog">run client (destination) command</code></pre>
 ### The message sections:
 **run client** - Making the current node a client of a peer node (or nodes). The command is organized in a message
  delivered to one or more destination nodes and is executed on the destination nodes.    
@@ -383,9 +348,9 @@ run client (destination) command
 **(destination)** - the destination nodes identified by the IP and Port assigned to their
 [TCP Server configuration](commands/backgound_services.md#enable-the-tcp-service).
 Destination can be represented in any of the following ways:
-* As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: `(139.162.126.241 2048, 172.105.13.202 2048)`    
-* For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  `10.0.0.78:20348`  
-* As variables. For example: `!dest_ip !dest_port`
+* As a comma (or space) separated list of IP-Ports pairs within parenthesis. For example: <code class="language-anylog">(139.162.126.241 2048, 172.105.13.202 2048)</code>    
+* For a single destination node - as an IP-Port string (a single destination does not require the parenthesis). For example:  <code class="language-anylog">10.0.0.78:20348</code>  
+* As variables. For example: <code class="language-anylog">!dest_ip !dest_port</code>
 * As a query to the metadata that returns a list of comma separated IPs and Ports.
 
 Note: If more than a single destination is specified, the destinations are contained in parentheses.   
@@ -394,22 +359,16 @@ Note: If more than a single destination is specified, the destinations are conta
 
 ### Examples:
 
-```EdgeLake
-run client 10.0.0.78:20348 get status
+<pre class="code-frame"><code class="language-anylog">run client 10.0.0.78:20348 get status
 run client (139.162.126.241:2048, 172.105.13.202:2048) get processes   
-run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator
-```
+run client (!operator1_ip !operator1_port, !operator2_ip operator2_port) get operator</code></pre>
 Queries are not required to specify destinations (and the parentheses are left empty).  
 If destination is not specified, the network protocol identifies the destination nodes.  
 For example:
-```EdgeLake
-run client () sql my_dbms "select count(*) from my_table"
-```
+<pre class="code-frame"><code class="language-anylog">run client () sql my_dbms "select count(*) from my_table"</code></pre>
 Destination can be a query to the metadata that generates a list of IPs and Ports.  
 The example below returns the CPU usage from all the Operator nodes in the US: 
-```EdgeLake
-run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage
-```
+<pre class="code-frame"><code class="language-anylog">run client (blockchain get operator where [country] contains US bring [operator][ip] : [operator][port]  separator = ,) get cpu usage</code></pre>
 
 Additional information is available at [Queries and info requests to the Network](https://github.com/AnyLog-co/documentation/blob/master/queries.md).
 

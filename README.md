@@ -1,5 +1,8 @@
 <div align="right">
-<img src="imgs/edgelake_logo.png" height="5%" width="5%" align="right"/>
+<img src="imgs/edgelake.png" align="right"/>
+<br/>
+<br/>
+<br/>
 </div>
 
 
@@ -59,11 +62,10 @@ of the distributed edge resources from a single point.
 Detailed directions for Install EdgeLke can be found in [docker-compose repository](https://github.com/EdgeLake/docker-compose)
 
 **Prepare Node(s)**:
-1. Install requirements
+* Install requirements
    * _Docker_
    * _docker-compose_
    * _Makefile_
-
 <pre>
     <code class="language-shell">
 sudo snap install docker
@@ -78,8 +80,7 @@ newgrp docker
     </code>
 </pre>
 
-
-2. Clone _docker-compose_ repository from EdgeLake
+* Clone _docker-compose_ repository from EdgeLake
 <pre>
     <code class="language-shell">
 git clone https://github.com/EdgeLake/docker-compose
@@ -89,7 +90,7 @@ cd docker-compose
 
 **Deploy EdgeLake**:
 
-3. Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
+* Update `.env` configurations for the node(s) being deployed -- specifically _LEDGER_CONN_ for _Query_ and _Operator_ Nodes  
    * [master node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_master.env)
    * [operator node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_operator.env)
    * [query node](https://github.com/EdgeLake/docker-compose/tree/main/docker_makefile/edgelake_query.env)
