@@ -22,6 +22,14 @@ layout: table_wrappers
   <div class="main" id="top">
     {% include components/header.html %}
     <div class="main-content-wrap">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        {% if site.search_enabled != false %}
+          {% include components/search.html %}
+        {% endif %}
+        <div align="right">
+          <img src="{{ site.baseurl }}/imgs/edgelake.png" style="margin-right: 10px;"/>
+        </div>
+      </div>
       {% include components/breadcrumbs.html %}
       <div id="main-content" class="main-content">
         <main>
@@ -38,19 +46,8 @@ layout: table_wrappers
         {% include components/footer.html %}
       </div>
     </div>
-    {% if site.search_enabled != false %}
-      {% include components/search_footer.html %}
-    {% endif %}
-
-    <!-- Place the image below the search bar on the right -->
-    <div align="right">
-      <img src="{{ site.baseurl }}/imgs/edgelake.png" align="right"/>
-      <br/>
-      <br/>
-      <br/>
-    </div>
-
   </div>
+
   {% if site.mermaid %}
     {% include components/mermaid.html %}
   {% endif %}
