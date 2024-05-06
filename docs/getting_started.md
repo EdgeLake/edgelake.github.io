@@ -64,7 +64,9 @@ The metadata is stored in a repository which is accessible to all the nodes in t
 The interaction with the metadata is not dependent on the repository used. When a member node operates, it is configured to use a particular metadata repository and
 there are no operational differences which are dependent on the repository used.
 
-**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if the metadata is maintained in a blockchain platform or in a master node.**
+**Note that the documentation (and the nodes processes) reference the blockchain for metadata operations regardless if 
+the metadata is maintained in a blockchain platform or in a master node.**
+
 It allows users to leverage one type of repository, and change to a different type without the need to make changes to their processes and logic.
 
 The nodes in the network are configured to pull the metadata (from the blockchain platform, or the master node) periodically (using a backround service and if the metadata was changed) and update a local copy of the metadata on the node.  
@@ -205,15 +207,13 @@ help reset
 help blockchain</code></pre>
 * List command usage and examples - type ***help*** followed by the command text.  
   Examples:
-<pre class="code-frame"><code class="language-anylog">
-help connect dbms
+<pre class="code-frame"><code class="language-anylog">help connect dbms
 help blockchain insert
 help get msg client
 </code></pre>
 The help provides the usage, examples, explanation and a link to the relevant documentation.
 For example:
-<pre class="code-frame"><code class="language-anylog">
-help blockchain get
+<pre class="code-frame"><code class="language-anylog">help blockchain get
 
 Usage:
         blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
@@ -288,9 +288,9 @@ More information on the background processes is available the [background servic
 
 ### The dynamic logs
 Every node maintains 4 dynamic logs that capture different types of events:
-* The event log - registers the executed commands
-* The error log - registers the commands that failed to execute.
-* The query log - registers the executed SQL queries. This log needs to be enabled and configured as needed.
+* <code class="language-anylog">The event log</code> - registers the executed commands
+* <code class="language-anylog">The error log</code> - registers the commands that failed to execute.
+* <code class="language-anylog">The query log</code> - registers the executed SQL queries. This log needs to be enabled and configured as needed.
 Additional information is available at [Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md#profiling-and-monitoring-queries)
 
 To view the content of the logs issue the following commands:
