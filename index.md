@@ -6,14 +6,6 @@ layout: home
 title: EdgeLake
 nav_order: 1
 ---
-
-<div align="right">
-<img src="imgs/edgelake.png" align="right"/>
-<br/>
-<br/>
-<br/>
-</div>
-
 # EdgeLake
 
 Transform your edge nodes into members of a permissioned decentralized network, optimized to manage and monitor data and resources at the edge.
