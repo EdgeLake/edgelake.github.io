@@ -90,9 +90,11 @@ The metadata is shared by all the nodes of the network, and includes the followi
 ## The Users Data
 The users' data is distributed in local databases on the Operators Nodes. Operators can use different databases for different sets of data.  
 Currently EdgeLake Operators can use the following databases:  
-[PostgresSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.    
-[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.      
-[MongoDB](https://www.mongodb.com/) - recommended for unstructured data.
+<ul>
+    <li>[PostgresSQL](https://www.postgresql.org/) - recommended for larger nodes and deployments of large data sets.</li>    
+    <li>[SQLite](https://www.sqlite.org/index.html) - recommended for gateways, smaller nodes and deployments of small or in-memory data sets.</li>      
+    <li>[MongoDB](https://www.mongodb.com/) - recommended for unstructured data.</li>
+</ul>
 
 The data managed by the network is distributed to many nodes, but the network protocol provides a unified view over the distributed data -
 the users or applications issuing the queries do not need to identify the nodes that host the relevant data - for each query, the network protocol 
@@ -205,15 +207,13 @@ help reset
 help blockchain</code></pre>
 * List command usage and examples - type ***help*** followed by the command text.  
   Examples:
-<pre class="code-frame"><code class="language-anylog">
-help connect dbms
+<pre class="code-frame"><code class="language-anylog">help connect dbms
 help blockchain insert
 help get msg client
 </code></pre>
 The help provides the usage, examples, explanation and a link to the relevant documentation.
 For example:
-<pre class="code-frame"><code class="language-anylog">
-help blockchain get
+<pre class="code-frame"><code class="language-anylog">help blockchain get
 
 Usage:
         blockchain get [policy type] [where] [attribute name value pairs] [bring] [bring command variables]
@@ -243,7 +243,7 @@ Link: https://github.com/AnyLog-co/documentation/blob/master/blockchain%20comman
 Note: **help index** followed by a key prefix, returns all the EdgeLake commands associated with the key prefix.   
 For example:
 <pre class="code-frame"><code class="language-anylog">help index s</code></pre>
-Returns all commands associated with ***s*** in the index key prefix: ```script``` ```secure network``` ```streaming```.
+Returns all commands associated with ***s*** in the index key prefix: <code class="language-anylog">script </code> <code class="language-anylog">secure network </code> <code class="language-anylog">streaming```.
 
 
 ### The local dictionary
