@@ -14,8 +14,8 @@ EdgeLake / AnyLog is able to accept data from _Telegraf_ via REST POST or its me
 policy.  
 
 <ol start="1">
-    <li>Create a mapping policy to accept data  - notice that except for `timestamp`,  all other columns will
-    <pre class="code-frame"><ol class="language-anylog"># create policy 
+<li>Create a mapping policy to accept data  - notice that except for <code class="language-anylog">timestamp</code>,  all other columns will
+<pre class="code-frame"><code class="language-anylog"># create policy 
 policy_id = telegraf-mapping
 topic_name = telegraf-data
 default_dbms = new_company 
