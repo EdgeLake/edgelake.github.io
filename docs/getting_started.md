@@ -125,7 +125,7 @@ An installation training session is available with the [Training Session Link](h
 
 The EdgeLake directory setup is configurable. The default setup (used on docker deployment) is detailed below: 
 
-<pre class="code-frame"><code style="textcolor: black;">
+<code style="textcolor: black;">
 <b>Directory Structure                 Explabnation</b>
 -------------------                 -----------------------------------------
 /app                                [EdgeLake Root]
@@ -152,7 +152,7 @@ The EdgeLake directory setup is configurable. The default setup (used on docker 
 │   ├── test-network-local-scripts  [Directory consisting of scripts used by AnyLog's demo / test network setup]
 │   └── tests                       [Directory consisting of using test cases]
 └── edgelake_v0.0.0_x86_64          [compiled code of either EdgeLake or AnyLog. Namimg slightly changes based on version / CPU architecture]
-</code></pre>
+</code>
 
 Notes: 
 * The following command creates the work folders if they do not exist:
