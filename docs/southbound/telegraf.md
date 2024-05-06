@@ -101,8 +101,8 @@ input filters.
         <li>data_format - set as JSON</li>
         <li>Update headers information under <code class="language-config">[outputs.http.headers]</code> -- notice the topic value is the same as the topic in <code class="language-config">run msg client</code></li>
     </ul> 
-<b>Sample Configurations</b> 
-<pre class="code-frame"><class class="language-config">...
+<b>Sample Configurations</b>
+<pre class="code-frame"><code class="language-shell">...
 # A plugin that can transmit metrics over HTTP
 [[outputs.http]]
   ## URL is the address to send metrics to
@@ -133,57 +133,9 @@ input filters.
     topic = "telegraf-data"
     User-Agent = "AnyLog/1.23"
     Content-Type = "text/plain"
-...
-</code></pre></li>
+...</code></pre></li>
 
-<li>Start Telegraf 
+<li>Start Telegraf
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
 </li></ol>
-
-### Configuring MQTT
-<ol start="1">
-<li>Create a configurations file for REST 
-<pre class="code-frame"><code class="language-shell">telegraf --input-filter cpu:mem:net:swap  --output-filter mqtt config > telegraf.conf</code></pre>
 </li>
-
-<li>The following parameters under <code class="language-config">[[outputs.mqtt]]</code> for <code>telegraf.conf</code> 
-    <ul style="padding-left: 20px;">
-        <li>servers - Message broker connection information</li>
-        <li>topic - specify the MQTT topic, should be the same as the topic used in <code>run msg client</code></li>
-        <li>bath - should be set <i>true</i></li>
-        <li>data_format - set as JSON</li>
-    </ul>
-<b>Sample configurations</b> 
-<pre class="code-frame"><code class="language-config">...
-[[outputs.mqtt]]
-  ## MQTT Brokers
-  ## The list of brokers should only include the hostname or IP address and the
-  ## port to the broker. This should follow the format `[{scheme}://]{host}:{port}`. For
-  ## example, `localhost:1883` or `mqtt://localhost:1883`.
-  ## Scheme can be any of the following: tcp://, mqtt://, tls://, mqtts://
-  ## non-TLS and TLS servers can not be mix-and-matched.
-  servers = ["10.0.0.78:7850", ] # or ["mqtts://tls.example.com:1883"]
-  
-  ...
-  ## MQTT Topic for Producer Messages
-  ## In case a tag is missing in the metric, that path segment omitted for the final topic.
-  topic = "telegraf-broker"
-  
-  ...
-  
-  ## When true, metrics will be sent in one MQTT message per flush. Otherwise,
-  ## metrics are written one metric per MQTT message.
-  ## DEPRECATED: Use layout option instead
-  batch = true
-  
-  ...
-  
-  ## Each data format has its own unique set of configuration options, read
-  ## more about them here:
-  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_OUTPUT.md
-  data_format = "json"
-</code></pre></li>
-
-<li>Start Telegraf 
-<pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
-</li></ol>
