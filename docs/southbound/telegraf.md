@@ -101,8 +101,8 @@ input filters.
         <li>data_format - set as JSON</li>
         <li>Update headers information under <code class="language-config">[outputs.http.headers]</code> -- notice the topic value is the same as the topic in <code class="language-config">run msg client</code></li>
     </ul> 
-<b>Sample configurations</b> 
-<pre class="code-frame"><ol class="language-config">...
+<b>Sample Configurations</b> 
+<pre class="code-frame"><code class="language-config">...
 # A plugin that can transmit metrics over HTTP
 [[outputs.http]]
   ## URL is the address to send metrics to
@@ -138,7 +138,7 @@ input filters.
 
 <li>Start Telegraf 
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
-</li></ol>
+</li></code>
 
 ### Configuring MQTT 
 1. Create a configurations file for REST 
