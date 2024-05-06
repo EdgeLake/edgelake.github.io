@@ -1,5 +1,8 @@
 <div align="right">
-<img src="imgs/edgelake_logo.png" height="5%" width="5%" align="right"/>
+<img src="imgs/edgelake.png" align="right"/>
+<br/>
+<br/>
+<br/>
 </div>
 
 

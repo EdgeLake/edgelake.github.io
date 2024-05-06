@@ -18,7 +18,7 @@ email: support@anylog.co
 description: "Your data lake on the edge"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://lfedge.org/projects/edgelake/ # the base hostname & protocol for your site, e.g. http://example.com
-favicon: "/imgs/edgelake_logo.png"
+favicon: "/imgs/edgelake.ico"
 twitter_username: ""
 github_username:  edgelake
 repository: edgelake/edgelake # for github-metadata
