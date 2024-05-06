@@ -13,14 +13,7 @@ This document provides the following:
 
 Note: The EdgeLake software is derived from AnyLog. To provide additional info, some links reference the AnyLog documentation. 
 
-## Table of Content
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
+## Table of Contents
 
 - [The Member Nodes](#the-member-nodes)
 - [The Network Metadata](#the-network-metadata)
