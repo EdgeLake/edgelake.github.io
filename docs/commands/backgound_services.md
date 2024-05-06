@@ -42,10 +42,10 @@ Monitoring the services' status:
 ### Enable the TCP service
 The TCP service provides the functionality to send and recieve messages from peer nodes using the EdgeLake Network Protocol.
 **Usage**:
-<pre class="code-frame"><code class="language-anylog">lt;run tcp server where 
+<pre class="code-frame"><code class="language-anylog">&lt;run tcp server where 
   external_ip = [ip] and external_port = [port] and 
   internal_ip = [local_ip] and internal_port = [local_port] and 
-  bind = [true/false] and threads = [threads count]gt;
+  bind = [true/false] and threads = [threads count]&gt;
 </code></pre>
 
 **Explanation**: Set a TCP server in a listening mode on the specified IP and port.
@@ -55,8 +55,7 @@ The TCP service provides the functionality to send and recieve messages from pee
 * _threads_ - an optional parameter for the number of workers threads that process requests which are sent to the provided IP and Port. The default value is 6.
 
 **Examples**:
-<pre class="code-frame"><code class="language-anylog">
-run tcp server where external_ip = !ip and external_port = !port  and threads = 3
+<pre class="code-frame"><code class="language-anylog">run tcp server where external_ip = !ip and external_port = !port  and threads = 3
 
 &lt;run tcp server where 
   external_ip = !external_ip and external_port = 7850 and 
@@ -168,8 +167,7 @@ Enable and monitor a service that receives commands and data via REST from 3rd p
 
 ###  Enable the REST service
 **Usage:**
-<pre class="code-frame"><code class="language-anylog">
-&lt;run rest server where 
+<pre class="code-frame"><code class="language-anylog">&lt;run rest server where 
   external_ip = [external_ip ip] and external_port = [external port] and 
   internal_ip = [internal ip] and internal_port = [internal port] and 
   timeout = [timeout] and ssl = [true/false] and bind = [true/false]&gt;

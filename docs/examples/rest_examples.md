@@ -15,9 +15,7 @@ requests.
 * A REST client software like [cUrL](https://man7.org/linux/man-pages/man1/curl.1.html) or [Postman](https://www.postman.com/)
 * An EdgeLake Node that provides a REST connection. To configure an EdgeLake Node to satisfy REST calls, issue the 
 following command on the EdgeLake command line:
-<pre>
-    <code>
-<run rest server where 
+<pre class="code-frame"><code class="language-anylog">&lt;run rest server where 
    external_ip = [external_ip ip] and 
    external_port = [external port] and 
    internal_ip = [internal ip] and 
@@ -25,9 +23,8 @@ following command on the EdgeLake command line:
    timeout = [timeout] and 
    ssl = [true/false] and 
    bind = [true/false] 
->
-    </code>
-</pre>
+&gt;
+</code></pre>
 
 ## HTTP methods supported
 EdgeLake commands are supported using the HTTP methods `GET`, `PUT` and `POST`.
@@ -93,31 +90,22 @@ EdgeLake commands are supported using the HTTP methods `GET`, `PUT` and `POST`.
 ### `GET` requests 
 
 * `get status` - check whether a node is active or not
-<pre>
-    <code>
-curl --location --request GET '10.0.0.78:7849' \
+<pre class="code-frame"><code class="language-shell">curl --location --request GET '10.0.0.78:7849' \
     --header 'command: get status' \
     --header 'User-Agent: AnyLog/1.23'
-    </code>
-</pre>
+</code></pre>
 * `blockchain get operator where company='New Company'` - get list of all operators owned by _New Company_
-<pre>
-    <code>
-curl --location --request GET '10.0.0.78:7849' \
+<pre class="code-frame"><code class="language-shell">curl --location --request GET '10.0.0.78:7849' \
     --header 'command: blockchain get operator where company="New Company" \
     --header 'User-Agent: AnyLog/1.23'
-    </code>
-</pre> 
+</code></pre> 
 * `sql new_company format=table "select * from rand_data where timestamp >= NOW() - 1 minute limit 5;"` -
 Sample `SELECT` request
-<pre>
-    <code> 
-curl --location --request GET '10.0.0.78:7849' \
+<pre class="code-frame"><code class="language-shell">curl --location --request GET '10.0.0.78:7849' \
     --header 'command:sql new_company format=table "select * from rand_data where timestamp >= NOW() - 1 minute limit 5;"' \
     --header 'User-Agent: AnyLog/1.23' \
     --header 'destination: network'
-    </code>
-</pre> 
+</code></pre> 
 
 ### `POST` request
 
@@ -127,9 +115,7 @@ When sending data via `POST`, there's a need for mapping between the data commin
 Farther details regardin `run msg client` can be found in [subscribing to rest calls](https://github.com/AnyLog-co/documentation/blob/master/using%20rest.md#subscribing-to-rest-calls)
 in AnyLog documentation. 
 
-<pre>
-    <code>
-&lt;run msg client where broker=rest and port=!anylo_rest_port and user-agennt=anylog/1.23 and log=false and topic=(
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=rest and port=!anylo_rest_port and user-agennt=anylog/1.23 and log=false and topic=(
   name=new_data and 
   dbms=bring [dbms] and 
   table=bring [table] and 
@@ -141,9 +127,7 @@ in AnyLog documentation.
 
 **Sample Calls**:
 * Adding Data
-<pre>
-    <code>
-curl --location --request POST '10.0.0.226:32149' \
+<pre class="code-frame"><code class="language-shell">curl --location --request POST '10.0.0.226:32149' \
   --header 'command: data' \
   --header 'topic: new_data' \
   --header 'User-Agent: AnyLog/1.23' \
@@ -151,38 +135,28 @@ curl --location --request POST '10.0.0.226:32149' \
   --data-raw ' [{"dbms" : "aiops", "table" : "fic11", "value": 50, "timestamp": "2019-10-14T17:22:13.051101Z"},
     {"dbms" : "aiops", "table" : "fic16", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"},
     {"dbms" : "aiops", "table" : "ai_mv", "value": 501, "timestamp": "2019-10-14T17:22:13.050101Z"}]'
-    </code>
-</pre>
+</code></pre>
 
 * Reset (error) log
-<pre>
-    <code>
-curl --location --request POST '10.0.0.78:7849' \
+<pre class="code-frame"><code class="language-shell">curl --location --request POST '10.0.0.78:7849' \
   --header 'User-Agent: AnyLog/1.23' \
   --header 'command: reset error log'
-    </code>
-</pre>
+</code></pre>
 
 * Set value 
-<pre>
-    <code>
-curl --location --request POST '10.0.0.78:7849' \
+<pre class="code-frame"><code class="language-shell">curl --location --request POST '10.0.0.78:7849' \
   --header 'User-Agent: AnyLog/1.23' \
   --header 'command: set company_name=AnyLog'
-    </code>
-</pre>
+</code></pre>
 
 * Publish Blockchain Policy 
-<pre>
-    <code>
-curl -X POST \
+<pre class="code-frame"><code class="language-shell">curl -X POST \
   http://172.18.12.129:2149 \
   -H 'command: blockchain push !new_policy' \
   -H 'User-Agent: AnyLog/1.23' \
   -H 'Content-Type: application/json' \
   -d '&lt;new_policy={"panel": {"name": "panel 1", "city": "Los Angeles, CA", "loc": "33.8121, -117.91899", "owner": "AFG"}}&gt;'
-    </code>
-</pre>
+</code></pre>
 
 
 ### `PUT` request
@@ -225,8 +199,7 @@ keys and values in the header
   </tr>
 </table>
 
-<pre>
-    <code>
+<pre class="code-frame"><code class="language-shell"><code>
 curl --location --request PUT '10.0.0.226:32149' \
     --header 'type: json' \
     --header 'dbms: test' \
@@ -239,8 +212,7 @@ curl --location --request PUT '10.0.0.226:32149' \
                  {"parentelement": "68ae8bef-92e1-11e9-b465", "webid": "F1AbEfLbwwL8F6EiS", "device_name": "Catalyst 3500XL", "value": 50, "timestamp": "2019-10-14T17:22:18.0360107Z"}]' 
 
 # Expected output: {"AnyLog.status":"Success", "AnyLog.hash": "0dd6b959e48c64818bf4748e4ae0c8cb" }
-    </code>
-</pre>
+</code></pre>
 
 
 
