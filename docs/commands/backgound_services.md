@@ -85,13 +85,13 @@ Return the node's connection information including the TCP service information.
 Repeatedly update the local copy of the blockchain
 
 **Options:**   
-* source - The source of the metadata (blockchain or a Master Node). 
-* dest - The destination of the blockchain data such as a file (a local file) or a DBMS (a local DBMS).
-* connection - The connection information that is needed to retrieve the data. For a Master, the IP and Port of the master node.
-* time - The frequency of updates.
+* <code class="language-anylog">source</code> - The source of the metadata (blockchain or a Master Node). 
+* <code class="language-anylog">dest</code> - The destination of the blockchain data such as a file (a local file) or a DBMS (a local DBMS).
+* <code class="language-anylog">connection</code> - The connection information that is needed to retrieve the data. For a Master, the IP and Port of the master node.
+* <code class="language-anylog">time</code> - The frequency of updates.
 
 **Examples:**  
-<pre><code>run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
+<pre class="code-frame"><code class="language-anylog">run blockchain sync where source = master and time = 3 seconds and dest = file and dest = dbms and connection = !ip_port
 run blockchain sync where source = blockchain and time = !sync_time and dest = file and platform = ethereum
 </code></pre>
 
@@ -121,15 +121,15 @@ Monitors new data added to the watch directory and load the new data to a local 
 
 **Options:**
 
-* policy - The ID of the operator policy.
-* compress_json - True/False to enable/disable compression of the JSON file.
-* compress_sql - True/False to enable/disable compression of the SQL file.
-* archive_json - True moves the JSON file to the 'archive' dir if processing is successful. The file deleted if archive_sql is false.
-* archive_sql -  True moves the SQL file to the 'archive' dir if processing is successful. The file deleted if archive_sql is false.
-* limit_tables - A list of comma separated names within brackets listing the table names to process.
-* craete_table - A True value creates a table if the table doesn't exist.
-* master_node - The IP and Port of a Master Node (if a master node is used).
-* update_tsd_info - True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingeste
+* <code class="language-anylog">policy</code> - The ID of the operator policy.
+* <code class="language-anylog">compress_json</code> - True/False to enable/disable compression of the JSON file.
+* <code class="language-anylog">compress_sql</code> - True/False to enable/disable compression of the SQL file.
+* <code class="language-anylog">archive_json</code> - True moves the JSON file to the 'archive' dir if processing is successful. The file deleted if archive_sql is false.
+* <code class="language-anylog">archive_sql</code> -  True moves the SQL file to the 'archive' dir if processing is successful. The file deleted if archive_sql is false.
+* <code class="language-anylog">limit_tables</code> - A list of comma separated names within brackets listing the table names to process.
+* <code class="language-anylog">craete_table</code> - A True value creates a table if the table doesn't exist.
+* <code class="language-anylog">master_node</code> - The IP and Port of a Master Node (if a master node is used).
+* <code class="language-anylog">update_tsd_info</code> - True/False to update a summary table (tsd_info table in almgm dbms) with status of files ingeste
 
 **Examples:**  
 <pre class="code-frame"><code class="language-anylog">run operator where create_table = true and update_tsd_info = true and archive_json = true and distributor = true and master_node = !master_node and policy = !operator_policy  and threads = 3
@@ -369,7 +369,7 @@ A detailed description is available in the [](https://github.com/AnyLog-co/docum
 **Usage:**
 <pre class="code-frame"><code class="language-anylog">run scheduler [id]</code></pre>
 
-[id] - Optional value, representing the scheduler ID. The default value is 1, representing a user scheduler.
+<code class="language-anylog">[id]</code> - Optional value, representing the scheduler ID. The default value is 1, representing a user scheduler.
 
 **Explanation:**  Repeatedly execute scheduled jobs.
 
