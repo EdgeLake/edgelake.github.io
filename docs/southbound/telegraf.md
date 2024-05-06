@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Southbound Examples
+parent: Southbound
 title: Telegraf
 nav_order: 1
 ---
