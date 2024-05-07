@@ -29,7 +29,7 @@ sending data between FLEDGE nodes, it allows sending data into AnyLog via _POST_
 git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 </li>
 
-<li>Copy anylog_plugin into <i>FLEDGE</i>
+<li>Copy <code>anylog_plugin</code> into <i>FLEDGE</i>
 <pre class="code-frame"><code class="language-shell">cp -r $HOME/fledge-connector/anylog_rest_conn/ /usr/local/fledge/python/fledge/plugins/north/</code></pre>
 </li>
 
@@ -37,7 +37,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 <div class="image-frame"><img src="../../../imgs/fledge_gui.jpeg" /></div>
 </li>
 
-<li>Begin sending data & view `readings` columns. - We'll be using the OpenWeatherMap asset as an example
+<li>Begin sending data & view <code>readings</code> columns - We'll be using the <i>OpenWeatherMap</i> asset as an example
 <pre class="code-frame"><code class="language-json"># Sample data being generated
 &lt;
  "asset": "OpenWeatherMap",
@@ -54,7 +54,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 &gt;
 </code></pre></li>
 
-<li>Under the _North_ section add `anylog_rest_conn`
+<li>Under the <i>North</i> section add <code>anylog_rest_conn</code>
    <ul style="padding-left: 20px">
       <li><b>URL</b> - The IP:Port address to send data to</li>
       <li><b>REST Topic Name</b> - REST topic to send data to</li>
@@ -66,7 +66,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 
 ![North Plugin Configs](../../../imgs/fledge_north_plugin.png)
 
-At this point data will send into EdgeLake via REST. 
+At this point data will sent into EdgeLake via REST. 
 
 
 ## Configuring EdgeLake REST  Client
@@ -75,9 +75,7 @@ When sending data via _PUT_, all that's required is for EdgeLake to accept REST 
 When sending data via _POST_, an message client accepting the requests should be running. 
 
 **Sample Message Client**:
-<pre>
-   <code>
-&lt;msg client where broker=rest and user-agent=anylog and log=!mqtt_log and topic=(
+<pre class="code-frame"><code class="language-anylog">&lt;msg client where broker=rest and user-agent=anylog and log=!mqtt_log and topic=(
     name=fledge-weather and
     dbms=!default_dbms and
     table="bring [asset]" and
@@ -89,8 +87,7 @@ When sending data via _POST_, an message client accepting the requests should be
     column.temperature=(type=float and value="bring [readings][temperature]" and optional=true) and
     column.visibility=(type=float and value="bring [readings][visibility]" and optional=true) and
     column.wind_speed=(type=float and value="bring [readings][wind_speed]" and optional=true)
-)&gt;
-   </code>
-</pre>
+)&gt
+</code></pre>
 
 EdgeLake deployment comes with a sample connection to Fledge that accepts data from both OpenWeather and Random southbound service.        
