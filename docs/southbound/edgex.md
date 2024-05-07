@@ -9,6 +9,9 @@ nav_order: 2
 EdgeX allows to send data _REST_, _MQTT_ and _Kafka_ which requires `run msg client` on the EdgeLake 
 side to accept data. 
 
+* [EdgeX docker-compose](https://github.com/edgexfoundry/edgex-compose)
+* [EdgeX Documentation](https://docs.edgexfoundry.org/)
+
 ## Requirements 
 1. EdgeLake deployment to accept data - directions can be found [here](https://github.com/EdgeLake/docker-compose)
 2. EdgeX & Corresponding plugins 
@@ -17,12 +20,11 @@ side to accept data.
     * EdgeX Random Data Generator
 
 ## Accepting Data from EdgeX into EdgeLake
-1. When starting EdgeLake, make sure to begin with message broker enable (`ANYLOG_BROKER_PORT` config value)
+<ol>
+<li>When starting EdgeLake, make sure to begin with message broker enable (`ANYLOG_BROKER_PORT` config value)</li>
 
-2. Begin inserting data - the sample code uses RandomInt and Modbus
-<pre>
-    <code>
-[
+<li>Begin inserting data - the sample code uses RandomInt and Modbus
+<pre class="code-frame"><code class="language-json">[
     {
       "id": "fb68440c-0dea-49be-b2b2-8e9003ab78c2",
       "pushed": 1656093207769,
@@ -54,16 +56,15 @@ side to accept data.
       ]
     }
 ]
-    </code>
-</pre>
+</code></pre></li>
 
-3. Configure EdgeX `app-service-mqtt`, make sure to update the following params
-    * MQTT_IP_ADDRESS
-    * MQTT_PORT
-    * MQTT_TOPIC
-<pre>
-    <code>
-  app-service-mqtt:
+<li>Configure EdgeX `app-service-mqtt`, make sure to update the following params
+   <ul style="padding-left: 20px;">
+      <li>MQTT_IP_ADDRESS</li>
+      <li>MQTT_PORT</li>
+      <li>MQTT_TOPIC</li>
+   </ul>
+<pre class="code-frame"><code class="language-confiig">app-service-mqtt:
        image: ${APP_SVC_REPOSITORY}/docker-app-service-configurable${ARCH}:${APP_SERVICE_VERSION}
        ports:
          - "127.0.0.1:48101:48101"
@@ -115,13 +116,10 @@ side to accept data.
          # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_QOS: ["your quality or service"]
          # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_KEY: [your Key]  
          # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_CERT: [your Certificate]
-    </code>
-</pre>
+</code></pre></li>
 
-4. On EdgeLake, configure `run msg client` to accept data from EdgeX
-<pre>
-    <code>
-&lt;run msg client where broker=local and port=!anylog_broker_port and log=false and topic=(
+<li>On EdgeLake, configure `run msg client` to accept data from EdgeX
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=local and port=!anylog_broker_port and log=false and topic=(
    name=anylogedgex-demo and 
    dbms=test and 
    table="bring [readings][][name]" and 
@@ -130,7 +128,6 @@ side to accept data.
    column.device=(type=str and value="bring [readings][][device]") and
    column.value=(type=str and value="bring [readings][][value]")
 )&gt;
-    </code>
-</pre>
+</code></pre></li></ol>
 
 EdgeLake deployment comes with a sample connection to EdgeX that accepts data IoTech System _lighting_ and _retail-device1_.
