@@ -21,7 +21,7 @@ side to accept data.
 
 ## Accepting Data from EdgeX into EdgeLake
 <ol>
-<li>When starting EdgeLake, make sure to begin with message broker enable (`ANYLOG_BROKER_PORT` config value)</li>
+<li>When starting EdgeLake, make sure to begin with message broker enable (<code>ANYLOG_BROKER_PORT</code> config value)</li>
 
 <li>Begin inserting data - the sample code uses RandomInt and Modbus
 <pre class="code-frame"><code class="language-json">[
