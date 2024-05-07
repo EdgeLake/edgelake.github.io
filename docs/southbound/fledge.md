@@ -2,7 +2,7 @@
 layout: default
 parent: Southbound
 title: FLEDGE
-nav_order: 2
+nav_order: 3
 ---
 <link rel="stylesheet" href="just-the-docs.css">
 # FLEDGE Connection
