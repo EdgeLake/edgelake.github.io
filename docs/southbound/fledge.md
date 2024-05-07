@@ -33,11 +33,10 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 <pre class="code-frame"><code class="language-shell">cp -r $HOME/fledge-connector/anylog_rest_conn/ /usr/local/fledge/python/fledge/plugins/north/</code></pre>
 </li>
 
-<li>Access Fledge GUI</li></ol>
+<li>Access Fledge GUI
+<img src="../../imgs/fledge_gui.jpeg" />
+</li>
 
-![fledge_gui.jpeg](../../imgs/fledge_gui.jpeg)
-
-<ol start="4">
 <li>Begin sending data & view `readings` columns. - We'll be using the OpenWeatherMap asset as an example
 <pre class="code-frame"><code class="language-json"># Sample data being generated
 &lt;
