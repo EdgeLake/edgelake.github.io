@@ -39,9 +39,9 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 
 <li>Begin sending data & view <code>readings</code> columns - We'll be using the <i>OpenWeatherMap</i> asset as an example
 <pre class="code-frame"><code class="language-json"># Sample data being generated
-&lt;
+{
  "asset": "OpenWeatherMap",
- "reading": &lt;
+ "reading": {
    "city": "London",
    "wind_speed": 5.14,
    "clouds": 100,
@@ -49,9 +49,9 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
    "pressure": 1009,
    "humidity": 74,
    "visibility": 10000
- &gt;,
+ },
  "timestamp": "2022-06-25 19:42:09.916403"
-&gt;
+}
 </code></pre></li>
 
 <li>Under the <i>North</i> section add <code>anylog_rest_conn</code>
