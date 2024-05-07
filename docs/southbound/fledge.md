@@ -34,7 +34,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 </li>
 
 <li>Access Fledge GUI
-<img src="../../imgs/fledge_gui.jpeg" />
+<img src="../../../imgs/fledge_gui.jpeg" />
 </li>
 
 <li>Begin sending data & view `readings` columns. - We'll be using the OpenWeatherMap asset as an example
@@ -64,7 +64,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
    </ul>
 </li></ol>
 
-![North Plugin Configs](../../imgs/fledge_north_plugin.png)
+![North Plugin Configs](../../../imgs/fledge_north_plugin.png)
 
 At this point data will send into EdgeLake via REST. 
 
