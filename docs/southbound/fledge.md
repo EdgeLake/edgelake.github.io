@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Southbound Examples
+parent: Southbound
 title: FLEDGE
 nav_order: 2
 ---
