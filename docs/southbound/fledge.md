@@ -4,6 +4,7 @@ parent: Southbound
 title: FLEDGE
 nav_order: 2
 ---
+<link rel="stylesheet" href="just-the-docs.css">
 # FLEDGE Connection
 
 AnyLog's fledge-connector is based on [fledge-http-north](https://github.com/fledge-iot/fledge-north-http), but instead of 
@@ -64,7 +65,10 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
    </ul>
 </li></ol>
 
-<div class="image-frame"><img src="../../../imgs/fledge_north_plugin.png" /></div>
+<div class="image-frame">
+    <img id="enlarge-image" src="../../../imgs/fledge_north_plugin.png" />
+    <script src="script.js"></script>
+</div>
 
 At this point data will sent into EdgeLake via REST. 
 
