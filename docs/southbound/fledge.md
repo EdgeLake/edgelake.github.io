@@ -64,7 +64,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
    </ul>
 </li></ol>
 
-![North Plugin Configs](../../../imgs/fledge_north_plugin.png)
+<div class="image-frame"><img src="../../../imgs/fledge_north_plugin.png" /></div>
 
 At this point data will sent into EdgeLake via REST. 
 
@@ -87,7 +87,7 @@ When sending data via _POST_, an message client accepting the requests should be
     column.temperature=(type=float and value="bring [readings][temperature]" and optional=true) and
     column.visibility=(type=float and value="bring [readings][visibility]" and optional=true) and
     column.wind_speed=(type=float and value="bring [readings][wind_speed]" and optional=true)
-)&gt
+)&gt;
 </code></pre>
 
 EdgeLake deployment comes with a sample connection to Fledge that accepts data from both OpenWeather and Random southbound service.        
