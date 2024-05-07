@@ -21,7 +21,7 @@ side to accept data.
 
 ## Accepting Data from EdgeX into EdgeLake
 <ol>
-<li>When starting EdgeLake, make sure to begin with message broker enable (<code>ANYLOG_BROKER_PORT</code> config value)</li>
+<li>When starting EdgeLake, make sure to begin with message broker enable (<code class="language-anylog">ANYLOG_BROKER_PORT</code> config value)</li>
 
 <li>Begin inserting data - the sample code uses RandomInt and Modbus
 <pre class="code-frame"><code class="language-json">[
@@ -58,7 +58,7 @@ side to accept data.
 ]
 </code></pre></li>
 
-<li>Configure EdgeX `app-service-mqtt`, make sure to update the following params
+<li>Configure EdgeX <code class="language-config">app-service-mqtt</code>, make sure to update the following params
    <ul style="padding-left: 20px;">
       <li>MQTT_IP_ADDRESS</li>
       <li>MQTT_PORT</li>
