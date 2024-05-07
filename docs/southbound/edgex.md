@@ -1,8 +1,8 @@
 ---
 layout: default
 title: EdgeX 
-parent: Southbound Examples
-nav_order: 1
+parent: Southbound
+nav_order: 2
 ---
 # EdgeX connection 
 
