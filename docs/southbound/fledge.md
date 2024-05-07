@@ -34,7 +34,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 </li>
 
 <li>Access Fledge GUI
-<img src="../../../imgs/fledge_gui.jpeg" />
+<div class="image-frame"><img src="../../../imgs/fledge_gui.jpeg" /></div>
 </li>
 
 <li>Begin sending data & view `readings` columns. - We'll be using the OpenWeatherMap asset as an example
