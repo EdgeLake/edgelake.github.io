@@ -14,7 +14,8 @@ gRPC is used in distributed systems, microservices architectures, and client-ser
 communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).  
 
 ## EdgeLake as a gRPC client
-EdgeLake can connect as a gRPC client to a gRPC Server to receive the data streams.  
+EdgeLake can connect as a gRPC client to a gRPC Server to receive the data streams. 
+
 Using EdgeLake policies, these streams are mapped to a target schema, and the data is hosted on the local EdgeLakee node.
 
 ## Setup
@@ -115,8 +116,7 @@ Examples (the < and > signs designate a code block that can be used on the CLI):
 ### Options for added_info
 
 If **added_info** is included in the **run grpc client** command, the keys and values are added to the JSON data retrieved 
-from the server.  
-The added keys (to the JSON struct) are contained within greater than and less than signs (<key>).
+from the server. The added keys (to the JSON struct) are contained within greater than and less than signs (<key>).
 
 | Key        | Value added to the JSON  | 
 | ---------- | -----------------------------|
@@ -124,9 +124,8 @@ The added keys (to the JSON struct) are contained within greater than and less t
 | request    | The name of the request message in the proto file   |
 | conn       | The IP and Port used   |
 
-Example:
-<pre class="code-frame"><code class="language-anylog">
-&lt;run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and 
+**Example**:
+<pre class="code-frame"><code class="language-anylog">&lt;run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and 
     grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
     proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and 
     response = Log and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and 
@@ -154,9 +153,11 @@ A connection is terminated using the following command:
 
 **ID** is the **name** provided to the connection in the **run grpc client** command.    
 For example, the following command terminates a gRPC process: 
-<pre class="code-frame"><code class="language-anylog">exit grpc kubearmor
-```
+
+<pre class="code-frame"><code class="language-anylog">exit grpc kubearmor</code></pre>
+
 To terminate all gRPC connections, use "all" as the connection string:
+
 <pre class="code-frame"><code class="language-anylog">exit grpc all</code></pre>
 
 ## Retrieving the list of gRPC services
