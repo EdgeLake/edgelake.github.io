@@ -177,3 +177,5 @@ kubearmor-logs   |Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |
 </code></pre>
 </li>
 </ol> 
+
+## Querying Data 
