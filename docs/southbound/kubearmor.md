@@ -1,6 +1,6 @@
 ---
 layout: default
-title: KubeArmor  
+title: KubeArmor / gRPC
 parent: Southbound
 nav_order: 5
 ---
@@ -176,4 +176,25 @@ kubearmor-message|Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |
 kubearmor-logs   |Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |RequestMessage|mapping    |kubearmor-logs   |kubearmor-logs   |    87496|    4885|     |
 </code></pre>
 </li>
+<li>Detach from Operator node - <code code="language-shell">ctrl-d</code></li>
 </ol> 
+
+## Querying Data 
+<ol start="1">
+<li>Attach to EdgeLake query node
+<pre class="code-frame"><code class="language-shell"># ctrl-d to detach 
+cd servvice-edgelake 
+make attach operator
+</code></pre></li>
+<li>Query Data - make sure to set logical database name correctly
+<pre class="code-frame"><code class="language-anylog"># Get row count 
+run client () sql kubearmor format=table "select count(*) from logs;"
+run client () sql kubearmor format=table "select count(*) from alert;"
+
+# Query log table using increment function 
+run client () sql kubearmor format=table "select increments(hour, 1, updated_timestamp), result, min(updated_timestamp) as min_ts, max(updated_timestamp) as max_ts, count(*) as row_count from logs where operation='File' group by result ORDER by min_ts;"
+
+# Query alert table using period function
+run client () sql kubearmor format=table "select updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, message, action, result, tag, resource, source from alert where period(day, 1, now(), timestamp)"
+</code></pre></li>
+</ol>
