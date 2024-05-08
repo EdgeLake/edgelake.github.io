@@ -126,7 +126,7 @@ from the server. The added keys (to the JSON struct) are contained within greate
 
 **Example**:
 <pre class="code-frame"><code class="language-anylog">&lt;run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and 
-    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    grpc_dir = D:/EdgeLake-Code/EdgeLake-Network/dummy_source_code/kubearmor/proto and 
     proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and 
     response = Log and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and 
     ingest = false and add_info = conn and add_info = proto and add_info = request&gt; 
