@@ -51,7 +51,9 @@ Directions for importing our demo images dashboards can be found in [import graf
 ## Setting Up Grafana 
 1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
 
-<img src="../../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+<div align="center">
+    <img src="../../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+</div>
 
 2. In _Data Sources_ section, create a new JSON data source
    * select a JSON data source.
@@ -60,12 +62,14 @@ Directions for importing our demo images dashboards can be found in [import graf
    * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query
 
+<div align="center">
 <table>
   <tr>
-    <td><img src="../../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
-    <td><img src="../../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /></td>
+    <td align="center"><img src="../../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
+    <td align="center"><img src="../../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /></td>
   </tr>
 </table>
+</div>
 
 Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
 <img src="../../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
