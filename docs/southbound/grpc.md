@@ -170,9 +170,9 @@ The following command returns the list of gRPC services from the gRPC server:
 <pre class="code-frame"><code class="language-anylog">get grpc services where conn = [ip:port]</code></pre>
 
 **Example returned info**:
-<pre class="code-frame"><code class="language-anylog"><table>
+<table>
   <tr>
-    <th style="text-align:center;"><b>gRPC Services</b></th>
+    <th style="text-align:left;"><b>gRPC Services</b></th>
   </tr>
   <tr>
     <td style="text-align:left;">grpc.reflection.v1alpha.ServerReflection</td>
@@ -180,4 +180,4 @@ The following command returns the list of gRPC services from the gRPC server:
   <tr>
     <td style="text-align:left;">test.MyService</td>
   </tr>
-</table></code></pre>
+</table>
