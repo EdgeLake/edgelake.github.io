@@ -198,3 +198,5 @@ run client () sql kubearmor format=table "select increments(hour, 1, updated_tim
 run client () sql kubearmor format=table "select updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, message, action, result, tag, resource, source from alert where period(day, 1, now(), timestamp)"
 </code></pre></li>
 </ol>
+
+Directions for importing pre-built Grafana Dashboards for KubeArmor can be found as part of our <a href="https://github.com/open-horizon-services/service-edgelake/blob/main/Documentation/Import_Grafana_Dashboards.md" target="_blang">OpenHorizon Deployment</a>
