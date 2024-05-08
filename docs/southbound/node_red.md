@@ -13,7 +13,7 @@ The following provides an example of sending sample data, of timestamp and value
 <ol start="1">
 <li><a href="https://nodered.org/docs/getting-started/local" target="_blank">Install Node-RED</a></li>
 
-<li>Create a <a herf="https://github.com/EdgeLake/edgelake.github.io/blob/main/docs/examples/node_red_sample_flow.json" target="_blank">new flow</a> 
+<li>Create a <a href="https://github.com/EdgeLake/edgelake.github.io/blob/main/docs/examples/node_red_sample_flow.json" target="_blank">new flow</a> 
 that consists of the following components:
    <ul style="padding-left: 20px;">
       <li><i>Inject</i></li>
