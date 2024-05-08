@@ -60,14 +60,13 @@ and consume published messages by pulling data from the Kafka instance.
 Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
 
 **Example**:
-<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
-    ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (
-        name = ping_data and 
-        dbms = lsl_demo and 
-        table = ping_sensor and 
-        column.timestamp.timestamp = "bring [timestamp]" and 
-        column.value.int = "bring [value]"
-    )&gt;</code></pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (
+    name = ping_data and 
+    dbms = lsl_demo and 
+    table = ping_sensor and 
+    column.timestamp.timestamp = "bring [timestamp]" and 
+    column.value.int = "bring [value]"
+)&gt;</code></pre>
 
 
 ### Related commands
