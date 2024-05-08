@@ -9,24 +9,24 @@ nav_order: 1
 APIs, and online services in a visual and intuitive manner. It allows users to create event-driven applications by wiring 
 together nodes that represent different functions or services. Directions for using Node-RED can be found [here](https://nodered.org/docs/user-guide/),
 
-The following provides an example of sending sample data, of timestamp and value, from Node-RED into AnyLog via _POST_.  
+The following provides an example of sending sample data, of timestamp and value, from Node-RED into EdgeLake via _POST_.  
+<ol start="1">
+<li><a href="https://nodered.org/docs/getting-started/local" target="_blank">Install Node-RED</a></li>
 
-1. Install [Node-Red](https://nodered.org/docs/getting-started/local)
+<li>Create a <a herf="https://github.com/EdgeLake/edgelake.github.io/blob/main/docs/examples/node_red_sample_flow.json" target="_blank">new flow</a> 
+that consists of the following components:
+   <ul style="padding-left: 20px;">
+      <li><i>Inject</i></li>
+      <li><i>Function</i></li>
+      <li><i>JSON</i></li>
+      <li><i>HTTP request</i> & <i>HTTP response</i></li>
+      <li><i>Trigger</i> to repeat process every N seconds</li>
+   </ul>
+<div class="image-frame"><img src="../../../imgs/node_red_flow.png" /></div>
+</li> 
 
-
-2. Create a [new flow](../examples/node_red_sample_flow.json) that consists of the following components: 
-   * _Inject_ 
-   * _function_
-   * _JSON_
-   * _HTTP request_ & _HTTP response_
-   * _Trigger_ to repeat the process every N seconds 
-   
-![Sample Node-Red Flow](../../imgs/node_red_flow.png)
-
-
-3. Create a function that generates a timestamp and value, then stores those into a "dictionary" that also includes a table name
-```javascript
-// Create a new Date object to get the current timestamp
+<li>Create a function that generates a timestamp and value, then stores those into a "dictionary" that also includes a table name
+<pre class="code-frame"><code class="language-javascript">// Create a new Date object to get the current timestamp
 var timestamp = new Date();
 
 // Generate a random integer between min (inclusive) and max (inclusive)
@@ -46,32 +46,50 @@ var combinedResults = {
 msg.payload = combinedResults;
 
 return msg
-```
+</code></pre></li>
 
-4. Edit HTTP request mode to be _POST_ with the following headers:
-   * command - data
-   * topic - node-red 
-   * User-Agent - AnyLog/1.23
-   * Content-Type - text/plain
+<li>Edit HTTP request mode to be _POST_ with the following headers:
+   <table>
+      <tr>
+         <td><b>key</b></td>
+         <td><b>value</b></td>
+      </tr>
+      <tr>
+         <td>command</td>
+         <td>data</td>  
+      </tr>
+      <tr>
+         <td>topic</td>
+         <td>node-red</td>  
+      </tr>
+      <tr>
+         <td>User-Agent</td>
+         <td>AnyLog/1.23</td>  
+      </tr>
+      <tr>
+         <td>Content-Type</td>
+         <td>text/palin</td>  
+      </tr>
+   </table>
+<div class="image-frame"><img src="../../../imgs/node_red_http_request.png" /></div>
+</li>
 
-![Node-RED POST configurations](imgs/node_red_http_request.png)
-
-5. On the AnyLog Operator side, create a new `run mqtt client` process against the REST port
-```anylog
-<run msg client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
+<li>On the AnyLog Operator side, create a new `run mqtt client` process against the REST port
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
     name=node-red and 
     dbms=!default_dbms and
     table="bring [table]" and
     column.timestamp.timestamp="bring [timestamp]" and
     column.value.int="bring [value]"
-)>
-```
+)&gt;
+</li>
 
-6. Run the Node-RED process  
+<li>Run the Node-RED process</li>
+</ol> 
 
-**Sample Result of Data**
-```anylog
-AL anylog-query +> run client () sql new_company format=table "Select * from rand_data limit 15;" 
+
+### Sample Results
+<pre class="code-frame"><code class="language-anylog">AL anylog-query +> run client () sql new_company format=table "Select * from rand_data limit 15;" 
 [3]
 AL anylog-query +> 
 row_id insert_timestamp           tsd_name tsd_id timestamp               value
@@ -95,4 +113,4 @@ row_id insert_timestamp           tsd_name tsd_id timestamp               value
 {"Statistics":[{"Count": 15,
                 "Time":"00:00:00",
                 "Nodes": 1}]}
-```
+</code></pre>
