@@ -44,8 +44,8 @@ and consume published messages by pulling data from the Kafka instance.
 <pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
     ip = [ip] and port = [port] and 
     reset = [latest/earliest] and
-    topic = [topic and mapping instructions&gt;
-]</code></pre>
+    topic = [topic and mapping instructions]
+&gt;</code></pre>
 
 
 **Command options**:
@@ -60,7 +60,7 @@ and consume published messages by pulling data from the Kafka instance.
 Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
 
 **Example**:
-<pre class="code-frame"><code class="language-anylog">&gt;run kafka consumer where 
+<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
     ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (
         name = ping_data and 
         dbms = lsl_demo and 
