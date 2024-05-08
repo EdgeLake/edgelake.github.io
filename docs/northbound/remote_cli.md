@@ -101,7 +101,7 @@ query are stored in `remote-cli-curennt`.
 #### Accessing Volumes
 <ol start="1">
 <li>Using <code class="language-shell">docker volume ls</code> locate <code class="language-shell">remote-cli</code> volume.
-<pre><code class="language-shell">root@anylog-co:~# docker volume ls 
+<pre class="code-frame"><code class="language-shell">root@anylog-co:~# docker volume ls 
 DRIVER    VOLUME NAME
 local     anylog-gui_anylog-gui
 local     docker-makefile_edgelake-master-anylog
@@ -121,7 +121,7 @@ local     docker-makefile_remote-cli-current
 </code></pre></li>
 
 <li>Inspect the volume in order to locate where configuration file(s) reeside.
-<pre><code class="language-shell">root@anylog-co:~# docker volume inspect docker-makefile_remote-cli
+<pre class="code-frame"><code class="language-shell">root@anylog-co:~# docker volume inspect docker-makefile_remote-cli
 [
     {
         "CreatedAt": "2024-05-08T18:33:32Z",
@@ -143,7 +143,7 @@ local     docker-makefile_remote-cli-current
         <li><b>settings.json</b> - consists of default configurations for accessing the (query) node(s) in the network</li>
         <li><b>commands.json</b> - queries to be used for viewing / accessing both th data and metadata</li>
     </ul>
-<pre><code class="language-shell">root@anylog-co:~# ls -l /var/lib/docker/volumes/docker-makefile_remote-cli/_data
+<pre class="code-frame"><code class="language-shell">root@anylog-co:~# ls -l /var/lib/docker/volumes/docker-makefile_remote-cli/_data
 total 120
 -rw-r--r-- 1 root root 31785 Apr  8 03:44 commands.json
 -rw-r--r-- 1 root root   591 May  8 18:58 settings.json
