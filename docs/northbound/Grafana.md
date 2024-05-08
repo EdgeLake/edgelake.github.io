@@ -218,11 +218,17 @@ The additional information is provided using a JSON script with the following at
 
 ### Using the Time-Series Data Visualization
 
+#### Increments Query 
+
 **Increments query** (The default query) is used to retriv statistics on the time series data in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
 average are collected for each interval and graphically presented.  
 
-<pre class="code-frame"><code class="language-json"># Input in Grafana 
+<ol start="1">
+  <li>In the <i>Visualizations</i> section, select Time series</li>
+  <li>In the <i>Metric</i> section, select a table name to “query” against</li>
+  <li>Update Payload with the following information
+  <pre class="code-frame"><code class="language-json"># Input in Grafana 
 {
   "type": "increments",
   "time_column": "timestamp",
@@ -230,10 +236,16 @@ average are collected for each interval and graphically presented.
   "grafana": {
     "format_as": "timeseries"
   }
-}
-</code></pre>
+}</code></pre></li>
+  <li>Under Query Options, update <i>Max data points</i> (ie limit) otherwise the outcome would look like a single line 
+as opposed to clearly showing <i><min / max / avg</i> value(s).
+  <div align="center">
+    <img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
+  </div>
+  </li>
+</ol>
 
-**uery Being Executed**
+When the node type is set to _increments_, the query being executed on the EdgeLake side is as follows:
 <pre class="code-frame"><code class="language-sql">SELECT 
   increments(second, 1, timestamp), max(timestamp) as timestamp, avg(value) as avg_val, min(valu e) as min_val, 
   max(value) as max_val 
@@ -243,6 +255,8 @@ WHERE
   timestamp >= '2024-02-19T19:42: 02.133Z' and timestamp <= '2024-02-19T19:57:02.133Z' 
 LIMIT 2128;
 </code></pre>
+
+#### Period Query
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
@@ -290,7 +304,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 
 <br/>
 
-<img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
+
 
 **Period Graphs**
 1. In the _Visualizations_ section, select _Gauge_
