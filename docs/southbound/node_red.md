@@ -48,7 +48,7 @@ msg.payload = combinedResults;
 return msg
 </code></pre></li>
 
-<li>Edit HTTP request mode to be _POST_ with the following headers:
+<li>Edit <i>HTTP request</i> mode to be <b>POST</b> with the following headers:
    <table>
       <tr>
          <td><b>key</b></td>
