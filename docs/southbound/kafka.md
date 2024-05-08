@@ -41,7 +41,11 @@ and consume published messages by pulling data from the Kafka instance.
 
 **Usage**:
 
-<pre class="code-frame"><code class="language-anylog">run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earliest] and topic = [topic and mapping instructions]</code></pre>
+<pre class="code-frame"><code class="language-anylog">&lt;run kafka consumer where 
+    ip = [ip] and port = [port] and 
+    reset = [latest/earliest] and
+    topic = [topic and mapping instructions&gt;
+]</code></pre>
 
 
 **Command options**:
@@ -56,14 +60,21 @@ and consume published messages by pulling data from the Kafka instance.
 Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
 
 **Example**:
-<pre class="code-frame"><code class="language-anylog">run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (name = ping_data and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")</code></pre>
+<pre class="code-frame"><code class="language-anylog">&gt;run kafka consumer where 
+    ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (
+        name = ping_data and 
+        dbms = lsl_demo and 
+        table = ping_sensor and 
+        column.timestamp.timestamp = "bring [timestamp]" and 
+        column.value.int = "bring [value]"
+    )&gt;</code></pre>
 
 
 ### Related commands
 
 | Command                                                          | Info provided  |
 |------------------------------------------------------------------| -------|
-| [get processes](monitoring%20nodes.md#the-get-processes-command) | Background processes to determine if Kafka is enabled |
-| [get msg client](monitoring%20calls.md#get-msg-clients)          | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
-| [get streaming](monitoring%20calls.md#get-streaming)             | Data consumed from brokers associated to dbms tables |
-| [get operator](monitoring%20calls.md#get-operator)               | Statistics on ingestion of data to database tables |
+| [get processes](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command) | Background processes to determine if Kafka is enabled |
+| [get msg client](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-msg-clients)          | Subscriptions to brokers to determine related configurations and data consumed from Kafka instances |
+| [get streaming](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-streaming)             | Data consumed from brokers associated to dbms tables |
+| [get operator](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#get-operator)               | Statistics on ingestion of data to database tables |
