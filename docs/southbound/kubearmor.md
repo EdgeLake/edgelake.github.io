@@ -154,3 +154,26 @@ process $EDGELAKE_PATH/deployment-scripts/grpc/kubearmor/kubearmor_log.al
 process $EDGELAKE_PATH/deployment-scripts/grpc/kubearmor/grpc_client.al
 </code></pre></li>
 </ol>
+
+## Deploy KubeArmor Connector in EdgeLake
+<ol start="1">
+<li>Attach to EdgeLake operator node
+<pre class="code-frame"><code class="language-shell"># ctrl-d to detach 
+cd servvice-edgelake 
+make attach operator</code></pre></li>
+<li>Execute <code>deploy_kubearmor_system.al</code> process
+<pre class="code-frame"><code class="language-anylog">process $EDGELAKE_PATH/deployment-scripts/grpc/kubearmor/deploy_kubearmor_system.al</code></pre>
+</li>
+<li>Validate gRPC is Runnig
+<pre class="code-frame"><code class="language-anylog">get grpc client</code></pre>
+<b>Expected Output:</b>
+<pre class="code-frame"><code class="language-anylog">EL edgelake-operator +> get grpc client 
+
+Name (ID)         Status Connection                                  Proto Name Request Msg    Policy Type Policy Name       Policy ID         Data Msgs Timeouts Error 
+-----------------|------|-------------------------------------------|----------|--------------|-----------|-----------------|-----------------|---------|--------|-----|
+kubearmor-alert  |Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |RequestMessage|mapping    |kubearmor-alert  |kubearmor-alert  |     2846|    4883|     |
+kubearmor-message|Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |RequestMessage|mapping    |kubearmor-message|kubearmor-message|        0|    4891|     |
+kubearmor-logs   |Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |RequestMessage|mapping    |kubearmor-logs   |kubearmor-logs   |    87496|    4885|     |
+</code></pre>
+</li>
+</ol> 
