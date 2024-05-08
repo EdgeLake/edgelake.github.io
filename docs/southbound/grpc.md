@@ -44,9 +44,10 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
     }
 </code></pre></li>
 
-<li>Compile file <br/>Example:
-<pre class="code-frame"><code class="language-shell">python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto</code></pre>
-</li></code>
+<li>Compile file - <b>Example</b>:
+<pre class="code-frame"><code class="language-shell">
+    python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto
+</code></pre></li>
     
 **Notes**: 
 * Compile in the proto file (target) directory.  
