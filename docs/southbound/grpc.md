@@ -170,7 +170,7 @@ The following command returns the list of gRPC services from the gRPC server:
 <pre class="code-frame"><code class="language-anylog">get grpc services where conn = [ip:port]</code></pre>
 
 **Example returned info**:
-<pre class="code-frame"<code class="language-anylog"><table>
+<pre class="code-frame"><code class="language-anylog"><table>
   <tr>
     <th style="text-align:center;"><b>gRPC Services</b></th>
   </tr>
