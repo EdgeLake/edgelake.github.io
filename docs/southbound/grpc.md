@@ -19,6 +19,7 @@ Using EdgeLake policies, these streams are mapped to a target schema, and the da
 
 ## Setup
 Users define the data extracted from the gRPC server using a **proto** file.    
+
 A Protocol Buffers (proto file) is a language-agnostic data serialization format developed by Google.    
 This file is compiled to generate 2 **grpc** files that manage the process between the client and the server.
 
@@ -136,16 +137,15 @@ Example:
 ## Retrieving the list of gRPC clients
 The following command returns the list of connected gRPC clients on the EdgeLake node:
 <pre class="code-frame"><code class="language-anylog">get grpc clients</code></pre>
-```
-The info returns identifies each client by the connection info (IP and Port) and the proto file name (ID).
-An example of the returned info is below:
-```anylog
 
-ID        Connection       Proto     Request Message Policy Type Policy Name Policy ID               Timeouts Data Msg
----------|----------------|---------|---------------|-----------|-----------|-----------------------|--------|--------|
-health   |10.0.0.251:32769|kubearmor|NonceMessage   |           |           |                       |       0|    1254|
-kubearmor|10.0.0.251:32769|kubearmor|RequestMessage |mapping    |           |kubearmor-system-policy|       0|       0|
-```
+The info returns identifies each client by the connection info (IP and Port) and the proto file name (ID).
+An example of the returned info is below: 
+
+| ID       | Connection       | Proto     | Request Message | Policy Type | Policy Name             | Policy ID | Timeouts | Data Msg |
+|----------|------------------|-----------|-----------------|-------------|-------------------------|-----------|----------|----------|
+| health   | 10.0.0.251:32769| kubearmor | NonceMessage    |             |                         |       0   |    1254  |          |
+| kubearmor| 10.0.0.251:32769| kubearmor | RequestMessage  | mapping     | kubearmor-system-policy|       0   |       0  |          |
+
 
 ## Terminate gRPC connection
 
@@ -159,7 +159,6 @@ For example, the following command terminates a gRPC process:
 To terminate all gRPC connections, use "all" as the connection string:
 <pre class="code-frame"><code class="language-anylog">exit grpc all</code></pre>
 
-
 ## Retrieving the list of gRPC services
 Users can retrieve the list of services offered by the gRPC server.    
 This process requires that the server reflection on the gRPC server is implemented and enabled.   
@@ -170,9 +169,8 @@ The following command returns the list of gRPC services from the gRPC server:
 <pre class="code-frame"><code class="language-anylog">get grpc services where conn = [ip:port]</code></pre>
 
 Example returned info:
-```anylog
-gRPC Services
-----------------------------------------|
-grpc.reflection.v1alpha.ServerReflection|
-test.MyService                          |
-```
+
+|gRPC Services| 
+|:---:| 
+| grpc.reflection.v1alpha.ServerReflection |
+|test.MyService                          |
