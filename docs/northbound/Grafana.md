@@ -49,19 +49,22 @@ Directions for importing our demo images dashboards can be found in [import graf
 
 
 ## Setting Up Grafana 
-1. [Login to Grafana](https://grafana.com/docs/grafana/latest/getting-started/getting-started/) - The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to ```http://localhost:3000/```.
-
+<ol start="1">
+<li><a href="https://grafana.com/docs/grafana/latest/getting-started/getting-started/" target="_blank">Login to Grafana</a> - 
+The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to <code>http://localhost:3000</code>.
+<br>
 <div align="center">
     <img src="../../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
 </div>
-
-2. In _Data Sources_ section, create a new JSON data source
-   * select a JSON data source.
-   * On the name tab provide a unique name to the connection.
-   * On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)
-   * On the ***Custom HTTP Headers***, name the default database. If no header is set, then all accessible databases to 
-   the node will be available to query
-
+</li>
+<li>In <i>Data Sources</i> section, create a new JSON data source
+    <ul style="padding-left: 20px">
+        <li>select a JSON data source</li>
+        <li>On the name tab provide a unique name to the connection.</li>
+        <li>On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)</li>
+        <li>On the <b>Custom HTTP Headers</b>, name the default database. If no header is set, then all accessible databases to 
+   the node will be available to query</li>
+    </ul>
 <div align="center">
 <table>
   <tr>
@@ -70,9 +73,14 @@ Directions for importing our demo images dashboards can be found in [import graf
   </tr>
 </table>
 </div>
-
-Select the ***Save and Test*** option that should return a green banner message: ***Data source is working***.
-<img src="../../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
+</li>
+<br/>
+<li>Select the <b>Save and Test</b> option that should return a green banner message: ***Data source is working***.
+    <div align="center">
+        <img src="../../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
+    </div>
+</li>
+</ol>
 
 ### Enabling Authentication
 
@@ -81,11 +89,15 @@ Enabling authentication is explained at [Authenticating HTTP requests](../authen
 When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
 the Grafana configuration should have _basic auth_ enabled.
 
-<img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
+<div align="center">
+    <img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
+</div>
 
 While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
 
-<img src="../../../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
+<div align="center">
+    <img src="../../../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
+</div>
 
 **Notes**: Failure to connect may be the result of one of the following
 * AnyLog instance is not running or not configured to support REST calls.
@@ -93,7 +105,6 @@ While authentication using [SSL Certificates](../authentication.md#using-ssl-cer
 * Firewalls are not properly configured and make the IP and Port not available.
 * AnyLog is configured with authentication detection that is not being satisfied.
 * If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.
-
 
 ## Using Grafana to visualize AnyLog
 
@@ -164,8 +175,9 @@ The additional information is provided using a JSON script with the following at
   </tbody>
 </table>
 
-
-<img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
+<div align="center">
+    <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
+</div> 
 
 ### Blockchain based Visualization
 
@@ -183,8 +195,9 @@ The additional information is provided using a JSON script with the following at
 }
 </code></pre>
 
-<img src="../../../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
-
+<div align="center">
+    <img src="../../../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
+</div> 
 
 **Creating Table from Blockchain**
 1. In the _Visualizations_ section, select _Table_
@@ -192,13 +205,16 @@ The additional information is provided using a JSON script with the following at
 2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
+
 <pre class="code-frame"><code class="language-json">{
     "type": "info", 
     "details": "blockchain get operator bring.json [*][cluster] [*][name] [*][company] [*][ip] [*][country] [*][state] [*][city]"
 }
 </code></pre>
 
-<img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+<div align="center">
+    <img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+</div>
 
 ### Using the Time-Series Data Visualization
 
@@ -271,6 +287,8 @@ More information on increments and period types of queries are available in [que
 
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
+
+<br/>
 
 <img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
 
