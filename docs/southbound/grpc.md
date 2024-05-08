@@ -13,9 +13,9 @@ It is designed to be efficient, scalable, and interoperable across different pro
 gRPC is used in distributed systems, microservices architectures, and client-server applications to enable efficient 
 communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).  
 
-## AnyLog as a gRPC client
-AnyLog can connect as a gRPC client to a gRPC Server to receive the data streams.  
-Using AnyLog policies, these streams are mapped to a target schema, and the data is hosted on the local AnyLog node.
+## EdgeLake as a gRPC client
+EdgeLake can connect as a gRPC client to a gRPC Server to receive the data streams.  
+Using EdgeLake policies, these streams are mapped to a target schema, and the data is hosted on the local EdgeLakee node.
 
 ## Setup
 Users define the data extracted from the gRPC server using a **proto** file.    
@@ -23,17 +23,13 @@ A Protocol Buffers (proto file) is a language-agnostic data serialization format
 This file is compiled to generate 2 **grpc** files that manage the process between the client and the server.
 
 ## Prerequisites
+<ol>
+<li>Install <a href="https://pypi.org/project/grpcio-tools/">grpcio-tools</a>
+    <pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code>
+</li>
 
-1. Install [grpcio-tools](https://pypi.org/project/grpcio-tools/)
-```shell
-python3 -m pip install --upgrade grpcio-tools
-```
-
-2. Create the protocol buffer file  
-    Example file: **dummy.proto**:
-    ```shell
-    syntax = "proto3";
-    
+<li>Create the protocol buffer file <br/>Example file: <b>dummy.proto</b>:
+<pre class="code-frame"><ol class="language-config">syntax = "proto3"; 
     package mygrpc;
     
     service SerializeService {
@@ -45,22 +41,21 @@ python3 -m pip install --upgrade grpcio-tools
     message SampleDataResponse {
       repeated string serialized_data = 1;
     }
-    ```    
+</code></pre></li>
 
-3. Compile file  
-    Example:
-    ```shell
-    python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto
-    ```
-    Notes: 
-    * Compile in the proto file (target) directory.  
-    * The following files are gennerated in the target directory (if dummy.proto is compiled) :
-        * dummy_pb2.py
-        * dummy_pb2_grpc,py
+<li>Compile file <br/>Example:
+<pre class="code-frame"><code class="language-shell">python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto</code></pre>
+</li></ol>
+    
+**Notes**: 
+* Compile in the proto file (target) directory.  
+* The following files are gennerated in the target directory (if dummy.proto is compiled) :
+    * dummy_pb2.py
+    * dummy_pb2_grpc,py
 
 
 ## Initiating a gRPC client
-The following command initiate a gRPC client on the AnyLog node:
+The following command initiate a gRPC client on the EdgeLake node:
 
 ```anylog
 run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id] and grpc_dir = [dir path] and proto = [proto name] 
@@ -125,7 +120,7 @@ and add_info = conn and add_info = proto and add_info = request>
 
 
 ## Retrieving the list of gRPC clients
-The following command returns the list of connected gRPC clients on the AnyLog node:
+The following command returns the list of connected gRPC clients on the EdgeLake node:
 ```anylog
 get grpc clients 
 ```
