@@ -11,7 +11,7 @@ nav_order: 4
 gRPC (gRPC Remote Procedure Calls) is an open-source framework developed by Google. 
 It is designed to be efficient, scalable, and interoperable across different programming languages.
 gRPC is used in distributed systems, microservices architectures, and client-server applications to enable efficient 
-communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).  
+communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).
 
 ## EdgeLake as a gRPC client
 EdgeLake can connect as a gRPC client to a gRPC Server to receive the data streams. 
