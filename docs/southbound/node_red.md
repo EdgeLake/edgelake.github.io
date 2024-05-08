@@ -74,7 +74,8 @@ return msg
 <div class="image-frame"><img src="../../../imgs/node_red_http_request.png" /></div>
 </li>
 
-<li>On the AnyLog Operator side, create a new `run mqtt client` process against the REST port
+<li>On the EdgeLake Operator side, create a new <code class="language-anylog">run mqtt client</code> process against the REST port
+
 <pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=rest and port=!anylog_rest_port and user-agent=anylog and log=false and topic=(
     name=node-red and 
     dbms=!default_dbms and
