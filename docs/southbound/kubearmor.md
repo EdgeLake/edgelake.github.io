@@ -2,7 +2,7 @@
 layout: default
 title: KubeArmor / gRPC
 parent: Southbound
-nav_order: 5
+nav_order: 4
 ---
 # KubeArmor / gRPC Integrations
 

@@ -1,9 +1,14 @@
----
-layout: default
-title: gRPC  
-parent: Southbound
-nav_order: 4
----
+[//]: # (---)
+
+[//]: # (layout: default)
+
+[//]: # (title: gRPC  )
+
+[//]: # (parent: Southbound)
+
+[//]: # (nav_order: 4)
+
+[//]: # (---)
 
 # Using gRPC
 
