@@ -24,7 +24,7 @@ The Kafka instance is identified by an IP and port, and the query result set is 
 
 The following command, issued on an EdgeLake instance, sends 10 row from a table managed by nodes in the network to a Kafka instance:
 
-<pre class="code-frame"><code class="language-json">run client () sql litsanleandro format = json:output and stat  = false and dest = kafka@198.74.50.131:9092 and topic = ping_data "select device_name, timestamp, value, from ping_sensor where timestamp > now() - 1 day limit 10"</code></pre>
+<pre class="code-frame"><code class="language-anylog">run client () sql litsanleandro format = json:output and stat  = false and dest = kafka@198.74.50.131:9092 and topic = ping_data "select device_name, timestamp, value, from ping_sensor where timestamp > now() - 1 day limit 10"</code></pre>
 
 **Note**:
 * The format directive _json:output_ organizes each set of timestamp and value (that are returned by the query) in JSON.
@@ -41,9 +41,8 @@ and consume published messages by pulling data from the Kafka instance.
 
 **Usage**:
 
-```anylog
-run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earliest] and topic = [topic and mapping instructions]
-```
+<pre class="code-frame"><code class="language-anylog">run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earliest] and topic = [topic and mapping instructions]</code></pre>
+
 
 **Command options**:
 
@@ -57,9 +56,7 @@ run kafka consumer where ip = [ip] and port = [port] and reset = [latest/earlies
 Details on the topic declaration and mapping instructions are available [here](https://github.com/AnyLog-co/documentation/blob/master/message%20broker.md#the-topic-params).  
 
 **Example**:
-```anylog
-run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (name = ping_data and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")
-```
+<pre class="code-frame"><code class="language-anylog">run kafka consumer where ip = 198.74.50.131 and port = 9092 and reset = latest and topic = (name = ping_data and dbms = lsl_demo and table = ping_sensor and column.timestamp.timestamp = "bring [timestamp]" and column.value.int = "bring [value]")</code></pre>
 
 
 ### Related commands
