@@ -2,7 +2,7 @@
 layout: default
 title: Syslog
 parent: Southbound
-nav_order: 5
+nav_order: 6
 ---
 # Syslog 
 Syslog is a standardized protocol used for sending and receiving log messages in a computer network. It facilitates the 

@@ -1,5 +1,10 @@
-# Node-RED 
-
+---
+layout: default
+title: Node-RED
+parent: Southbound
+nav_order: 1
+---
+# Node-RED
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool designed for connecting hardware devices, 
 APIs, and online services in a visual and intuitive manner. It allows users to create event-driven applications by wiring 
 together nodes that represent different functions or services. Directions for using Node-RED can be found [here](https://nodered.org/docs/user-guide/),
