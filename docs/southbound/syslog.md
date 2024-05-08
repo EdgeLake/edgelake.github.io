@@ -49,7 +49,6 @@ The following provides directions for using [rsyslog](https://www.rsyslog.com/).
 sudo apt -y install rsyslog
 sudo service rsyslog start
 </code></pre></li>
-<br/>
 <li>Validate rsyslog is running
 <pre class="code-frame"><code class="language-shell">root@localhost:~# tail -f /var/log/syslog
 Feb 25 02:55:47 localhost systemd[31139]: Reached target Basic System.
