@@ -1,3 +1,9 @@
+---
+layout: default
+title: KubeArmor  
+parent: Southbound
+nav_order: 5
+---
 # KubeArmor / gRPC Integrations
 
 gRPC (gRPC Remote Procedure Calls) is an open-source framework developed by Google. 
