@@ -171,7 +171,14 @@ The following command returns the list of gRPC services from the gRPC server:
 
 Example returned info:
 
-|gRPC Services| 
-|:---:| 
-| grpc.reflection.v1alpha.ServerReflection |
-|test.MyService                          |
+<table>
+  <tr>
+    <th style="text-align:center;"><b>gRPC Services</b></th>
+  </tr>
+  <tr>
+    <td style="text-align:left;">grpc.reflection.v1alpha.ServerReflection</td>
+  </tr>
+  <tr>
+    <td style="text-align:left;">test.MyService</td>
+  </tr>
+</table>
