@@ -25,11 +25,12 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
 ## Prerequisites
 <ol>
 <li>Install <a href="https://pypi.org/project/grpcio-tools/">grpcio-tools</a>
-    <pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code>
+<br/>
+<pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code>
 </li>
 
 <li>Create the protocol buffer file <br/>Example file: <b>dummy.proto</b>:
-<pre class="code-frame"><ol class="language-config">syntax = "proto3"; 
+<pre class="code-frame"><code class="language-config">syntax = "proto3"; 
     package mygrpc;
     
     service SerializeService {
@@ -45,7 +46,7 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
 
 <li>Compile file <br/>Example:
 <pre class="code-frame"><code class="language-shell">python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto</code></pre>
-</li></ol>
+</li></code>
     
 **Notes**: 
 * Compile in the proto file (target) directory.  
