@@ -183,8 +183,8 @@ kubearmor-logs   |Active|kubearmor.kubearmor.svc.cluster.local:32767|kubearmor |
 <ol start="1">
 <li>Attach to EdgeLake query node
 <pre class="code-frame"><code class="language-shell"># ctrl-d to detach 
-cd servvice-edgelake 
-make attach operator
+cd docker-compose 
+make attach EDGELAKE_TYPE=query
 </code></pre></li>
 <li>Query Data - make sure to set logical database name correctly
 <pre class="code-frame"><code class="language-anylog"># Get row count 
