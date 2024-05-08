@@ -27,15 +27,128 @@ The Remote CLI contains the following:
 Nodes in the network needs to be configured with their REST service enabled.  
 Configuring a node to recieve REST requests is detailed in the [REST Requests](../commands/backgound_services.md#rest-services) section.
 
-## Installing the Remote CLI
+## Installing the Remote-CLI
+The Remote-CLI is an Open-Source django based project that can be [run manually](https://github.com/AnyLog-co/Remote-CLI) or via Docker.   
 
-Details are available [here](../deployments/Support/Remote-CLI.md#remote-cli).
+### Quck install
+<pre class="code-frame"><code class="language-shell">docker run -it -d \
+  -p 31800:31800 \
+  -e CONN_IP=0.0.0.0 \
+  -p CONN_PORT=31800 \
+  -v remote-cli:/app/Remote-CLI/djangoProject/static/json
+--name remote-cli --rm anylogco/remote-cli:lateest
+</code></pre>
+
+### Remote-CLI with Query Node
+The Remote-CLI makes it simple to view images and videos that are returned from queries. To see these files through 
+Remote-CLI, you just need to ensure that the directory (docker volume) where the files are stored is shared with the 
+query node that receives them.
+
+To accomplish this, you'll need to update the template docker-compose with the Remote-CLI information (as shown below). 
+
+<pre class="code-frame"><code class="language-config">version: "3"
+services:
+  remote-cli:
+    image: anylogco/remote-cli:latest
+    container_name: remote-cli
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - 31800:31800
+    environment:
+      - CONN_IP=0.0.0.0
+      - CLI_PORT=31800
+    volumes:
+      - remote-cli:/app/Remote-CLI/djangoProject/static/json
+      - remote-cli-current:/app/Remote-CLI/djangoProject/static/blobs/current/
+  anylog-query:
+    image: anylogco/edglake:1.3.2404
+    restart: always
+    env_file:
+      - query-configs/base_configs.env
+      - query-configs/advance_configs.env
+      - .env
+    container_name: anylog-query
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - edgelake-query-anylog:/app/EdgeLake/anylog
+      - edgelake-query-blockchain:/app/EdgeLake/blockchain
+      - edgelake-query-data:/app/EdgeLake/data
+      - edgelake-query-local-scripts:/app/deployment-scripts
+      - remote-cli-current:/app/Remote-CLI/djangoProject/static/blobs/current/
+volumes:
+  edgelake-query-anylog:
+  edgelake-query-blockchain:
+  edgelake-query-data:
+  edgelake-query-local-scripts:
+  remote-cli:
+  remote-cli-current:
+</code></pre>
+
 
 # Configuring the Remote CLI
 The Remote CLI can be configured to support specific settings, default values and frequently used commands.  
 The configurations files are organized in the static/json folder as a set of JSON files.
 
 ## The configuration files
+
+When deploying with Docker, the configurations files are located in `remote-cli` volume; while images aand videos coming via 
+query are stored in `remote-cli-curennt`. 
+
+#### Accessing Volumes
+<ol start="1">
+<li>Using <code class="language-shell">docker volume ls</code> locate <code class="language-shell">remote-cli</code> volume.
+<pre><code class="language-shell">root@anylog-co:~# docker volume ls 
+DRIVER    VOLUME NAME
+local     anylog-gui_anylog-gui
+local     docker-makefile_edgelake-master-anylog
+local     docker-makefile_edgelake-master-blockchain
+local     docker-makefile_edgelake-master-data
+local     docker-makefile_edgelake-master-local-scripts
+local     docker-makefile_edgelake-operator-anylog
+local     docker-makefile_edgelake-operator-blockchain
+local     docker-makefile_edgelake-operator-data
+local     docker-makefile_edgelake-operator-local-scripts
+local     docker-makefile_edgelake-query-anylog
+local     docker-makefile_edgelake-query-blockchain
+local     docker-makefile_edgelake-query-data
+local     docker-makefile_edgelake-query-local-scripts
+local     docker-makefile_remote-cli
+local     docker-makefile_remote-cli-current
+</code></pre></li>
+
+<li>Inspect the volume in order to locate where configuration file(s) reeside.
+<pre><code class="language-shell">root@anylog-co:~# docker volume inspect docker-makefile_remote-cli
+[
+    {
+        "CreatedAt": "2024-05-08T18:33:32Z",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.compose.project": "docker-makefile",
+            "com.docker.compose.version": "1.29.2",
+            "com.docker.compose.volume": "remote-cli"
+        },
+        "Mountpoint": "/var/lib/docker/volumes/docker-makefile_remote-cli/_data",
+        "Name": "docker-makefile_remote-cli",
+        "Options": null,
+        "Scope": "local"
+    }
+]</code></pre></li>
+
+<li>In the directory corresponding to <b>Mountpoint</b> you should be able to locate the configuration file(s)
+    <ul style="padding-left: 20px">
+        <li><b>settings.json</b> - consists of default configurations for accessing the (query) node(s) in the network</li>
+        <li><b>commands.json</b> - queries to be used for viewing / accessing both th data and metadata</li>
+    </ul>
+<pre><code class="language-shell">root@anylog-co:~# ls -l /var/lib/docker/volumes/docker-makefile_remote-cli/_data
+total 120
+-rw-r--r-- 1 root root 31785 Apr  8 03:44 commands.json
+-rw-r--r-- 1 root root   591 May  8 18:58 settings.json
+</code></pre></li>
+</ol>
 
 ### The main configuration file
 
