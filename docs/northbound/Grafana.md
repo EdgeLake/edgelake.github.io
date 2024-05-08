@@ -10,7 +10,7 @@ nav_order: 2
 
 Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/). We utilize Grafana as our default 
 demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](PowerBI.md), can be found in our 
-[North Bound services](https://github.com/AnyLog-co/documentation/tree/master/northbound%20connectors) section.   
+[North Bound services](../) section.   
 
 Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
 
@@ -20,9 +20,7 @@ Directions for importing our demo images dashboards can be found in [import graf
 ## Prerequisites & Links
 
 * An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher. 
-<pre>
-   <code>
-docker run --name=grafana \
+<pre class="code-frame"><code class="language-shell">docker run --name=grafana \
   -e GRAFANA_ADMIN_USER=admin \
   -e GRAFANA_ADMIN_PASSWORD=admin \
   -e GF_AUTH_DISABLE_LOGIN_FORM=false \
@@ -34,16 +32,13 @@ docker run --name=grafana \
   -v grafana-log:/var/log/grafana \
   -v grafana-config:/etc/grafana \
   -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
-    </code>
-</pre>
+</code></pre>
 
 * An AnyLog Node that provides a REST connection - To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
   * [ip] and [port] are the IP and Port that would be available to REST calls.
   * [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.
   * A 0 value means a call would never be aborted and the default time is 20 seconds.
-<pre>
-   <code>
-&lt;run rest server where
+<pre class="code-frame"><code class="language-anylog">&lt;run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout
@@ -176,16 +171,13 @@ The additional information is provided using a JSON script with the following at
 2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
-<pre>
-    <code>
-{
+<pre class="code-frame"><code class="language-json">{
     "type" : "map",
     "member" : ["master", "query", "operator", "publisher"],
     "metric" : [0,0,0],
     "attribute" : ["name", "name", "name", "name"]
 }
-    </code>
-</pre>
+</code></pre>
 
 <img src="../../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
 
@@ -196,15 +188,11 @@ The additional information is provided using a JSON script with the following at
 2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
-<pre>
-    <code>
-
-{
+<pre class="code-frame"><code class="language-json">{
     "type": "info", 
     "details": "blockchain get operator bring.json [*][cluster] [*][name] [*][company] [*][ip] [*][country] [*][state] [*][city]"
 }
-    </code>
-</pre>
+</code></pre>
 
 <img src="../../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
 
@@ -214,10 +202,7 @@ The additional information is provided using a JSON script with the following at
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
 average are collected for each interval and graphically presented.  
 
-**Example**:
-<pre>
-    <code>
-# Input in Grafana 
+<pre class="code-frame"><code class="language-json"># Input in Grafana 
 {
   "type": "increments",
   "time_column": "timestamp",
@@ -226,9 +211,10 @@ average are collected for each interval and graphically presented.
     "format_as": "timeseries"
   }
 }
+</code></pre>
 
-# Query Being Executed
-SELECT 
+**uery Being Executed**
+<pre class="code-frame"><code class="language-sql">SELECT 
   increments(second, 1, timestamp), max(timestamp) as timestamp, avg(value) as avg_val, min(valu e) as min_val, 
   max(value) as max_val 
 FROM 
@@ -236,18 +222,14 @@ FROM
 WHERE 
   timestamp >= '2024-02-19T19:42: 02.133Z' and timestamp <= '2024-02-19T19:57:02.133Z' 
 LIMIT 2128;
-    </code>
-</pre>
+</code></pre>
 
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
 derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
 
-**Example**: 
-<pre>
-    <code>
-# Input in Grafana
+<pre class="code-frame"><code class="language-json"># Input in Grafana
 {
   "type": "period", 
   "time_column": "timestamp",
@@ -255,14 +237,14 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
   "grafana" : {
     "format_as" : "timeseries"
   }
-}
-# Query Being Executed
-SELECT 
+}</code></pre>
+**Query Being Executed**
+
+<pre class="code-frame"><code class="language-sql">SELECT 
     max(timestamp) as timestamp, avg(value) as avg_val, min(value) as min_val, max(value) as max_val 
 FROM 
     ping_sensor 
-    </code>
-</pre>
+</code></pre>
 
 More information on increments and period types of queries are available in [queries and info requests](../queries.md#optimized-time-series-data-queries).
 
@@ -273,9 +255,7 @@ More information on increments and period types of queries are available in [que
 2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
-<pre>
-    <code>
-{
+<pre class="code-frame"><code class="language-json">{
   "type": "increments",
   "time_column": "timestamp",
   "value_column": "value",
@@ -283,8 +263,7 @@ More information on increments and period types of queries are available in [que
     "format_as" : "timeseries"
   }
 }
-    </code>
-</pre>
+</code></pre>
 
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
@@ -297,9 +276,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 2. In the _Metric_  section, select a table name to "query" against
 
 3. Update _Payload_ with the following information
-<pre>
-    <code>
-{
+<pre class="code-frame"><code class="language-json">{
   "type": "period", 
   "time_column": "timestamp",
   "value_column": "value",
@@ -307,8 +284,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
     "format_as" : "timeseries"
   }
 }
-    </code>
-</pre>
+</code></pre>
 
 4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
 opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
@@ -319,9 +295,7 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
 **Other Examples**
 
 * Extending query to use where conditions
-<pre>
-    <code>
-# Increments
+<pre class="code-frame"><code class="language-json"># Increments
 {
   "type": "increments",
   "time_column": "timestamp",
@@ -342,14 +316,11 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
     "format_as" : "timeseries"
   }
 }
-    </code>
-</pre>
+</code></pre>
     
 
 * Extend to specify which _Functions_ without _time_range_ to query 
-<pre>
-    <code>
-{
+<pre class="code-frame"><code class="language-json">{
   "type": "period", 
   "time_column": "timestamp",
   "value_column": "value",
@@ -359,5 +330,4 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
     "format_as" : "timeseries"
   }
 }
-    </code>
-</pre>>
+</code></pre>>
