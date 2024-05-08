@@ -2,7 +2,7 @@
 layout: default
 title: EdgeX 
 parent: Southbound
-nav_order: 2
+nav_order: 3
 ---
 # EdgeX connection 
 
