@@ -198,77 +198,62 @@ The info contained in the file includes the following:
 * **group** - A category name, allowing users to select buttons by categories.
 * **help_url** - The URL to use if **help** is selected on the client form.
 
-Example:
+**Example**:
 <pre class="code-frame"><code class="language-json">{
  "commands": [
-  {
-   "button": "Node Status",
-   "command": "get status",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#the-get-status-command"
-  },
-  {
-   "button": "Get Processes",
-   "command": "get processes",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#the-get-processes-command"
-  },
-  {
-   "button": "Get Dictionary",
-   "command": "get dictionary",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#the-get-dictionary-command"
-  },
-  {
-   "button": "Disk Usage",
-   "command": "get disk usage .",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#monitoring-state-commands"
-  },
-  {
-   "button": "CPU Usage",
-   "command": "get cpu usage",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#monitoring-state-commands"
-  },
-  {
-   "button": "Platform Info",
-   "command": "get platform info",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#monitoring-state-commands"
-  },
-  {
-   "button": "Network Info",
-   "command": "get node info net_io_counters",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#the-get-node-info-command"
-  },
-  {
-   "button": "Swap Memory",
-   "command": "get node info swap_memory",
-   "type": "GET",
-   "group": "Monitor",
-   "help_url": "blob/master/monitoring%20nodes.md#the-get-node-info-command"
-  },
-  {
-   "button": "Members List",
-   "command": "blockchain get (operator, publisher, query) bring.table [*][name] [*][country] [*][city] [*][ip] [*][port]",
-   "type": "GET",
-   "group": "Monitor"
-  },
-  {
-   "button": "USA Members",
-   "command": "blockchain get (operator, publisher, query) where [country] contains US bring.table [*][name] [*][country] [*][city] [*][ip] [*][port]",
-   "type": "GET",
-   "group": "Monitor"
-  }
+    {
+        "button": "Node Status",
+        "command": "get status",
+        "type": "GET",
+        "group": "Monitor",
+        "help_url": "blob/master/monitoring%20nodes.md#the-get-status-command"
+    },
+    {
+        "button": "Get Processes",
+        "command": "get processes",
+        "type": "GET",
+        "group": "Monitor",
+        "help_url": "blob/master/monitoring%20nodes.md#the-get-processes-command"
+    },
+    {
+        "button": "Get Dictionary",
+        "command": "get dictionary",
+        "type": "GET",
+        "group": "Monitor",
+        "help_url": "blob/master/monitoring%20nodes.md#the-get-dictionary-command"
+    },
+    {
+        "button": "Disk Usage",
+        "command": "get disk usage .",
+        "type": "GET",
+        "group": "Monitor",
+        "help_url": "blob/master/monitoring%20nodes.md#monitoring-state-commands"
+    },
+    {
+        "button": "CPU Usage",
+        "command": "get cpu usage",
+        "type": "GET",
+        "group": "Monitor",
+        "help_url": "blob/master/monitoring%20nodes.md#monitoring-state-commands"
+    },
+    {
+          "button": "Data Summary per Table",
+          "command": "sql new_company format=table and extend=(+node_name as node) \"select min(timestamp), max(timestamp), min(value), avg(value), max(value), count(*) from random_float_device;\"",
+          "type": "GET",
+          "group": "Data Query"
+    },
+    {
+      "button": "Streaming Video",
+      "command": "sql new_company info = (dest_type = rest) and extend=(+country, +city, @ip, @port, @dbms_name, @table_name) and format = json and timezone = utc  select  file, start_ts::ljust(19), end_ts::ljust(19), people_count, confidence::float(3) from people_counter     where start_ts >= NOW() - 1 hour and end_ts <= NOW() order by people_count, confidence --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file)",
+      "type": "GET",
+      "group": "Data Query"
+    },
+    {
+      "button": "Image",
+      "command": "sql new_company extend=(+node_name, @ip, @port, @dbms_name, @table_name) and format = json and timezone=Europe/Dublin  select  timestamp, file, class, bbox, score, status  from images where timestamp >= now() - 1 hour and timestamp <= NOW() order by timestamp desc --> selection (columns: ip using ip and port using port and dbms using dbms_name and table using table_name and file using file) -->  description (columns: bbox as shape.rect and score)",
+      "type": "GET",
+      "group": "Data Query"
+    }
  ]
 }</code></pre>
 
