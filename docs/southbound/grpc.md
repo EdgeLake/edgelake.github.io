@@ -103,12 +103,12 @@ Examples (the < and > signs designate a code block that can be used on the CLI):
 <pre class="code-frame"><code class="language-anylog">&lt;run grpc client where 
     name = kubearmor and 
     ip = 127.0.0.1 and port = 50051 and 
-    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    grpc_dir = D:/EdgeLake-Code/EdgeLake-Network/dummy_source_code/kubearmor/proto and 
     proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log and 
     service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false&gt; 
 <br/>
 &lt;run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and 
-    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    grpc_dir = D:/EdgeLake-Code/EdgeLake-Network/dummy_source_code/kubearmor/proto and 
     proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and 
     service = LogService and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false&gt; 
 </code></pre>
