@@ -156,4 +156,4 @@ real-time insight from their distributed edge data without dependency on the clo
   </tbody>
 </table>
 
-<h3 align="center"><a href="https://anylog.co/download-anylog/" target="_blank">Download AnyLog</a>, the enterprise version of EdgeLake</h3>
+<h3 align="center"><a href="https://anylog.co/download-anylog/" target="_blank">Try AnyLog</a> the enterprise version of EdgeLake</h3>
