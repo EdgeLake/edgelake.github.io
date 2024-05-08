@@ -1,8 +1,8 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: Using Grafana
-nav_order: 1
+nav_order: 2
 ---
 # Using Grafana
 
