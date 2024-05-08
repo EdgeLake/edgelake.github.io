@@ -11,8 +11,6 @@ Using EdgeLake, companies manage their data on each distributed edge node using 
 real-time insight from their distributed edge data without dependency on the cloud.
 
 
-[AnyLog](https://anylog.co) is the enterprise version of EdgeLake.
-
 ## EdgeLake vs AnyLog
 
 ### General 
@@ -47,99 +45,115 @@ real-time insight from their distributed edge data without dependency on the clo
 
 ### Breakdown
 <table>
-  <tr>
-    <td></td>
-    <td></td>
-    <td>EdgeLake</td>
-    <td>AnyLog</td>
-  </tr>
-  <tr>
-    <td rowspan="4"><strong>Networking</strong></td>
-    <td><strong>TCP</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>REST</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Message Broker</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Database</strong></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><strong>SQLite</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><strong>PostgreSQL</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><strong>MongoDB</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td rowspan="4"><strong>Security</strong></td>
-    <td><strong>High-Availability</strong></td>
-    <td></td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>HTTP Authentication</strong></td>
-    <td></td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Encrypting Messages</strong></td>
-    <td></td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Publisher Data Distribution</strong></td>
-    <td></td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td rowspan="4"><strong>Southbound</strong></td>
-    <td><strong>gRPC</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Kafka</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>MQTT</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
-  <tr>
-    <td><strong>Syslog</strong></td>
-    <td>+</td>
-    <td>+</td>
-  </tr>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th style="text-align: center"><b>EdgeLake</b></th>
+      <th style="text-align: center"><b>AnyLog</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5"><b>Networking</b></td>
+      <td>TCP</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>REST</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Message Broker</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td><a href="southbound/kubearmor.md">gRPC</a></td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td><a href="southbound/syslog.md">Syslog</a></td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td rowspan="4"><b>Database</b></td>
+      <td>SQLite</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>PostgresSQL</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>MongoDB</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>File store for blobs</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td rowspan="5"><b>Core</b></td>
+      <td>Data Partitioning</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Node Monitoring</td>
+      <td style="text-align: center;">+</td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>High-Availability of Operator Nodes</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Horizontal Data Distribution</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Built-in Overlay Network</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td rowspan="5"><b>Security</b></td>
+      <td>HTTP Authentication</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Key-Based Authentication</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Encrypting network messages</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Signed blockchain policies</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+    <tr>
+      <td>Group / individual permissions</td>
+      <td></td>
+      <td style="text-align: center;">+</td>
+    </tr>
+  </tbody>
 </table>
 
-
-
-
-
-
-
-
+<h3 align="center"><a href="https://anylog.co/download-anylog/" target="_blank">Try AnyLog</a> the enterprise version of EdgeLake</h3>
