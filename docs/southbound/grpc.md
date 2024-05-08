@@ -25,7 +25,7 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
 ## Prerequisites
 <ol start="1">
 <li>Install <a href="https://pypi.org/project/grpcio-tools/" target="_blank">grpcio-tools</a>
-<pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code></pre>></li>
+<pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code></pre></li>
 
 <li>Create the protocol buffer file - <b>Example file</b>: <code>dummy.proto</code>:
 <pre class="code-frame"><code class="language-config">syntax = "proto3"; 
@@ -56,12 +56,24 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
 ## Initiating a gRPC client
 The following command initiate a gRPC client on the EdgeLake node:
 
-```anylog
-run grpc client where name = [unique name] and ip = [IP] and port = [port] and policy = [policy id] and grpc_dir = [dir path] and proto = [proto name] 
-    and function = [proto function] and request = [request message] and response = [response message] and service = [service name]
-    and value = (key1 = value1 and key2 = value2 ...) and debug = [true/false] and limit = [max events] and dbms = [dbms name] and table = [table name]
-    and ingest = [true /false]
-```
+<pre class="code-frame"><code class="language-anylog">&lt;run grpc client where 
+    name = [unique name] and 
+    ip = [IP] and 
+    port = [port] and 
+    policy = [policy id] and 
+    grpc_dir = [dir path] and 
+    proto = [proto name] and 
+    function = [proto function] and 
+    request = [request message] and 
+    response = [response message] and 
+    service = [service name] and 
+    value = (key1 = value1 and key2 = value2 ...) and 
+    debug = [true/false] and 
+    limit = [max events] and 
+    dbms = [dbms name] and 
+    table = [table name] and 
+    ingest = [true /false]&gt; 
+</code></pre>
 
 **Command variables**:
 
@@ -86,16 +98,18 @@ run grpc client where name = [unique name] and ip = [IP] and port = [port] and p
 | add_info   | N | Updates the data retrieved from the server with additional info. For example, **added_info = conn**, includes the connection info. |
 
 Examples (the < and > signs designate a code block that can be used on the CLI):
-```anylog
-<run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
-    and proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log 
-    and service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false>
-```
-```anylog
-<run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
-    and proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and service = LogService 
-    and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false>
-```
+<pre class="code-frame"><code class="language-anylog">&lt;run grpc client where 
+    name = kubearmor and 
+    ip = 127.0.0.1 and port = 50051 and 
+    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    proto = kubearmor and function = WatchLogs and request = RequestMessage and response = Log and 
+    service = LogService and value = (Filter = policy) and debug = true and limit = 2 and ingest = false&gt; 
+<br/>
+&lt;run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 50051 and 
+    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    proto = kubearmor and function = HealthCheck and request = NonceMessage and response = ReplyMessage and 
+    service = LogService and value = (nonce = 10.int) and debug = true and limit = 1 and ingest = false&gt; 
+</code></pre>
 
 ### Options for added_info
 
@@ -110,18 +124,18 @@ The added keys (to the JSON struct) are contained within greater than and less t
 | conn       | The IP and Port used   |
 
 Example:
-```anylog
-<run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto 
-and proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and response = Log 
-and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and ingest = false  
-and add_info = conn and add_info = proto and add_info = request>
-```
+<pre class="code-frame"><code class="language-anylog">
+&lt;run grpc client where name=kubearmor and ip = 10.0.0.251 and port = 32769 and 
+    grpc_dir = D:/AnyLog-Code/AnyLog-Network/dummy_source_code/kubearmor/proto and 
+    proto = kubearmor and function = WatchLogs and policy = kubearmor-system-policy and request = RequestMessage and 
+    response = Log and service = LogService and value = (Filter = all) and debug = false  and limit = 10000 and 
+    ingest = false and add_info = conn and add_info = proto and add_info = request&gt; 
+</code></pre>
 
 
 ## Retrieving the list of gRPC clients
 The following command returns the list of connected gRPC clients on the EdgeLake node:
-```anylog
-get grpc clients 
+<pre class="code-frame"><code class="language-anylog">get grpc clients</code></pre>
 ```
 The info returns identifies each client by the connection info (IP and Port) and the proto file name (ID).
 An example of the returned info is below:
@@ -136,18 +150,15 @@ kubearmor|10.0.0.251:32769|kubearmor|RequestMessage |mapping    |           |kub
 ## Terminate gRPC connection
 
 A connection is terminated using the following command:
-```anylog
-exit grpc [ID]
-```
+<pre class="code-frame"><code class="language-anylog">exit grpc [ID]</code></pre>
+
 **ID** is the **name** provided to the connection in the **run grpc client** command.    
 For example, the following command terminates a gRPC process: 
-```anylog
-exit grpc kubearmor
+<pre class="code-frame"><code class="language-anylog">exit grpc kubearmor
 ```
 To terminate all gRPC connections, use "all" as the connection string:
-```anylog
-exit grpc all
-```
+<pre class="code-frame"><code class="language-anylog">exit grpc all</code></pre>
+
 
 ## Retrieving the list of gRPC services
 Users can retrieve the list of services offered by the gRPC server.    
@@ -155,9 +166,8 @@ This process requires that the server reflection on the gRPC server is implement
 Server Reflection (ServerReflectionRequest ) allows clients to query information about services provided by a gRPC server dynamically.
 
 The following command returns the list of gRPC services from the gRPC server:
-```anylog
-get grpc services where conn = [ip:port]
-```
+
+<pre class="code-frame"><code class="language-anylog">get grpc services where conn = [ip:port]</code></pre>
 
 Example returned info:
 ```anylog
