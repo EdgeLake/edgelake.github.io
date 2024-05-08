@@ -49,28 +49,12 @@ return msg
 </code></pre></li>
 
 <li>Edit <i>HTTP request</i> mode to be <b>POST</b> with the following headers:
-   <table>
-      <tr>
-         <td><b>key</b></td>
-         <td><b>value</b></td>
-      </tr>
-      <tr>
-         <td>command</td>
-         <td>data</td>  
-      </tr>
-      <tr>
-         <td>topic</td>
-         <td>node-red</td>  
-      </tr>
-      <tr>
-         <td>User-Agent</td>
-         <td>AnyLog/1.23</td>  
-      </tr>
-      <tr>
-         <td>Content-Type</td>
-         <td>text/palin</td>  
-      </tr>
-   </table>
+   <ul style="padding-left: 20px;">
+      <li><b>command</b> - data</li>
+      <li><b>topic</b> - node-red</li>
+      <li><b>User-Agent</b> - AnyLog/1.23</li>
+      <li><b>Content-Type</b> - text/palin</li>
+   </ul>
 <div class="image-frame"><img src="../../../imgs/node_red_http_request.png" /></div>
 </li>
 
