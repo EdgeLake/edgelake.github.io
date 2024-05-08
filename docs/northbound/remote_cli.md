@@ -1,8 +1,8 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: Remote CLI
-nav_order: 3
+nav_order: 1
 ---
 # The Remote CLI
 
@@ -12,7 +12,7 @@ This functionality allows to interact, using a web based graphical application, 
 (with valid certificate).    
 
 A similar functionality is achieved using [cURL](https://curl.se/) as well as with other tools such as [Postman](https://www.postman.com/).  
-Note: [Using Postman](../using_postman.md) details the usage of Postman with AnyLog nodes.
+Note: [Using Postman](using_postman.md) details the usage of Postman with EdgeLake nodes.
 
 The Remote CLI contains the following:
 1. A client form to issue commands and queries to nodes in the network.
@@ -43,20 +43,19 @@ The initial settings for the Remote CLI are determined by the **setting.json** f
 
 The **setting.json** file includes the following sections:
 * **client** - specifies the default values on the client form allowing the following options:
-   * connect_info - specifies the default AnyLog Node to use.
+   * connect_info - specifies the default EdgeLake Node to use.
    * buttons - the name of the JSON file that defines the preconfigured buttons options on the client form.
    * help - determines how help is provided when a button is selected and the help option is flagged on the client form:
       - if the value is **open**, the button selection opens the URL that is associated with the button.
       - if the value is **url**, the button selection displays the help URL that is associated with the button.
  
-* **certificates** - specifies the certificates to use (if authentication on the AnyLog node is enabled).
+* **certificates** - specifies the certificates to use (if authentication on the EdgeLake node is enabled).
 
 * **Monitor** - specifies the JSON files that configure the monitored pages. Each pair includes a name describing the 
 data monitored, and a file name that specifies what is monitored.
 
 Example:
-```json
-{
+<pre class="code-frame"><code class="language-json">{
   "client" : {
     "connect_info": "23.239.12.151:32349",
     "buttons" : "commands.json",
@@ -74,9 +73,7 @@ Example:
     ["Monitor Members", "monitor_members.json"]
   ]
 
-}
-
-```
+}</code></pre>
 
 ### The buttons' configuration file
 
@@ -89,8 +86,7 @@ The info contained in the file includes the following:
 * **help_url** - The URL to use if **help** is selected on the client form.
 
 Example:
-```json
-{
+<pre class="code-frame"><code class="language-json">{
  "commands": [
   {
    "button": "Node Status",
@@ -161,8 +157,7 @@ Example:
    "group": "Monitor"
   }
  ]
-}
-```
+}</code></pre>
 
 ### The monitor configuration file
 
@@ -178,59 +173,72 @@ The following demonstrate commands issued via cURL and their web representation 
 
 ### Return the list of tables supported by the network 
 
-Using cURL:  
-`curl -X GET 23.239.12.151:32349 -H "command: get tables where dbms=*" -H "User-Agent: AnyLog/1.23"`
+**Using cURL**:
+<pre class="code-frame"><code class="language-shell">curl -X GET 23.239.12.151:32349 \
+    -H "command: get tables where dbms=*" \
+    -H "User-Agent: AnyLog/1.23"</code></pre>
 
-Using the Remote CLI:
+**Using the Remote CLI**:
 
-![get databases](../../imgs/remote_cli_get_databases.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_get_databases.png" /></div>
 
 ### Return columns in a given table 
 
 Using cURL:
 
-`curl -X GET 23.239.12.151:32349 -H "command: get columns where dbms=litsanleandro and table=ping_sensor" -H "User-Agent: AnyLog/1.23"`
+<pre class="code-frame"><code class="language-shell">curl -X GET 23.239.12.151:32349 \
+    -H "command: get columns where dbms=litsanleandro and table=ping_sensor" \
+    -H "User-Agent: AnyLog/1.23"`</code></pre>
 
 Using the Remote CLI:
 
-![get columns](../../imgs/remote_cli_get_columns.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_get_columns.png" /></div>
 
 ### Return Operators nodes associated to a company
 
 Using cURL:
 
-`curl -X GET 23.239.12.151:32349 -H 'command:blockchain get operator where company="Lit San Leandro"' -H "User-Agent: AnyLog/1.23"` 
+<pre class="code-frame"><code class="language-shell">curl -X GET 23.239.12.151:32349 \
+    -H 'command:blockchain get operator where company="Lit San Leandro"' \
+    -H "User-Agent: AnyLog/1.23"`</code></pre> 
 
 Using the Remote CLI:
 
-![view operators in blockchain](../../imgs/remote_cli_blockchain_operators.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_blockchain_operators.png" /></div>
 
 ### Get the list of nodes that host the data (for each table)
 
 Using cURL:
 
-`curl -X GET 23.239.12.151:32349 -H "command:get data nodes" -H "User-Agent: AnyLog/1.23" `
+<pre class="code-frame"><code class="language-shell">curl -X GET 23.239.12.151:32349 \
+    -H "command:get data nodes" \
+    -H "User-Agent: AnyLog/1.23"</code></pre>
 
 Using the Remote CLI:
 
-![Data Nodes](../../imgs/remote_cli_data_nodes.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_data_nodes.png" /></div>
 
 ### Query the last 90 seconds of data
 
 Using cURL:
 
-`curl -X GET /23.239.12.151:32349 -H 'command: sql litsanleandro format=table "select timestamp, value FROM ping_sensor WHERE timestamp >= NOW() -90 seconds"' -H "User-Agent: AnyLog/1.23" -H "destination: network"`
+<pre class="code-frame"><code class="language-shell">curl -X GET /23.239.12.151:32349 \
+    -H 'command: sql litsanleandro format=table "select timestamp, value FROM ping_sensor WHERE timestamp >= NOW() -90 seconds"' \
+    -H "User-Agent: AnyLog/1.23" \
+    -H "destination: network"`</code></pre>
 
 Using the Remote CLI:
-
-![Last 90 seconds of data](../../imgs/remote_cli_select_last_90sec.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_select_last_90sec.png" /></div>
 
 ### Query the last 10 minutes of data including the source node
 
 Using cURL:
 
-`curl -X GET 23.239.12.151:32349 -H 'command: sql test format=table and extend=(+ip, +node_name) "select timestamp, value FROM rand_data WHERE timestamp >= NOW() - 10 minutes ORDER BY value LIMIT 50"' -H "User-Agent: AnyLog/1.23" -H "destination: network"`
+<pre class="code-frame"><code class="language-shell">curl -X GET 23.239.12.151:32349 \
+    -H 'command: sql test format=table and extend=(+ip, +node_name) "select timestamp, value FROM rand_data WHERE timestamp >= NOW() - 10 minutes ORDER BY value LIMIT 50"' \
+    -H "User-Agent: AnyLog/1.23" \
+    -H "destination: network"`</code></pre>
 
 Using the Remote CLI:
 
-![Last 10 minutes of data](../../imgs/remote_cli_select_last_10min.png)
+<div class="image-frame"><img src="../../../imgs/remote_cli_select_last_10min.png" /></div>
