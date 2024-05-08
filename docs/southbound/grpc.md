@@ -23,13 +23,11 @@ A Protocol Buffers (proto file) is a language-agnostic data serialization format
 This file is compiled to generate 2 **grpc** files that manage the process between the client and the server.
 
 ## Prerequisites
-<ol>
-<li>Install <a href="https://pypi.org/project/grpcio-tools/">grpcio-tools</a>
-<br/>
-<pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code>
-</li>
+<ol start="1">
+<li>Install <a href="https://pypi.org/project/grpcio-tools/" target="_blank">grpcio-tools</a>
+<pre class="code-frame"><code class="language-shell">python3 -m pip install --upgrade grpcio-tools</code></pre>></li>
 
-<li>Create the protocol buffer file <br/>Example file: <b>dummy.proto</b>:
+<li>Create the protocol buffer file - <b>Example file</b>: <code>dummy.proto</code>:
 <pre class="code-frame"><code class="language-config">syntax = "proto3"; 
     package mygrpc;
     
@@ -44,9 +42,9 @@ This file is compiled to generate 2 **grpc** files that manage the process betwe
     }
 </code></pre></li>
 
-<li>Compile file <br/>Example:
-<pre class="code-frame"><code class="language-shell">python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto</code></pre>
-</li></code>
+<li>Compile file - <b>Example</b>:
+<pre class="code-frame"><code class="language-shell">python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. dummy.proto</code></pre></li>
+</ol>
     
 **Notes**: 
 * Compile in the proto file (target) directory.  
