@@ -82,8 +82,7 @@ return msg
     table="bring [table]" and
     column.timestamp.timestamp="bring [timestamp]" and
     column.value.int="bring [value]"
-)&gt;
-</li>
+)&gt;</code></pre></li>
 
 <li>Run the Node-RED process</li>
 </ol> 
