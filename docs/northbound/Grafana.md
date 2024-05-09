@@ -21,20 +21,7 @@ Directions for importing our demo images dashboards can be found in [import graf
 * 
 * [Grafana Support](https://grafana.com/docs/grafana/latest/)
 
-* An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher. 
-<pre class="code-frame"><code class="language-shell">docker run --name=grafana \
-  -e GRAFANA_ADMIN_USER=admin \
-  -e GRAFANA_ADMIN_PASSWORD=admin \
-  -e GF_AUTH_DISABLE_LOGIN_FORM=false \
-  -e GF_AUTH_ANONYMOUS_ENABLED=true \
-  -e GF_SECURITY_ALLOW_EMBEDDING=true \
-  -e GF_INSTALL_PLUGINS=simpod-json-datasource,grafana-worldmap-panel \
-  -e GF_SERVER_HTTP_PORT=3000 \
-  -v grafana-data:/var/lib/grafana \
-  -v grafana-log:/var/log/grafana \
-  -v grafana-config:/etc/grafana \
-  -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
-</code></pre>
+* An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher.
 
 * An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the 
 following command on the EdgeLake command line:  
