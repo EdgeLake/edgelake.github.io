@@ -38,37 +38,27 @@ opposed to needing to develop a full application for messaging.
     <li>Select the preferred channel
         <div class="image-frame"><img src="../../../imgs/notification_slack_workspace.png" /></div>
     </li>
+    <li>Press continue / next till the end</li>
+    <li>Select <i>Incoming Webhooks</i>
+        <div class="image-frame"><img src="../../../imgs/notification_slack_webhook.png" /></div>
+    </li>
+    <li>Enable Webhooks
+        <div class="image-frame"><img src="../../../imgs/notification_slack_enable_webhooks.png" /></div>
+    </li>
+    <li>At the bottom, add <i>Webbooks</i> to workspace
+        <div class="image-frame"><img src="../../../imgs/notification_slack_create_webhook.png" /></div>
+    </li>
+    <li>Select which channel in Slack to send messages to
+        <div class="image-frame"><img src="../../../imgs/notification_slack_select_channel.png" /></div>
+    </li>
+    <li>When done you should see a <i>Webhook</i> (URL) - this will be used as part of your REST request in EdgeLake
+        <div class="image-frame"><img src="../../../imgs/notification_slack_webhook_generated.png" /></div>
+    </li>
 </ol>
 
-4. Press continue / next till the end 
-
-5. Select _Incoming Webhooks_
-
-<img src="../../../imgs/notification_slack_webhook.png" height="50%" width="50%" />
-
-6. Enable Webhooks
-
-<img src="../../../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
-
-7. At the bottom, add _Webbook_ to workspace
-
-<img src="../../../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
-
-
-8. Select which channel in Slack to send messages to 
-
-
-<img src="../../../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
-
-9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in EdgeLake
-
-<img src="../../../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
-
-
 **Generated URL**: 
-```URL
-https://hooks.slack.com/services/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
-```
+<pre class="code-frame"><code class="language-shell">https://hooks.slack.com/services/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</code></pre>
+
 
 ## Send Notifications via EdgeLake
 
