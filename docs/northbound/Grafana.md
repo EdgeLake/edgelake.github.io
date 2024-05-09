@@ -61,7 +61,7 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
     <ul style="padding-left: 20px">
         <li>select a JSON data source</li>
         <li>On the name tab provide a unique name to the connection.</li>
-        <li>On the URL Tab add the REST address offered by the AnyLog node (i.e. http://10.0.0.25:2049)</li>
+        <li>On the URL Tab add the REST address offered by the EdgeLake node (i.e. http://10.0.0.25:32149)</li>
         <li>On the <b>Custom HTTP Headers</b>, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query</li>
     </ul>
@@ -100,22 +100,22 @@ While authentication using [SSL Certificates](../authentication.md#using-ssl-cer
 </div>
 
 **Notes**: Failure to connect may be the result of one of the following
-* AnyLog instance is not running or not configured to support REST calls.
+* EdgeLake instance is not running or not configured to support REST calls.
 * Wrong IP and Port.
 * Firewalls are not properly configured and make the IP and Port not available.
-* AnyLog is configured with authentication detection that is not being satisfied.
+* EdgeLake is configured with authentication detection that is not being satisfied.
 * If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.
 
-## Using Grafana to visualize AnyLog
+## Using Grafana to visualize EdgeLake
 
 Grafana allows to present data in 2 modes _Time Series_ collects and visualize data values as a function of time, and 
 _Table_ format where data is presented in rows and columns.
 
-AnyLog offers 2 predefined query types ([_Increments_ and _Period_](#using-the-time-series-data-visualization)) which 
+EdgeLake offers 2 predefined query types ([_Increments_ and _Period_](#using-the-time-series-data-visualization)) which 
 users can modify or specify additional queries either "as-is" or using _Additional JSON Data_ options on the panel.
 
 **Additional JSON Data** section(s) provides additional information to the query process. The information provided overrides 
-the default behaviour and can pull data from any database managed by AnyLog (as long as the user maintains valid permissions).  
+the default behaviour and can pull data from any database managed by EdgeLake (as long as the user maintains valid permissions).  
 The additional information is provided using a JSON script with the following attribute names:
 
 <table>
@@ -138,7 +138,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>details</td>
-      <td>An AnyLog command which is not a SQL statement.</td>
+      <td>An EdgeLake command which is not a SQL statement.</td>
     </tr>
     <tr>
       <td>where</td>
@@ -170,7 +170,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>instructions</td>
-      <td>Additional AnyLog query instructions.</td>
+      <td>Additional EdgeLake query instructions.</td>
     </tr>
   </tbody>
 </table>
