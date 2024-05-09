@@ -72,9 +72,10 @@ For demonstration purposes, this document uses _Slack_, however, the same logic 
 
 ## Send Notifications via EdgeLake
 
-EdgeLake allows to send cURL requests the [_rest_ command](../anylog%20commands.md#rest-command). Since _Webhooks_ are 
-essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from EdgeLake into
-Slack.
+EdgeLake allows to send cURL requests the 
+<a href="https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command" target="_blank"><i>rest</i> command</a>. 
+Since _Webhooks_ are essentially URLs to send messages into a system, we'll be using the _rest_ command to send 
+notifications from EdgeLake into Slack.
 
 <ol start="1">
     <li>Create webhook URL as a variables
