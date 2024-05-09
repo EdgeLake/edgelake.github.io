@@ -56,8 +56,7 @@ it might be easier to connect to a physical database. In such a case, it is reco
 
 ## Extract Data onto Tableau
 <ol start="1">
-   <li><a href="https://www.tableau.com/products/desktop/download" target="_blank">Download & Install Tableau</a>
-   <br/>
+   <li><a href="https://www.tableau.com/products/desktop/download" target="_blank">Download & Install Tableau</a></li>
    <li>Under <i>Data</i> → <i>Data Sources</i> select PostgresSQL connector type
         <table>
             <tr>
@@ -66,14 +65,12 @@ it might be easier to connect to a physical database. In such a case, it is reco
             </tr>
         </table>
    </li>
-   <br/>
    <li>Fill-out the information to connect to database & Press "Ok"
       <div class="image-frame">
          <img src="../../../imgs/tableau_img3.png"  />
       </div>
    </li>
-   <br/>
-   <li>Double-click on the table you want to use (in this case <code>new_table</code>) and goto worksheet
+   <li>Double-click on the table you want to use (in this case <code>new_table</code>) and go to worksheet
       <div class="image-frame">
          <img src="../../../imgs/tableau_img4.png"  />
       </div>
@@ -82,12 +79,12 @@ it might be easier to connect to a physical database. In such a case, it is reco
 
 ## Generating Graphs
 
-The `system_query` database gathers (query) results from the different AnyLog instances to generate a unified dataset for 
+The <code>system_query</code> database gathers (query) results from the different EEd instances to generate a unified dataset for 
 the user. As such, generating graphs from the final results is a bit complicated. 
-   * Min 2 - is column `MIN(timestamp)`
-   * Min 3 - is column `MIN(value)`
-   * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column `AVG(value)`
-   * MAX 5 - is column `MAX(value)`
+   * Min 2 - is column <code>MIN(timestamp)</code>
+   * Min 3 - is column <code>MIN(value)</code>
+   * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column <code>AVG(value)</code>
+   * MAX 5 - is column <code>MAX(value)</code>
 ![column explanation](../../imgs/tableau_img5.png)
 
 To generate a graph, use "Min 2" as _Columns_ and all others for _Rows_
