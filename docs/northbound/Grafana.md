@@ -236,7 +236,8 @@ average are collected for each interval and graphically presented.
   }
 }</code></pre></li>
   <li>Under Query Options, update <i>Max data points</i> (ie limit) otherwise the outcome would look like a single line 
-as opposed to clearly showing <i><min / max / avg</i> value(s).
+as opposed to clearly showing <i>min / max / avg</i> value(s).
+  <br/>
   <div align="center">
     <img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
   </div>
