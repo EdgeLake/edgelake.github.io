@@ -38,7 +38,7 @@ In order to support PowerBI, return data as a list of JSON values without the st
 ## Using PowerBI
 <ol start="1">
    <li>Under <i>Get Data</i> open <i>Web</i>
-      <div class="image-frame"><img src="../../../imgs/powerbi_img1.png" /></div>
+      <div style="align: center;"><img src="../../../imgs/powerbi_img1.png" /></div>
    </li>
 
    <li>In the Advanced option fill-out the <b>URL</b>, and <b>HEADER</b> parameters. Once the form is filled out press "OK"
@@ -51,51 +51,51 @@ In order to support PowerBI, return data as a list of JSON values without the st
    "destination": "network"
 }</code></pre>
          </td>
-         <td><div class="image-frame"><img src="../../../imgs/powerbi_img2.png" /></div></td>
+         <td><div style="align: center;"><img src="../../../imgs/powerbi_img2.png" /></div></td>
       </tr>
    </table>
    </li>
 
    <li>Right-click and & select JSON
-      <div class="image-frame"><img src="../../../imgs/powerbi_img3.png" /></div>
+      <div style="align: center;"><img src="../../../imgs/powerbi_img3.png" /></div>
    </li>
 
    <li>Right-click on **List** & select _To Table_
-      <div class="image-frame"><img src="../../../imgs/powerbi_img3.png" /></div>
+      <div style="align: center;"><img src="../../../imgs/powerbi_img4.png" /></div>
+   </li>
+
+   <li>Keep defaults (None) and press "OK"
+      <div style="align: center;"><img src="../../../imgs/powerbi_img5.png" /></div>
+   </li>
+   
+   <li>Press the button on the right of the column to view list of columns. This will show the different JSON keys 
+that’ll be converted to table columns
+      <table>
+      <tr>
+         <td align="center"><img src="../../../imgs/powerbi_img6a.png" /></td>
+         <td align="center"><img src="../../../imgs/powerbi_img6b.png" /></td>
+      </tr>
+      </table>
+   </li>
+
+   <li>For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
+      <div align="center"><img src="../../../imgs/powerbi_img7.png" /></div>
+   </li>
+   
+   <li>Once updated press Close & Apply
+      <div align="center"><img src="../../../imgs/powerbi_img8.png" /></div>
+   </li>
+
+   <li>From this point you should be able to draw tables & graphs with the data
+      <ul style="padding-left: 20px">
+      The following shows 3 diagrams, each is assigned to its own query
+         <li>The table shows number of rows per table in the database</li>
+         <li>The bar graph shows <i>MIN, MAX, AVG and Row Count</i> difference between 2021 and 2022.</li>
+         <li>The line graph uses [increments function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#the-increment-function) to <i>MIN, MAX and AVG</i> over time</li>
+      </ul>
+      <div align="center"><img src="../../../imgs/powerbi_img9.png" /></div>
    </li>
 </ol>
-
-4. 
-![convert list of (raw) results into table format](../../../imgs/powerbi_img4.png)
-
-
-5. Keep defaults (None) and press "OK"
-![value conversion form](../../../imgs/powerbi_img5.png)
-
-
-6. Press the button on the right of the column to view list of columns. 
-This will show the different JSON keys that’ll be converted to table columns
-<table>
-   <tr>
-      <td align="center"><img src="../../../imgs/powerbi_img6a.png" /></td>
-      <td align="center"><img src="../../../imgs/powerbi_img6b.png" /></td>
-   </tr>
-</table>
-
-7. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
-![set data-type](../../../imgs/powerbi_img7.png)
-
-
-8. Once updated press Close & Apply
-![Close & Apply](../../../imgs/powerbi_img8.png)
-
-
-9. From this point you should be able to draw tables & graphs with the data
-![Sample Graphs](../../../imgs/powerbi_img9.png)
-The following shows 3 diagrams, each is assigned to its own query
-   * The table shows number of rows per table in the database
-   * The bar graph shows _MIN_, _MAX_, _AVG_ and _Row Count_ difference between 2021 and 2022. 
-   * The line graph uses [increments function](../queries.md#the-increment-function) to _MIN_, _MAX_ and _AVG_ over time 
 
 ## Error Handling 
 When converting raw content into _Text_, [PowerQuery Editor](https://docs.microsoft.com/en-us/power-query/power-query-ui)
