@@ -51,7 +51,7 @@ In order to support PowerBI, return data as a list of JSON values without the st
    "destination": "network"
 }</code></pre>
          </td>
-         <td><div class="image-frame"><img src=../../../imgs/powerbi_img2.png" /></div></td>
+         <td><div class="image-frame"><img src="../../../imgs/powerbi_img2.png" /></div></td>
       </tr>
    </table>
    </li>
