@@ -95,7 +95,7 @@ payload = json {"text": !text_msg}
     <br/>
     <li>Publish information to Slack via _REST_
         <pre class="code-frame"><code class="language-anylog">rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}"</code></pre>
-    **Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`.
+    <b>Note</b>: <i>Google Hangouts</i>, <i>Discord</i> and <i>Microsoft Teams</i> use <code>content</code> for the <i>payload</i> key as opposed to <code>text</code>.
     </li>
 </ol>
 
