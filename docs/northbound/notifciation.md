@@ -6,7 +6,7 @@ nav_order: 4
 ---
 # System Notification 
 
-AnyLog provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
+EdgeLake provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
 the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped / created.
 
 
@@ -23,40 +23,46 @@ opposed to needing to develop a full application for messaging.
 
 
 ### Steps
-1. Go https://api.slack.com/apps/ 
-2. Under _Create_, Create an app from manifest 
-
-| <img src="../../imgs/notification_slack_your_app.png" height="75%" width="75%" /> | <img src="../../imgs/notification_slack_manifest.png" height="75%" width="75%" /> | 
-|:------------------------------------------------------------------------------:|:------------------------------------------------------------------------------:|
-
-3. Select the preferred channel 
-
-<img src="../../imgs/notification_slack_workspace.png" height="50%" width="50%" />
-
+<ol start="1">
+    <li>Go to <a href="https://api.slack.com/apps/" target="_blank">Slack Applications Sections</a> (may require to login 
+        / admin permissions)
+    </li>
+    <li>Under _Create_, Create an app from manifest
+        <table>
+            <tr>
+                <td align="center"><img src="../../../imgs/notification_slack_your_app.png" height="75%" width="75%" /></td>
+                <td align="center"><img src="../../../imgs/notification_slack_manifest.png" height="75%" width="75%" /></td>
+            </tr>
+        </table>
+    </li>
+    <li>Select the preferred channel
+        <div class="image-frame"><img src="../../../imgs/notification_slack_workspace.png" /></div>
+    </li>
+</ol>
 
 4. Press continue / next till the end 
 
 5. Select _Incoming Webhooks_
 
-<img src="../../imgs/notification_slack_webhook.png" height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_webhook.png" height="50%" width="50%" />
 
 6. Enable Webhooks
 
-<img src="../../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_enable_webhooks.png" height="50%" width="50%" />
 
 7. At the bottom, add _Webbook_ to workspace
 
-<img src="../../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_create_webhook.png" height="50%" width="50%" />
 
 
 8. Select which channel in Slack to send messages to 
 
 
-<img src="../../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_select_channel.png" height="50%" width="50%" />
 
-9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in AnyLog
+9. When done you should see a _webhook_ (URL) - this will be used as part of your REST request in EdgeLake
 
-<img src="../../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_webhook_generated.png" height="50%" width="50%" />
 
 
 **Generated URL**: 
@@ -64,11 +70,11 @@ opposed to needing to develop a full application for messaging.
 https://hooks.slack.com/services/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
 ```
 
-## Send Notifications via AnyLog
+## Send Notifications via EdgeLake
 
 ### Slack Webhooks
-AnyLog allows to send cURL requests the [_rest_ command](../anylog%20commands.md#rest-command). Since _Webhooks_ are 
-essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from AnyLog into
+EdgeLake allows to send cURL requests the [_rest_ command](../anylog%20commands.md#rest-command). Since _Webhooks_ are 
+essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from EdgeLake into
 Slack.
 
 1. Create webhook URL as a variable 
@@ -95,7 +101,7 @@ rest post where url = !webhook_url and body = !payload and headers = "{'Content-
 
 Once sent, an output would appear in the proper Slack channel
 
-<img src="../../imgs/notification_slack_messsage.png"  height="50%" width="50%" />
+<img src="../../../imgs/notification_slack_messsage.png"  height="50%" width="50%" />
 
 **Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
 
