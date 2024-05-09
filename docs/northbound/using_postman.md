@@ -1,10 +1,10 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: Using Postman
-nav_order: 4
+nav_order: 5
 ---
-# Sending Queries and Commands to the AnyLog Network with Postman
+# Sending Queries and Commands to the EdgeLake Network with Postman
  
 Postman is an API platform for building and using APIs. It can serve as a tool to issue AnyLog Commands to nodes in the 
 ANyLog Network and as a tool to issue queries to data that is hosted by nodes of the network.
