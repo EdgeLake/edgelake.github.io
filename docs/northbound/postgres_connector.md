@@ -13,7 +13,9 @@ the <code>system_query</code> database. To connect <code>system_query</code> in 
 db_port = 5432 
 db_user = admin 
 db_passwd = passwd
-connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd</code></pre>
+&lt;connect dbms system_query where 
+   type=psql and ip=!db_ip and port=!db_port and
+   user=!db_user and password=!db_passwd&gt;</code></pre>
 
 
 ## Setting up Postgres 
@@ -32,28 +34,32 @@ connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and us
 </ol>
 
 ## Executing Query
-0. On AnyLog connect `system_query` to Postgres database 
-```anylog
-connect dbms psql anylog@127.0.0.1:demo 5432 system_query
-```
+<ol start="1">
+   <li>On EdgeLake connect <code>>system_query</code> to Postgres database
+      <pre class="code-frame"><code class="language-anylog">&lt;connect dbms system_query where 
+   type=psql and 
+   ip=127.0.0.1 and
+   port=5432 and 
+   user=anylog and 
+   password=demo&gt;</code></pre>
+   </li>
+   
+   <li>Execute query - <a href="https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#repeatable-queries" target="_blank">to run in repeat</a>
+      <pre class="code-frame"><code class="language-anylog">run client () sql aiops format=table and table=new_table and drop=true "select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day"</code></pre>
+   </li>
 
-1. Execute query - [to run in repeat](../alerts%20and%20monitoring.md#repeatable-queries)
-```anylog
-AL aiops-single-node > run client () sql aiops format=table and table=new_table and drop=true "select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day"
-```
+   <li>Utilize <code>query explain</code> to view how the results are generated
+      <pre class="code-frame"><code class="language-anylog">AL aiops-single-node &lt; query explain
+   07 Remote DBMS    : aiops
+   07 Remote Table   : fic11_mv
+   07 Source Command : select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day
+   07 Remote Query   : select date_trunc('day',timestamp), (extract(hour FROM timestamp)::int / 1), min(timestamp), min(value), SUM(value), COUNT(value), max(value) from fic11_mv where timestamp >= '2022-01-17T18:31:31.442147Z' group by 1,2
+   07 Local Create   : create table new_table (increments_1_trunc timestamp without time zone, increments_1_extract integer, min_2 timestamp without time zone, min_3 double precision, SUM__value numeric, COUNT__value integer, max_5 double precision);
+   <b>07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract</b>
+   </code></pre></li>
+</ol>
 
-2. Utilize explain query to view how the results are generated
-```anylog
-AL aiops-single-node > query explain 
-
-07 Remote DBMS    : aiops
-07 Remote Table   : fic11_mv
-07 Source Command : select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day
-07 Remote Query   : select date_trunc('day',timestamp), (extract(hour FROM timestamp)::int / 1), min(timestamp), min(value), SUM(value), COUNT(value), max(value) from fic11_mv where timestamp >= '2022-01-17T18:31:31.442147Z' group by 1,2
-07 Local Create   : create table new_table (increments_1_trunc timestamp without time zone, increments_1_extract integer, min_2 timestamp without time zone, min_3 double precision, SUM__value numeric, COUNT__value integer, max_5 double precision);
-07 Local Query    : select min(min_2), min(min_3), SUM(SUM__value) /NULLIF(SUM(COUNT__value),0), max(max_5) from new_table group by increments_1_trunc,increments_1_extract order by increments_1_trunc,increments_1_extract
-```
-Disclaimer: [Full list of SQL options](../queries.md#query-options)
+**Disclaimer**: [Full list of SQL options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options)
 
 ## Extract Data onto Tableau
 1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
