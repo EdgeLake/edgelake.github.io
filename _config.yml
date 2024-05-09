@@ -24,6 +24,7 @@ github_username:  edgelake
 repository: edgelake/edgelake # for github-metadata
 
 permalink: pretty
+#remote_theme: pmarsceill/just-the-docs
 
 exclude:
  # from https://github.com/jekyll/jekyll/blob/master/lib/site_template/_config.yml:
@@ -131,6 +132,8 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 nav_external_links:
   - title: Download EdgeLake
     url: https://github.com/EdgeLake/docker-compose
+  - title: EdgeLake (LFEdge)
+    url: https://lfedge.org/projects/edgelake/
 
 liquid:
    error_mode: strict
