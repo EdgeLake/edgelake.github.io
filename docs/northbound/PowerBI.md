@@ -14,16 +14,14 @@ In order to support PowerBI, return data as a list of JSON values without the st
 
 
 **Sample cURL request**
-<pre class="code-frame"><code class="language-shell">
- curl -X GET 10.1.2.10:2149 \
+<pre class="code-frame"><code class="language-shell">curl -X GET 10.1.2.10:2149 \
     -H 'command: sql aiops format=json:list and stat=false "SELECT date(timestamp) as timestamp, min(value) as min, avg(value) as avg, max(value) as max FROM lic1_mv group by timestamp ORDER by timestamp limit 10"' \
     -H "User-Agent: AnyLog/1.23" \ 
     -H "destination: network" -w "\n"
 </code></pre>
 
 **Sample Output** (the data is returned as a list of JSON objects).
-<pre class="code-frame"><code class="language-json">
-[
+<pre class="code-frame"><code class="language-json">[
     {"timestamp": "2021-12-17", "min": 16.07562231854013, "avg": 16.07562231854013, "max": 16.07562231854013},
     {"timestamp": "2021-12-18", "min": 0.7819949317261932, "avg": 37.58098167042068, "max": 85.13897566679766},
     {"timestamp": "2021-12-22", "min": 3.545549704985503, "avg": 44.07391736121831, "max": 75.688516046041},
@@ -38,21 +36,36 @@ In order to support PowerBI, return data as a list of JSON values without the st
 </code></pre>
 
 ## Using PowerBI
+<ol start="1">
+   <li>Under <i>Get Data</i> open <i>Web</i>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img1.png" /></div>
+   </li>
 
-1. Under _Get Data_ open _Web_
-![location of "Web" data source](../../../imgs/powerbi_img1.png)
+   <li>In the Advanced option fill-out the <b>URL</b>, and <b>HEADER</b> parameters. Once the form is filled out press "OK"
+   <table>
+      <tr>
+         <td>
+<pre class="code-frame"><code class="language-json">{
+   "command": "[YOUR QUERY]", 
+   "User-Agent": "AnyLog/1.23",  
+   "destination": "network"
+}</code></pre>
+         </td>
+         <td><div class="image-frame"><img src=../../../imgs/powerbi_img2.png" /></div></td>
+      </tr>
+   </table>
+   </li>
 
+   <li>Right-click and & select JSON
+      <div class="image-frame"><img src="../../../imgs/powerbi_img3.png" /></div>
+   </li>
 
-2. In the Advanced option fill-out the _URL_, and _HEADER_ Parameters with "command", "User-Agent" and "destination".
-Once the form is filled out press "OK"
-!["Web" data source request form](../../../imgs/powerbi_img2.png)
+   <li>Right-click on **List** & select _To Table_
+      <div class="image-frame"><img src="../../../imgs/powerbi_img3.png" /></div>
+   </li>
+</ol>
 
-
-3. Right-click and & select JSON
-![Set results type](../../../imgs/powerbi_img3.png)
-
-
-4. Right-click on **List** & select _To Table_
+4. 
 ![convert list of (raw) results into table format](../../../imgs/powerbi_img4.png)
 
 
@@ -62,9 +75,12 @@ Once the form is filled out press "OK"
 
 6. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
-
-| ![list of records](../../../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../../../imgs/powerbi_img6b.png) |
-| --- | --- |
+<table>
+   <tr>
+      <td align="center"><img src="../../../imgs/powerbi_img6a.png" /></td>
+      <td align="center"><img src="../../../imgs/powerbi_img6b.png" /></td>
+   </tr>
+</table>
 
 7. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
 ![set data-type](../../../imgs/powerbi_img7.png)
