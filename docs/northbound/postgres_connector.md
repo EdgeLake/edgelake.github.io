@@ -69,13 +69,13 @@ it might be easier to connect to a physical database. In such a case, it is reco
    <br/>
    <li>Fill-out the information to connect to database & Press "Ok"
       <div class="image-frame">
-         <img src="../../../imgs/tableau_img3.png" width="50%" height="50%" />
+         <img src="../../../imgs/tableau_img3.png"  />
       </div>
    </li>
    <br/>
    <li>Double-click on the table you want to use (in this case <code>new_table</code>) and goto worksheet
       <div class="image-frame">
-         <img src="../../../imgs/tableau_img4.png" width="50%" height="50%" />
+         <img src="../../../imgs/tableau_img4.png"  />
       </div>
    </li>
 </ol>
