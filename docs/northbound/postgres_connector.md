@@ -84,8 +84,12 @@ the user. As such, generating graphs from the final results is a bit complicated
    * Min 2 - is column <code>MIN(timestamp)</code>
    * Min 3 - is column <code>MIN(value)</code>
    * SUM(SUM__VALUE) / COUNT(new_table_count) -- is column <code>AVG(value)</code>
-   * MAX 5 - is column <code>MAX(value)</code>
-![column explanation](../../imgs/tableau_img5.png)
+* MAX 5 - is column <code>MAX(value)</code>
+<div class="image-frame">
+   <img src="../../../imgs/tableau_img5.png"  />
+</div>
 
 To generate a graph, use "Min 2" as _Columns_ and all others for _Rows_
-![generated image](../../imgs/tableau_img6.png)
+<div class="image-frame">
+   <img src="../../../imgs/tableau_img6.png"  />
+</div>
