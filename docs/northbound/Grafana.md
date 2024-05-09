@@ -34,7 +34,7 @@ Directions for importing our demo images dashboards can be found in [import graf
   -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
 </code></pre>
 
-* An AnyLog Node that provides a REST connection - To configure an AnyLog Node to satisfy REST calls, issue the following command on the AnyLog command line:  
+* An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the following command on the EdgeLake command line:  
   * [ip] and [port] are the IP and Port that would be available to REST calls.
   * [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.
   * A 0 value means a call would never be aborted and the default time is 20 seconds.
@@ -51,7 +51,7 @@ Directions for importing our demo images dashboards can be found in [import graf
 ## Setting Up Grafana 
 <ol start="1">
 <li><a href="https://grafana.com/docs/grafana/latest/getting-started/getting-started/" target="_blank">Login to Grafana</a> - 
-The default HTTP port that AnyLog GUI listens to is 3000 - On a local machine go to <code>http://localhost:3000</code>.
+The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machine go to <code>http://localhost:3000</code>.
 <br>
 <div align="center">
     <img src="../../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
@@ -218,8 +218,6 @@ The additional information is provided using a JSON script with the following at
 
 ### Using the Time-Series Data Visualization
 
-#### Increments Query 
-
 **Increments query** (The default query) is used to retriv statistics on the time series data in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
 average are collected for each interval and graphically presented.  
@@ -245,7 +243,7 @@ as opposed to clearly showing <i><min / max / avg</i> value(s).
   </li>
 </ol>
 
-When the node type is set to _increments_, the query being executed on the EdgeLake side is as follows:
+When the query type is set to _increments_, the query being executed on the EdgeLake side is as follows:
 <pre class="code-frame"><code class="language-sql">SELECT 
   increments(second, 1, timestamp), max(timestamp) as timestamp, avg(value) as avg_val, min(valu e) as min_val, 
   max(value) as max_val 
@@ -256,13 +254,15 @@ WHERE
 LIMIT 2128;
 </code></pre>
 
-#### Period Query
-
 ***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
 derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
 
+<ol start="1">
+  <li>In the <i>Visualizations</i> section, select <i>Gauge</i></li>
+  <li>In the <i>Metric</i> section, select a table name to “query” against</li>
+  <li>Update Payload with the following information
 <pre class="code-frame"><code class="language-json"># Input in Grafana
 {
   "type": "period", 
@@ -272,63 +272,23 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
     "format_as" : "timeseries"
   }
 }</code></pre>
-**Query Being Executed**
+  </li>
+  <li>Under <i>Query Options</i>, update <i>Max data points</i> (ie limit) otherwise the outcome would look like a single line as opposed to clearly showing <i>min / max / avg</i> value(s).
+  <div align="center">
+    <img src="../../../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
+  </div></li>
+</ol>
 
+When the query type is set to _period_, the query being executed on the EdgeLake side is as follows:
 <pre class="code-frame"><code class="language-sql">SELECT 
     max(timestamp) as timestamp, avg(value) as avg_val, min(value) as min_val, max(value) as max_val 
 FROM 
     ping_sensor 
 </code></pre>
 
-More information on increments and period types of queries are available in [queries and info requests](../queries.md#optimized-time-series-data-queries).
+More information on increments and period types of queries are available in [queries and info requests](https://github.com/AnyLog-co/documentation/blob/master/queries.md#optimized-time-series-data-queries).
 
-
-**Increments Graph**
-1. In the _Visualizations_ section, select _Time series_
-
-2. In the _Metric_  section, select a table name to "query" against
-
-3. Update _Payload_ with the following information
-<pre class="code-frame"><code class="language-json">{
-  "type": "increments",
-  "time_column": "timestamp",
-  "value_column": "value",
-  "grafana" : {
-    "format_as" : "timeseries"
-  }
-}
-</code></pre>
-
-4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
-opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
-
-<br/>
-
-
-
-**Period Graphs**
-1. In the _Visualizations_ section, select _Gauge_
-
-2. In the _Metric_  section, select a table name to "query" against
-
-3. Update _Payload_ with the following information
-<pre class="code-frame"><code class="language-json">{
-  "type": "period", 
-  "time_column": "timestamp",
-  "value_column": "value",
-  "grafana" : {
-    "format_as" : "timeseries"
-  }
-}
-</code></pre>
-
-4. Under _Query Options_, update _Max data points_ (ie limit) otherwise the outcome would look like a single line as 
-opposed to clearly showing _min_ / _max_ / _avg_ value(s). 
-
-<img src="../../../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
-
-
-**Other Examples**
+## Other Grafana Examples
 
 * Extending query to use where conditions
 <pre class="code-frame"><code class="language-json"># Increments
@@ -366,4 +326,28 @@ opposed to clearly showing _min_ / _max_ / _avg_ value(s).
     "format_as" : "timeseries"
   }
 }
-</code></pre>>
+</code></pre>
+
+### Other Examples
+* Extending query to use where conditions
+<pre class="code-frame"><code class="language-json">{
+  "type": "increments",
+  "time_column": "timestamp",
+  "value_column": "value",
+  "where": "device_name='ADVA FSP3000R7'",
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
+}</code></pre>
+
+* Extend to specify which Functions without time_range to query
+<pre class="code-frame"><code class="language-json">{
+  "type": "period", 
+  "time_column": "timestamp",
+  "value_column": "value",
+  "time_range": false,
+  "functions": ["min", "max", "avg", "count"],
+  "grafana" : {
+    "format_as" : "timeseries"
+  }
+}</code></pre>
