@@ -1,8 +1,8 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: Using PowerBI
-nav_order: 2
+nav_order: 3
 ---
 # EdgeLake with PowerBI 
 
@@ -14,18 +14,15 @@ In order to support PowerBI, return data as a list of JSON values without the st
 
 
 **Sample cURL request**
-<pre>
-   <code>
+<pre class="code-frame"><code class="language-shell">
  curl -X GET 10.1.2.10:2149 \
     -H 'command: sql aiops format=json:list and stat=false "SELECT date(timestamp) as timestamp, min(value) as min, avg(value) as avg, max(value) as max FROM lic1_mv group by timestamp ORDER by timestamp limit 10"' \
     -H "User-Agent: AnyLog/1.23" \ 
     -H "destination: network" -w "\n"
-   </code>
-</pre>
+</code></pre>
 
 **Sample Output** (the data is returned as a list of JSON objects).
-<pre>
-   <code>
+<pre class="code-frame"><code class="language-json">
 [
     {"timestamp": "2021-12-17", "min": 16.07562231854013, "avg": 16.07562231854013, "max": 16.07562231854013},
     {"timestamp": "2021-12-18", "min": 0.7819949317261932, "avg": 37.58098167042068, "max": 85.13897566679766},
@@ -38,48 +35,47 @@ In order to support PowerBI, return data as a list of JSON values without the st
     {"timestamp": "2022-01-08", "min": 53.17291222256768, "avg": 78.21358089166576, "max": 93.42429844531414},
     {"timestamp": "2022-01-09", "min": 54.664901456750904, "avg": 75.73146536262269, "max": 96.79802926849446}
 ]
-   </code>
-</pre>
+</code></pre>
 
 ## Using PowerBI
 
 1. Under _Get Data_ open _Web_
-![location of "Web" data source](../../imgs/powerbi_img1.png)
+![location of "Web" data source](../../../imgs/powerbi_img1.png)
 
 
 2. In the Advanced option fill-out the _URL_, and _HEADER_ Parameters with "command", "User-Agent" and "destination".
 Once the form is filled out press "OK"
-!["Web" data source request form](../../imgs/powerbi_img2.png)
+!["Web" data source request form](../../../imgs/powerbi_img2.png)
 
 
 3. Right-click and & select JSON
-![Set results type](../../imgs/powerbi_img3.png)
+![Set results type](../../../imgs/powerbi_img3.png)
 
 
 4. Right-click on **List** & select _To Table_
-![convert list of (raw) results into table format](../../imgs/powerbi_img4.png)
+![convert list of (raw) results into table format](../../../imgs/powerbi_img4.png)
 
 
 5. Keep defaults (None) and press "OK"
-![value conversion form](../../imgs/powerbi_img5.png)
+![value conversion form](../../../imgs/powerbi_img5.png)
 
 
 6. Press the button on the right of the column to view list of columns. 
 This will show the different JSON keys that’ll be converted to table columns
 
-| ![list of records](../../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../../imgs/powerbi_img6b.png) |
+| ![list of records](../../../imgs/powerbi_img6a.png) | ![list of JSON keys used as column names](../../../imgs/powerbi_img6b.png) |
 | --- | --- |
 
 7. For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
-![set data-type](../../imgs/powerbi_img7.png)
+![set data-type](../../../imgs/powerbi_img7.png)
 
 
 8. Once updated press Close & Apply
-![Close & Apply](../../imgs/powerbi_img8.png)
+![Close & Apply](../../../imgs/powerbi_img8.png)
 
 
 9. From this point you should be able to draw tables & graphs with the data
-![Sample Graphs](../../imgs/powerbi_img9.png)
+![Sample Graphs](../../../imgs/powerbi_img9.png)
 The following shows 3 diagrams, each is assigned to its own query
    * The table shows number of rows per table in the database
    * The bar graph shows _MIN_, _MAX_, _AVG_ and _Row Count_ difference between 2021 and 2022. 
@@ -88,4 +84,4 @@ The following shows 3 diagrams, each is assigned to its own query
 ## Error Handling 
 When converting raw content into _Text_, [PowerQuery Editor](https://docs.microsoft.com/en-us/power-query/power-query-ui)
 will show results. However, it will not separate the JSON keys into separate columns
-![text output](../../imgs/error_img1.png)
+![text output](../../../imgs/error_img1.png)
