@@ -6,7 +6,7 @@ nav_order: 5
 ---
 # Using Postman against EdgeLake Network
  
-Postman is an API platform for building and using APIs. It can serve as a tool to issue AnyLog Commands to nodes in the 
+Postman is an API platform for building and using APIs. It can serve as a tool to issue EdgeLake Commands to nodes in the 
 EdgeLake Network and as a tool to issue queries to data that is hosted by nodes of the network.
 
 Commands and queries through Postman can be issues with SSL enabled or disabled.  
@@ -14,7 +14,7 @@ Commands and queries through Postman can be issues with SSL enabled or disabled.
 Download Postman here: https://www.postman.com/downloads/.  
 
 ### Without SSL
-To run AnyLog queries using Postman without SSL enabled, follow the following steps:
+To run EdgeLake queries using _Postman_ without SSL enabled, follow the following steps:
 <ol start="1">
     <li>Open Postman</li>
     <li>Create a collection</li>
@@ -31,7 +31,7 @@ To run AnyLog queries using Postman without SSL enabled, follow the following st
 
 For SSL, the explanation on generating the needed files is available at the [Using SSL Certificates](https://github.com/AnyLog-co/documentation/blob/master/authentication.md#using-ssl-certificates) section.
 
-To run AnyLog queries using Postman with SSL enabled, follow the following steps:
+To run EdgeLake queries using Postman with SSL enabled, follow the following steps:
 <ol start="1">
     <li>Open Postman</li>
     <li>Create a collection</li>
