@@ -87,8 +87,8 @@ that’ll be converted to table columns
    </li>
 
    <li>From this point you should be able to draw tables & graphs with the data
+   <br/><br/>The following shows 3 diagrams, each is assigned to its own query
       <ul style="padding-left: 20px">
-      The following shows 3 diagrams, each is assigned to its own query
          <li>The table shows number of rows per table in the database</li>
          <li>The bar graph shows <i>MIN, MAX, AVG and Row Count</i> difference between 2021 and 2022.</li>
          <li>The line graph uses [increments function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#the-increment-function) to <i>MIN, MAX and AVG</i> over time</li>
