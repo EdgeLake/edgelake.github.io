@@ -18,6 +18,8 @@ Directions for importing our demo images dashboards can be found in [import graf
 
 
 ## Prerequisites & Links
+* 
+* [Grafana Support](https://grafana.com/docs/grafana/latest/)
 
 * An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher. 
 <pre class="code-frame"><code class="language-shell">docker run --name=grafana \
@@ -34,18 +36,16 @@ Directions for importing our demo images dashboards can be found in [import graf
   -it -d -p 3000:3000 --rm grafana/grafana:9.5.16
 </code></pre>
 
-* An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the following command on the EdgeLake command line:  
-  * [ip] and [port] are the IP and Port that would be available to REST calls.
-  * [max time] is an optional value that determines the max execution time in seconds for a call before being aborted.
+* An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the 
+following command on the EdgeLake command line:  
+  * `[ip]` and `[port]` are the IP and Port that would be available to REST calls.
+  * `[max time]` is an optional value that determines the max execution time in seconds for a call before being aborted.
   * A 0 value means a call would never be aborted and the default time is 20 seconds.
 <pre class="code-frame"><code class="language-anylog">&lt;run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout
-&gt;
-</code>
-</pre>
-* [Support](https://grafana.com/docs/grafana/latest/)
+&gt;</code></pre>
 
 
 ## Setting Up Grafana 
@@ -290,45 +290,6 @@ More information on increments and period types of queries are available in [que
 
 ## Other Grafana Examples
 
-* Extending query to use where conditions
-<pre class="code-frame"><code class="language-json"># Increments
-{
-  "type": "increments",
-  "time_column": "timestamp",
-  "value_column": "value",
-  "where": "device_name='ADVA FSP3000R7'",
-  "grafana" : {
-    "format_as" : "timeseries"
-  }
-}
-          
-# Period
-{
-  "type": "period", 
-  "time_column": "timestamp",
-  "value_column": "value",
-  "where": "device_name='ADVA FSP3000R7'",
-  "grafana" : {
-    "format_as" : "timeseries"
-  }
-}
-</code></pre>
-    
-
-* Extend to specify which _Functions_ without _time_range_ to query 
-<pre class="code-frame"><code class="language-json">{
-  "type": "period", 
-  "time_column": "timestamp",
-  "value_column": "value",
-  "time_range": false,
-  "functions": ["min", "max", "avg", "count"],
-  "grafana" : {
-    "format_as" : "timeseries"
-  }
-}
-</code></pre>
-
-### Other Examples
 * Extending query to use where conditions
 <pre class="code-frame"><code class="language-json">{
   "type": "increments",
