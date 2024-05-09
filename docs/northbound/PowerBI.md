@@ -79,11 +79,11 @@ that’ll be converted to table columns
    </li>
 
    <li>For each column, you should update to the correct data-type otherwise PowerBI will assume the data type is string
-      <div align="center"><img src="../../../imgs/powerbi_img7.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img7.png" /></div>
    </li>
    
    <li>Once updated press Close & Apply
-      <div align="center"><img src="../../../imgs/powerbi_img8.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img8.png" /></div>
    </li>
 
    <li>From this point you should be able to draw tables & graphs with the data
@@ -93,7 +93,7 @@ that’ll be converted to table columns
          <li>The bar graph shows <i>MIN, MAX, AVG and Row Count</i> difference between 2021 and 2022.</li>
          <li>The line graph uses [increments function](https://github.com/AnyLog-co/documentation/blob/master/queries.md#the-increment-function) to <i>MIN, MAX and AVG</i> over time</li>
       </ul>
-      <div align="center"><img src="../../../imgs/powerbi_img9.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img9.png" /></div>
    </li>
 </ol>
 

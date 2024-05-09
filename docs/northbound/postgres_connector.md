@@ -79,7 +79,7 @@ it might be easier to connect to a physical database. In such a case, it is reco
 
 ## Generating Graphs
 
-The <code>system_query</code> database gathers (query) results from the different EEd instances to generate a unified dataset for 
+The <code>system_query</code> database gathers (query) results from the different instances to generate a unified dataset for 
 the user. As such, generating graphs from the final results is a bit complicated. 
    * Min 2 - is column <code>MIN(timestamp)</code>
    * Min 3 - is column <code>MIN(value)</code>

@@ -40,8 +40,8 @@ following command on the EdgeLake command line:
 <li><a href="https://grafana.com/docs/grafana/latest/getting-started/getting-started/" target="_blank">Login to Grafana</a> - 
 The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machine go to <code>http://localhost:3000</code>.
 <br>
-<div align="center">
-    <img src="../../../imgs/grafana_login.png" alt="Grafana page" width="50%" height="50%" />
+<div class="image-frame">
+    <img src="../../../imgs/grafana_login.png" alt="Grafana page" />
 </div>
 </li>
 <li>In <i>Data Sources</i> section, create a new JSON data source
@@ -52,19 +52,19 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
         <li>On the <b>Custom HTTP Headers</b>, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query</li>
     </ul>
-<div align="center">
+<div class="image-frame">
 <table>
   <tr>
     <td align="center"><img src="../../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
-    <td align="center"><img src="../../../imgs/grafana_data_source.png" alt="Data Source Config" width="50%" height="50%" /></td>
+    <td align="center"><img src="../../../imgs/grafana_data_source.png" alt="Data Source Config" /></td>
   </tr>
 </table>
 </div>
 </li>
 <br/>
 <li>Select the <b>Save and Test</b> option that should return a green banner message: ***Data source is working***.
-    <div align="center">
-        <img src="../../../imgs/grafana_confirmation.png" alt="Confirmation Message" width="50%" height="50%" />
+    <div class="image-frame">
+        <img src="../../../imgs/grafana_confirmation.png" alt="Confirmation Message" />
     </div>
 </li>
 </ol>
@@ -76,14 +76,14 @@ Enabling authentication is explained at [Authenticating HTTP requests](../authen
 When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
 the Grafana configuration should have _basic auth_ enabled.
 
-<div align="center">
-    <img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication" width="50%" height="50%">
+<div class="image-frame">
+    <img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication"  >
 </div>
 
 While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
 
-<div align="center">
-    <img src="../../../imgs/grafana_auth_image.png" alt="SSL Authentication" width="50%" height="50%">
+<div class="image-frame">
+    <img src="../../../imgs/grafana_auth_image.png" alt="SSL Authentication" />
 </div>
 
 **Notes**: Failure to connect may be the result of one of the following
@@ -162,7 +162,7 @@ The additional information is provided using a JSON script with the following at
   </tbody>
 </table>
 
-<div align="center">
+<div class="image-frame">
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
 
@@ -182,8 +182,8 @@ The additional information is provided using a JSON script with the following at
 }
 </code></pre>
 
-<div align="center">
-    <img src="../../../imgs/grafana_geomap.png" alt="Network Map" width="75%" height="75%" />
+<div class="image-frame">
+    <img src="../../../imgs/grafana_geomap.png" alt="Network Map" />
 </div> 
 
 **Creating Table from Blockchain**
@@ -199,8 +199,8 @@ The additional information is provided using a JSON script with the following at
 }
 </code></pre>
 
-<div align="center">
-    <img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" width="75%" height="75%" />
+<div class="image-frame">
+    <img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" />
 </div>
 
 ### Using the Time-Series Data Visualization
@@ -226,8 +226,8 @@ average are collected for each interval and graphically presented.
 as opposed to clearly showing <i>min / max / avg</i> value(s).
   <br/>
   <br/>
-  <div align="center">
-    <img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph" width="75%" height="75%" />
+  <div class="image-frame">
+    <img src="../../../imgs/grafana_increments_graph.png" alt="Increments Graph"   />
   </div>
   </li>
 </ol>
@@ -263,8 +263,8 @@ To execute a period query, include the key: 'type' and the value: 'period' in th
 }</code></pre>
   </li>
   <li>Under <i>Query Options</i>, update <i>Max data points</i> (ie limit) otherwise the outcome would look like a single line as opposed to clearly showing <i>min / max / avg</i> value(s).
-  <div align="center">
-    <img src="../../../imgs/grafana_period_gauge.png" alt="Increments Graph" width="75%" height="75%" />
+  <div class="image-frame">
+    <img src="../../../imgs/grafana_period_gauge.png" alt="Increments Graph"   />
   </div></li>
 </ol>
 
