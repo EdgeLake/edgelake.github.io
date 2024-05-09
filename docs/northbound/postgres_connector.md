@@ -1,22 +1,15 @@
 ---
 layout: default
 parent: Northbound
-title: Using Postgres to view Data (Tableau)
+title: Using Postgres to view Data
 nav_order: 5
 ---
-# PSQL Connector & Tableau Visualization
-  
-For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
-the <code>system_query</code> database. To connect <code>system_query</code> in  PostgresSQL
+# Using Postgres to view Data
 
-<pre class="code-frame"><code class="language-anylog">db_ip = 127.0.0.1 
-db_port = 5432 
-db_user = admin 
-db_passwd = passwd
-&lt;connect dbms system_query where 
-   type=psql and ip=!db_ip and port=!db_port and
-   user=!db_user and password=!db_passwd&gt;</code></pre>
-
+Most BI tools and third-party applications support a _REST_ tool to query data. However, there are applications, like
+[Tableu](https://www.tableau.com/) and [Lookr](https://developers.google.com/looker-studio), that may not have REST; or 
+it might be easier to connect to a physical database. In such a case, it is recommended to use PostgresSQL for 
+<code>system_query</code> as opposed to _SQLite_. 
 
 ## Setting up Postgres 
 <ol start="1">
@@ -62,19 +55,30 @@ db_passwd = passwd
 **Disclaimer**: [Full list of SQL options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options)
 
 ## Extract Data onto Tableau
-1. [Download & Install Tableau](https://www.tableau.com/products/desktop/download)
-2. Under _Data_ → _Data Sources_ select PostgresSQL connector type 
-
-| ![data](../../imgs/tableau_img2a.png) | ![data source](../../imgs/tableau_img2b.png) |
-| --- | --- |
-
-3. Fill-out the information to connect to database & Press "Ok"
-![connection information](../../imgs/tableau_img3.png)
-
-
-4. Double-click on the table you want to use (in this case `new_table`) and goto worksheet
-![prep worksheet data](../../imgs/tableau_img4.png)
-
+<ol start="1">
+   <li><a href="https://www.tableau.com/products/desktop/download" target="_blank">Download & Install Tableau</a>
+   <br/>
+   <li>Under <i>Data</i> → <i>Data Sources</i> select PostgresSQL connector type
+        <table>
+            <tr>
+                <td align="center"><img src="../../../imgs/tableau_img2a.png" height="75%" width="75%" /></td>
+                <td align="center"><img src="../../../imgs/tableau_img2b.png" height="75%" width="75%" /></td>
+            </tr>
+        </table>
+   </li>
+   <br/>
+   <li>Fill-out the information to connect to database & Press "Ok"
+      <div align="center">
+         <img src="../../../imgs/tableau_img3.png" width="50%" height="50%" />
+      </div>
+   </li>
+   <br/>
+   <li>Double-click on the table you want to use (in this case <code>new_table</code>) and goto worksheet
+      <div align="center">
+         <img src="../../../imgs/tableau_img4.png" width="50%" height="50%" />
+      </div>
+   </li>
+</ol>
 
 ## Generating Graphs
 
