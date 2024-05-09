@@ -7,7 +7,8 @@ nav_order: 4
 # System Notification 
 
 EdgeLake provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
-the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped / created.
+the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped 
+/ created.
 
 
 ## Setting up Webhooks
@@ -23,10 +24,13 @@ opposed to needing to develop a full application for messaging.
 
 
 ### Steps
+For demonstration purposes, this document uses _Slack_, however, the same logic can be applied with other webhooks.   
+
 <ol start="1">
     <li>Go to <a href="https://api.slack.com/apps/" target="_blank">Slack Applications Sections</a> (may require to login 
         / admin permissions)
     </li>
+    <br/>
     <li>Under _Create_, Create an app from manifest
         <table>
             <tr>
@@ -35,22 +39,28 @@ opposed to needing to develop a full application for messaging.
             </tr>
         </table>
     </li>
+    <br/>
     <li>Select the preferred channel
         <div class="image-frame"><img src="../../../imgs/notification_slack_workspace.png" /></div>
     </li>
+    <br/>
     <li>Press continue / next till the end</li>
     <li>Select <i>Incoming Webhooks</i>
         <div class="image-frame"><img src="../../../imgs/notification_slack_webhook.png" /></div>
     </li>
+    <br/>
     <li>Enable Webhooks
         <div class="image-frame"><img src="../../../imgs/notification_slack_enable_webhooks.png" /></div>
     </li>
+    <br/>
     <li>At the bottom, add <i>Webbooks</i> to workspace
         <div class="image-frame"><img src="../../../imgs/notification_slack_create_webhook.png" /></div>
     </li>
+    <br/>
     <li>Select which channel in Slack to send messages to
         <div class="image-frame"><img src="../../../imgs/notification_slack_select_channel.png" /></div>
     </li>
+    <br/>
     <li>When done you should see a <i>Webhook</i> (URL) - this will be used as part of your REST request in EdgeLake
         <div class="image-frame"><img src="../../../imgs/notification_slack_webhook_generated.png" /></div>
     </li>
@@ -62,37 +72,35 @@ opposed to needing to develop a full application for messaging.
 
 ## Send Notifications via EdgeLake
 
-### Slack Webhooks
 EdgeLake allows to send cURL requests the [_rest_ command](../anylog%20commands.md#rest-command). Since _Webhooks_ are 
 essentially URLs to send messages into a system, we'll be using the _rest_ command to send notifictaions from EdgeLake into
 Slack.
 
-1. Create webhook URL as a variable 
-```anylog
-webhook_url = "https://hooks.slack.com/services/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"
-```
-
-2. get percentage of CPU used and current timestamp  
-```anylog
-cpu_percent = get node info cpu_percent
+<ol start="1">
+    <li>Create webhook URL as a variables
+        <pre class="code-frame"><code class="language-anylog">webhook_url = "https://hooks.slack.com/services/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"</code></pre>
+    </li>
+    <br/>
+    <li>get percentage of CPU used and current timestamp
+        <pre class="code-frame"><code class="language-anylog">cpu_percent = get node info cpu_percent
 date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
-```
-
-3. Create payload
-```anylog
-text_msg = !date_time + "  CPU usage: " + !cpu_percent 
+    </code></pre>
+    </li>
+    <br/>
+    <li>Create payload
+        <pre class="code-frame"><code class="language-anylog">text_msg = !date_time + "  CPU usage: " + !cpu_percent 
 payload = json {"text": !text_msg}
-```
+    </code></pre>
+    </li>
+    <br/>
+    <li>Publish information to Slack via _REST_
+        <pre class="code-frame"><code class="language-anylog">rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}"</code></pre>
+    **Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`.
+    </li>
+</ol>
 
-4. Publish information to Slack via _REST_
-```anylog
-rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}" 
-```
 
 Once sent, an output would appear in the proper Slack channel
-
-<img src="../../../imgs/notification_slack_messsage.png"  height="50%" width="50%" />
-
-**Note**: _Google Hangouts_, _Discord_ and _Microsoft Teams_ use `content` for the _payload_ key as opposed to `text`. 
+<div class="image-frame"><img src="../../../imgs/notification_slack_messsage.png"  height="50%" width="50%" /></div>
 
 
