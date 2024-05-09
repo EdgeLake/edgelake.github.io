@@ -61,20 +61,20 @@ it might be easier to connect to a physical database. In such a case, it is reco
    <li>Under <i>Data</i> → <i>Data Sources</i> select PostgresSQL connector type
         <table>
             <tr>
-                <td align="center"><img src="../../../imgs/tableau_img2a.png" height="75%" width="75%" /></td>
-                <td align="center"><img src="../../../imgs/tableau_img2b.png" height="75%" width="75%" /></td>
+                <td align="center"><img src="../../../imgs/tableau_img2a.png"  /></td>
+                <td align="center"><img src="../../../imgs/tableau_img2b.png"  /></td>
             </tr>
         </table>
    </li>
    <br/>
    <li>Fill-out the information to connect to database & Press "Ok"
-      <div align="center">
+      <div class="image-frame">
          <img src="../../../imgs/tableau_img3.png" width="50%" height="50%" />
       </div>
    </li>
    <br/>
    <li>Double-click on the table you want to use (in this case <code>new_table</code>) and goto worksheet
-      <div align="center">
+      <div class="image-frame">
          <img src="../../../imgs/tableau_img4.png" width="50%" height="50%" />
       </div>
    </li>
