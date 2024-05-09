@@ -1,8 +1,8 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: System Notification (Webhooks)
-nav_order: 7
+nav_order: 4
 ---
 # System Notification 
 
