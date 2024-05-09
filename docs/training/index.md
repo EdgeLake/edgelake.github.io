@@ -1,3 +1,10 @@
+---
+layout: default
+title: Training
+nav_order: 7
+has_children: true
+---
+
 # Training Overview
 This document and the referenced documents explain the deployment and configuration of an EdgeLake test network.
 
@@ -16,9 +23,3 @@ Prerequisites for AnyLog Nodes are detailed [here](prerequisites.md).
 
 This training includes 2 sessions:
 
----
-layout: default
-title: Training
-nav_order: 7
-has_children: true
----
