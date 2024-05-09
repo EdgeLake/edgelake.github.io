@@ -1,74 +1,35 @@
 ---
 layout: default
-parent: Northbound Examples
+parent: Northbound
 title: Using Postgres to view Data (Tableau)
 nav_order: 5
 ---
 # PSQL Connector & Tableau Visualization
   
 For software that doesn't support REST requests, but does support PostgresSQL connector graphs can be generated through 
-the `system_query` database. To connect `system_query` in  PostgresSQL
+the <code>system_query</code> database. To connect <code>system_query</code> in  PostgresSQL
 
-```anylog
-db_ip = 127.0.0.1 
+<pre class="code-frame"><code class="language-anylog">db_ip = 127.0.0.1 
 db_port = 5432 
 db_user = admin 
 db_passwd = passwd
-connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd   
-```
+connect dbms system_query where type=psql and ip=!db_ip and port=!db_port and user=!db_user and password=!db_passwd</code></pre>
 
 
 ## Setting up Postgres 
-0. [Install Postgres](https://www.postgresqltutorial.com/install-postgresql/)
-```bash
-docker run -d --network host \
-  --name anylog-psql \
-  -e POSTGRES_USER=${DB_USR} \
-  -e POSTGRES_PASSWORD=${DB_PASSWD} \
-  -v pgdata:/var/lib/postgresql/data \
-  --rm postgres:14.0-alpine
-```
-
-Update Postgres to support [remote access](https://mellowhost.com/blog/how-to-allow-remote-user-access-in-postgresql.html#:~:text=%20How%20to%20Allow%20Remote%20User%20Access%20in,manages%20a%20remote%20access%20file%2C%20to...%20More%20) - if Postgres (_north-bound_) connector is on a separate machine.
-1. locate and open`data/postgresql.conf` & open it
-    ```bash
-    anylog@anylog-2004:~$ docker volume inspect pgdata 
-    [
-        {
-            "CreatedAt": "2022-01-18T00:46:23Z",
-            "Driver": "local",
-            "Labels": null,
-            "Mountpoint": "/var/lib/docker/volumes/pgdata/_data",
-            "Name": "pgdata",
-            "Options": null,
-            "Scope": "local"
-        }
-    ]
-    
-    anylog@anylog-2004:~$ sudo ls /var/lib/docker/volumes/pgdata/_data
-    [sudo] password for anylog: 
-    base    pg_commit_ts  pg_hba.conf    pg_logical    pg_notify    pg_serial     pg_stat      pg_subtrans  pg_twophase  pg_wal   postgresql.auto.conf  postmaster.opts
-    global  pg_dynshmem   pg_ident.conf  pg_multixact  pg_replslot  pg_snapshots  pg_stat_tmp  pg_tblspc    PG_VERSION   pg_xact  postgresql.conf       postmaster.pid
-    
-    anylog@anylog-2004:~$ sudo vim /var/lib/docker/volumes/pgdata/_data/postgresql.conf
-    ```
-    
-2. Allow Remote Access - uncomment `listen_address` and set to "*"
-    ```configs
-    listen_addresses = '*'
-                                        # comma-separated list of addresses;
-                                        # defaults to 'localhost'; use '*' for all
-    ```
-    
-3. Grant Remote Access - add the following line at the bottom of `data/pg_hba.conf`
-    ```configs
-    host    all             new_user           27.147.176.2/32       md5
-    ```
+<ol start="1">
+   <li><a href="https://www.postgresqltutorial.com/install-postgresql/" target="_blank">Install PostgresSQL</a></li>
    
-4. Restart PostgresSQL instance
-    ```bash
-    docker restart anylog-psql
-    ```
+   <li>In <code>postgresql.conf</code>, update <bold>listen_address</bold> value to allow remote access
+      <pre class="code-frame"><code class="language-config">listen_addresses = '*'</code></pre>
+   </li>
+   
+   <li>In <code>pg_hba.conf</code>, add the following line at the bottom of the paga
+      <pre class="code-frame"><code class="language-config">host    all            all             0.0.0.0/0               md5</code></pre>
+   </li>
+   
+   <li>Restart PostgresSQL instance</li> 
+</ol>
 
 ## Executing Query
 0. On AnyLog connect `system_query` to Postgres database 
