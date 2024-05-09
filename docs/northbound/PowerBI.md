@@ -38,7 +38,7 @@ In order to support PowerBI, return data as a list of JSON values without the st
 ## Using PowerBI
 <ol start="1">
    <li>Under <i>Get Data</i> open <i>Web</i>
-      <div style="align: center;"><img src="../../../imgs/powerbi_img1.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img1.png" /></div>
    </li>
 
    <li>In the Advanced option fill-out the <b>URL</b>, and <b>HEADER</b> parameters. Once the form is filled out press "OK"
@@ -51,21 +51,21 @@ In order to support PowerBI, return data as a list of JSON values without the st
    "destination": "network"
 }</code></pre>
          </td>
-         <td><div style="align: center;"><img src="../../../imgs/powerbi_img2.png" /></div></td>
+         <td><div class="image-frame"><img src="../../../imgs/powerbi_img2.png" /></div></td>
       </tr>
    </table>
    </li>
 
    <li>Right-click and & select JSON
-      <div style="align: center;"><img src="../../../imgs/powerbi_img3.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img3.png" /></div>
    </li>
 
    <li>Right-click on **List** & select _To Table_
-      <div style="align: center;"><img src="../../../imgs/powerbi_img4.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img4.png" /></div>
    </li>
 
    <li>Keep defaults (None) and press "OK"
-      <div style="align: center;"><img src="../../../imgs/powerbi_img5.png" /></div>
+      <div class="image-frame"><img src="../../../imgs/powerbi_img5.png" /></div>
    </li>
    
    <li>Press the button on the right of the column to view list of columns. This will show the different JSON keys 
@@ -98,6 +98,8 @@ that’ll be converted to table columns
 </ol>
 
 ## Error Handling 
-When converting raw content into _Text_, [PowerQuery Editor](https://docs.microsoft.com/en-us/power-query/power-query-ui)
-will show results. However, it will not separate the JSON keys into separate columns
-![text output](../../../imgs/error_img1.png)
+
+When converting raw content into _Text_, [PowerQuery Editor](https://docs.microsoft.com/en-us/power-query/power-query-ui) will show results. However, it will not separate the 
+JSON keys into separate columns
+
+<div class="image-frame"><img src="../../../imgs/error_img1.png" /></div>

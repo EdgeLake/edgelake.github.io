@@ -52,14 +52,14 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
         <li>On the <b>Custom HTTP Headers</b>, name the default database. If no header is set, then all accessible databases to 
    the node will be available to query</li>
     </ul>
-<div class="image-frame">
+
 <table>
   <tr>
     <td align="center"><img src="../../../imgs/grafana_datasource_connector.png" alt="Data Source Option" /></td>
     <td align="center"><img src="../../../imgs/grafana_data_source.png" alt="Data Source Config" /></td>
   </tr>
 </table>
-</div>
+
 </li>
 <br/>
 <li>Select the <b>Save and Test</b> option that should return a green banner message: ***Data source is working***.
