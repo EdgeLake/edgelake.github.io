@@ -27,8 +27,8 @@ opposed to needing to develop a full application for messaging.
 For demonstration purposes, this document uses _Slack_, however, the same logic can be applied with other webhooks.   
 
 <ol start="1">
-    <li>Go to <a href="https://api.slack.com/apps/" target="_blank">Slack Applications Sections</a> (may require to login 
-        / admin permissions)
+    <li>Go to <a href="https://api.slack.com/apps/" target="_blank">Slack Applications Sections</a> -- may require to login 
+        / admin permissions
     </li>
     <br/>
     <li>Under _Create_, Create an app from manifest
@@ -83,18 +83,20 @@ Slack.
     <br/>
     <li>get percentage of CPU used and current timestamp
         <pre class="code-frame"><code class="language-anylog">cpu_percent = get node info cpu_percent
-date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"
-    </code></pre>
+date_time = python "datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')"</code></pre>
     </li>
     <br/>
     <li>Create payload
         <pre class="code-frame"><code class="language-anylog">text_msg = !date_time + "  CPU usage: " + !cpu_percent 
-payload = json {"text": !text_msg}
-    </code></pre>
+payload = json {"text": !text_msg}</code></pre>
     </li>
     <br/>
     <li>Publish information to Slack via _REST_
-        <pre class="code-frame"><code class="language-anylog">rest post where url = !webhook_url and body = !payload and headers = "{'Content-Type': 'application/json'}"</code></pre>
+        <pre class="code-frame"><code class="language-anylog">&lt;rest post where 
+    url = !webhook_url and 
+    body = !payload and 
+    headers = "{'Content-Type': 'application/json'}"&gt;</code></pre>
+    <br/>
     <b>Note</b>: <i>Google Hangouts</i>, <i>Discord</i> and <i>Microsoft Teams</i> use <code>content</code> for the <i>payload</i> key as opposed to <code>text</code>.
     </li>
 </ol>
