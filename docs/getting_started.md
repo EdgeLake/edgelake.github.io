@@ -39,17 +39,23 @@ Note: The EdgeLake software is derived from AnyLog. To provide additional info, 
 
 EdgeLake is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the EdgeLake Software.    
 Joining a network requires the following steps:  
-1) Install the EdgeLake Software on a computer instance.
-2) Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
+1. Install the EdgeLake Software on a computer instance.
+2. Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
+
+The EdgeLake Software is a stack of services to manage data and resources on each node. When a node starts, it enables
+selected services. These services manage data ingestion, data storage, southbound and northbound connectors, queries, resource status and more.  
+
+Some nodes are configured to host data. The database used is determined by the users.  
+All the nodes share a metadata layer. for the metadata, users can choose between a blockchain platform or a master node. 
 
 ## The member nodes
-A node in the network is assigned with one or more roles. The optional roles are the following:  
+A node in the network is assigned with one or more roles (summarized in the chart below):  
 
 | Node Type     | Comment | Role  |
 | ----------- | ------------|  -------------- | 
 | Operator   | | A node that hosts the data and satisfies queries. |
 | Query  | | A node that orchestrates a query process. |
-| Master | Optional | A node that hosts the metadata on a ledger and serves the metadata to the peer nodes in the network. |
+| Master | Optional | A node that hosts the metadata and serves the metadata to the nodes in the network. |
 
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
 If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
