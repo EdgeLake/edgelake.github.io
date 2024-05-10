@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    just-the-docs (0.8.2)
+    edgelake-specs (1.0.0)
       jekyll (>= 3.8.5)
       jekyll-include-cache
       jekyll-seo-tag (>= 2.0)
@@ -149,10 +149,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (>= 2.3.5)
+  edgelake-specs!
   html-proofer (~> 5.0)
   jekyll-github-metadata (>= 2.15)
   jekyll-include-cache
-  just-the-docs!
 
 BUNDLED WITH
    2.5.9
