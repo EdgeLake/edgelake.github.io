@@ -18,7 +18,7 @@ nav_order: 1
 - [The Scheduler Services](#the-scheduler-services)  
 - [The Blobs Archiver Services](#blob-archiver-services)  
 
-### Get the list of data services and their status 
+## Get the list of data services and their status 
 
 **Usage**:
 <pre class="code-frame"><code class="language-anylog">get processes [where format = json]</code></pre>
