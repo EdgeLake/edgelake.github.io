@@ -5,19 +5,35 @@ parent: Commands
 nav_order: 5
 ---
 # Interacting with the network
-Users and Applications interact with the network to query data or issue native commands using the CLI or via REST.
-Data is streamed to the network using a varaiety of methods summarized below.
 
-# Query data and issue commands
+## Querying and issuing commands
 
 Users and applications connect to the network by issuing queries and commands to a single node in the network. This node serves as a
-gateway to the network.    
+gateway to the network.  
+In the context of data query, the node that serves as a gateway is called a **Query Node**. 
+Users and applications interacts with the node that serves as a gateway using the EdgeLake CLI or via REST.
+* Every member node can serve as a gateway to the network.
+* The EdgeLake CLI is available by default on each EdgeLake instance. Using the CLI, users can interact with the local node, 
+a peer node or a group of nodes which are members of the network.
+* To support calls from the Node's CLI, the TCP service needs to be enabled. Details are available [here](backgound_services.md#run-tcp-server).  
+* A REST API can be enabled on each participating node by enabling the REST service. Details are available [here](backgound_services.md#enable-the-rest-service).
+* Examples of REST calls to a network from Python, Postman, Grafana, Power BI, and Google tools are available
+      [here](https://github.com/AnyLog-co/documentation/tree/master/northbound%20connectors).
+* EdgeLake offers a Remote CLI application. This is a graphical web based interactive tool to issue queries and commands.
+Details are available [here](../northbound/remote_cli.md)
+     
+## Streaming data to the nodes in the network.
+
+Some nodes in the network serve to host data. These nodes are called **Operator Nodes**.
+Data is streamed to nodes in the network using a variety of methods summarized below ([Southbound Connectors](#southbound-connectors)).
+
+# Query data and issue commands
 
 Queries and commands issued to a node can be processed locally, or by peers (target nodes) in the network.  
 When a SQL query is issued, the target nodes are determined dynamically and transparently by the database referenced 
 in the query info and the table name in the SQL command. Alternatively users can specify the target nodes.  
 
-The target nodes for commands (which are not SQL) are specified by the user or the calling application.     
+The target nodes for commands (which are not SQL) are specified by the users and applications that issue the commands.     
 
 Specifying the target nodes can be done by listing their IPs and Ports, or by a query to the metadata.  
 Queries to the metadata can leverage domain info represented in the metadata policies. 
@@ -25,30 +41,6 @@ Example are: all nodes deployed in a region, and all nodes supporting machines f
 Note that users can represent their domain knowledge in the metadata policies and leverage this info to identify target nodes.  
 The EdgeLake Metadata APIs are open allowing to update and query metadata information as needed, and the metadata can be used to identify target nodes.
 
-## Issuing queries and commands to the network
-
-Commands can be delivered in one of the following ways:
-* **On the node's CLI**. If the command is prefixed with **run client (target nodes)** the node serves as a client to the network and the 
-command will be issued on the target nodes specified in the prefix. Otherwise, the command is executed on the local node.
-  details ate available in the [TCP Messages Section](https://github.com/AnyLog-co/documentation/blob/master/network%20processing.md#the-tcp-messages).
-* **Using the Remote CLI** (via REST). This is a graphical web based interactive remote CLI tool that issues queries and commands to a selected node in the network.  
-  If the **Network** button is selected on the Remote CLI, the selected node (specified in the **connect info** field) serves as a gateway to the network, and 
-  the target nodes can be specified by IPs and Ports, or through a query to the metadata, or with SQL, by the network protocol.  
-  If the **Network** button is not selected, the command or query is executed on the node specified in the **connect info** field. Details on the Remote CLI
-  are available in the [Remote CLI](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/remote_cli.md) section.
-* **Using REST calls**. 
-    * Note, users can see the structure of REST requests by specifying the command on the Remote CLI and 
-      selecting the **Code** option.
-    * Examples of REST calls to a network from Python, Postman, Grafana, Power BI, and Google tools are available
-      [here](https://github.com/AnyLog-co/documentation/tree/master/northbound%20connectors).
-  
-Notes:
-* To support calls from the Node's CLI, the TCP service needs to be enabled. 
-  Details are available in the [TCP Service](backgound_services.md#run-tcp-server).
-* To support the REST API, the REST service needs to be enabled on the node that serves as the network bridge.
-  Details are available in the [REST Service](backgound_services.md#run-rest-server) section.
-  
-  
 # Streaming data to the EdgeLake Network
 
 Users stream their data into Operator Nodes. These nodes are configured to host the data and operate as follows:
