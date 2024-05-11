@@ -11,8 +11,8 @@ select a blockchain platform or a master node as their metadata storage, The met
 on the platform used.
 
 Notes: 
-* The metadata commands start with the keyword blockchain, regardless if the metadata platform used.
-* Run **blockchain help** on the EdgeLake CLI for a complete list of the blockchain commands.
+* The metadata commands start with the keyword blockchain, regardless of the metadata platform used (blockchain or master node).
+* Run **help blockchain** on the EdgeLake CLI for a complete list of the blockchain commands.
 
 ## Blockchain Seed
 The **blockchain seed** command pulls a copy of the metadata from a peer node. When a node is properly configured,
@@ -69,6 +69,7 @@ Identify the metadata platform by including one of these 2 values:
 blockchain delete policy where id = 64283dba96a4c818074d564c6be20d5c and local = true and blockchain = ethereum
 </code></pre>
 
+**Details**: [The blockchain delete policy command](https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#the-blockchain-delete-policy-command)
 
 ## Connect to a blockchain platform
 The **blockchain connect** and **blockchain set account info** commands are used to connect to the blockchain platform. 
