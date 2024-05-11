@@ -6,7 +6,24 @@ nav_order: 1
 ---
 # Background Services
 
-- [List of background services and their status](#get-the-list-of-data-services-and-their-status)    
+The background services enable data processing on each participating node.  
+Services can be enabled using one of the following methods:
+* As command line arguments passed to the EdgeLake process when initiated.
+* On the EdgeLake CLI.
+* As an EdgeLake configuration file that is processed using the command: *process [path and file name]*
+* As a policy in the metadata that is associated to a node using the command: *config from policy where id = [policy id]*
+
+The following command lists the background services and their status:
+
+**Usage**:
+<pre class="code-frame"><code class="language-anylog">get processes [where format = json]</code></pre>
+
+**Explanation**: List the background processes and their status.
+
+**Details:** [The "get processes" command](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)
+
+The main services are listed below:
+    
 - [Connect to the EdgeLake Network](#connect-to-the-edgelake-network)  
 - [The local data storage service](#the-local-data-storage-service)  
 - [REST Services](#rest-services)  
@@ -17,15 +34,6 @@ nav_order: 1
 - [SMTP Client](#enable-smtp-client-service)  
 - [The Scheduler Services](#the-scheduler-services)  
 - [The Blobs Archiver Services](#blob-archiver-services)  
-
-## Get the list of data services and their status 
-
-**Usage**:
-<pre class="code-frame"><code class="language-anylog">get processes [where format = json]</code></pre>
-
-**Explanation**: List the background processes and their status.
-
-**Details:** [The "get processes" command](https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#the-get-processes-command)
 
 
 ## Connect to the EdgeLake Network
@@ -40,7 +48,8 @@ Monitoring the services' status:
 
 
 ### Enable the TCP service
-The TCP service provides the functionality to send and recieve messages from peer nodes using the EdgeLake Network Protocol.
+The TCP service provides the functionality to send and recieve messages from peer nodes using the EdgeLake Network Protocol.  
+
 **Usage**:
 <pre class="code-frame"><code class="language-anylog">&lt;run tcp server where 
   external_ip = [ip] and external_port = [port] and 
@@ -63,7 +72,7 @@ The TCP service provides the functionality to send and recieve messages from pee
   bind=false and threads = 6&gt;
 </code></pre>
 
-**Details**: [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#blockchain-synchronizer)
+**Details**: [run tcp server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#the-tcp-server-process)
 
 ### Get the network configuration info
 **Usage**:
@@ -159,7 +168,7 @@ get operator summary where format = json
 ## REST Services
 Enable and monitor a service that receives commands and data via REST from 3rd parties applications and data sources.
 
-* Enable the service: [run rest server](#enable-the-rest-service)
+* Enable the service: [run rest server](https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#rest-requests)
 * Monitor the REST service:
     * [get rest server info](#rest-service-info-commands)
     * [get rest calls](#rest-service-info-commands)
@@ -214,7 +223,7 @@ Enable and monitor a service that operates as a message broker, allowing to publ
   bind = [true/false] and threads = [threads count]&gt;
 </code></pre>
 
-**Explanation:**  Set a message broker in a listening mode on the specified IP and port. **Threads count** represents the number of threads supporting the service.
+**Explanation:**  Set a message broker in a listening mode on the specified IP and port. *Threads count* represents the number of threads supporting the service.
 
 **Examples:**
 <pre class="code-frame"><code class="language-anylog">run message broker where external_ip = !ip and external_port = !port  and threads = 3
@@ -237,8 +246,7 @@ Retrieve data from a 3rd party broker and monitor the streaming process.
 
 ### Subscribe to a broker
 The **run msg client** command subscribes to a 3rd party broker. It includes options to map the source data (the data on the broker) to a destination format.  
-The mapping can be done using command variables, or by associating a mapping policy (from the metadata). See details below and with 
-the details link.
+The mapping can be done using command variables, or by associating a mapping policy (from the metadata). See details below.
 
 **Usage:**
 <pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
@@ -251,7 +259,7 @@ the details link.
     [participating columns info]
 )&gt;</code></pre>
 
-**Explanation:**  Subscribe to a broker according to the url provided to receive data on the provided topic.
+**Explanation:**  Subscribe to a broker according to the URL provided to receive data on the provided topic.
 
 **Examples:**
 <pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
@@ -311,7 +319,7 @@ polls data assigned to the subscribed topics using the provided IP and Port. The
 )&gt;
 </code></pre>
 
-**Details:** [Data consumers services](https://github.com/AnyLog-co/documentation/blob/master/using%20kafka.md#anylog-serves-as-a-data-consumer).
+**Details:** [Using Kafka](https://github.com/AnyLog-co/documentation/blob/master/using%20kafka.md#using-kafka).
 
 ## gRPC Client Service
 
@@ -328,7 +336,7 @@ Subscribe to a gRPC broker and monitor the data flow.
 **Examples:**
 <pre class="code-frame"><code class="language-anylog">run grpc client where name = kubearmor and ip = 127.0.0.1 and port = 32767 and policy = deff520f1096bcd054b22b50458a5d1c</code></pre>
 
-**Details:** [gRPC Client Service](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md#initiating-a-grpc-client).
+**Details:** [Using gRPC](https://github.com/AnyLog-co/documentation/blob/master/using%20grpc.md#using-grpc).
 
 ### Get gRPC connection info
 List the active gRPC clients and the data exchange info.
