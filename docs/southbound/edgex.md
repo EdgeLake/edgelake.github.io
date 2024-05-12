@@ -6,24 +6,26 @@ nav_order: 3
 ---
 # EdgeX connection 
 
-EdgeX allows to send data _REST_, _MQTT_ and _Kafka_ which requires `run msg client` on the EdgeLake 
-side to accept data. 
+[EdgeX](https://www.edgexfoundry.org/) facilitates interoperability between devices and applications.  
+This document details how to stream device data to EdgeLake instances using EdgeX.  
+Note: Edgex can stream the data to the EdgeLake Operator nodes using _REST_ and _MQTT_.  
+For REST, enable the REST service on the EdgeLake node and for MQTT, enable the Message Broker service on the EdgeLake node. 
 
-* [EdgeX docker-compose](https://github.com/edgexfoundry/edgex-compose)
+EdgeX Documentation:
 * [EdgeX Documentation](https://docs.edgexfoundry.org/)
+* [EdgeX docker-compose](https://github.com/edgexfoundry/edgex-compose)
 
-## Requirements 
-1. EdgeLake deployment to accept data - directions can be found [here](https://github.com/EdgeLake/docker-compose)
+
+## Prerequisites 
+1. EdgeLake deployed and either the REST service or the Message service is enabled - Deployment details are available [here](https://github.com/EdgeLake/docker-compose).
 2. EdgeX & Corresponding plugins 
     * EdgeX 
     * EdgeX MQTT broker 
     * EdgeX Random Data Generator
 
-## Accepting Data from EdgeX into EdgeLake
+## Streaming Data to EdgeLake using EdgeX 
 <ol>
-<li>When starting EdgeLake, make sure to begin with message broker enable (<code class="language-anylog">ANYLOG_BROKER_PORT</code> config value)</li>
-
-<li>Begin inserting data - the sample code uses RandomInt and Modbus
+<li>Sample data
 <pre class="code-frame"><code class="language-json">[
     {
       "id": "fb68440c-0dea-49be-b2b2-8e9003ab78c2",
@@ -58,7 +60,7 @@ side to accept data.
 ]
 </code></pre></li>
 
-<li>Configure EdgeX <code class="language-config">app-service-mqtt</code>, make sure to update the following params
+<li>Configure EdgeX <code class="language-config">app-service-mqtt</code>, with IP, Port and Topic to satisfy the EdgeLake service configuration
    <ul style="padding-left: 20px;">
       <li>MQTT_IP_ADDRESS</li>
       <li>MQTT_PORT</li>
@@ -118,7 +120,7 @@ side to accept data.
          # WRITABLE_PIPELINE_FUNCTIONS_MQTTSEND_PARAMETERS_CERT: [your Certificate]
 </code></pre></li>
 
-<li>On EdgeLake, configure `run msg client` to accept data from EdgeX
+<li>On EdgeLake, configure the broker service to accept data from EdgeX and pull the needed data
 <pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=local and port=!anylog_broker_port and log=false and topic=(
    name=anylogedgex-demo and 
    dbms=test and 
@@ -130,4 +132,4 @@ side to accept data.
 )&gt;
 </code></pre></li></ol>
 
-EdgeLake deployment comes with a sample connection to EdgeX that accepts data IoTech System _lighting_ and _retail-device1_.
+EdgeLake deployment comes with a sample connection to EdgeX that accepts sample data (IoTech System _lighting_ and _retail-device1_).
