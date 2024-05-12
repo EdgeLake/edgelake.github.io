@@ -6,15 +6,16 @@ nav_order: 2
 ---
 # Telegraf 
 
-Created by InfluxDB, [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) is the open source server agent to help you collect metrics from your stacks, sensors and systems.
+Created by InfluxDB, [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) is the open source server agent to collect metrics from stacks, sensors and systems.
 
 ## Configuring EdgeLake
 
-EdgeLake / AnyLog is able to accept data from _Telegraf_ via REST POST or its message broker using a generic mapping 
-policy.  
+EdgeLake can be configured to service _Telegraf_ via REST POST or as a message broker.  
+On _Telegraf_, the output is configured to be in JSON, and when data is streamed to an EdgeLake node,
+a mapping policy (like the example policy in this document) transforms the JSON readings to the EdgeLake target structure.
 
 <ol start="1">
-<li>Create a mapping policy to accept data  - notice that except for <code class="language-anylog">timestamp</code>,  all other columns will
+<li>Create a mapping policy to accept data  - notice that except for <code class="language-anylog">timestamp</code>,  all other source attributes remain unchanged. 
 <pre class="code-frame"><code class="language-anylog"># create policy 
 policy_id = telegraf-mapping
 topic_name = telegraf-data
@@ -40,7 +41,7 @@ default_dbms = new_company
    }
 }&gt;
 
-# publish policy 
+# Publish Policy 
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn</code></pre></li>
 
 <li>Enable a message client to accept the data from Telegraf. 
@@ -139,7 +140,9 @@ input filters.
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
 </li></ol>
 
-### Configuring MQTT
+## Configuring EdgeLake
+
+### Configuring the Message Broker Service
 
 [Message broker service](../commands/backgound_services.md#message-broker-services) configures an EdgeLake service to act 
 as a _MQTT_ or _Kafka_ message broker, and storing the accepted message into the respected operator. Enabling a message 

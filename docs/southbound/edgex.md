@@ -4,7 +4,7 @@ title: EdgeX
 parent: Southbound
 nav_order: 3
 ---
-# EdgeX connection 
+# Using EdgeX as the data source connector
 
 [EdgeX](https://www.edgexfoundry.org/) facilitates interoperability between devices and applications.  
 This document details how to stream device data to EdgeLake instances using EdgeX.  

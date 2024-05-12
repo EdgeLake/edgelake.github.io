@@ -5,17 +5,17 @@ title: FLEDGE
 nav_order: 4
 ---
 <link rel="stylesheet" href="just-the-docs.css">
-# FLEDGE Connection
 
-AnyLog's fledge-connector is based on fledge-http-north, but instead of 
-sending data between FLEDGE nodes, it allows sending data into AnyLog via _POST_ or _PUT_. 
+# Using FLEDGE as the data source connector
+
+EdgeLake-fledge-connector is based on fledge-http-north. The connector replaces FLEDGE nodes with EdgeLake nodes and data is streamed using _POST_ or _PUT_. 
 * [AnyLog / EdgeLake Northbound connector for FLEDGE](https://github.com/AnyLog-co/fledge-connector)
 * [FLEDGE Docker Install](https://hub.docker.com/r/robraesemann/fledge)
 * [FLEDGE Documentation](https://fledge-iot.readthedocs.io/en/latest/quick_start/index.html))
 
-## Requirements 
+## Prerequisites 
 <ol> 
-<li>EdgeLake deployment to accept data - directions can be found <a href="https://github.com/EdgeLake/docker-compose" target="_blank">here</a></li> 
+<li>EdgeLake REST services enabled. Details are available <a href="https://github.com/EdgeLake/docker-compose" target="_blank">here</a></li> 
 <li>FLEDGE & Corresponding plugins
    <ul style="padding-left: 20px;">
    <li>FLEDGE</li>
@@ -23,14 +23,14 @@ sending data between FLEDGE nodes, it allows sending data into AnyLog via _POST_
    <li>FLEDGE Southbound services OpenWeatherMap</li>
 </ul></li></ol>
 
-## Accepting Data from FLEDGE into EdgeLake
+## Stream Data from FLEDGE into EdgeLake
 <ol>
-<li>Clone AnyLog's fledge-connector
+<li>Clone EdgeLake's fledge-connector
 <pre class="code-frame"><code class="language-shell">cd $HOME
 git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 </li>
 
-<li>Copy <code>anylog_plugin</code> into <i>FLEDGE</i>
+<li>Copy <code>edgelake_plugin</code> into <i>FLEDGE</i>
 <pre class="code-frame"><code class="language-shell">cp -r $HOME/fledge-connector/anylog_rest_conn/ /usr/local/fledge/python/fledge/plugins/north/</code></pre>
 </li>
 
@@ -38,7 +38,7 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
 <div class="image-frame"><img src="../../../imgs/fledge_gui.jpeg" /></div>
 </li>
 
-<li>Begin sending data & view <code>readings</code> columns - We'll be using the <i>OpenWeatherMap</i> asset as an example
+<li>Begin sending data & view <code>readings</code> columns - using the <i>OpenWeatherMap</i> asset as an example
 <pre class="code-frame"><code class="language-json"># Sample data being generated
 {
  "asset": "OpenWeatherMap",
@@ -70,13 +70,13 @@ git clone https://github.com/AnyLog-co/fledge-connector</code></pre>
     <script src="script.js"></script>
 </div>
 
-At this point data will sent into EdgeLake via REST. 
+The process detailed above streams data into EdgeLake via REST. 
 
 
 ## Configuring EdgeLake REST  Client
-When sending data via _PUT_, all that's required is for EdgeLake to accept REST requests - which is done by default. 
-
-When sending data via _POST_, an message client accepting the requests should be running. 
+Notes:
+* To stream data using _PUT_, enable the EdgeLake REST service. 
+* To stream data via _POST_, enable the message client service on the EdgeLake node. 
 
 **Sample Message Client**:
 <pre class="code-frame"><code class="language-anylog">&lt;msg client where broker=rest and user-agent=anylog and log=!mqtt_log and topic=(
