@@ -24,7 +24,7 @@ default_dbms = new_company
 &lt;new_policy = {"mapping" : {
         "id" : !policy_id,
         "dbms" : !default_dbms,
-        "table" : "bring [metrics][*][name] _ [metrics][*][tags][name]:[metrics][*][tags][host]",
+        "table" : "bring [name] _ [tags][name]:[tags][host]",
         "readings": "metrics",
         "schema" : {
                 "timestamp" : {
@@ -43,6 +43,11 @@ default_dbms = new_company
 
 # Publish Policy 
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn</code></pre></li>
+
+<br/>
+<b>Disclaimer</b>: In the Telegraf configurations, you'll need to extract the content from <i>metrics</i> using 
+<code>json_string_fields=["metrics"]</code> parameter. Farther details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>. 
+<br/> 
 
 <li>Enable a message client to accept the data from Telegraf. 
 <pre class="code-frame"><code class="language-anylog"># REST message client 
