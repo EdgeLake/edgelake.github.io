@@ -21,8 +21,8 @@ demo BI tool. However, directions for other BI tools, such as [Microsoft's Power
 
 * [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 * [Grafana Install](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ 9.5.16 or higher.
-* An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the 
-following command on the EdgeLake command line:  
+* The REST service enabled on the EdgeLake node (the Query Node) that services the Grafana Request.
+* Use the following command on the EDgeLake CLI to enable the REST service:
 <pre class="code-frame"><code class="language-anylog">&lt;run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
@@ -72,7 +72,7 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
 Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
 
 * For Basic Authentications, the Grafana configuration should have _basic auth_ enabled.
-* Basic Authentications validates _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
+* Basic Authentications validates _username_ and _password_, details are at [basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network). 
 <div class="image-frame">
     <img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication"  >
 </div>
@@ -102,8 +102,8 @@ EdgeLake queries are represented in the Grafana JSON API, and details of the con
 EdgeLake offers 2 predefined functions that can be represented in the Grafana JSON inteface ([_Increments_ and _Period_](#using-the-time-series-data-visualization)).
 These function reduce the data transfer by pushing processing to the edge nodes.
 
-**Additional JSON Data** section(s) provides additional information to the query process. The information provided overrides 
-the default behaviour and can pull data from any database managed by EdgeLake (as long as the user maintains valid permissions).  
+**Additional JSON Data** section(s) provides additional information to the query process. The information provided modifies
+the default behaviour.  
 The additional information is provided using a JSON script with the following attribute names:
 
 <table>
@@ -118,7 +118,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>type</td>
-      <td>The type of the query. The default value is 'sq' and other valid types are: 'increments', 'period' and 'info'.</td>
+      <td>The type of the query. The default value is 'sql' and other valid types are: 'increments', 'period' and 'info'.</td>
     </tr>
     <tr>
       <td>sql</td>
@@ -126,7 +126,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>details</td>
-      <td>An EdgeLake command which is not a SQL statement.</td>
+      <td>An EdgeLake native command which is not a SQL statement.</td>
     </tr>
     <tr>
       <td>where</td>
@@ -134,19 +134,19 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>functions</td>
-      <td>A list of SQL functions to use which overwrites the default functions.</td>
+      <td>A list of SQL functions to use which override the default functions.</td>
     </tr>
     <tr>
       <td>timezone</td>
-      <td>***utc*** (default) or ***default*** to change time values to local time before the transfer to Grafana.</td>
+      <td>'utc' (default) or 'default' to change time values to local time before the transfer to Grafana.</td>
     </tr>
     <tr>
       <td>time_column</td>
-      <td>The name of the time column in the Time Series format.</td>
+      <td>The name of the time column in the Time Series table.</td>
     </tr>
     <tr>
       <td>value_column</td>
-      <td>The name of the value column in the Time Series format.</td>
+      <td>The name of the value column in the Time Series table.</td>
     </tr>
     <tr>
       <td>time_range</td>
@@ -154,7 +154,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>servers</td>
-      <td>Replacing the network determined servers with a list of Operators (data hosting servers) to use.</td>
+      <td>Replacing the network determined Operators (nodes hosting data) with a list of user determined Operators to use.</td>
     </tr>
     <tr>
       <td>instructions</td>
@@ -167,7 +167,7 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
 
-### Blockchain based Visualization
+### Metadata based Visualization
 
 **Creating Network Map**
 1. In the _Visualizations_ section, select _Geomap_
@@ -187,10 +187,10 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_geomap.png" alt="Network Map" />
 </div> 
 
-**Creating Table from Blockchain**
+**Visualizing Blockchain Data (Metadata)**
 1. In the _Visualizations_ section, select _Table_
 
-2. In the _Metric_  section, select a table name to "query" against
+2. In the _Metric_  section, select a random table - the JSON instruction will override the selction.
 
 3. Update _Payload_ with the following information
 
@@ -206,7 +206,7 @@ The additional information is provided using a JSON script with the following at
 
 ### Using the Time-Series Data Visualization
 
-**Increments query** (The default query) is used to retriv statistics on the time series data in the selected time 
+**Increments query** (The default query) is used to retrieve statistics on the time series data in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
 average are collected for each interval and graphically presented.  
 
@@ -291,7 +291,7 @@ More information on increments and period types of queries are available in [que
   }
 }</code></pre>
 
-* Extend to specify which Functions without time_range to query
+* Example without where conditions
 <pre class="code-frame"><code class="language-json">{
   "type": "period", 
   "time_column": "timestamp",
