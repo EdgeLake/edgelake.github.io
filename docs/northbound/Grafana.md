@@ -12,28 +12,26 @@ Grafana is an open-source BI tool managed by [Grafana Labs](https://grafana.com/
 demo BI tool. However, directions for other BI tools, such as [Microsoft's PowerBI](PowerBI.md), can be found in our 
 [North Bound services](../) section.   
 
-Using Grafana, users can visualize time series data using pre-defined queries and add new queries using SQL.
-
-Directions for importing our demo images dashboards can be found in [import grafana dashboard document](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/import_grafana_dashboard.md)
-
+* Using Grafana, users can visualize time series data using pre-defined dashboards.
+* Details on how to use Grafana to visualize data in the network are available in the 
+[Using Grafana](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md#using-grafana) document. 
+* Example configurations and dashboards can be found at [import grafana dashboard document](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/import_grafana_dashboard.md).
 
 ## Prerequisites & Links
-* 
-* [Grafana Support](https://grafana.com/docs/grafana/latest/)
 
-* An [installation of Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ version 7.5 and higher, we recommend using _Grafana_ version 9.5.16 or higher.
-
+* [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
+* [Grafana Install](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ 9.5.16 or higher.
 * An EdgeLake node that provides a REST connection - To configure an EdgeLake node to satisfy REST calls, issue the 
 following command on the EdgeLake command line:  
-  * `[ip]` and `[port]` are the IP and Port that would be available to REST calls.
-  * `[max time]` is an optional value that determines the max execution time in seconds for a call before being aborted.
-  * A 0 value means a call would never be aborted and the default time is 20 seconds.
 <pre class="code-frame"><code class="language-anylog">&lt;run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
     bind=!rest_bind and threads=!rest_threads and timeout=!rest_timeout
 &gt;</code></pre>
-
+Note:  
+  * `[ip]` and `[port]` are the IP and Port that would be available to REST calls.
+  * `[max time]` is an optional value that determines the max execution time in seconds for a call before being aborted.
+  * A 0 value means a call would never be aborted and the default time is 20 seconds.
 
 ## Setting Up Grafana 
 <ol start="1">
@@ -46,7 +44,7 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
 </li>
 <li>In <i>Data Sources</i> section, create a new JSON data source
     <ul style="padding-left: 20px">
-        <li>select a JSON data source</li>
+        <li>Select a JSON data source</li>
         <li>On the name tab provide a unique name to the connection.</li>
         <li>On the URL Tab add the REST address offered by the EdgeLake node (i.e. http://10.0.0.25:32149)</li>
         <li>On the <b>Custom HTTP Headers</b>, name the default database. If no header is set, then all accessible databases to 
@@ -73,14 +71,14 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
 
 Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
 
-When authentication only REST requests via _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
-the Grafana configuration should have _basic auth_ enabled.
-
+* For Basic Authentications, the Grafana configuration should have _basic auth_ enabled.
+* Basic Authentications validates _username_ and _password_ ([basic authentication](../authentication.md#enabling-basic-authentication-in-a-node-in-the-network)) 
 <div class="image-frame">
     <img src="../../../imgs/grafana_basic_auth.png" alt="basic authentication"  >
 </div>
 
-While authentication using [SSL Certificates](../authentication.md#using-ssl-certificates) should have _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
+* Using certificates is detailed in [SSL Certificates](../authentication.md#using-ssl-certificates).
+* On Grafana, set _TLS Client Auth_ and _Skip TLS Verify_ enabled. 
 
 <div class="image-frame">
     <img src="../../../imgs/grafana_auth_image.png" alt="SSL Authentication" />
@@ -89,17 +87,20 @@ While authentication using [SSL Certificates](../authentication.md#using-ssl-cer
 **Notes**: Failure to connect may be the result of one of the following
 * EdgeLake instance is not running or not configured to support REST calls.
 * Wrong IP and Port.
-* Firewalls are not properly configured and make the IP and Port not available.
+* Firewalls are not properly configured and the needed IP and Port not available.
 * EdgeLake is configured with authentication detection that is not being satisfied.
-* If the connected node is not able to determine tables for the selected database, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.
+* If Grafana is properly connected, the database and tables of the EdgeLake network can be selected on the Grafana GUI.
+  If Gragfana fails to connect, the dashboard (Edit Panel/Metric Selection) presents "Error: No table connected" in the pull-down menu.
 
-## Using Grafana to visualize EdgeLake
+## Using Grafana to visualize EdgeLake data
 
 Grafana allows to present data in 2 modes _Time Series_ collects and visualize data values as a function of time, and 
 _Table_ format where data is presented in rows and columns.
 
-EdgeLake offers 2 predefined query types ([_Increments_ and _Period_](#using-the-time-series-data-visualization)) which 
-users can modify or specify additional queries either "as-is" or using _Additional JSON Data_ options on the panel.
+EdgeLake queries are represented in the Grafana JSON API, and details of the configuration are available 
+[here](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md#using-grafana).  
+EdgeLake offers 2 predefined functions that can be represented in the Grafana JSON inteface ([_Increments_ and _Period_](#using-the-time-series-data-visualization)).
+These function reduce the data transfer by pushing processing to the edge nodes.
 
 **Additional JSON Data** section(s) provides additional information to the query process. The information provided overrides 
 the default behaviour and can pull data from any database managed by EdgeLake (as long as the user maintains valid permissions).  
