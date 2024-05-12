@@ -15,7 +15,7 @@ Transform your edge nodes into members of a permissioned decentralized network, 
 * Query the distributed data from a single point (as if the data is hosted in a centralized database). 
 * Manage your edge resources from a single point (the network of nodes reflects a [Single System Image](https://en.wikipedia.org/wiki/Single_system_image)).
 
-### Table of Content
+## Table of Content
 * [How it Works](#how-it-works)
 * [Download & Install](#download-and-install)
 * [Prerequisite & Setup Considerations](#prerequisite-and-setup-considerations)

@@ -6,16 +6,16 @@ nav_order: 4
 ---
 # System Notification 
 
-EdgeLake provides services like _REST_, _SMS_ and _STMP_ (eMail) in order allow your network to send notifications regarding 
-the system; this can be things like CPU utilization, data not coming in or simply when ever a partition is being dropped 
-/ created.
-
+EdgeLake includes a rule engine that can be configured to execute periodic tasks and monitor and alert
+using services like _REST_, _SMS_ and _STMP_ (eMail).
+For example, users can be alerted on CPU, Network, RAM, Disk utilization and data ingestion.  
+Details on the Rule Engine is available in the section
+[Alerts and Monitoring](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring).
 
 ## Setting up Webhooks
 
 _Webhooks_ are user-defined _HTTP_ callbacks that enable real-time communication between web applications; they are the
-simplest and fastest way to send messages into third-party applications as it simply uses a _REST_ (post) request as 
-opposed to needing to develop a full application for messaging.
+simplest and fastest way to send messages into third-party applications as these callbacks use _REST_ (POST) requests for messaging.
 
 * [Slack](https://api.slack.com/messaging/webhooks)
 * [Discord](https://docs.gitlab.com/ee/user/project/integrations/discord_notifications.html#create-webhook)
@@ -74,8 +74,7 @@ For demonstration purposes, this document uses _Slack_, however, the same logic 
 
 EdgeLake allows to send cURL requests the 
 <a href="https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#rest-command" target="_blank"><i>rest</i> command</a>. 
-Since _Webhooks_ are essentially URLs to send messages into a system, we'll be using the _rest_ command to send 
-notifications from EdgeLake into Slack.
+Since _Webhooks_ are essentially URLs embedded with messages, below is a _rest_ command that sends notifications from EdgeLake into Slack.
 
 <ol start="1">
     <li>Create webhook URL as a variables
