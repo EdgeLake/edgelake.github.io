@@ -45,8 +45,8 @@ default_dbms = new_company
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
 </code></pre>
 <br>
-<div style="text-align: justify"><b>Note</b>: In the Telegraf configurations, you'll need to extract the content from <i>metrics</i> using 
-<code>json_string_fields=["metrics"]</code> parameter. Farther details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.</div>
+<div style="text-align: justify"><b>Note</b>: In the Telegraf configurations, extract the content from <i>metrics</i> using 
+<code>json_string_fields=["metrics"]</code> parameter. Details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.</div>
 <br>
 </li>
 
@@ -66,9 +66,10 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 ## Configuring Telegraf
 
-At its core, _Telegraf_ returns a list of JSONs (shown below). This data can be published into EdgeLake via _REST_ POST 
-or EdgeLake's local (MQTT) message broker. For this example, we'll be using their _cpu_, _mem_, _net_ and _swap_ 
-input filters.  
+Configure _Telegraf_ to return a list of JSONs (an example shown below). This data can be published into EdgeLake via _REST_ POST 
+(if the REST service on the EdgeLake node is enabled) or to the EdgeLake's local (MQTT) message broker service (if enabled).    
+The example below is streaming _cpu_, _mem_, _net_ and _swap_ readings. 
+
 
 <pre class="code-frame"><code class="language-json">{"metrics":[
   {
@@ -95,7 +96,7 @@ input filters.
 ]}
 </code></pre>
 
-### Configuring REST 
+### Configuring REST
 <ol start="1">
 <li>Create a configurations file for REST 
 <pre class="code-frame"><code class="language-shell">telegraf --input-filter cpu:mem:net:swap  --output-filter http config > telegraf.conf</code></pre>
@@ -151,8 +152,8 @@ input filters.
 ### Configuring the Message Broker Service
 
 [Message broker service](../commands/backgound_services.md#message-broker-services) configures an EdgeLake service to act 
-as a _MQTT_ or _Kafka_ message broker, and storing the accepted message into the respected operator. Enabling a message 
-broker can be done via a configuration policy or the following command.  
+as message broker (and satisfy an _MQTT_ or _Kafka_ publish messaged). Data published on the EdgeLake node will be ingested to the local database.      
+Enabling a message broker service can be done via a configuration policy or the following command.  
 
 <pre class="code-frame"><code class="language-anylog">&lt;run message broker where
     external_ip=!external_ip and external_port=!anylog_broker_port and
