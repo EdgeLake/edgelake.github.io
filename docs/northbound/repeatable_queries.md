@@ -4,7 +4,7 @@ parent: Northbound
 title: Using Postgres to view Data
 nav_order: 5
 ---
-# Using Postgres to view Data
+# Using PostgreSQL to view Data
 
 Most BI tools and third-party applications support a _REST_ tool to query data. However, there are applications, like
 [Tableu](https://www.tableau.com/) and [Lookr](https://developers.google.com/looker-studio), that may not have REST; or 
