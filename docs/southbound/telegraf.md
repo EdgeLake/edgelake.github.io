@@ -42,13 +42,13 @@ default_dbms = new_company
 }&gt;
 
 # Publish Policy 
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn</code></pre>
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+</code></pre>
 <br>
-<b>Disclaimer</b>: In the Telegraf configurations, you'll need to extract the content from <i>metrics</i> using 
-<code>json_string_fields=["metrics"]</code> parameter. Farther details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.
+<pre style="text-align: justify"><b>Disclaimer</b>: In the Telegraf configurations, you'll need to extract the content from <i>metrics</i> using 
+<code>json_string_fields=["metrics"]</code> parameter. Farther details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.</pre>
 <br>
 </li>
-
 
 <li>Enable a message client to accept the data from Telegraf. 
 <pre class="code-frame"><code class="language-anylog"># REST message client 
