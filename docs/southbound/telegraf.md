@@ -46,6 +46,7 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 <br>
 <b>Disclaimer</b>: In the Telegraf configurations, you'll need to extract the content from <i>metrics</i> using 
 <code>json_string_fields=["metrics"]</code> parameter. Farther details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.
+<br>
 </li>
 
 
