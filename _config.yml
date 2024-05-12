@@ -132,6 +132,8 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 nav_external_links:
   - title: Download EdgeLake
     url: https://github.com/EdgeLake/docker-compose
+  - title: EdgeLake (LFEdge)
+    url: https://lfedge.org/projects/edgelake/
 
 liquid:
    error_mode: strict

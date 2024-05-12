@@ -17,7 +17,8 @@ data during ingestion, storage and query.
 
 ## Associate a physical database to a logical database
 The <code class="language-anylog">connect dbms</code> command associates a physical database to a logical database. This 
-process is per node, to determine, when a data table is created, the physical database to host the table's data.
+process is per node, to determine, when a data table is created, the physical database to host the table's data.  
+Note: The same logical database (and the database tables), can be hosted on different nodes by a different physical database.
 
 ### Connect DBMS
 **Usage**:
@@ -54,8 +55,9 @@ connect dbms sensor_data where type = psql and user = anylog and password = demo
 <pre class="code-frame"><code class="language-anylog">get tables where dbms = [dbms name] and format = [format type]</code></pre>
 
 **Explanation**:
-* Get the list of tables for the named dbms or all databases (if named dbms is asterisk). Each table is flagged if declared on the blockchain and if declared locally.
-* <code class="language-anylog">[format type]</code> is optional to determine the output format and is 'table' (default) or 'json'.
+* Get the list of tables for the named dbms or all databases (if named dbms is asterisk). Each table is flagged if declared on the shared metadata (blockchain or master) 
+  and if declared locally (on the local physical database).  
+* <code class="language-anylog">[format type]</code> is optional to determine the output format (*table* or *json* and *table* being the default).
 
 **Examples**:
 <pre class="code-frame"><code class="language-anylog">get tables where dbms = dmci
@@ -105,7 +107,7 @@ get partitioned dropped
 get partitions where dbms = lsl_demo and table = ping_sensor
 </code></pre>
 
-**Details**: [Data Partitioning](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
+**Details**: [Partition Status](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partitions-status-and-configurations).
 
 ### Drop Partition
 

@@ -611,6 +611,23 @@ jtd.onReady(function(){
 
 });
 
+// JavaScript to handle click event and show enlarged image
+document.getElementById('enlarge-image').onclick = function() {
+  var enlargedImage = document.createElement('img');
+  enlargedImage.src = this.src;
+  enlargedImage.id = 'enlarged-image';
+
+  var overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.onclick = function() {
+    document.body.removeChild(this);
+    document.body.removeChild(enlargedImage);
+  };
+
+  document.body.appendChild(overlay);
+  document.body.appendChild(enlargedImage);
+};
+
 {%- endif %}
 
 })(window.jtd = window.jtd || {});

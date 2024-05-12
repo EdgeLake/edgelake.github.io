@@ -2,19 +2,20 @@
 layout: default
 parent: Southbound
 title: Telegraf
-nav_order: 1
+nav_order: 2
 ---
 # Telegraf 
 
-Created by InfluxDB, [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) is the open source server agent to help you collect metrics from your stacks, sensors and systems.
+Created by InfluxDB, [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) is the open source server agent to collect metrics from stacks, sensors and systems.
 
 ## Configuring EdgeLake
 
-EdgeLake / AnyLog is able to accept data from _Telegraf_ via REST POST or its message broker using a generic mapping 
-policy.  
+EdgeLake can be configured to service _Telegraf_ via REST POST or as a message broker.  
+On _Telegraf_, the output is configured to be in JSON, and when data is streamed to an EdgeLake node,
+a mapping policy (like the example policy in this document) transforms the JSON readings to the EdgeLake target structure.
 
 <ol start="1">
-<li>Create a mapping policy to accept data  - notice that except for <code class="language-anylog">timestamp</code>,  all other columns will
+<li>Create a mapping policy to accept data  - notice that except for <code class="language-anylog">timestamp</code>,  all other source attributes remain unchanged. 
 <pre class="code-frame"><code class="language-anylog"># create policy 
 policy_id = telegraf-mapping
 topic_name = telegraf-data
@@ -23,7 +24,7 @@ default_dbms = new_company
 &lt;new_policy = {"mapping" : {
         "id" : !policy_id,
         "dbms" : !default_dbms,
-        "table" : "bring [metrics][*][name] _ [metrics][*][tags][name]:[metrics][*][tags][host]",
+        "table" : "bring [name] _ [tags][name]:[tags][host]",
         "readings": "metrics",
         "schema" : {
                 "timestamp" : {
@@ -40,8 +41,14 @@ default_dbms = new_company
    }
 }&gt;
 
-# publish policy 
-blockchain insert where policy=!new_policy and local=true and master=!ledger_conn</code></pre></li>
+# Publish Policy 
+blockchain insert where policy=!new_policy and local=true and master=!ledger_conn
+</code></pre>
+<br>
+<div style="text-align: justify"><b>Note</b>: In the Telegraf configurations, extract the content from <i>metrics</i> using 
+<code>json_string_fields=["metrics"]</code> parameter. Details can be found <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">here</a>.</div>
+<br>
+</li>
 
 <li>Enable a message client to accept the data from Telegraf. 
 <pre class="code-frame"><code class="language-anylog"># REST message client 
@@ -59,9 +66,10 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 
 ## Configuring Telegraf
 
-At its core, _Telegraf_ returns a list of JSONs (shown below). This data can be published into EdgeLake via _REST_ POST 
-or EdgeLake's local (MQTT) message broker. For this example, we'll be using their _cpu_, _mem_, _net_ and _swap_ 
-input filters.  
+Configure _Telegraf_ to return a list of JSONs (an example shown below). This data can be published into EdgeLake via _REST_ POST 
+(if the REST service on the EdgeLake node is enabled) or to the EdgeLake's local (MQTT) message broker service (if enabled).    
+The example below is streaming _cpu_, _mem_, _net_ and _swap_ readings. 
+
 
 <pre class="code-frame"><code class="language-json">{"metrics":[
   {
@@ -88,7 +96,7 @@ input filters.
 ]}
 </code></pre>
 
-### Configuring REST 
+### Configuring REST
 <ol start="1">
 <li>Create a configurations file for REST 
 <pre class="code-frame"><code class="language-shell">telegraf --input-filter cpu:mem:net:swap  --output-filter http config > telegraf.conf</code></pre>
@@ -139,11 +147,13 @@ input filters.
 <pre class="code-frame"><code class="language-shell">telegraf -config /home/edgelake/influx-telegraf/telegraf.conf</code></pre>
 </li></ol>
 
-### Configuring MQTT
+## Configuring EdgeLake
+
+### Configuring the Message Broker Service
 
 [Message broker service](../commands/backgound_services.md#message-broker-services) configures an EdgeLake service to act 
-as a _MQTT_ or _Kafka_ message broker, and storing the accepted message into the respected operator. Enabling a message 
-broker can be done via a configuration policy or the following command.  
+as message broker (and satisfy an _MQTT_ or _Kafka_ publish messaged). Data published on the EdgeLake node will be ingested to the local database.      
+Enabling a message broker service can be done via a configuration policy or the following command.  
 
 <pre class="code-frame"><code class="language-anylog">&lt;run message broker where
     external_ip=!external_ip and external_port=!anylog_broker_port and
