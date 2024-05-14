@@ -3,7 +3,7 @@ layout: default
 parent: 
   - Northbound
     nav_order: 1
-  - Getting Started
+  - Quick Start
     nav_order: 4
 title: Remote CLI
 ---

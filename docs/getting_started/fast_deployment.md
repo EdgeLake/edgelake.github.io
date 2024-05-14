@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Getting Started
+parent: Quick Start
 title: Fast Deployment
 nav_order: 2
 ---

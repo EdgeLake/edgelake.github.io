@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Getting Started
+parent: Quick Start
 title: Prerequisite
 nav_order: 1
 ---

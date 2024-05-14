@@ -1,8 +1,8 @@
 ---
 layout: default
-parent: Getting Started
+parent: Quick Start
 title: Session I
-nav_order: 2
+nav_order: 3
 ---
 # The Basic Guided Tour
 
