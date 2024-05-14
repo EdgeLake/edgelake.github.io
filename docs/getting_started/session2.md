@@ -177,7 +177,7 @@ REST to communicate with nodes in the network.
 * The port designated as **Message Broker** is optional and is used to accept message from 3rd party apps like Kafka
 and MQTT
 
-#### The Network ID
+<h3>The Network ID</h3>
 
 * With a Master Node deployment, the network ID is the Master's IP and Port.
 * A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
