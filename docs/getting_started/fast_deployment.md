@@ -69,13 +69,12 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
     </li>
-    <li>Execute <code class="language-anylog">test node</code> to validate everything is working properly 
+    <li>Execute <code class="language-anylog">test node</code> to validate everything is working properly
         <pre class="code-frame"><code class="language-shell">EL edgelake-master +> test node 
 
 Test TCP
 [************************************************************]
-
-EL anylog-master +> 
+ 
 Test REST
 [************************************************************]
 
@@ -126,6 +125,7 @@ Address               Node Type Node Name                     Status
 ---------------------|---------|-----------------------------|------|
 35.225.182.15:32148  |operator |edgelake-operator            |  +   |
 45.79.74.39:32048    |master   |edgelake-master              |  +   |
+</code></pre>
 </li>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
@@ -158,7 +158,7 @@ Address               Node Type Node Name                     Status
 35.225.182.15:32148  |operator |edgelake-operator            |  +   |
 45.79.74.39:32048    |master   |edgelake-master              |  +   |
 23.239.12.151:32348  |query    |anylog-query                 |  +   |
-</li>
+</code></pre></li>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
