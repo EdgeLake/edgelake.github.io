@@ -103,7 +103,7 @@ The following steps can be used for both operator nodes, any differences would a
             <li>LEDGER_CONN - should be set to the TCP connection for Master Node</li>
             <li>CLUSTER_NAME - each operator should have unique value</li>
             <li>DEFAULT_DBMS - should be the same on both operators</li>
-            <li>(Optional) ENABLE_MQTT</li>
+            <li>ENABLE_MQTT - for demo we recommend to enabling MQTT to accept data from third-party broker</li>
             <li>MSG_DBMS - should be set to the same value as DEFAULT_DBMS</li>
             <li>If you run multiple operators on the same machine, make sure they each have unique port values</li>
         </ul>
@@ -157,67 +157,33 @@ Address               Node Type Node Name                     Status
 ---------------------|---------|-----------------------------|------|
 35.225.182.15:32148  |operator |edgelake-operator            |  +   |
 45.79.74.39:32048    |master   |edgelake-master              |  +   |
-23.239.12.151:32348  |query    |anylog-query                 |  +   |
+23.239.12.151:32348  |query    |edgelake-query                 |  +   |
 </code></pre></li>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
+## Commands & Queries
 
+<ul><b>Operator Commands</b> 
+    <li>To see the data stream to the node
+        <pre class="code-frame"><code class="language-anylog">get streaming</code></pre>
+    </li>
+    <li>View the list of tables
+        <pre class="code-frame"><code class="language-anylog">get virtual tables</code></pre>
+    </li>
+    <li>View columns in a table - Replace [dbms name] with the name given to DEFAULT_DBMS in the config file. 
+        <pre class="code-frame"><code class="language-anylog">get columns where dbms=[dbms name] and table = rand_data</code></pre>
+    </li>
+    <li>View data distribution (for each table)
+        <pre class="code-frame"><code class="language-anylog">get data nodes</code></pre>
+    </li>
+<b>Sample Queries</b> - Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
+    <li>Get Row Count
+        <pre class="code-frame"><code class="language-anylog">run client () sql [dbms name] format=table "select count(*) from rand_data"</code></pre>
+    </li>
+    <li>View timestamp and value
+        <pre class="code-frame"><code class="language-anylog">run client () sql [dbms name] format=table "select timeestamp, value from rand_data"</code></pre>
+    </li>
+</ul>
 
-
-Test the network by issuing the command: **test network** on the AnyLog CLI.  
-* With the first Master - Three nodes (a Master, a Query and an Operator node) are identified).
-* With the second Master - Four nodes (a Master, a Query and 2 Operators) are identified.
-
-Note: In this training session, the operators are configured to pull data from a 3rd party broker. Issue the command 
-```get streaming``` to see the data stream to the node (from the external broker). 
-
-#### Detach
-
-Using the keys: **ctrl+d**
-
-## Example commands and queries on the Query Node
-
-Note: In this training, when an operator node is initiated, it is configured to subscribe to data that is published on 
-a 3rd party broker. It can take up to a minute before data is available on the node and the tables hosting the data are created.
-
-#### View the list of tables
-
-```get virtual tables```
-
-#### View columns in a table
-Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
-
-```get columns where dbms = [dbms name] and table = lightout1 ```
-
-#### View data distribution (for each table)
-
-```get data nodes```
-
-#### Example queries
-Replace [dbms name] with the name given to DEFAULT_DBMS in the config file.
-
-```shell
-run client () sql [dbms name] format=table "select count(*) from lightout1"
-run client () sql [dbms name] format=table "select timestamp, value from lightout1 limit 20"
-```
-
-## Deploy the remote CLI
-
-#### Enter the Remote CLI folder
- ```shell
-cd deployments/training/remote-cli
-```
-#### Start the Remote CLI
-```shell
-docker-compose up -d
-```
-
-#### Open a browser with the following URL
-```
-http://[The IP of the Node]:31800
-```
-for example:
-```
-http://198.74.50.131:31800
 ```
