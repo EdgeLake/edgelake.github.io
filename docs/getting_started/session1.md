@@ -12,7 +12,7 @@ nav_order: 3
 
 ## Basic EdgeLake commands
 
-The basic AnyLog commands demonstrated in the Onboarding session:
+The basic EdgeLake commands demonstrated in the Onboarding session:
 
 <ul>
     <li><b>Help commands</b> - See details in <a href="https://github.com/AnyLog-co/documentation/blob/master/getting%20started.md#the-help-command" target="blank">the help command section</a>
