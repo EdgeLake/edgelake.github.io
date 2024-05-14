@@ -48,7 +48,7 @@ proprietary settings.
 
 ### This session includes 4 sections:
 1. [Prerequisites & Support Software](#prerequisites--support-software)
-2. Machine Configurations
+2. [Network Configurations](#network-configurations)
 3. Deploy EdgeLake 
 4. Test & Query EdgeLake
 
@@ -73,9 +73,9 @@ Prior to this session, users are required to prepare:
     <li>Each node accessible by IP and Port (remove firewalls restrictions)</li>
 </ul>
 
-**Note 1**: The prerequisites for a customer deployment are available [here](prerequisite.md).
+The prerequisites for a customer deployment are available [here](prerequisite.md).
 
-**Note 2** We recommend deploying an overlay network, such as <a herf="https://github.com/AnyLog-co/documentation/blob/master/deployments/Networking%20&%20Security/nebula.md" target="_blank"> nebula</a>.
+**Note**: We recommend deploying an overlay network, such as <a herf="https://github.com/AnyLog-co/documentation/blob/master/deployments/Networking%20&%20Security/nebula.md" target="_blank">nebula</a>.
  * It provides a mechanism to maintain static IPs.
  * It provides the mechanisms to address firewalls limitations.
  * It isoltates the network addressing security considerations. 
@@ -132,3 +132,57 @@ The following table summarizes the commonly used packages deployed with EdgeLake
 * Grafana, on a dedicated node, as an example for an application interacting with the network data.
 
 
+## Machine Configurations
+EdgeLake requires static IPs for the nodes in the network. In a private or closed network, the IPs tend to be static even
+when restarting a machine. However, for cloud instances, users may require some configuration in order to have static IPs. 
+* <a href="https://cloud.google.com/compute/docs/ip-addresses/configure-static-external-ip-address" target="_blank">Google Cloud</a>
+* <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank">AWS</a>
+* <a href="https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-networks-static-private-ip-arm-pportal" target="_blank">Azure</a>
+
+### Network Configurations
+Users can configure the nodes to use any valid IP and Port. 
+
+For simplicity, the default setup is associating the same port values to nodes of the same type. The following tables 
+summarizes the default port values used by EdgeLake.
+
+<table>
+    <tr>
+        <td style="text-align: center"><b>Node Type</b></td>
+        <td style="text-align: center"><b>TCP</b></td>
+        <td style="text-align: center"><b>REST</b></td>
+        <td style="text-align: center"><b>Message Broker</b></td>
+    </tr>
+    <tr>
+        <td>Master</td>
+        <td style="text-align: right">32048</td>
+        <td style="text-align: right">32049</td>
+    </tr>
+    <tr>
+        <td>Operator</td>
+        <td style="text-align: right">32148</td>
+        <td style="text-align: right">32149</td>
+        <td style="text-align: right">32150</td>
+    </tr>
+    <tr>
+        <td>Query</td>
+        <td style="text-align: right">32348</td>
+        <td style="text-align: right">32349</td>
+    </tr>
+</table>
+
+**Note**: 
+* The port designated as **TCP** is used by the EdgeLake protocol when messages are send between nodes of the network. 
+* The port designated as **REST** is used to message a node using the REST protocol. 3rd party apps would be using 
+REST to communicate with nodes in the network.
+* The port designated as **Message Broker** is optional and is used to accept message from 3rd party apps like Kafka
+and MQTT
+
+#### The Network ID
+
+* With a Master Node deployment, the network ID is the Master's IP and Port.
+* A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
+(the IP that identifies the node on the network used) and the ports are set by default as described above.  
+In this setup, the network ID is the IP of the Master and port 32048.
+
+If the default IP is not known, when the Master node is initiated, the command <code class="language-anylog"get connections</code> on the node CLI returns
+the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
