@@ -106,7 +106,7 @@ and <a href="https://github.com/AnyLog-co/documentation/blob/master/blockchain%2
 <ul>
     <li>Copy the metadata from a peer node in the network. See details <a href="https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#blockchain-commands" target="_blank">here</a>
     <pre class="code-frame"><code class="language-anylog">blockchain seed from [ip:port]</code></pre>
-<b>Note</b>: the proper way to provide the metadata to a node is to enable the **blockchain synchronizer** service on the node.  
+<b>Note</b>: the proper way to provide the metadata to a node is to enable the <b>blockchain synchronizer</b> service on the node.  
 This process will update the node continuously with updates to the metadata. Details are available [here](../background%20processes.md#blockchain-synchronizer).
 </li>
     <li>Examples of metadata commands
