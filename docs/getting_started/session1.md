@@ -83,7 +83,7 @@ get echo queue
 </code></pre>
 </li>
     <li>Test node configuration - A node can validate proper configurations using the **test node** command.
-<pre class="code-frame"><code class="language-anylog">test node</code>
+<pre class="code-frame"><code class="language-anylog">test node</code></pre>
 Details are available <a href="https://github.com/AnyLog-co/documentation/blob/master/test%20commands.md#test-node" target="_blank">here</a>.
 </li>
 </ul>
