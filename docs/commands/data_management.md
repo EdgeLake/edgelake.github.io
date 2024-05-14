@@ -107,7 +107,7 @@ get partitioned dropped
 get partitions where dbms = lsl_demo and table = ping_sensor
 </code></pre>
 
-**Details**: [Data Partitioning](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partition-command).
+**Details**: [Partition Status](https://github.com/AnyLog-co/documentation/blob/master/anylog%20commands.md#partitions-status-and-configurations).
 
 ### Drop Partition
 
