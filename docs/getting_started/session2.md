@@ -187,8 +187,9 @@ and MQTT
 
 * With a Master Node deployment, the network ID is the Master's IP and Port.
 * A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
-(the IP that identifies the node on the network used) and the ports are set by default as described above.  
-In this setup, the network ID is the IP of the Master and port 32048.
+(the IP that identifies the node on the network used) and the ports are set by default as described above.
+
+<b>In this setup, the network ID is the IP of the Master and port 32048.</b>
 
 If the default IP is not known, when the Master node is initiated, the command <code class="language-anylog">get connections</code> 
 on the node CLI returns the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
@@ -338,6 +339,9 @@ connect dbms system_query where type=sqlite and memory=true</code></pre>
     </li>
 </ol>
 
+## Test & Query EdgeLake
+
+### Validate Node is Running
 
 <ol start="1">
     <li>Validate node is reachable by the network members - On each deployed node issue the command
@@ -346,21 +350,74 @@ The command returns the list of registered nodes in the network and validates th
 published IPs and Ports. For each node, the value in the status column needs to be the plus sign (<b>+</b>) that designates connectivity.    
 if the plus sign is missing, the node is down or not reachable.
     </li>
-    <li>Basic operations - On each node (using the CLI) use the following commands
-        <ul>
-            <li>View the network services using the command
-                <pre class="code-frame"><code class="language-anylog">get connections</code></pre>
-            </li>
-            <li>View the background processes enabled using the command
-                <pre class="code-frame"><code class="language-anylog">get processes</code></pre>
-            </li>
-            <li>Communicate with peer nodes. The basic command is <code class="language-anylog">get status</code> 
+    <li>View the background processes enabled using the command
+        <pre class="code-frame"><code class="language-anylog">get processes
+    Process         Status       Details                                                                      
+    ---------------|------------|----------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 172.105.86.168:32148, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 172.105.86.168:32149, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Running     |Cluster Member: True, Using Master: 45.79.74.39:32048, Threads Pool: 3      |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 45.79.74.39:32048                  |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                              |
+    Blobs Archiver |Running     |                                                                            |
+    MQTT           |Running     |                                                                            |
+    Message Broker |Running     |Listening on: 172.105.86.168:32150, Threads Pool: 5                         |
+    SMTP           |Not declared|                                                                            |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes                |
+    Query Pool     |Running     |Threads Pool: 3                                                             |
+    Kafka Consumer |Not declared|                                                                            |
+    gRPC           |Not declared|                                                                            |
+    Publisher      |Not declared|                                                                            |
+    Distributor    |Running     |                                                                            |
+    Consumer       |Running     |No peer Operators supporting the cluster                                    |</code></pre>
+    </li>
+    <li>Communicate with peer nodes. The basic command is <code class="language-anylog">get status</code> 
 (similar to <i>ping</i>) which is exemplified below (from the CLI of the master)
                 <pre class="code-frame"><code class="language-anylog">EL edgelake-master > run client (198.74.50.131:32148) get status
  
 [From Node 198.74.50.131:32148]  
      'edgelake-operator_1@198.74.50.131:32148 running'</code></pre>
+    </li>
+    <li>On an Operator Node, users can view data coming in using an array of commands:
+        <ul>
+            <li>Statistics on the streaming processes
+                <pre class="code-frame"><code class="language-anylog">get streaming
+EL edgex-operator1 > get streaming 
+
+Flush Thresholds
+Threshold        Value  Streamer 
+----------------|------|--------|
+Threshold Time  |    60|Running |
+Threshold Volume|10,240|        |
+Write Immediate |False |        |
+Buffered Rows   |    49|        |
+Flushed Rows    |   101|        |
+
+
+Statistics
+                     Put    Put     Streaming Streaming Cached Counter    Threshold   Buffer   Threshold  Time Left Last Process 
+DBMS-Table           files  Rows    Calls     Rows      Rows   Immediate  Volume(KB)  Fill(%)  Time(sec)  (Sec)     HH:MM:SS     
+--------------------|------|-----|-|---------|---------|------|----------|-----------|--------|----------|---------|------------|
+edgex.rand_data     |     0|    0| |  243,780|  243,780|    49|         0|         10|   28.55|        60|       32|00:00:04    |</code></pre>
             </li>
+            <li>Information on messages received by clients subscribed to message brokers.
+                <pre class="code-frame"><code class="language-anylog">get msg client 
+
+Subscription ID: 0001
+User:         anyloguser
+Broker:       139.144.46.246:1883
+Connection:   Connected
+
+     Messages    Success     Errors      Last message time    Last error time      Last Error
+     ----------  ----------  ----------  -------------------  -------------------  ----------------------------------
+          24389       24389           0  2024-05-14 20:17:01
+     
+     Subscribed Topics:
+     Topic       QOS DBMS  Table       Column name Column Type Mapping Function Optional Policies 
+     -----------|---|-----|-----------|-----------|-----------|----------------|--------|--------|
+     anylog-demo|  0|edgex|['[table]']|timestamp  |timestamp  |now()           |False   |        |
+                |   |     |           |value      |float      |['[value]']     |False   |        |
+    </code></pre></li>
         </ul>
     </li>
 </ol>
