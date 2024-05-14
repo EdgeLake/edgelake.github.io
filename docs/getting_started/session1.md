@@ -10,7 +10,7 @@ nav_order: 2
 * [Getting Started](..%2Fgetting_started.md)
 * [Prerequisite](prerequisite.md)
 
-## Basic AnyLog commands
+## Basic EdgeLake commands
 
 The basic AnyLog commands demonstrated in the Onboarding session:
 
