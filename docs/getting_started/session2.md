@@ -447,7 +447,7 @@ run client () sql edgex "select count(*) from rand_data;"</code></pre>
         <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), min(value), avg(value), max(value), count(*) from rand_data"</code></pre>
     </li>
     <li>Period Function 
-        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data where period(minute, 5, now(), timestamp)"</code></pre>
+        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data where period(minute, 1, now(), timestamp)"</code></pre>
     </li>
 </ul>
 
