@@ -50,8 +50,8 @@ proprietary settings.
 1. [Prerequisites & Support Software](#prerequisites--support-software)
 2. [Network Configurations](#network-configurations)
 3. [Deploy EdgeLake](#deploy-edgelake)
-4. [Configuring Node]() 
-5. [Test & Query EdgeLake]()
+4. [Configuring Node](#configuring-node) 
+5. [Test & Query EdgeLake](#test--query-edgelake)
 
 ## Prerequisites & Support Software
 ### Prerequisites 
@@ -352,6 +352,8 @@ if the plus sign is missing, the node is down or not reachable.
     </li>
     <li>View the background processes enabled using the command
         <pre class="code-frame"><code class="language-anylog">get processes
+
+# Sample processes for Operator Node:
     Process         Status       Details                                                                      
     ---------------|------------|----------------------------------------------------------------------------|
     TCP            |Running     |Listening on: 172.105.86.168:32148, Threads Pool: 6                         |
@@ -374,7 +376,6 @@ if the plus sign is missing, the node is down or not reachable.
     <li>Communicate with peer nodes. The basic command is <code class="language-anylog">get status</code> 
 (similar to <i>ping</i>) which is exemplified below (from the CLI of the master)
                 <pre class="code-frame"><code class="language-anylog">EL edgelake-master > run client (198.74.50.131:32148) get status
- 
 [From Node 198.74.50.131:32148]  
 'edgelake-operator_1@198.74.50.131:32148 running'</code></pre>
     </li>
@@ -382,6 +383,7 @@ if the plus sign is missing, the node is down or not reachable.
         <ul>
             <li>Statistics on the streaming processes
                 <pre class="code-frame"><code class="language-anylog">get streaming
+
 # Output
 Flush Thresholds
 Threshold        Value  Streamer 
@@ -401,6 +403,7 @@ edgex.rand_data     |     0|    0| |  243,780|  243,780|    49|         0|      
             </li>
             <li>Information on messages received by clients subscribed to message brokers.
                 <pre class="code-frame"><code class="language-anylog">get msg client
+
 # Output
 Subscription ID: 0001
 User:         anyloguser
@@ -420,6 +423,33 @@ Connection:   Connected
         </ul>
     </li>
 </ol>
+
+
+### Sample Queries
+<ul>
+    <li>View list of tables 
+        <pre class="code-frame"><code class="language-anylog">get tables where dbms=[DB_NAME]</code></pre>
+    </li>
+    <li>View columns in table
+        <pre class="code-frame"><code class="language-anylog">get columns where dbms=[DB_NAME]  and table=rand_data</code></pre>
+    </li>
+    <li>Get row count 
+        <pre class="code-frame"><code class="language-anylog"># Using AnyLog tool
+get rows count where dbms=edgex and table=rand_data
+
+# Using SQL 
+run client () sql edgex "select count(*) from rand_data;"</code></pre>
+    </li>
+    <li>Get raw data 
+        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data limit 100"</code></pre>
+    </li>
+    <li>Increment Function 
+        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), min(value), avg(value), max(value), count(*) from rand_data"</code></pre>
+    </li>
+    <li>Period Function 
+        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data where period(minute, 5, now(), timestamp)"</code></pre>
+    </li>
+</ul>
 
 
 
