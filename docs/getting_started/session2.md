@@ -235,14 +235,43 @@ LEDGER_CONN=127.0.0.1:32048
 
 #--- Advanced Settings ---
 # Whether to automatically run a local (or personalized) script at the end of the process
-DEPLOY_LOCAL_SCRIPT=false</code></pre>
-    </li>
+DEPLOY_LOCAL_SCRIPT=false</code></pre></li>
     <li>Start Node using makefile
         <pre class="code-frame"><code class="language-configs">make up EDGELAKE_TYPE=[NODE_TYPE]</code></pre>
     </li>
-</ul>
+</ol>
 
 <h3>Makefile Commands for Docker</h3>
+
+<ul>
+    <li><i>Help</i>
+        <pre class="code-frame"><code class="language-shell">Usage: make [target] EDGELAKE_TYPE=[anylog-type]
+Targets:
+  build       Pull the docker image
+  up          Start the containers
+  attach      Attach to EdgeLake instance
+  exec        Attach to shell interface for container
+  down        Stop and remove the containers
+  logs        View logs of the containers
+  clean       Clean up volumes and network
+  help        Show this help message
+         supported EdgeLake types: master, operator and query
+Sample calls: make up EDGELAKE_TYPE=master | make attach EDGELAKE_TYPE=master | make clean EDGELAKE_TYPE=master</code></pre>
+    </li>
+    <li><i>Bring up (Query) Node</i>
+        <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=query</code></pre>
+    </li>
+    <li><i>Attach to (Query) Node</i>
+        <pre class="code-frame"><code class="language-shell"># to detach: ctrl-d
+make attach EDGELAKE_TYPE=query</code></pre>
+    </li>
+    <li><i>Bring down (Query) Node</i>
+        <pre class="code-frame"><code class="language-shell">make down EDGELAKE_TYPE=query</code></pre>
+    </li>
+    <li><i>Clean (Query) Node - this removes the volume(s) and image from disk</i>
+        <pre class="code-frame"><code class="language-shell">make clean EDGELAKE_TYPE=query</code></pre>
+    </li>
+</ul>
 
 
 
