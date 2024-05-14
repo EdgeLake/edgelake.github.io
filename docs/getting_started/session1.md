@@ -168,8 +168,7 @@ get data monitored where dbms = dmci and table = sensor_reading</code></pre>
 get tables where dbms = litsanleandro
 get columns where table = ping_sensor and dbms = litsanleandro
 
-get data nodes
-        </code></pre>
+get data nodes</code></pre>
     </li>
     <li>Data Query - Details are in the <a href="https://github.com/AnyLog-co/documentation/blob/master/queries.md" target="_blank">query section</a>
         <pre class="code-frame"><code class="language-anylog">run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
@@ -179,9 +178,9 @@ query status
 
 run client () sql edgex format=table "select increments(minute, 1, timestamp), min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value,  count(*) as row_count from rand_data where timestamp >= NOW() - 1 hour;"
 
-run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"
-        </pre></code> 
+run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"</pre></code> 
     </li>
+</ul>
 
 
 
