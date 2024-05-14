@@ -2,9 +2,10 @@
 layout: default
 parent: 
   - Northbound
+    nav_order: 1
   - Getting Started
+    nav_order: 4
 title: Remote CLI
-nav_order: 1
 ---
 # The Remote CLI
 

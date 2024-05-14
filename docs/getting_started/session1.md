@@ -85,5 +85,42 @@ get echo queue
 <pre class="code-frame"><code class="language-anylog">test node</code></pre>
 Details are available <a href="https://github.com/AnyLog-co/documentation/blob/master/test%20commands.md#test-node" target="_blank">here</a>.
 </li>
+    <li>Connecting to a DBMS - Supported databases: <i>PostgreSQL</i> for larger nodes and <i>SQLite</i> for smaller nodes or data in RAM
+        <ul>2 system databases:    
+            <li>system_query - orchestrate query results</li>
+            <li>almgm - tracks data ingestion and Manage HA</li>
+        </ul>
+        <pre class="code-frame"><code class="language-anylog">connect dbms system_query where type = sqlite and memory = true # Used for local processing
+get databases
+</code></pre></li>
 </ul>
+
+## Metadata
+A node in the network interacts with 2 layers of metadata:
+* With a local metadata layer. The local metadata layer includes the local databases, tables and views that are used by the node to organize the data locally such that the data is unified with data on peer nodes and is accessible to permitted members of the network.
+* With a global metadata layer shared by all the members of the network.
+
+Details are available in <a href="https://github.com/AnyLog-co/documentation/blob/master//metadata%20management.md#managing-metadata" target="_blank">Managing Metadata</a> 
+and <a href="https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#blockchain-commands" target="_blank">Blockchain Commands</a>
+
+<ul>
+    <li>Copy the metadata from a peer node in the network. See details <a href="https://github.com/AnyLog-co/documentation/blob/master/blockchain%20commands.md#blockchain-commands" target="_blank">here</a>
+    <pre class="code-frame"><code class="language-anylog">blockchain seed from [ip:port]</code></pre>
+<b>Note</b>: the proper way to provide the metadata to a node is to enable the **blockchain synchronizer** service on the node.  
+This process will update the node continuously with updates to the metadata. Details are available [here](../background%20processes.md#blockchain-synchronizer).
+</li>
+    <li>Examples of metadata commands
+    <pre class="code-frame"><code class="language-anylog">blockchain get *
+blockchain get operator
+
+blockchain get operator bring.table [operator][name] [operator][city] [operator][ip]  [operator][port] 
+blockchain get operator where [city] = toronto  bring.table [operator][name] [operator][city] [operator][ip]  [operator][port] 
+
+blockchain get operator where [city] = toronto  bring [operator][ip] : [operator][port] separator = ,
+
+blockchain get operator where [city] = toronto  bring.ip_port
+</code></pre></li>
+</ul>
+
+
 
