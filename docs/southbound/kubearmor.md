@@ -6,7 +6,7 @@ nav_order: 5
 ---
 # KubeArmor / gRPC Integrations
 
-gRPC (gRPC Remote Procedure Calls) is an open-source framework developed by Google. 
+gRPC (Google Remote Procedure Calls) is an open-source framework developed by Google. 
 It is designed to be efficient, scalable, and interoperable across different programming languages.
 gRPC is used in distributed systems, microservices architectures, and client-server applications to enable efficient 
 communication between components. Detailed gRPC documentation is available [here](https://grpc.io/docs/what-is-grpc/introduction/#overview).

@@ -39,17 +39,23 @@ Note: The EdgeLake software is derived from AnyLog. To provide additional info, 
 
 EdgeLake is a decentralized network to manage IoT data. Nodes in the network are compute instances that execute the EdgeLake Software.    
 Joining a network requires the following steps:  
-1) Install the EdgeLake Software on a computer instance.
-2) Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
+1. Install the EdgeLake Software on a computer instance.
+2. Configure the node to either join an existing network or create a new network, and enable the services provided by the node.
+
+The EdgeLake Software is a stack of services to manage data and resources on each node. When a node starts, it enables
+selected services. These services manage data ingestion, data storage, southbound and northbound connectors, queries, resource status and more.  
+
+Some nodes are configured to host data. The database used is determined by the users.  
+All the nodes share a metadata layer. for the metadata, users can choose between a blockchain platform or a master node. 
 
 ## The member nodes
-A node in the network is assigned with one or more roles. The optional roles are the following:  
+A node in the network is assigned with one or more roles (summarized in the chart below):  
 
 | Node Type     | Comment | Role  |
 | ----------- | ------------|  -------------- | 
 | Operator   | | A node that hosts the data and satisfies queries. |
 | Query  | | A node that orchestrates a query process. |
-| Master | Optional | A node that hosts the metadata on a ledger and serves the metadata to the peer nodes in the network. |
+| Master | Optional | A node that hosts the metadata and serves the metadata to the nodes in the network. |
 
 Using a Master node is optional. A master node is used to maintain the global metadata when users do not enable the blockchain functionality.  
 If the nodes in the network are associated with a blockchain (see more details below), the master node in not needed, and the network remains fully decentralized.  
@@ -170,11 +176,11 @@ Notes:
 ### Initiating and Configuring EdgeLake Instances
 
 EdgeLake can be deployed and initiated using Docker or Kubernetes or as a background process. The way the node operates depends on the configuration.  
-EdgeLake can be configured in many ways:
+EdgeLake can be configured in 4 ways:
 * Using command line arguments when EdgeLake is called on the Operating System CLI (as a list of EdgeLake commands separated by the _and_ keyword).
 * By issuing configuration commands on the CLI of an EdgeLake node.
 * By calling a script file that lists the EdgeLake configuration commands (calling the command _process_ followed by the path to the script).
-* By associating a Configuration Policy with the node. 
+* By associating a Configuration Policy with the node. Configuration policies are hosted on the shared metadata layer. 
 
 
 ### The EdgeLake Command Line Interface
@@ -186,8 +192,8 @@ The command line prompt appear as **EL >**, and it can be updated by issuing the
 Using the CLI, a user can interact with the node or peer nodes in the network.  
 A more detailed description of the EdgeLake CLI is available at [The EdgeLake CLI](https://github.com/AnyLog-co/documentation/blob/master/cli.md#the-anylog-cli) section. 
 
-Users issue commands to retrieve and modify configuration, state of different processes, query and update the blockchain data and
-issue SQL queries to data stored locally and data that is stored by other members of the network.    
+Users issue commands to retrieve and modify configuration, state of different processes, query and update the metadata and
+issue SQL queries to data stored locally and data that is stored on other members of the network.    
 
 Exiting and terminating an EdgeLake node is by issuing the command `exit node` on the CLI.
 
@@ -197,7 +203,7 @@ The help command is issued on the CLI and can be used in multiple ways:
 
 * List the commands by typing ***help*** on the CLI.
 <pre class="code-frame"><code class="language-anylog">help</code></pre>
-* List all commands that share the same prefix. For example: the keyword ***get*** is the prefix of a group of commands.
+* List all commands that are assigned to a group. For example: the keyword ***get*** groups commands that retrieve information.
   These commands can be listed by typing ***help get***.   
   
 Additional Examples:
@@ -211,7 +217,7 @@ help blockchain</code></pre>
 help blockchain insert
 help get msg client
 </code></pre>
-The help provides the usage, examples, explanation and a link to the relevant documentation.
+The help provides the usage, examples, explanation and a link to the relevant documentation.  
 For example:
 <pre class="code-frame"><code class="language-anylog">help blockchain get
 
@@ -277,7 +283,7 @@ The node dictionary is detailed in the [local dictionary](https://github.com/Any
 ### Retrieving environment variables
 
 By adding the $ sign to a variable name, users can retrieve the values assigned to an environment variable.
-For example: $HOME retrieves the assigned value to HOME and $PATH retrieves the assigned value to PATH.
+For example: **$HOME** retrieves the assigned value to HOME and **$PATH** retrieves the assigned value to PATH.
 
 ### Retrieving the services status
 
@@ -287,7 +293,7 @@ To view the list of services and their status issue the following command:
 More information on the background processes is available the [background services](commands/backgound_services.md) section.
 
 ### The dynamic logs
-Every node maintains 4 dynamic logs that capture different types of events:
+Every node maintains 3 dynamic logs that capture different types of events:
 * <code class="language-anylog">The event log</code> - registers the executed commands
 * <code class="language-anylog">The error log</code> - registers the commands that failed to execute.
 * <code class="language-anylog">The query log</code> - registers the executed SQL queries. This log needs to be enabled and configured as needed.
@@ -316,14 +322,17 @@ The following command tests the availability of the network members:
 When a new node starts, or when a user wants to connect to a new network on the same root directory, user can retrieve 
 and assign a node to a metadata using the following command:
 <pre class="code-frame"><code class="language-anylog">seed from [ip:port]</code></pre>
+
+Note: IP:Port is the IP and Port of a member of the network.    
 More details are in the [Metadata](commands/metadata.md) section.
 
-### Dynamically connecting to a master node
+## Dynamically connecting to a master node
 
 Users may need to switch between different master nodes.
 The following command makes the [blockchain synchronizer process](commands/backgound_services.md)
  connect to a different master node:
 <pre class="code-frame"><code class="language-anylog">blockchain switch network where master = [IP:Port]</code></pre>
+Note: IP:Port is the IP and Port of the Master node.
 
 ## Using the REST API to issue EdgeLake commands
 
@@ -339,7 +348,7 @@ When a message is received at a node, the node retrieves the command and the dat
 Depending on the command in the message, some messages trigger a reply (for example, a command to derive a status, or a SQL query)
 and some types of commands are only executed on the destination node (for example, a command to change a state, or a command to display a message).    
 
-The format to send a command from the node's CLI is the following:
+The format for sending a command from the node's CLI is as follows:
 <pre class="code-frame"><code class="language-anylog">run client (destination) command</code></pre>
 ### The message sections:
 **run client** - Making the current node a client of a peer node (or nodes). The command is organized in a message
@@ -372,7 +381,7 @@ The example below returns the CPU usage from all the Operator nodes in the US:
 
 Additional information is available at [Queries and info requests to the Network](https://github.com/AnyLog-co/documentation/blob/master/queries.md).
 
-## Querying and updating metadata in the blockchain
+## Querying and updating metadata
 
 The network maintains a global metadata that is stored in a blockchain or in a Master Node.  
 Users are able to query and update the metadata (regardless of the platform used to store the metadata) using the ***blockchain commands***.    

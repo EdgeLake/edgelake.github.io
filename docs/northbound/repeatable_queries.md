@@ -4,14 +4,19 @@ parent: Northbound
 title: Using Postgres to view Data
 nav_order: 5
 ---
-# Using Postgres to view Data
+# Using Repeatable Queries to update a database with result sets
 
-Most BI tools and third-party applications support a _REST_ tool to query data. However, there are applications, like
-[Tableu](https://www.tableau.com/) and [Lookr](https://developers.google.com/looker-studio), that may not have REST; or 
-it might be easier to connect to a physical database. In such a case, it is recommended to use PostgresSQL for 
-<code>system_query</code> as opposed to _SQLite_. 
+In EdgeLake, a Repeatable Query is a query placed on the EdgeLake rule engine, executed repeatedly, and configured 
+to update a target table with the query results.
 
-## Setting up Postgres 
+A common use case is to provide result sets to BI tools and third-party applications that do not support the _REST_ API.  
+For these tools and applications, results sets of queries over the network data are hosted in a database.  
+For example, [Tableu](https://www.tableau.com/) and [Lookr](https://developers.google.com/looker-studio) do not support 
+the REST API but can leverage Repeatable Queries.
+
+The examples below places the network data in PotgreSQL. 
+
+## Setting up PostgreSQL 
 <ol start="1">
    <li><a href="https://www.postgresqltutorial.com/install-postgresql/" target="_blank">Install PostgresSQL</a></li>
    
@@ -37,8 +42,8 @@ it might be easier to connect to a physical database. In such a case, it is reco
    password=demo&gt;</code></pre>
    </li>
    
-   <li>Execute query - <a href="https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#repeatable-queries" target="_blank">to run in repeat</a>
-      <pre class="code-frame"><code class="language-anylog">run client () sql aiops format=table and table=new_table and drop=true "select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day"</code></pre>
+   <li>Execute query - <a href="https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#repeatable-queries" target="_blank">as repeatable query</a>
+      <pre class="code-frame"><code class="language-anylog">run client () sql aiops format=table and table=fic11_mv and drop=true "select increments(hour, 1, timestamp), min(timestamp), min(value), avg(value), max(value) from fic11_mv where timestamp >= NOW() - 1 day"</code></pre>
    </li>
 
    <li>Utilize <code>query explain</code> to view how the results are generated
@@ -52,7 +57,10 @@ it might be easier to connect to a physical database. In such a case, it is reco
    </code></pre></li>
 </ol>
 
-**Disclaimer**: [Full list of SQL options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options)
+Note:
+* In the example above, output is placed in table named: **fic11_mv**.
+* If **drop** is set to True, every query execution deletes the previous result sets. Users can configure the process to be incremental to the previous result sets.  
+* The [Query Options](https://github.com/AnyLog-co/documentation/blob/master/queries.md#query-options) document details the query configuration options.
 
 ## Extract Data onto Tableau
 <ol start="1">

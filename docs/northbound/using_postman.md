@@ -6,8 +6,8 @@ nav_order: 5
 ---
 # Using Postman against EdgeLake Network
  
-Postman is an API platform for building and using APIs. It can serve as a tool to issue EdgeLake Commands to nodes in the 
-EdgeLake Network and as a tool to issue queries to data that is hosted by nodes of the network.
+Postman is an API platform that can serve as a tool to issue EdgeLake Commands to nodes in the 
+EdgeLake Network and as a tool to issue queries to data in the network.
 
 Commands and queries through Postman can be issues with SSL enabled or disabled.  
 
