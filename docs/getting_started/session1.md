@@ -51,7 +51,6 @@ get dictionary _dir
 </li>
 </ul>
 
-
 ## Communication Services
 
 Each node can offer 3 types of communication services:
@@ -122,6 +121,68 @@ blockchain get operator where [city] = toronto  bring [operator][ip] : [operator
 blockchain get operator where [city] = toronto  bring.ip_port
 </code></pre></li>
 </ul>
+
+## Communicating with Peers
+Use the [TCP connection to communicate](#communication-services) with peers.
+<ul>
+    <li>With a single peer:   <code class="language-anylog">run client (ip:port)</code></li>
+    <li>With multiple peers:  <code class="language-anylog">run client (ip:port, ip:port, ip:port ...)</code></li>
+</ul>
+
+<ul>
+    <li>Test node connectivity with peers - A process to validate that the node can communicate with peers in the network. 
+See details <a href="https://github.com/AnyLog-co/documentation/blob/master/test%20commands.md#the-test-network-commands" target="_blank">here</a>.
+    <pre class="code-frame"><code class="language-anylog">test network</code></pre>
+    </li>
+    <li>Communicating with Other Nodes 
+    <pre class="code-frame"><code class="language-anylog">run client (23.239.12.151:32348) get status
+run client (23.239.12.151:32348) get disk usage .
+run client (23.239.12.151:32348) get cpu usage</code></pre></li>
+</ul>
+
+## Monitoring Commands
+The following examples use <code class="language-anylog">!destination</code>, this is value is derived from the blockchain metadata 
+<pre class="code-frame"><code class="language-anylog">destination = blockchain get operator where [city] = toronto  bring.ip_port</code></pre>
+<ul>
+    <li><a herf="https://github.com/AnyLog-co/documentation/blob/master/monitoring%20nodes.md#monitoring-nodes" target="_blank">Monitoring Nodes</a>
+        <pre class="code-frame"><code class="language-anylog">run client (!destination) get status
+run client (!destination) get disk usage .
+run client (!destination) get memory info
+run client (!destination) get processes
+        </code></pre>
+    </li>
+    <li><a herf="https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring" target="_blank">Alerts and Monitoring</a>
+        <pre class="code-frame"><code class="language-anylog">schedule time = 5 minutes and name = "Get Disk Space" task disk_d_free = get disk free d:\</code></pre>
+    </li>
+    <li><a herf="https://github.com/AnyLog-co/documentation/blob/master/monitoring%20data.md#monitoring-data" target="_blank">Monitoring Data</a>
+        <pre class="code-frame"><code class="language-anylog">get data monitored
+get data monitored where dbms = dmci and table = sensor_reading</code></pre>
+    </li>
+    <li><a herf="https://github.com/AnyLog-co/documentation/blob/master/monitoring%20calls.md#monitoring-calls-from-external-applications" target="_blank">Monitoring Calls</a></li>
+</ul>
+
+### Data Monitoring & Querying
+<ul>
+    <li>Data Monitoring Examples
+        <pre class="code-frame"><code class="language-anylog">get virtual tables
+get tables where dbms = litsanleandro
+get columns where table = ping_sensor and dbms = litsanleandro
+
+get data nodes
+        </code></pre>
+    </li>
+    <li>Data Query - Details are in the <a href="https://github.com/AnyLog-co/documentation/blob/master/queries.md" target="_blank">query section</a>
+        <pre class="code-frame"><code class="language-anylog">run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor WHERE timestamp > NOW() - 1 day limit 100"
+run client () sql litsanleandro format = table "select count(*), min(value), max(value) from ping_sensor WHERE timestamp > NOW() - 1 day;"
+
+query status
+
+run client () sql edgex format=table "select increments(minute, 1, timestamp), min(timestamp) as min_ts, max(timestamp) as max_ts, min(value) as min_value, avg(value) as avg_value,  count(*) as row_count from rand_data where timestamp >= NOW() - 1 hour;"
+
+run client () sql edgex format=table "select timestamp, value FROM rand_data WHERE period(minute, 5, NOW(), timestamp) ORDER BY timestamp"
+        </pre></code> 
+    </li>
+
 
 
 
