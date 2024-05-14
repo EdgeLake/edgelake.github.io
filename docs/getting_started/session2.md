@@ -277,23 +277,23 @@ make attach EDGELAKE_TYPE=query</code></pre>
 ## Configuring Node
 For the demo purposes, everything should deploy automatically using configuration policies.
 
-<ol start="1"> 
+<ol start="1">
     <li>Based on used environment parameters (<code>.env</code> file), set EdgeLake parameters to be used</li>
     <li>Connect to network services (TCP and REST)
-<pre class="code-frame"><code class="language-anylog"># TCP Server 
-&lt;run tcp server where 
-  external_ip = [ip] and external_port = [port] and 
-  internal_ip = [local_ip] and internal_port = [local_port] and 
+        <pre class="code-frame"><code class="language-anylog"># TCP Server
+&lt;run tcp server where
+  external_ip = [ip] and external_port = [port] and
+  internal_ip = [local_ip] and internal_port = [local_port] and
   bind = [true/false] and threads = [threads count]&gt;
 
 # REST server
-&lt;run rest server where 
-  external_ip = [external_ip ip] and external_port = [external port] and 
-  internal_ip = [internal ip] and internal_port = [internal port] and 
+&lt;run rest server where
+  external_ip = [external_ip ip] and external_port = [external port] and
+  internal_ip = [internal ip] and internal_port = [internal port] and
   timeout = [timeout] and ssl = [true/false] and bind = [true/false]&gt;
 </code></pre>
     </li>
-    <li>Using <code class="language-anylog">blockchain seed</code>, get the latest copy of the blockchian
+    <li>Using <code class="language-anylog">blockchain seed</code>, get the latest copy of the blockchain
         <pre class="code-frame"><code class="language-anylog">blockchain seed from !ledger_conn</code></pre>
     </li>
     <li>Declare Node policy - in Operator Node, it also creates the correlating Cluster Policy
@@ -302,8 +302,8 @@ For the demo purposes, everything should deploy automatically using configuratio
     "company": "AnyLog Co.",
     "ip": "136.23.47.189",
     "local_ip": "136.23.47.189",
-    "port": 32248,
-    "rest_port": 32249,
+    "port": 32148,
+    "rest_port": 32149,
     "cluster": "f3e300855609ba4fc83b550179f584a4",
     "loc": "37.425423, -122.078360",
     "country": "US",
@@ -313,20 +313,20 @@ For the demo purposes, everything should deploy automatically using configuratio
 </code></pre>
     </li>
     <li>connect to logical database(s)
-        <pre class="code-frame"><code class="language-anylog"># Master Node 
+        <pre class="code-frame"><code class="language-anylog"># Master Node
 connect dbms blockchain where type=sqlite
 
-# Operator Node 
-connect dbms [DEFAULT_DBMS] where type=psql and host=127.0.0.1 and port=5432 and user=!db_user and port=!db_port 
+# Operator Node
+connect dbms [DEFAULT_DBMS] where type=psql and host=127.0.0.1 and port=5432 and user=!db_user and port=!db_port
 connect dbms almgm where type=psql and host=127.0.0.1 and port=5432 and user=!db_user and port=!db_port
 
-# Query Node 
+# Query Node
 connect dbms system_query where type=sqlite and memory=true</code></pre>
     </li>
     <li>Run blockchain sync
         <pre class="code-frame"><code class="language-anylog">run blockchain sync where source=master and time="30 seconds" and dest=file and connection=!ledger_conn</code></pre>
     </li>
-    <li>Monitor nodes - send <i>Remote-CLI</i> information like <code>cpu utilization</code>, <code>disk space</code> and <code>memory usage</code></li>
+    <li>Monitor nodes - send Remote-CLI information like <code>cpu utilization</code>, <code>disk space</code> and <code>memory usage</code></li>
     <li>When setting <code>ENABLE_MQTT</code> to <i>true</i> on an Operator Node, that will automatically flow in from a 3rd party application via MQTT
         <pre class="code-frame"><code class="language-anylog">&lt;run msg client client where broker=139.144.46.246 and port=1883 and user=anyloguser and password=mqtt4AnyLog! and log=false and topic=(
     name=anylog-demo and
@@ -334,10 +334,10 @@ connect dbms system_query where type=sqlite and memory=true</code></pre>
     table="bring [table]" and 
     column.timestamp.timestamp="bring [timestamp]" and 
     column.value=(type=float and value="bring [value]")
-)&gt; 
-    <li>
+)&gt;</code></pre>
+    </li>
 </ol>
- 
+
 
 <ol start="1">
     <li>Validate node is reachable by the network members - On each deployed node issue the command
