@@ -21,5 +21,34 @@ Prerequisites for AnyLog Nodes are detailed [here](prerequisites.md).
 
 **Note**: For the training sessions, remove firewalls restrictions and assign each node to a static IP.
 
-This training includes 2 sessions:
+
+## Training Architecture 
+
+<div style="text-align: center;"><b>The test network deployed is shown in the following diagram</b></div>
+
+<div class="image-frame"><img src="../../../imgs/deployment_diagram.png" /></div>
+
+In the test network, data will be transferred to the 2 Operator Nodes, and a query that is processed on the Query Node 
+will be satisfied as if the entire data set is hosted locally (as if the 2 Operators are a single machine).
+
+**Note 1**: The table of content to the AnyLog documentation is available in the README Section
+
+**Note 2**: In this training, some configurations are packaged with the software deployed, and some configurations are 
+done using the EdgeLake command-line.
+
+In a customer deployment, all configurations are pre-packaged, and associated to a node by one (or more) of these processes:
+
+<ol start="1">
+    <li>By maintaining configuration commands in a local file that is associated to a node</li>
+    <li>By dynamically creating a configuration file (for the node) during the Docker deployment.</li>
+    <li>By maintaining configuration commands in policies stored in the shared metadata and associating a configuration policy to a node.</li>
+</ol>
+
+**Note 3**: Advanced users can review the [Network Setup](https://github.com/AnyLog-co/documentation/blob/master/examples/Secure%20Network.md) Document to deploy a test network using the EdgeLake CLI without pre-packaged configuration.
+
+
+
+
+
+
 
