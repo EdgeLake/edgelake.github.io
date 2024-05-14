@@ -184,5 +184,5 @@ and MQTT
 (the IP that identifies the node on the network used) and the ports are set by default as described above.  
 In this setup, the network ID is the IP of the Master and port 32048.
 
-If the default IP is not known, when the Master node is initiated, the command <code class="language-anylog">get connections</code> on the node CLI returns
-the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
+If the default IP is not known, when the Master node is initiated, the command <code class="language-anylog">get connections</code> 
+on the node CLI returns the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
