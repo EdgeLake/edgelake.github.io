@@ -148,8 +148,7 @@ The following examples use <code class="language-anylog">!destination</code>, th
         <pre class="code-frame"><code class="language-anylog">run client (!destination) get status
 run client (!destination) get disk usage .
 run client (!destination) get memory info
-run client (!destination) get processes
-        </code></pre>
+run client (!destination) get processes</code></pre>
     </li>
     <li><a herf="https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#alerts-and-monitoring" target="_blank">Alerts and Monitoring</a>
         <pre class="code-frame"><code class="language-anylog">schedule time = 5 minutes and name = "Get Disk Space" task disk_d_free = get disk free d:\</code></pre>
