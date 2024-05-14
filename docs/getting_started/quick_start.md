@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Getting Started
+title: Quick Start
 nav_order: 7
 has_children: true
 ---
-# Getting Started
+# Quick Start
 EdgeLake is deployed using Docker as a pre-configured software package.
 
 To address dynamic and ad-hoc needs, each EdgeLake node provides an interactive environment allowing to dynamically 
