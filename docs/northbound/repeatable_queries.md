@@ -1,8 +1,6 @@
 ---
 layout: default
-parent: 
-    - Northbound
-    - Getting Started
+parent: Northbound
 title: Using Postgres to view Data
 nav_order: 5
 ---

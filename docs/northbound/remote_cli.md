@@ -1,6 +1,8 @@
 ---
 layout: default
-parent: Northbound
+parent: 
+  - Northbound
+  - Getting Started
 title: Remote CLI
 nav_order: 1
 ---
