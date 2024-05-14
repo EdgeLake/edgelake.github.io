@@ -53,7 +53,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     </li>
 </ol>
 
-### Machine A - Master Node
+### Master Node
 <ol start="1">
     <li>cd into docker-compose directory</li>
     <li>Update the params in <a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_master.env" target="_blank">docker_makefile/edgelake_master.env</a> 
@@ -65,7 +65,6 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=master</code></pre>
     </li>
-    <br/>
     <b>Validate Node is working</b> 
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
@@ -90,85 +89,81 @@ REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 runn
 </li>
 <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
+**Note**: The TCP connection information (in the exampl - `45.79.74.39:32048` will be used as the LEDGER_CONN for the 
+other nodes. 
+
+
+### Operator Node(s)
+The following steps can be used for both operator nodes, any differences would are specified in the correlated step. 
+<ol start="1">
+    <li>cd into docker-compose directory</li>
+    <li>Update the params in <a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_operator.env" target="_blank">docker_makefile/edgelake_operator.env</a>
+        <ul style="padding-left: 20px;">Key Params:
+            <li>NODE_NAME - each operator should have unique value</li>
+            <li>COMPANY_NAME</li>
+            <li>LEDGER_CONN - should be set to the TCP connection for Master Node</li>
+            <li>CLUSTER_NAME - each operator should have unique value</li>
+            <li>DEFAULT_DBMS - should be the same on both operators</li>
+            <li>(Optional) ENABLE_MQTT</li>
+            <li>MSG_DBMS - should be set to the same value as DEFAULT_DBMS</li>
+            <li>If you run multiple operators on the same machine, make sure they each have unique port values</li>
+        </ul>
+    </li>
+    <li> Start Node
+        <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=operator</code></pre>
+    </li>
+    <b>Validate Node is working</b> 
+    <li>Attach into operator node
+        <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=operator</code></pre>
+    </li>
+    <li>Execute <code class="language-anylog">test network</code> to validate you're able to communicate with the nodes in the network
+        <pre class="code-frame"><code class="language-shell">EL edgelake-operator +> test network  
+                                                                                         
+Test Network
+[****************************************************************]
+ 
+Address               Node Type Node Name                     Status 
+---------------------|---------|-----------------------------|------|
+35.225.182.15:32148  |operator |edgelake-operator            |  +   |
+45.79.74.39:32048    |master   |edgelake-master              |  +   |
+</li>
+    <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
+</ol>
+
+### Query Node(s) 
+<ol start="1">
+    <li>cd into docker-compose directory</li>
+    <li>Update the params in <a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_query.env" target="_blank">docker_makefile/edgelake_query.env</a>
+        <ul style="padding-left: 20px;">Key Params:
+            <li>NODE_NAME - each operator should have unique value</li>
+            <li>COMPANY_NAME</li>
+            <li>LEDGER_CONN - should be set to the TCP connection for Master Node</li>
+        </ul>
+    </li>
+    <li> Start Node
+        <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=query</code></pre>
+    </li>
+    <b>Validate Node is working</b> 
+    <li>Attach into query node
+        <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=query</code></pre>
+    </li>
+    <li>Execute <code class="language-anylog">test network</code> to validate you're able to communicate with the nodes in the network
+        <pre class="code-frame"><code class="language-shell">EL edgelake-query +> test network  
+                                                                                         
+Test Network
+[****************************************************************]
+ 
+Address               Node Type Node Name                     Status 
+---------------------|---------|-----------------------------|------|
+35.225.182.15:32148  |operator |edgelake-operator            |  +   |
+45.79.74.39:32048    |master   |edgelake-master              |  +   |
+23.239.12.151:32348  |query    |anylog-query                 |  +   |
+</li>
+    <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
+</ol>
 
 
 
-
-#### Start the node
-
-```docker-compose up -d```
-
-#### Attach & test
-
-```docker attach --detach-keys=ctrl-d anylog-master``` (and hit the Enter key)
-
-* Test the network by issuing the command: **test network** on the AnyLog CLI (One node - the Master, is identified).
-
-* Copy the Network ID (the IP and Port of the master) - use the command: ```get connections``` to view the IP and Port info.
-    This network ID is added to the configuration of the member nodes to make them members of the network associated with this master.  
-    Example:
-    ```
-    AL anylog-master +> get connections
-    
-    Type      External Address    Internal Address    Bind Address  
-    ---------|-------------------|-------------------|-------------|
-    TCP      |198.74.50.131:32048|198.74.50.131:32048|0.0.0.0:32048|
-    REST     |198.74.50.131:32049|198.74.50.131:32049|0.0.0.0:32049|
-    Messaging|Not declared       |Not declared       |Not declared |
-    ```
-    The Network ID in the example above is identified by TCP/External-Address and is: ```198.74.50.131:32048```.  
-    This ID is added to each participating node to make it a member of the same network.
-
-#### Detach
-
-Using the keys: **ctrl+d**
-
-## Deploy the Query node
-
-#### Update the configs
-
-In the folder ```cd deployments/training/anylog-query``` update the ```anylog_configs.env``` file as follows:
-* LICENSE_KEY with the AnyLog License Key (if different than the default).
-* NODE_NAME is set to anylog-query
-* COMPANY_NAME with your company name.
-* LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
-
-#### Start the node
-
-```docker-compose up -d```
-
-#### Attach & test
-
-```docker attach --detach-keys=ctrl-d anylog-query``` (and hit the Enter key)
-
-Test the network by issuing the command: **test network** on the AnyLog CLI (Two nodes - a Master and a Query node are identified).
-
-#### Detach
-
-Using the keys: **ctrl+d**
-
-## Deploy the Operator nodes (one node on each physical machine)
-
-In the folder ```cd deployments/training/anylog-operator``` update the ```anylog_configs.env``` file as follows:
-* LICENSE_KEY with the AnyLog License Key (if different than the default).
-* COMPANY_NAME with your company name.
-* LEDGER_CONN with the Network ID - the IP and Port of the Master Node (for example: LEDGER_CONN=198.74.50.131:32048).
-* NODE_NAME - currently showing **anylog-operator**, change to be unique (and anylog can be replaced with your company name):
-    - for operator 1: **anylog-operator_1**
-    - for operator 2: **anylog-operator_2**
-* CLUSTER_NAME - currently showing **new-company-cluster**. change to your company name (the example below is 
-using anylog for new-company) and a unique prefix like the example below:
-    - for operator 1: **anylog-cluster_1**
-    - for operator 2: **anylog-cluster_2**
-* DEFAULT_DBMS - a logical database name for test data. Use the same name on both operators (or use the default name - **test**).    
-        
-#### Start the node
-
-```docker-compose up -d```
-
-#### Attach & test
-
-```docker attach --detach-keys=ctrl-d anylog-operator```  (and hit the Enter key)
 
 Test the network by issuing the command: **test network** on the AnyLog CLI.  
 * With the first Master - Three nodes (a Master, a Query and an Operator node) are identified).
