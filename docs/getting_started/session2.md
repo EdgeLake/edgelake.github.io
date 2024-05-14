@@ -49,7 +49,7 @@ proprietary settings.
 ### This session includes 4 sections:
 1. [Prerequisites & Support Software](#prerequisites--support-software)
 2. [Network Configurations](#network-configurations)
-3. Deploy EdgeLake 
+3. [Deploy EdgeLake](#deploy-edgelake)
 4. Test & Query EdgeLake
 
 ## Prerequisites & Support Software
@@ -58,7 +58,12 @@ Prior to this session, users are required to prepare:
 <ul>
     <li>4 machines (virtual or physical) to host the EdgeLake nodes, as follows:
         <ul style="padding-left: 20px">
-            <li>Linux, Windows or MacOSX environment with Docker / docker-compose installed</li>
+            <li>Linux, Windows or MacOSX environment with the following programs: 
+                <ul>
+                    <li><a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a></li>
+                    <li><a href="https://www.gnu.org/software/make/manual/make.html" target="_blank">Makefile</a></li>
+                </ul>
+            </li>
             <li>A minimum of 512MB of RAM</li>
             <li>A minimum of 10GB of disk space</li>
         </ul>
@@ -186,3 +191,59 @@ In this setup, the network ID is the IP of the Master and port 32048.
 
 If the default IP is not known, when the Master node is initiated, the command <code class="language-anylog">get connections</code> 
 on the node CLI returns the IPs and ports used - the Network ID is the IP and port assigned to TCP-External.
+
+
+## Deploy EdgeLake
+
+Detailed directions for deploying each node can be found in [Fast Deployment](fast_deployment.md) document.
+
+<ol start="0">
+    <li>Clone docker-compose from EdgeLake repository
+        <pre class="code-frame"><code class="language-shell">git clone https://github.com/EdgeLake/docker-compose
+cd docker-compose</code></pre>
+    </li>
+    <li>Edit <code class="langauge-anylog">LEDGER_CONN</code> in <i>Query</i> and <i>Operator</i> using IP address of master node</li>
+    <li>Update .env configurations for the node(s) being deployed
+        <ul>
+            <li><a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_master.env" target="_blank">docker_makefile/edgelake_master.env</a></li>
+            <li><a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_operator.env" target="_blank">docker_makefile/edgelake_operator.env</a></li>
+            <li><a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_query.env" target="_blank">docker_makefile/edgelake_query.env</a></li>
+        </ul>
+        <br/>
+        <b>Sample Configuration File</b>:
+        <pre class="code-frame"><code class="language-configs">#--- General ---
+# Information regarding which AnyLog node configurations to enable. By default, even if everything is disabled, AnyLog starts TCP and REST connection protocols
+NODE_TYPE=master
+# Name of the AnyLog instance
+NODE_NAME=anylog-master
+# Owner of the AnyLog instance
+COMPANY_NAME=New Company
+
+#--- Networking ---
+# Port address used by AnyLog's TCP protocol to communicate with other nodes in the network
+ANYLOG_SERVER_PORT=32048
+# Port address used by AnyLog's REST protocol
+ANYLOG_REST_PORT=32049
+# A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+TCP_BIND=false
+# A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+REST_BIND=false
+
+#--- Blockchain ---
+# TCP connection information for Master Node
+LEDGER_CONN=127.0.0.1:32048
+
+#--- Advanced Settings ---
+# Whether to automatically run a local (or personalized) script at the end of the process
+DEPLOY_LOCAL_SCRIPT=false</code></pre>
+    </li>
+    <li>Start Node using makefile
+        <pre class="code-frame"><code class="language-configs">make up EDGELAKE_TYPE=[NODE_TYPE]</code></pre>
+    </li>
+</ul>
+
+<h3>Makefile Commands for Docker</h3>
+
+
+
+
