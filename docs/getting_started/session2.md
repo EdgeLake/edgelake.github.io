@@ -441,13 +441,13 @@ get rows count where dbms=edgex and table=rand_data
 run client () sql edgex "select count(*) from rand_data;"</code></pre>
     </li>
     <li>Get raw data 
-        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data limit 100"</code></pre>
+        <pre class="code-frame"><code class="language-anylog">run client () sql edgex format=table "select timestamp, value from rand_data limit 100"</code></pre>
     </li>
     <li>Increment Function 
-        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), min(value), avg(value), max(value), count(*) from rand_data"</code></pre>
+        <pre class="code-frame"><code class="language-anylog">run client () sql edgex format=table "select increments(day, 1, timestamp), min(timestamp), max(timestamp), min(value), avg(value), max(value), count(*) from rand_data"</code></pre>
     </li>
     <li>Period Function 
-        <pre class="code-frame"><code class="language-anylog">ran client () sql edgex format=table "select timestamp, value from rand_data where period(minute, 1, now(), timestamp)"</code></pre>
+        <pre class="code-frame"><code class="language-anylog">run client () sql edgex format=table "select timestamp, value from rand_data where period(minute, 1, now(), timestamp)"</code></pre>
     </li>
 </ul>
 
