@@ -93,11 +93,11 @@ The following table summarizes the commonly used packages deployed with EdgeLake
         <td style="text-align: center"><b>Functionality</b></td>
     </tr>
     <tr>
-        <td><a href="../northbound/remote_cli/">Remote-CLI</a></td>
+        <td><a href="../northbound/remote_cli.md">Remote-CLI</a></td>
         <td>A web based interface to the network</td>
     </tr>
     <tr>
-        <td><a href="https://www.postgresql.org/" target="_blank">PostgresSQL</a></td>
+        <td><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></td>
         <td>SQL-based local database</td>
     </tr>
     <tr>
@@ -107,22 +107,24 @@ The following table summarizes the commonly used packages deployed with EdgeLake
     <tr>
         <td>Northbound Visualization Tool
             <ul>
-                <li><a href="../northbound/Grafana/">Grafana</a></li>
-                <li><a href="../northbound/PowerBI/">PowerBI</a></li>
+                <li><a href="../northbound/Grafana.md">Grafana</a></li>
+                <li><a href="../northbound/PowerBI.md">PowerBI</a></li>
             </ul>
+        </td>
         <td>BI tool for visualization of the data</td>
     </tr>
     <tr>
         <td>Southbound Data Generators
             <ul>
-                <li><a href="../southbound/edgex/">EdgeX</a></li>
-                <li><a href="../southbound/fledge/">FLEDGE</a></li>
-                <li><a href="../southbound/node_red/">Node-RED</a></li>
+                <li><a href="../southbound/edgex.md">EdgeX</a></li>
+                <li><a href="../southbound/fledge.md">FLEDGE</a></li>
+                <li><a href="../southbound/node_red.md">Node-RED</a></li>
             </ul>
         </td>
         <td>A connector to PLCs and sensors</td>
     </tr>
 </table>
+
 
 #### In this session, users will use the following packages:
 * Local database is SQLite (and is available by default without a dedicated install).
