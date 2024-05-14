@@ -67,7 +67,7 @@ Each node can offer 3 types of communication services:
 <ul>
     <li>Enable the TCP and REST services and view existing connections:
 <pre class="code-frame"><code class="language-anylog"># command returns no connection
-get connections   
+get connections
 
 run tcp server where internal_ip = !ip and internal_port = 20048 and external_ip = !external_ip and external_port = 20048 and bind = false and threads = 6
 run rest server where internal_ip = !ip and internal_port = 20049 and external_ip = !external_ip and external_port = 20049 and bind = false
@@ -77,7 +77,6 @@ get connections
 </code></pre></li>
     <li>Enable message queue
 <pre class="code-frame"><code class="language-anylog">set echo queue on
-
 echo this is a test message
 get echo queue
 </code></pre>
