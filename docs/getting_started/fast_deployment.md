@@ -15,7 +15,7 @@ A detailed description of every step is available in the [Session II](Session%20
   * **Machine A** - deployed with Master, Query, Operator and a remote CLI.
   * **Machine B** - deployed with the second Operator. 
 * <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a>
-* <a href="https://www.gnu.org/software/make/manual/make.html target="_blank">Makefile</a>
+* <a href="https://www.gnu.org/software/make/manual/make.html" target="_blank">Makefile</a>
 
 ## Steps
 <ol start="0">
@@ -33,20 +33,20 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
         </tr>
         <tr>
             <td>Master</td>
-            <td>32048</td>
-            <td>32049</td>
+            <td style="text-align: right">32048</td>
+            <td style="text-align: right">32049</td>
             <td></td>
         </tr>
         <tr>
             <td>Operator</td>
-            <td>32148</td>
-            <td>32149</td>
-            <td>32150</td>
+            <td style="text-align: right">32148</td>
+            <td style="text-align: right">32149</td>
+            <td style="text-align: right">32150</td>
         </tr>
         <tr>
             <td>Query</td>
-            <td>32348</td>
-            <td>32349</td>
+            <td style="text-align: right">32348</td>
+            <td style="text-align: right">32349</td>
             <td></td>
         </tr>
     </table>
@@ -157,7 +157,7 @@ Address               Node Type Node Name                     Status
 ---------------------|---------|-----------------------------|------|
 35.225.182.15:32148  |operator |edgelake-operator            |  +   |
 45.79.74.39:32048    |master   |edgelake-master              |  +   |
-23.239.12.151:32348  |query    |edgelake-query                 |  +   |
+23.239.12.151:32348  |query    |edgelake-query               |  +   |
 </code></pre></li>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
@@ -185,5 +185,3 @@ Address               Node Type Node Name                     Status
         <pre class="code-frame"><code class="language-anylog">run client () sql [dbms name] format=table "select timeestamp, value from rand_data"</code></pre>
     </li>
 </ul>
-
-```
