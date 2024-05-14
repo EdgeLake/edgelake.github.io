@@ -376,14 +376,13 @@ if the plus sign is missing, the node is down or not reachable.
                 <pre class="code-frame"><code class="language-anylog">EL edgelake-master > run client (198.74.50.131:32148) get status
  
 [From Node 198.74.50.131:32148]  
-     'edgelake-operator_1@198.74.50.131:32148 running'</code></pre>
+'edgelake-operator_1@198.74.50.131:32148 running'</code></pre>
     </li>
     <li>On an Operator Node, users can view data coming in using an array of commands:
         <ul>
             <li>Statistics on the streaming processes
                 <pre class="code-frame"><code class="language-anylog">get streaming
-EL edgex-operator1 > get streaming 
-
+# Output
 Flush Thresholds
 Threshold        Value  Streamer 
 ----------------|------|--------|
@@ -401,8 +400,8 @@ DBMS-Table           files  Rows    Calls     Rows      Rows   Immediate  Volume
 edgex.rand_data     |     0|    0| |  243,780|  243,780|    49|         0|         10|   28.55|        60|       32|00:00:04    |</code></pre>
             </li>
             <li>Information on messages received by clients subscribed to message brokers.
-                <pre class="code-frame"><code class="language-anylog">get msg client 
-
+                <pre class="code-frame"><code class="language-anylog">get msg client
+# Output
 Subscription ID: 0001
 User:         anyloguser
 Broker:       139.144.46.246:1883
