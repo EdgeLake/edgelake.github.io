@@ -117,6 +117,54 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
     </li>
 </ol>
 
+#### Most Common _SMTP_ addresses
+<table>
+    <thead>
+        <tr>
+            <td align="center"><b>SMTP Provider</b></th>
+            <td align="center"><b>URL</b></th>
+            <td align="center"><b>SMTP Settings</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>AOL</td>
+            <td>aol.com</td>
+            <td>smtp.aol.com</td>
+        </tr>
+        <tr>
+            <td>AT&T</td>
+            <td>att.net</td>
+            <td>smtp.mail.att.net</td>
+        </tr>
+        <tr>
+            <td>Comcast</td>
+            <td>comcast.net</td>
+            <td>smtp.comcast.net</td>
+        </tr>
+        <tr>
+            <td>iCloud</td>
+            <td>icloud.com/mail</td>
+            <td>smtp.mail.me.com</td>
+        </tr>
+        <tr>
+            <td>Gmail</td>
+            <td>gmail.com</td>
+            <td>smtp.gmail.com</td>
+        </tr>
+        <tr>
+            <td>Outlook</td>
+            <td>outlook.com</td>
+            <td>smtp-mail.outlook.com</td>
+        </tr>
+        <tr>
+            <td>Yahoo!</td>
+            <td>mail.yahoo.com</td>
+            <td>smtp.mail.yahoo.com</td>
+        </tr>
+    </tbody>
+</table>
+
 ### SMS Notifications
 <ol start="0">
     <li>Start <i><a href="#email-configurations">SMTP service</a></i>
