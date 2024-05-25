@@ -61,7 +61,7 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
                 <tr>
                     <td>password</td>
                     <td>The sender email password</td>
-                    <td>/td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>SSL</td>
