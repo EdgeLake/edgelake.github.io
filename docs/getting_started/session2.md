@@ -99,7 +99,7 @@ The following table summarizes the commonly used packages deployed with EdgeLake
         <td style="text-align: center"><b>Functionality</b></td>
     </tr>
     <tr>
-        <td><a href="../northbound/remote_cli.md">Remote-CLI</a></td>
+        <td><a href="../../northbound/remote_cli">Remote-CLI</a></td>
         <td>A web based interface to the network</td>
     </tr>
     <tr>
@@ -113,8 +113,8 @@ The following table summarizes the commonly used packages deployed with EdgeLake
     <tr>
         <td>Northbound Visualization Tool
             <ul>
-                <li><a href="../northbound/Grafana.md">Grafana</a></li>
-                <li><a href="../northbound/PowerBI.md">PowerBI</a></li>
+                <li><a href="../../northbound/Grafana">Grafana</a></li>
+                <li><a href="../../northbound/PowerBI">PowerBI</a></li>
             </ul>
         </td>
         <td>BI tool for visualization of the data</td>
