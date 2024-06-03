@@ -1,7 +1,7 @@
 ---
 layout: default
 parent: Northbound
-title: Twilio (Email / SMS Notifications) 
+title: Twilio (Email / SMS Notifications)
 nav_order: 5
 ---
 # Twilio  - Email and SMS Notifications
