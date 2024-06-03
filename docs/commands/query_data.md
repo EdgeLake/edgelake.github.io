@@ -102,7 +102,7 @@ run client () sql [db_name] format=[output_type] and stats=[true/false] [select 
 run client () sql litsanleandro format = table "select insert_timestamp, device_name, timestamp, value from ping_sensor limit 100"
 </code></pre>
 
-* `run client ()` directs the query to the relevant nodes in the network. When [executing via REST](../examples/rest_examples.md), 
+* `run client ()` directs the query to the relevant nodes in the network. When [executing via REST](../../examples/rest_examples), 
 the `--headers "destination: network"` replaces the `run client ()` prefix.
 * `format` determines the structure of the returned data:
   * `format=json` - The returned results are in JSON.
@@ -110,7 +110,7 @@ the `--headers "destination: network"` replaces the `run client ()` prefix.
   * `format=json:output` - The returned results are organized as rows whereas each row is a JSON structure - this format is identical to the 
 data load structure.
   * `format=json;list`- The returned results are organized as a list, every entry in the list represents a row (use this format 
-with [PowerBI](../northbound/PowerBI.md)).
+with [PowerBI](../../northbound/PowerBI)).
 * The query result sets are extended by statistics that describe how the query was executed. Set `stats=false` to disable the statistics.    
    
 
