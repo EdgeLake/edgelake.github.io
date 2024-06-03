@@ -34,7 +34,7 @@ The main roles are summarized in the table below:
     </tr>
 </table>
 
-Additional information on the types of nodes is in the [Getting Started](../getting_started/) document.
+Additional information on the types of nodes is in the [Getting Started](../../getting_started/) document.
 
 The roles are determined by configuration commands which are processed by each node at startup and enable services 
 offered by the node. The same node may be assigned to multiple roles - there are no restrictions on the services that 
@@ -122,9 +122,9 @@ The following table summarizes the commonly used packages deployed with EdgeLake
     <tr>
         <td>Southbound Data Generators
             <ul>
-                <li><a href="../southbound/edgex.md">EdgeX</a></li>
-                <li><a href="../southbound/fledge.md">FLEDGE</a></li>
-                <li><a href="../southbound/node_red.md">Node-RED</a></li>
+                <li><a href="../../southbound/edgex">EdgeX</a></li>
+                <li><a href="../../southbound/fledge">FLEDGE</a></li>
+                <li><a href="../../southbound/node_red">Node-RED</a></li>
             </ul>
         </td>
         <td>A connector to PLCs and sensors</td>

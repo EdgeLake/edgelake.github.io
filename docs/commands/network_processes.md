@@ -20,7 +20,7 @@ a peer node or a group of nodes which are members of the network.
 * Examples of REST calls to a network from Python, Postman, Grafana, Power BI, and Google tools are available
       [here](https://github.com/AnyLog-co/documentation/tree/master/northbound%20connectors).
 * EdgeLake offers a Remote CLI application. This is a graphical web based interactive tool to issue queries and commands.
-Details are available [here](../northbound/remote_cli.md)
+Details are available [here](../../northbound/remote_cli)
      
 ## Streaming data to the nodes in the network.
 

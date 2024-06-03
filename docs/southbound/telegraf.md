@@ -151,7 +151,7 @@ The example below is streaming _cpu_, _mem_, _net_ and _swap_ readings.
 
 ### Configuring the Message Broker Service
 
-[Message broker service](../commands/backgound_services.md#message-broker-services) configures an EdgeLake service to act 
+[Message broker service](../../commands/backgound_services#message-broker-services) configures an EdgeLake service to act 
 as message broker (and satisfy an _MQTT_ or _Kafka_ publish messaged). Data published on the EdgeLake node will be ingested to the local database.      
 Enabling a message broker service can be done via a configuration policy or the following command.  
 
