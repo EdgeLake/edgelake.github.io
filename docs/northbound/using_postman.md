@@ -2,7 +2,7 @@
 layout: default
 parent: Northbound
 title: Using Postman
-nav_order: 6
+nav_order: 7
 ---
 # Using Postman against EdgeLake Network
  
