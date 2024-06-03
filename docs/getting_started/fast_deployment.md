@@ -7,9 +7,7 @@ nav_order: 2
 
 # Fast Deployment of the Test Network
 
-This document lists the steps to deploy the following:
-* A network of 4 nodes (master, query and 2 operators nodes).
-* A remote CLI.
+This document lists the steps to deploy a network of 4 nodes (master, query and 2 operators nodes).
 
 A detailed description of every step is available in the [Session II](Session%20II%20(Deployment).md) Deployment document.
 
@@ -92,22 +90,24 @@ REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 runn
 <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 **Note**: The TCP IP and Port (in the example - `45.79.74.39:32048`) is used as the Network Identifier, which will be referenced 
-by all members nodes that are assigned to this (test) network. This IP and Port is assigned to the attribute called LEDGER_CONN on each peer node. 
+by all members nodes that are assigned to this (test) network.   
+
+This IP and Port is assigned to the attribute called LEDGER_CONN on each peer node. 
 
 ### Operator Node(s)
-The following steps can be used for both operator nodes, any differences would are specified in the correlated step. 
+The following configuration steps can be used for each deployed operator. 
 <ol start="1">
     <li>cd into docker-compose directory</li>
     <li>Update the params in <a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_operator.env" target="_blank">docker_makefile/edgelake_operator.env</a>
         <ul style="padding-left: 20px;">Key Params:
             <li>NODE_NAME - each operator should have unique value</li>
             <li>COMPANY_NAME</li>
-            <li>LEDGER_CONN - should be set to the TCP connection for Master Node</li>
-            <li>CLUSTER_NAME - each operator should have unique value</li>
+            <li>LEDGER_CONN - should be set to the TCP connection of the Master Node (the value 45.79.74.39:32048 using the Master Node deployment example above)</li>
+            <li>CLUSTER_NAME - each operator should have unique cluster name</li>
             <li>DEFAULT_DBMS - should be the same on both operators</li>
-            <li>ENABLE_MQTT - for demo we recommend to enabling MQTT to accept data from third-party broker</li>
+            <li>ENABLE_MQTT - true value allows to publish data on the node as if the node is an MQTT broker</li>
             <li>MSG_DBMS - should be set to the same value as DEFAULT_DBMS</li>
-            <li>If you run multiple operators on the same machine, make sure they each have unique port values</li>
+            <li><b>Note: to deploy multiple operators on the same machine, make sure each operator is configured with unique port values</b></li>
         </ul>
     </li>
     <li> Start Node
@@ -137,9 +137,9 @@ Address               Node Type Node Name                     Status
     <li>cd into docker-compose directory</li>
     <li>Update the params in <a href="https://github.com/EdgeLake/docker-compose/blob/main/docker_makefile/edgelake_query.env" target="_blank">docker_makefile/edgelake_query.env</a>
         <ul style="padding-left: 20px;">Key Params:
-            <li>NODE_NAME - each operator should have unique value</li>
+            <li>NODE_NAME - each query node should have unique value</li>
             <li>COMPANY_NAME</li>
-            <li>LEDGER_CONN - should be set to the TCP connection for Master Node</li>
+            <li>LEDGER_CONN - should be set to the TCP connection of the Master Node</li>
         </ul>
     </li>
     <li> Start Node
@@ -167,7 +167,7 @@ Address               Node Type Node Name                     Status
 ## Commands & Queries
 
 <ul><b>Operator Commands</b> 
-    <li>To see the data stream to the node
+    <li>To see the data streams on a node
         <pre class="code-frame"><code class="language-anylog">get streaming</code></pre>
     </li>
     <li>View the list of tables
