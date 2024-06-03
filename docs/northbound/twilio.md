@@ -220,7 +220,8 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
     </li>
 </ol>
 
-#### Major US Carriers 
+<h3>Major US Carriers</h3> 
+
 The major USA carriers and their <a href="https://en.wikipedia.org/wiki/SMS_gateway" target="_blank">gateways</a> are the following:
 
 <table>
