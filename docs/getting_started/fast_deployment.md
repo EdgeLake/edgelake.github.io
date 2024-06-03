@@ -7,18 +7,21 @@ nav_order: 2
 
 # Fast Deployment of the Test Network
 
-This document lists the deployment steps to bring a network of 4 nodes (master, query and 2 operators nodes) and a remote CLI.    
+This document lists the steps to deploy the following:
+* A network of 4 nodes (master, query and 2 operators nodes).
+* A remote CLI.
+
 A detailed description of every step is available in the [Session II](Session%20II%20(Deployment).md) Deployment document.
 
 ## Requirements 
-* 2 machines - either physical or virtual
+* 2 machines - either physical or virtual.
   * **Machine A** - deployed with Master, Query, Operator and a remote CLI.
   * **Machine B** - deployed with the second Operator. 
 * <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a>
 * <a href="https://www.gnu.org/software/make/manual/make.html" target="_blank">Makefile</a>
 
 ## Steps
-<ol start="0">
+<ol start="1">
     <li>On both machines - Clone EdgeLake
         <pre class="code-frame"><code class="language-shell">cd $HOME
 git clone https://github.com/EdgeLake/docker-compose</code></pre>
@@ -65,11 +68,11 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=master</code></pre>
     </li>
-    <b>Validate Node is working</b> 
+    <p><b>Validate that the Master Node is properly configured</b></p>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
     </li>
-    <li>Execute <code class="language-anylog">test node</code> to validate everything is working properly
+    <li>Execute <code class="language-anylog">test node</code> to validate basic node configuration
         <pre class="code-frame"><code class="language-shell">EL edgelake-master +> test node 
 
 Test TCP
@@ -88,9 +91,8 @@ REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 runn
 </li>
 <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
-**Note**: The TCP connection information (in the exampl - `45.79.74.39:32048` will be used as the LEDGER_CONN for the 
-other nodes. 
-
+**Note**: The TCP IP and Port (in the example - `45.79.74.39:32048`) is used as the Network Identifier, which will be referenced 
+by all members nodes that are assigned to this (test) network. This IP and Port is assigned to the attribute called LEDGER_CONN on each peer node. 
 
 ### Operator Node(s)
 The following steps can be used for both operator nodes, any differences would are specified in the correlated step. 
@@ -111,7 +113,7 @@ The following steps can be used for both operator nodes, any differences would a
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=operator</code></pre>
     </li>
-    <b>Validate Node is working</b> 
+    <p><b>Validate that the Operator Node is properly configured</b></p> 
     <li>Attach into operator node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=operator</code></pre>
     </li>
@@ -143,7 +145,7 @@ Address               Node Type Node Name                     Status
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=query</code></pre>
     </li>
-    <b>Validate Node is working</b> 
+    <p><b>Validate that the Query Node is properly configured</b></p>
     <li>Attach into query node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=query</code></pre>
     </li>
