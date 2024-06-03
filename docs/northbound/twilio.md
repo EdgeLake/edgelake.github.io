@@ -122,7 +122,7 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
     </li>
 </ol>
 
-<h3>Most Common _SMTP_ addresses</h3>
+<h3>Most Common <i>SMTP</i> addresses</h3>
 <table>
     <thead>
         <tr>
