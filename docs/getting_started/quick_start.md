@@ -17,8 +17,7 @@ can use tools like [cURL](https://curl.se/), [Postman](..%2Fnorthbound%2Fusing_p
 [Remote-CLI](..%2Fnorthbound%2Fremote_cli.md) is a web based application allowing intuitive and simple GUI to interact 
 with nodes in the AnyLog Network.
 
-This section, guides users guides on how to use EdgeLake, from deployment, to manage, monitor and query nodes in their 
-network.
+This section, guides EdgeLake users on deployment, management, monitoring and querying nodes in the network.
 
 ## Deployment Diagram
 In the test network, data will be transferred to the 2 Operator Nodes, and a query that is processed on the _Query Node_ 
