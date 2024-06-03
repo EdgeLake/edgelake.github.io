@@ -171,56 +171,55 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
 </table>
 
 ### SMS Notifications
-<ol start="0">
-    <li>Start <i><a href="#email-configurations">SMTP service</a></i>
-    <li>Sending SMS message
-        <table style="border: none;">
-            <tr>
-                <td align="center"><h3>Configurations</h3></td>
-                <td align="center"><h3>Command</h3></td>
-            </tr>
-            <tr>
-                <td>
-                    <table border="1">
-                        <tr>
-                            <td align="center"><b>Option</b></td>
-                            <td align="center"><b>Explanation</b></td>
-                            <td align="center"><b>Default</b></td>
-                        </tr>
-                        <tr>
-                            <td>receiver phone</td>
-                            <td>The destination phone number</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>gateway</td>
-                            <td><a href="#major-us-carriers">SMS carrier gateway</a></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>subject</td>
-                            <td>message subject</td>
-                            <td>AnyLog Alert</td>
-                        </tr>
-                        <tr>
-                            <td>message</td>
-                            <td>sms text content</td>
-                            <td>AnyLog Network Alert from Node: [node name]</td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <pre class="code-frame"><code class="language-anylog">&lt;sms to [receiver phone] where 
-    gateway = [sms gateway] and 
-    subject = [message subject] and 
-    message = [message text]&gt;</code></pre>
-                </td>
-                <td>
-                </td>
-            </tr>
-        </table>
-    </li>
-</ol>
+
+1. Start <i><a href="#email-configurations">SMTP service</a></i>
+<br/>
+2. Sending SMS message
+<table style="border: none;">
+    <tr>
+        <td align="center"><h3>Configurations</h3></td>
+        <td align="center"><h3>Command</h3></td>
+    </tr>
+    <tr>
+        <td>
+            <table border="1">
+                <tr>
+                    <td align="center"><b>Option</b></td>
+                    <td align="center"><b>Explanation</b></td>
+                    <td align="center"><b>Default</b></td>
+                </tr>
+                <tr>
+                    <td>receiver phone</td>
+                    <td>The destination phone number</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>gateway</td>
+                    <td><a href="#major-us-carriers">SMS carrier gateway</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>subject</td>
+                    <td>message subject</td>
+                    <td>AnyLog Alert</td>
+                </tr>
+                <tr>
+                    <td>message</td>
+                    <td>sms text content</td>
+                    <td>AnyLog Network Alert from Node: [node name]</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <pre class="code-frame"><code class="language-anylog">&lt;sms to [receiver phone] where 
+gateway = [sms gateway] and 
+subject = [message subject] and 
+message = [message text]&gt;</code></pre>
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
 
 <h3>Major US Carriers</h3> 
 
