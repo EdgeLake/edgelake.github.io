@@ -1,7 +1,7 @@
 ---
 layout: default
 parent: Northbound
-title: Using Postgres to view Data 2
+title: Twilo (Email & SMS) 
 nav_order: 5
 ---
 # Twilio  - Email and SMS Notifications
