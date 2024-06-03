@@ -25,7 +25,7 @@ The Remote CLI contains the following:
 ## The server side
 
 Nodes in the network needs to be configured with their REST service enabled.  
-Configuring a node to recieve REST requests is detailed in the [REST Requests](../commands/backgound_services.md#rest-services) section.
+Configuring a node to recieve REST requests is detailed in the [REST Requests](../../commands/backgound_services#rest-services) section.
 
 ## Installing the Remote-CLI
 The Remote-CLI is an Open-Source django based project that can be [run manually](https://github.com/AnyLog-co/Remote-CLI) or via Docker.   

@@ -2,7 +2,7 @@
 layout: default
 parent: Northbound
 title: Using Postgres to view Data
-nav_order: 5
+nav_order: 6
 ---
 # Using Repeatable Queries to update a database with result sets
 
