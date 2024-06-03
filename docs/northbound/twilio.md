@@ -122,13 +122,13 @@ The _SMTP_ client process facilitates sending eMail and SMS messages from EdgeLa
     </li>
 </ol>
 
-#### Most Common _SMTP_ addresses
+<h3>Most Common _SMTP_ addresses</h3>
 <table>
     <thead>
         <tr>
-            <td align="center"><b>SMTP Provider</b></th>
-            <td align="center"><b>URL</b></th>
-            <td align="center"><b>SMTP Settings</b></th>
+            <td align="center"><b>SMTP Provider</b></td>
+            <td align="center"><b>URL</b></td>
+            <td align="center"><b>SMTP Settings</b></td>
         </tr>
     </thead>
     <tbody>
