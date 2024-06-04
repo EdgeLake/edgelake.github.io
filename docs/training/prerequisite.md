@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Quick Start
+parent: Training
 title: Prerequisite
 nav_order: 1
 ---

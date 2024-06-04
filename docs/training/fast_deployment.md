@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Quick Start
+parent: Training
 title: Fast Deployment
 nav_order: 2
 ---

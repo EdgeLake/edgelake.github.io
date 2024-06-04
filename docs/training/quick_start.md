@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Traing
+title: Training
 nav_order: 7
 has_children: true
 ---
-# Quick Start
+# Training
 EdgeLake is deployed using Docker as a pre-configured software package.
 
 To address dynamic and ad-hoc needs, each EdgeLake node provides an interactive environment allowing to dynamically 
