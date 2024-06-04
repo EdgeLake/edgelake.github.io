@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Quick Start
+title: Traing
 nav_order: 7
 has_children: true
 ---
