@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: Quick Start
+parent: Training
 title: Session II
 nav_order: 4
 ---
