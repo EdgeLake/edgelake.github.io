@@ -51,6 +51,15 @@ nav_order: 1
 
 
 **Comments**:
+* For Mac OSX installation you may need to add <code>envsubst</code> command functionality via <a href="https://www.gnu.org/software/gettext/" target="_blank">gettext</a>.
+<pre class="code-frame"><code class="language-shell">
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install envsubst
+brew install gettext
+</code></pre>
+
 * Databases: 
   - SQLite recommended for smaller nodes and in-memory data.
   - PostgreSQL recommended for larger nodes.
