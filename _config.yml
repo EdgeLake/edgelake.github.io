@@ -23,7 +23,7 @@ twitter_username: ""
 github_username:  edgelake
 repository: edgelake/edgelake # for github-metadata
 
-permalink: pretty
+#permalink: pretty
 remote_theme: pmarsceill/just-the-docs
 
 exclude:
