@@ -95,7 +95,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
     </li>
     <li>Execute <code class="language-anylog">test node</code> to validate basic node configuration
-        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +> test node 
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +&lt test node 
 
 Test TCP
 [************************************************************]
@@ -116,60 +116,7 @@ REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 runn
     If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
     open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORT}</code>
     <pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 198.74.50.131:32049 -w "\n"
-edgelake-master@198.74.50.131:32048 running
-    </code></pre>
-    <br/>
-    <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
-</ol>
-<ol start="4">
-    <li>View node logs - specifically validate TCP, REST, and Blockchain sync are running
-        <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
-        <b>Expected Output:</b>
-        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +> 
-    Process         Status       Details                                                                     
-    ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 198.74.50.131:32048, Threads Pool: 6                         |
-    REST           |Running     |Listening on: 198.74.50.131:32049, Threads Pool: 5, Timeout: 20, SSL: False|
-    Operator       |Not declared|                                                                           |
-    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
-    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
-    Blobs Archiver |Not declared|                                                                           |
-    MQTT           |Not declared|                                                                           |
-    Message Broker |Not declared|No active connection                                                       |
-    SMTP           |Not declared|                                                                           |
-    Streamer       |Not declared|                                                                           |
-    Query Pool     |Running     |Threads Pool: 3                                                            |
-    Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                           |
-        </code></pre>
-    </li>
-    <li>Attach into master node
-        <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
-    </li>
-    <li>Execute <code class="language-anylog">test node</code> to validate basic node configuration
-        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +> test node 
-
-Test TCP
-[************************************************************]
- 
-Test REST
-[************************************************************]
-
-Test                                      Status                                                                
------------------------------------------|-----------------------------------------------------------------------|
-Metadata Version                         |02a3d84c0017bbaea01a19780734d801                                       |
-Metadata Test                            |Pass                                                                   |
-TCP test using 45.79.74.39:32048         |[From Node 45.79.74.39:32048] edgelake-master@45.79.74.39:32048 running|
-REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 running                              |
-        </code></pre>
-    </li>
-    <br/>
-    <b>Note</b>: The command <code class="language-anylog">test node</code> only checks the external IP address for the REST port. 
-    If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
-    open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORT}</code>
-    <pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 198.74.50.131:32049 -w "\n"
-edgelake-master@198.74.50.131:32048 running
-    </code></pre>
+edgelake-master@198.74.50.131:32048 running</code></pre>
     <br/>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
