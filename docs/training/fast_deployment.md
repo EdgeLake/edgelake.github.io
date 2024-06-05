@@ -73,11 +73,11 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     <li>View node logs - specifically validate TCP, REST, and Blockchain sync are running
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
         <b>Expected Output:</b>
-        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +> 
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-master +&lt; 
     Process         Status       Details                                                                     
     ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 198.74.50.131:32048, Threads Pool: 6                         |
-    REST           |Running     |Listening on: 198.74.50.131:32049, Threads Pool: 5, Timeout: 20, SSL: False|
+    TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                           |
+    REST           |Running     |Listening on: 45.79.74.39:32049, Threads Pool: 5, Timeout: 20, SSL: False  |
     Operator       |Not declared|                                                                           |
     Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
     Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
@@ -88,9 +88,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     Streamer       |Not declared|                                                                           |
     Query Pool     |Running     |Threads Pool: 3                                                            |
     Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                           |
-        </code></pre>
-    </li>
+    gRPC           |Not declared|                                                                           |</code></pre></li>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
     </li>
@@ -114,8 +112,8 @@ REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 runn
     <b>Note</b>: The command <code class="language-anylog">test node</code> only checks the external IP address for the REST port. 
     If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
     open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORT}</code>
-    <pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 198.74.50.131:32049 -w "\n"
-edgelake-master@198.74.50.131:32048 running</code></pre>
+    <pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 45.79.74.39:32049 -w "\n"
+edgelake-master@45.79.74.39:32048 running</code></pre>
     <br/>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
@@ -150,11 +148,11 @@ The following configuration steps can be used for each deployed operator.
 <ol start="1">
      <li>View node logs - specifically validate TCP, REST, and Operator service and Blockchain sync are running
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=operator</code></pre>
-        <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +> 
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +&lt; 
     Process         Status       Details                                                                     
     ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 198.74.50.131:32148, Threads Pool: 6                         |
-    REST           |Running     |Listening on: 198.74.50.131:32149, Threads Pool: 5, Timeout: 20, SSL: False|
+    TCP            |Running     |Listening on: 35.225.182.15:32148, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 35.225.182.15:32149, Threads Pool: 5, Timeout: 20, SSL: False|
     Operator       |Running     |Cluster Member: True, Using Master: 127.0.0.1:32048, Threads Pool: {A2}    |
     Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
     Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
@@ -165,7 +163,8 @@ The following configuration steps can be used for each deployed operator.
     Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
     Query Pool     |Running     |Threads Pool: 3                                                            |
     Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                           |</code></pre>
+    gRPC           |Not declared|                                                                           
+|</code></pre></li>
     <li>Attach into operator node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=operator</code></pre>
     </li>
@@ -178,9 +177,7 @@ Test Network
 Address               Node Type Node Name                     Status 
 ---------------------|---------|-----------------------------|------|
 35.225.182.15:32148  |operator |edgelake-operator            |  +   |
-45.79.74.39:32048    |master   |edgelake-master              |  +   |
-</code></pre>
-</li>
+45.79.74.39:32048    |master   |edgelake-master              |  +   |</code></pre></li>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
@@ -197,7 +194,28 @@ Address               Node Type Node Name                     Status
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=query</code></pre>
     </li>
-    <p><b>Validate that the Query Node is properly configured</b></p>
+</ol>
+
+### Validate Query Node 
+<ol start="1"> 
+    <li>View node logs - specifically validate TCP, REST, and Operator service and Blockchain sync are running
+        <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=query</code></pre>
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +&lt;
+    Process         Status       Details                                                                     
+    ---------------|------------|---------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 23.239.12.151:32348, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 23.239.12.151:32349, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Not declared|                                                                           |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
+    Blobs Archiver |Not declared|                                                                           |
+    MQTT           |Not declared|                                                                           |
+    Message Broker |Not declared|No active connection                                                       |
+    SMTP           |Not declared|                                                                           |
+    Streamer       |Not declared|                                                                           |
+    Query Pool     |Running     |Threads Pool: 3                                                            |
+    Kafka Consumer |Not declared|                                                                           |
+    gRPC           |Not declared|                                                                           |</code></pre></li>
     <li>Attach into query node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=query</code></pre>
     </li>
