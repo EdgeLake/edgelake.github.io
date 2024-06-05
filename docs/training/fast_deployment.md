@@ -174,7 +174,6 @@ edgelake-master@198.74.50.131:32048 running
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
-
 **Note**: The TCP IP and Port (in the example - `45.79.74.39:32048`) is used as the Network Identifier, which will be referenced 
 by all members nodes that are assigned to this (test) network.   
 
