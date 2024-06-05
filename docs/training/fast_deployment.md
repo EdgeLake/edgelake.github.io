@@ -88,7 +88,7 @@ SMTP           |Not declared|                                                   
 Streamer       |Not declared|                                                                           |
 Query Pool     |Running     |Threads Pool: 3                                                            |
 Kafka Consumer |Not declared|                                                                           |
-gRPC           |Not declared| |
+gRPC           |Not declared|                                                                           |
 </code></pre></li>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
@@ -164,8 +164,7 @@ The following configuration steps can be used for each deployed operator.
     Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
     Query Pool     |Running     |Threads Pool: 3                                                            |
     Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                           
-|</code></pre></li>
+    gRPC           |Not declared|                                                                           |</code></pre></li>
     <li>Attach into operator node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=operator</code></pre>
     </li>
