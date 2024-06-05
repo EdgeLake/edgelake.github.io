@@ -67,11 +67,14 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=master</code></pre>
     </li>
 </ol>
+<br/>
 <p><b>Validate that the Master Node is properly configured</b></p>
+<br/>
 <ol start="4">
-    <li>View node logs - specifically validate TCP, REST and Blockchain sync are runing 
-        <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master
-# Expected output: 
+    <li>View node logs - specifically validate TCP, REST and Blockchain sync are runing
+        <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
+        <br/>
+        <pre class="code-frame"><code class="language-anylog"># Expected output: 
 EL edgelake-master +> 
     Process         Status       Details                                                                     
     ---------------|------------|---------------------------------------------------------------------------|
@@ -110,14 +113,14 @@ TCP test using 45.79.74.39:32048         |[From Node 45.79.74.39:32048] edgelake
 REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 running                              |
 </code></pre>
 </li>
+<br/>
 <b>Note</b>: The command <code class="language-anylog">test node</code> only checks the externnal IP address for REST port. 
 If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
 open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORt}</code>
-<pre class="code-frame"><code class="language-anylog">
-root@alog-edgelake-node:~# curl -X GET 198.74.50.131:32049  -w "\n"
+<pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 198.74.50.131:32049  -w "\n"
 edgelake-master@198.74.50.131:32048 running
 </code></pre>
-
+<br/>
 <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
