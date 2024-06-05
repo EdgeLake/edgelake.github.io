@@ -74,21 +74,21 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
         <b>Expected Output:</b>
         <pre class="code-frame"><code class="language-anylog">EL edgelake-master +&gt; 
-    Process         Status       Details                                                                     
-    ---------------|------------|---------------------------------------------------------------------------|
-    TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                           |
-    REST           |Running     |Listening on: 45.79.74.39:32049, Threads Pool: 5, Timeout: 20, SSL: False  |
-    Operator       |Not declared|                                                                           |
-    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
-    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
-    Blobs Archiver |Not declared|                                                                           |
-    MQTT           |Not declared|                                                                           |
-    Message Broker |Not declared|No active connection                                                       |
-    SMTP           |Not declared|                                                                           |
-    Streamer       |Not declared|                                                                           |
-    Query Pool     |Running     |Threads Pool: 3                                                            |
-    Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                         |
+Process         Status       Details                                                                     
+---------------|------------|---------------------------------------------------------------------------|
+TCP            |Running     |Listening on: 45.79.74.39:32048, Threads Pool: 6                           |
+REST           |Running     |Listening on: 45.79.74.39:32049, Threads Pool: 5, Timeout: 20, SSL: False  |
+Operator       |Not declared|                                                                           |
+Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
+Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
+Blobs Archiver |Not declared|                                                                           |
+MQTT           |Not declared|                                                                           |
+Message Broker |Not declared|No active connection                                                       |
+SMTP           |Not declared|                                                                           |
+Streamer       |Not declared|                                                                           |
+Query Pool     |Running     |Threads Pool: 3                                                            |
+Kafka Consumer |Not declared|                                                                           |
+gRPC           |Not declared|                                                                           |
 </code></pre></li>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
