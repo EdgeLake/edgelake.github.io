@@ -88,7 +88,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     Streamer       |Not declared|                                                                           |
     Query Pool     |Running     |Threads Pool: 3                                                            |
     Kafka Consumer |Not declared|                                                                           |
-    gRPC           |Not declared|                                                                           |
+    gRPC           |Not declared|                                                                         |
 </code></pre></li>
     <li>Attach into master node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=master</code></pre>
