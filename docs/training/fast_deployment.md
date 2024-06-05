@@ -18,7 +18,7 @@ A detailed description of every step is available in the [Session II](Session%20
 * <a href="https://docs.docker.com/engine/install/" target="_blank">Docker</a>
 * <a href="https://www.gnu.org/software/make/manual/make.html" target="_blank">Makefile</a>
 
-## Steps
+## Prepare Machine(s)
 <ol start="1">
     <li>On both machines - Clone EdgeLake
         <pre class="code-frame"><code class="language-shell">cd $HOME
@@ -67,9 +67,9 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=master</code></pre>
     </li>
 </ol>
-<br/>
-<p><b>Validate that the Master Node is properly configured</b></p>
-<ol start="4">
+
+#### Validate that the Master Node
+<ol start="1">
     <li>View node logs - specifically validate TCP, REST, and Blockchain sync are running
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
         <b>Expected Output:</b>
@@ -111,7 +111,6 @@ TCP test using 45.79.74.39:32048         |[From Node 45.79.74.39:32048] edgelake
 REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 running                              |
         </code></pre>
     </li>
-    <br/>
     <b>Note</b>: The command <code class="language-anylog">test node</code> only checks the external IP address for the REST port. 
     If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
     open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORT}</code>
