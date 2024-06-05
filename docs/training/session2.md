@@ -6,8 +6,8 @@ nav_order: 4
 ---
 # Deployment of the Test Network
 
-This document describes how to deploy and configure an AnyLog/EdgeLake Network. This guided session provides directions to:
-Deploy an  AnyLog/EdgeLake Network consisting of 4 nodes (2 operators, 1 query, 1 master).
+This document describes how to deploy and configure an AnyLog/EdgeLake Network. This guided session provides directions to
+deploy an AnyLog/EdgeLake Network consisting of 4 nodes (2 operators, 1 query, 1 master).
 
 When an EdgeLake node is deployed, the software packages needs to be organized on the node with proper configurations.  
 Each EdgeLake Node is using the same software stack, however, the nodes in the network are assigned to different roles, 
@@ -133,14 +133,14 @@ The following table summarizes the commonly used packages deployed with EdgeLake
 
 
 #### In this session, users will use the following packages:
-* Local database is SQLite (and is available by default without a dedicated install).
-* Remote CLI - deployed with the Query Node.
-* Grafana, on a dedicated node, as an example for an application interacting with the network data.
+* SQLite that serves as the local database (and is available by default without a dedicated install).
+* Remote CLI - a WEB based application that interact with nodes in the network via REST. The Remote CLI is deployed with the Query Node.
+* Grafana - a visualization application deployed on a dedicated node, as an example for an application interacting with the network data.
 
 
-## Machine Configurations
-EdgeLake requires static IPs for the nodes in the network. In a private or closed network, the IPs tend to be static even
-when restarting a machine. However, for cloud instances, users may require some configuration in order to have static IPs. 
+## Static IPs
+EdgeLake requires static IPs for the nodes in the network. With cloud instances, users may require some cloud specific configuration
+in order to enable static IPs. 
 * <a href="https://cloud.google.com/compute/docs/ip-addresses/configure-static-external-ip-address" target="_blank">Google Cloud</a>
 * <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html" target="_blank">AWS</a>
 * <a href="https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-networks-static-private-ip-arm-pportal" target="_blank">Azure</a>
@@ -187,7 +187,7 @@ and MQTT
 
 * With a Master Node deployment, the network ID is the Master's IP and Port.
 * A node can leverage any valid IP and port. In this deployment, the nodes are using their default IP 
-(the IP that identifies the node on the network used) and the ports are set by default as described above.
+(the IP that identifies the node on the network), and the ports are set by default as described above.
 
 <b>In this setup, the network ID is the IP of the Master and port 32048.</b>
 
