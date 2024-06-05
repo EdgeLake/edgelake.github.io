@@ -68,7 +68,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
     </li>
 </ol>
 
-#### Validate that the Master Node
+### Validate Master Node
 <ol start="1">
     <li>View node logs - specifically validate TCP, REST, and Blockchain sync are running
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
@@ -136,7 +136,7 @@ The following configuration steps can be used for each deployed operator.
             <li>LEDGER_CONN - should be set to the TCP connection of the Master Node (the value 45.79.74.39:32048 using the Master Node deployment example above)</li>
             <li>CLUSTER_NAME - each operator should have unique cluster name</li>
             <li>DEFAULT_DBMS - should be the same on both operators</li>
-            <li>ENABLE_MQTT - true value allows to publish data on the node as if the node is an MQTT broker</li>
+            <li>ENABLE_MQTT - The default configurations can accept data from a third-party broker that's alrady running. By setting <i>ENABLE_MQTT</i> to <b>true</b>, data from this third-party broker will flow in automatically.</li>
             <li>MSG_DBMS - should be set to the same value as DEFAULT_DBMS</li>
             <li><b>Note: to deploy multiple operators on the same machine, make sure each operator is configured with unique port values</b></li>
         </ul>
@@ -144,12 +144,33 @@ The following configuration steps can be used for each deployed operator.
     <li> Start Node
         <pre class="code-frame"><code class="language-shell">make up EDGELAKE_TYPE=operator</code></pre>
     </li>
-    <p><b>Validate that the Operator Node is properly configured</b></p> 
+</ol>
+
+### Validate Operator Node
+<ol start="1">
+     <li>View node logs - specifically validate TCP, REST, and Operator service and Blockchain sync are running
+        <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=operator</code></pre>
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +> 
+    Process         Status       Details                                                                     
+    ---------------|------------|---------------------------------------------------------------------------|
+    TCP            |Running     |Listening on: 198.74.50.131:32148, Threads Pool: 6                         |
+    REST           |Running     |Listening on: 198.74.50.131:32149, Threads Pool: 5, Timeout: 20, SSL: False|
+    Operator       |Running     |Cluster Member: True, Using Master: 127.0.0.1:32048, Threads Pool: {A2}    |
+    Blockchain Sync|Running     |Sync every 30 seconds with master using: 127.0.0.1:32048                   |
+    Scheduler      |Running     |Schedulers IDs in use: [0 (system)] [1 (user)]                             |
+    Blobs Archiver |Running     |                                                                           |
+    MQTT           |Running     |                                                                           |
+    Message Broker |Not declared|No active connection                                                       |
+    SMTP           |Not declared|                                                                           |
+    Streamer       |Running     |Default streaming thresholds are 60 seconds and 10,240 bytes               |
+    Query Pool     |Running     |Threads Pool: 3                                                            |
+    Kafka Consumer |Not declared|                                                                           |
+    gRPC           |Not declared|                                                                           |</code></pre>
     <li>Attach into operator node
         <pre class="code-frame"><code class="language-shell">make attach EDGELAKE_TYPE=operator</code></pre>
     </li>
     <li>Execute <code class="language-anylog">test network</code> to validate you're able to communicate with the nodes in the network
-        <pre class="code-frame"><code class="language-shell">EL edgelake-operator +> test network  
+        <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +> test network  
                                                                                          
 Test Network
 [****************************************************************]
