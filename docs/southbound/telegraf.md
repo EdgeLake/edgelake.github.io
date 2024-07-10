@@ -17,7 +17,7 @@ This document is based on <a href="https://www.influxdata.com/blog/telegraf-1-31
 * 
  
 ## Requirements
-1. [EdgeLake](../../training/quick_start.md)
+1. [EdgeLake](../../training/quick_start/)
 2. <a href="https://docs.influxdata.com/telegraf/v1/install/" target="_blank">Telegraf</a>
 
 ## Configure Telegraf
