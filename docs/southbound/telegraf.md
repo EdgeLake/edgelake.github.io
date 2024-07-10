@@ -14,7 +14,7 @@ This document is based on <a href="https://www.influxdata.com/blog/telegraf-1-31
 * [Configure Telegraf - REST](#rest)
 * [Configure Telegraf - Message Broker](#message-broker)
 * [Configure EdgeLake](#configure-edgelake)
-* 
+* [Generated Data](#generated-data)
  
 ## Requirements
 1. [EdgeLake](../../training/quick_start/)
@@ -67,6 +67,7 @@ REST and MQTT extract the list of JSONs from within the _metrics_ key, thus send
         <li>URL</li>
         <li>method - POST</li>
         <li>data_format - JSON</li>
+        <li>use_batch_format - false</li>
         <li>header information</li>
         <ul>
             <li>command - data</li>
@@ -76,9 +77,10 @@ REST and MQTT extract the list of JSONs from within the _metrics_ key, thus send
         </ul>
     </ul>
 <pre class="code-frame"><code class="language-config">[[outputs.http]]
-  url = "http://198.74.50.131:32149"
+  url = "http://127.0.0.1:32149"
   method = "POST"
   data_format = "json"
+  use_batch_format=false
   [outputs.http.headers]
     command = "data"
     topic = "telegraf-data"
@@ -108,7 +110,7 @@ Kafka.
         <li>data_format - json</li>
     </ul>
 <pre class="code-frame"><code class="language-config">[[outputs.mqtt]]
-    servers = ["198.74.50.131:32150"]
+    servers = ["127.0.0.1:32150"]
     topic = "telegraf-data"
     layout = "non-batch"
     data_format = "json"
@@ -161,13 +163,13 @@ topic_name=telegraf-data
 blockchain insert where policy=!new_policy and local=true and master=!ledger_conn</code></pre>
 </li>
 <li>Enable a message client to accept the data from Telegraf.
-<pre class="code-frame"><code class="language-anylog"># REST message client 
+<pre class="code-frame"><code class="language-anylog">\# REST message client 
 &lt;run msg client where broker=rest and user-agent=anylog and log=false and topic=(
     name=!topic_name and
     policy=!policy_id
 )&gt;
 
-# MQTT broker message client
+\# MQTT broker message client
 &lt;run msg client where broker=local and log=false and topic=(
     name=!topic_name and
     policy=!policy_id
@@ -175,6 +177,71 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 </li>
 </ol>
 
-## Generated Data 
+## Generated Data
+Using the mapping policy, shown above, EdgeLake generates a unique table per input (_cpu_, _mem_, _net_ and _swap_). 
+The mapping policy generates a table name based on the input (<code>[name]</code>) and hostname of where the data is 
+coming from (<code>[tags][name]:[tags][host]</code>). This causes a unique table per input for each hostname. To have a 
+single table for all inputs (regardless of the hostname), then the mapping policy should only consist of <code>[name]</code>. 
 
-   
+Directions for updating configurations within a docker container can be found <a href="https://github.com/AnyLog-co/documentation/blob/master/deployments/Networking%20%26%20Security/docker_volumes.md" target="_blank">here</a>. 
+
+
+<ol start="1">
+<li>List of generated tables 
+<pre class="code-frame"><code class="language-anylog">AL anylog-query +&gt; get data nodes 
+
+Company     DBMS        Table            Cluster ID                       Cluster Status Node Name       Member ID External IP/Port    Local IP/Port       Node Status 
+-----------|-----------|----------------|--------------------------------|--------------|---------------|---------|-------------------|-------------------|-----------|
+New Company|new_company|mem_raspberrypi |7b5b46361816b6d290b3dc430b221b79|active        |anylog-operator|      115|45.24.145.123:32148|192.168.1.215:32148|active     |
+New Company|new_company|net_raspberrypi |7b5b46361816b6d290b3dc430b221b79|active        |anylog-operator|      115|45.24.145.123:32148|192.168.1.215:32148|active     |
+New Company|new_company|swap_raspberrypi|7b5b46361816b6d290b3dc430b221b79|active        |anylog-operator|      115|45.24.145.123:32148|192.168.1.215:32148|active     |
+New Company|new_company|cpu_raspberrypi |7b5b46361816b6d290b3dc430b221b79|active        |anylog-operator|      115|45.24.145.123:32148|192.168.1.215:32148|active     |</code></pre></li>
+<li>Describe table
+<pre class="code-frame"><code class="language-anylog">AL anylog-query +&gt; AL anylog-query +&gt; get columns where dbms=new_company and table=swap_raspberrypi  
+
+Schema for DBMS: 'new_company' and Table: 'swap_raspberrypi'
+Column Name         Column Type                 
+-------------------|---------------------------|
+row_id             |integer                    |
+insert_timestamp   |timestamp without time zone|
+tsd_name           |char(3)                    |
+tsd_id             |int                        |
+timestamp          |timestamp without time zone|
+fields_free        |bigint                     |
+fields_total       |bigint                     |
+fields_used        |int                        |
+fields_used_percent|int                        |
+tags_host          |character varying          |
+fields_in          |int                        |
+fields_out         |int                        |</code></pre></li>
+<li>Aggregate overall used_percent per minute
+<pre class="code-frame"><code class="language-anylog">AL anylog-query +&gt; run client () sql new_company format=table  "select increments(minute, 1, timestamp), min(timestamp), max(timestamp), min(fields_usage_system)::float(2), avg(fields_usage_system)::float(2), max(fields_usage_system)::float(2) from cpu_raspberrypi;"
+[9]
+AL anylog-query +&gt;
+min(timestamp)        max(timestamp)        min(fields_usage_system) avg(fields_usage_system) max(fields_usage_system)
+--------------------- --------------------- ------------------------ ------------------------ ------------------------ 
+2024-07-10 22:26:40.0 2024-07-10 22:26:50.0                      0.7                     1.03                     1.81 
+2024-07-10 22:27:00.0 2024-07-10 22:27:50.0                      0.3                     0.97                     1.81 
+2024-07-10 22:47:40.0 2024-07-10 22:47:50.0                      0.4                     1.07                      1.8 
+2024-07-10 22:48:00.0 2024-07-10 22:48:50.0                      0.2                     0.53                      1.0 
+
+{"Statistics":[{"Count": 4,
+                "Time":"00:00:00",
+                "Nodes": 1}]}</code></pre></li>
+<li>Get last minute of data coming into cpu_raspberrypi for cpu-total
+<pre class="code-frame"><code class="language-anylog">AL anylog-query +&gt; run client () sql new_company format=table "select timestamp, fields_usage_guest, fields_usage_guest_nice, fields_usage_idle::float(2), fields_usage_iowait::float(2), fields_usage_irq, fields_usage_nice, fields_usage_softirq::float(2), fields_usage_steal, fields_usage_system::float(2), fields_usage_user::float(2),  tags_cpu,  tags_host from cpu_raspberrypi where period(minute, 1, now(), timestamp) and tags_cpu='cpu-total' order by timestamp desc;"  
+[21]
+AL anylog-query +> 
+timestamp             fields_usage_guest fields_usage_guest_nice fields_usage_idle fields_usage_iowait fields_usage_irq fields_usage_nice fields_usage_softirq fields_usage_steal fields_usage_system fields_usage_user tags_cpu  tags_host
+--------------------- ------------------ ----------------------- ----------------- ------------------- ---------------- ----------------- -------------------- ------------------ ------------------- ----------------- --------- ----------- 
+2024-07-10 22:48:50.0                  0                       0             97.97                0.75                0                 0                 0.03                  0                0.58              0.68 cpu-total raspberrypi
+2024-07-10 22:48:40.0                  0                       0             98.04                0.65                0                 0                  0.0                  0                0.48              0.83 cpu-total raspberrypi
+2024-07-10 22:48:30.0                  0                       0             98.37                0.25                0                 0                 0.03                  0                0.48              0.88 cpu-total raspberrypi
+2024-07-10 22:48:20.0                  0                       0             98.25                 0.4                0                 0                  0.0                  0                 0.5              0.85 cpu-total raspberrypi
+2024-07-10 22:48:10.0                  0                       0             98.02                0.68                0                 0                  0.0                  0                0.55              0.75 cpu-total raspberrypi
+2024-07-10 22:48:00.0                  0                       0              98.1                0.63                0                 0                 0.03                  0                 0.6              0.65 cpu-total raspberrypi
+2024-07-10 22:47:50.0                  0                       0             97.24                0.63                0                 0                  0.0                  0                0.75              1.38 cpu-total raspberrypi
+
+{"Statistics":[{"Count": 7,
+                "Time":"00:00:00",
+                "Nodes": 1}]}</code></pre></li></ol> 
