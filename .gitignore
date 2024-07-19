@@ -7,3 +7,4 @@ vendor
 _config.yml
 Gemfile
 Gemfile.lock
+*.jpg
