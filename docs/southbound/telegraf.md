@@ -21,7 +21,7 @@ This document is based on <a href="https://www.influxdata.com/blog/telegraf-1-31
 2. <a href="https://docs.influxdata.com/telegraf/v1/install/" target="_blank">Telegraf</a>
 
 ## Configure Telegraf
-EdgeLake can accept data from _Telegraf_ that's in serialized list <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">JSON format</a>, either via a [message broker](#message-broker) or [REST (POST)](#rest). 
+EdgeLake accepts data from _Telegraf_ using the serialized list in <a href="https://docs.influxdata.com/telegraf/v1/data_formats/input/json/" target="_blank">JSON format</a>, either via a [message broker](#message-broker) or [REST (POST)](#rest). 
 
 The examples below is using machine monitoring as data inputs (_cpu_, _mem_, _net_ and _swap_), but the same logic  can 
 be applied for any type of data input.
@@ -123,12 +123,11 @@ Kafka.
 
 ## Configure EdgeLake
 
-EdgeLake requires a mapping policy for data coming in via REST POST or the message broker. The mapping policy transforms 
-the JSON readings to the EdgeLake target structure. For _Telegraf_, EdgeLake allows mapping in a generic format where users
-do not need to know the associated columns being generated. 
+EdgeLake requires a mapping policy for data coming in via REST POST or data published on the EdgeLake node (as a message broker). The mapping policy transforms 
+the JSON readings to the EdgeLake target structure. For _Telegraf_, EdgeLake provides a generic mapping option without the need to consider the individual attributes generated. 
 
 The following steps can be executed using <a href="https://github.com/EdgeLake/deployment-scripts/blob/main/demo-scripts/telegraf.al" target="_blank">telegraf.al</a>
-script, which exists as part of the deployment scripts by default. 
+script, which exists in the deployment scripts by default. 
 
 <ol start="0">
 <li>If using message client to accept data, make sure EdgeLake's Message Broker is running
@@ -180,8 +179,8 @@ blockchain insert where policy=!new_policy and local=true and master=!ledger_con
 ## Generated Data
 Using the mapping policy, shown above, EdgeLake generates a unique table per input (_cpu_, _mem_, _net_ and _swap_). 
 The mapping policy generates a table name based on the input (<code>[name]</code>) and hostname of where the data is 
-coming from (<code>[tags][name]:[tags][host]</code>). This causes a unique table per input for each hostname. To have a 
-single table for all inputs (regardless of the hostname), then the mapping policy should only consist of <code>[name]</code>. 
+coming from (<code>[tags][name]:[tags][host]</code>). This causes a unique table per input for each hostname.  
+To create a single table for all inputs (regardless of the hostname), use <code>[name]</code> in the mapping policy. 
 
 Directions for updating configurations within a docker container can be found <a href="https://github.com/AnyLog-co/documentation/blob/master/deployments/Networking%20%26%20Security/docker_volumes.md" target="_blank">here</a>. 
 
