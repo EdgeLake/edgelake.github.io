@@ -160,6 +160,14 @@ The additional information is provided using a JSON script with the following at
       <td>instructions</td>
       <td>Additional EdgeLake query instructions.</td>
     </tr>
+    <tr>
+      <td>trace_level</td>
+      <td>By setting debug level to 1, the executed query and the number of rows returned are printed on the Query Node CLI.</td>
+    </tr>
+    <tr>
+      <td>timezone</td>
+      <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -302,3 +310,21 @@ More information on increments and period types of queries are available in [que
     "format_as" : "timeseries"
   }
 }</code></pre>
+
+### Trace Options
+
+Users can trace queries that are generated from the Grafana panels as follows:    
+* By setting debug level to 1, the executed query and the number of rows returned are printed on the CLI of the node that services Grafana.   
+This setting enables trace on the specific queries where **trace_level** is set.  
+Example:
+<pre class="code-frame"><code class="language-json">{
+  "sql": "SELECT insert_timestamp, servicepump1running_di FROM cos_wp ORDER BY insert_timestamp DESC limit 1",
+  "time_range": false,
+  "timezone": "local",
+  "trace_level" : 1
+}</code></pre>
+
+* Trace of all the queries from the Grafana instance can be enabled using the **trace level** command on the CLI of the Query Node:
+<pre class="code-frame"><code class="language-json">trace level = 1 grafana</code></pre>
+
+Setting trace level to 0 disables the trace.
