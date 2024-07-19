@@ -15,7 +15,18 @@ Gem::Specification.new do |spec|
     "source_code_uri"   => "https://github.com/EdgeLake/edgeLake.github.io",
   }
 
-  spec.files         = `git ls-files -z ':!:*.jpg' ':!:*.png'`.split("\x0").select { |f| f.match(%r{^(assets|bin|_layouts|_includes|lib|Rakefile|_sass|LICENSE|README|CHANGELOG|favicon)}i) }
+spec.files = Dir.glob("assets/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("bin/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("_layouts/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("_includes/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("lib/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("Rakefile", File::FNM_DOTMATCH) +
+             Dir.glob("_sass/**/*", File::FNM_DOTMATCH) +
+             Dir.glob("LICENSE", File::FNM_DOTMATCH) +
+             Dir.glob("README", File::FNM_DOTMATCH) +
+             Dir.glob("CHANGELOG", File::FNM_DOTMATCH) +
+             Dir.glob("favicon", File::FNM_DOTMATCH)
+
   spec.executables   << 'just-the-docs'
 
   spec.add_development_dependency "bundler", ">= 2.3.5"

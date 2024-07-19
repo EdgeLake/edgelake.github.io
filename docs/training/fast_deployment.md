@@ -70,7 +70,7 @@ git clone https://github.com/EdgeLake/docker-compose</code></pre>
 
 ### Validate Master Node
 <ol start="1">
-    <li>View node logs - specifically validate TCP, REST, and Blockchain sync are running
+    <li>View node logs - validate that the following services are enabled: TCP, REST, and Blockchain sync
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=master</code></pre>
         <b>Expected Output:</b>
         <pre class="code-frame"><code class="language-anylog">EL edgelake-master +&gt; 
@@ -110,11 +110,15 @@ TCP test using 45.79.74.39:32048         |[From Node 45.79.74.39:32048] edgelake
 REST test using http://45.79.74.39:32049 |edgelake-master@45.79.74.39:32048 running                              |
         </code></pre>
     </li>
-    <b>Note</b>: The command <code class="language-anylog">test node</code> only checks the external IP address for the REST port. 
-    If the port is not open to the outside world (when binding is set to False), then the test will fail. To manually test, 
+    <b>Note</b>: The command <code class="language-anylog">test node</code> validates the IP and Port used by the
+    AnyLog protocol (Test TCP) and the REST protocol (Test REST).     
+    The REST IP and Port are offered by an EdgeLake service to communicate with 3rd parties applications via REST.  
+    If the REST port is not open to the outside world (and **binding** in the EdgeLake Node configuration is set to **False**), then the
+    test will fail.   
+    Use the following process to manually test the connection:   
     open a new terminal and run a <code class="language-shell">curl -X GET {INTERNAL_IP}:{REST_PORT}</code>
     <pre class="code-frame"><code class="language-anylog">root@alog-edgelake-node:~# curl -X GET 45.79.74.39:32049 -w "\n"
-edgelake-master@45.79.74.39:32048 running</code></pre>
+    edgelake-master@45.79.74.39:32048 running</code></pre>
     <li>Detach from CLI - <code class="language-shell">ctrl-d</code></li>
 </ol>
 
@@ -146,7 +150,7 @@ The following configuration steps can be used for each deployed operator.
 
 ### Validate Operator Node
 <ol start="1">
-     <li>View node logs - specifically validate TCP, REST, and Operator service and Blockchain sync are running
+     <li>View node logs - validate that the following services are enabled: TCP, REST, Operator, and Blockchain sync
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=operator</code></pre>
         <b>Expected Output</b>:
         <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +&gt; 
@@ -198,7 +202,7 @@ Address               Node Type Node Name                     Status
 
 ### Validate Query Node 
 <ol start="1"> 
-    <li>View node logs - specifically validate TCP, REST, and Operator service and Blockchain sync are running
+    <li>View node logs - validate that the following services are enabled: TCP, REST, and Blockchain sync
         <pre class="code-frame"><code class="language-shell">make logs EDGELAKE_TYPE=query</code></pre>
         <b>Expected Output</b>:
         <pre class="code-frame"><code class="language-anylog">EL edgelake-operator +&gt;
