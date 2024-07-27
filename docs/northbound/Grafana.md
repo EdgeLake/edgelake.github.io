@@ -22,7 +22,7 @@ demo BI tool. However, directions for other BI tools, such as [Microsoft's Power
 * [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 * [Grafana Install](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) - We support _Grafana_ 9.5.16 or higher.
 * The REST service enabled on the EdgeLake node (the Query Node) that services the Grafana Request.
-* Use the following command on the EDgeLake CLI to enable the REST service:
+* Use the following command on the EdgeLake CLI to enable the REST service:
 <pre class="code-frame"><code class="language-anylog">&lt;run rest server where
     external_ip=!external_ip and external_port=!anylog_rest_port and
     internal_ip=!ip and internal_port=!anylog_rest_port and
@@ -98,13 +98,24 @@ Grafana allows to present data in 2 modes _Time Series_ collects and visualize d
 _Table_ format where data is presented in rows and columns.
 
 EdgeLake queries are represented in the Grafana JSON API, and details of the configuration are available 
-[here](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md#using-grafana).  
-EdgeLake offers 2 predefined functions that can be represented in the Grafana JSON inteface ([_Increments_ and _Period_](#using-the-time-series-data-visualization)).
-These function reduce the data transfer by pushing processing to the edge nodes.
+[here](https://github.com/AnyLog-co/documentation/blob/master/northbound%20connectors/using%20grafana.md#using-the-time-series-data-visualization).
+Queries are represented in the JSON API using one of the following methids:
+1. As a SQL query.
+2. As a push-down Increment function.
+3. As a push-down period function.
 
-**Additional JSON Data** section(s) provides additional information to the query process. The information provided modifies
-the default behaviour.  
-The additional information is provided using a JSON script with the following attribute names:
+The push-down functions are very efficient as processing are fone on the edge and only summaries are returned on the network.
+
+The query information is represented using JSON in the Payload section. The Grafana info including the Payload is 
+transferred to the EdgeLake query node, where it is transforms to a query that is executed on the nodes in the network.
+
+To represent a query, follow the following steps for each Panel:
+1. Select the JSON data Source.
+2. Select the logical database and table from the pull down menu in the Metric section.
+3. Represent the EdgeLake query in the Payload section.
+
+The chart below summarized the attribute names for the JSON payload:  
+
 
 <table>
   <tbody>
@@ -179,9 +190,9 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
 
-## Metadata based Visualization
 
-**Creating Network Map**
+## Metadata based Visualization - A Network Map
+
 1. In the _Visualizations_ section, select _Geomap_
 
 2. In the _Metric_  section, select a table name to "query" against
@@ -199,7 +210,7 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_geomap.png" alt="Network Map" />
 </div> 
 
-**Visualizing Blockchain Data (Metadata)**
+## Metadata based Visualization - Visualizing Blockchain Data (Metadata)
 1. In the _Visualizations_ section, select _Table_
 
 2. In the _Metric_  section, select a random table - the JSON instruction will override the selction.
@@ -215,6 +226,9 @@ The additional information is provided using a JSON script with the following at
 <div class="image-frame">
     <img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" />
 </div>
+
+## SQL Query
+
 
 ## The Increment Query
 
