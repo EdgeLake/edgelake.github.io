@@ -67,7 +67,7 @@ The default <i>HTTP</i> port that Grafana listens to is 3000 - On a local machin
 </li>
 </ol>
 
-### Enabling Authentication
+## Enabling Authentication
 
 Enabling authentication is explained at [Authenticating HTTP requests](../authentication.md#Authenticating-http-requests).
 
@@ -170,7 +170,7 @@ The additional information is provided using a JSON script with the following at
     </tr>
     <tr>
       <td>interval</td>
-      <td>Overwrite the intervals calculated by the query process. See details in the **increment** function detailed below.</td>
+      <td>Overwrite the intervals calculated by the query process. See details in the <b>increment</b> function detailed below.</td>
     </tr>
   </tbody>
 </table>
@@ -179,7 +179,7 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
 
-### Metadata based Visualization
+## Metadata based Visualization
 
 **Creating Network Map**
 1. In the _Visualizations_ section, select _Geomap_
@@ -216,7 +216,7 @@ The additional information is provided using a JSON script with the following at
     <img src="../../../imgs/grafana_blockchain_table.png" alt="Network Map" />
 </div>
 
-### Using the Time-Series Data Visualization
+## The Increment Query
 
 **Increments query** (The default query) is used to retrieve statistics on the time series data in the selected time 
 range. Depending on the number of data point requested, the time range is divided to intervals and the min, max and 
@@ -235,8 +235,7 @@ average are collected for each interval and graphically presented.
     "format_as": "timeseries"
   }
 }</code></pre></li>
-  <li>Under Query Options, update <i>Max data points</i> (ie limit) otherwise the outcome would look like a single line 
-as opposed to clearly showing <i>min / max / avg</i> value(s).
+  <li>Under Query Options, update <i>Max data points</i> (limit value), and see comment below (Considering the Grafana limit).
   <br/>
   <br/>
   <div class="image-frame">
@@ -256,21 +255,24 @@ WHERE
 LIMIT 2128;
 </code></pre>
 
-**Understanding and Tuning Increments queries**
+### Understanding and Tuning Increments queries  
+
 The increment function allows to push processing to the edge nodes and return summaries. This is a very powerful way to 
 query data for the following reasons:
 1. Rows are processed concurrently by multiple edge nodes.
-2. Only summaries are transferred over the network.
+2. Only summaries are transferred over the network as well as keeping the Grafana memory usage contained.
+
 
 An increment query is executed on each participating node as follows:  
 1. A time range is divided to intervals.
-2. ALl the rows in the time range are visited and evaluated.
-3. For each interval, the query functions are calculated (min, max, average, count, sum).
+2. All the rows in the time range are visited and evaluated.
+3. For each interval, the selected query functions are calculated (min, max, average, count, sum).
 4. A single entry is returned for each time interval.
 5. The query node unifies the replies from all the participating nodes to a unified result.
 
-**The number of time points returned:**  
-Unless specified, EdgeLake will determine on optimize the number of points returned based on the time interval.  
+### The number of time points returned
+
+Unless specified, EdgeLake will determine an optimized number of points returned based on the time interval.  
 To see the optimized value, add ```"trace_level" : 1``` to the JSON Payload. The Query node displays the increment details.  
 Here is an output example where a point is returned for every 1 hour interval:
 
@@ -279,15 +281,16 @@ Process: [0:Success] Rows: [248] Details: [increments(hour, 1, insert_timestamp)
 Stmt: [run client () sql cos timezone = local SELECT increments(insert_timestamp), max(insert_timestamp) as timestamp , avg(chemicalscale4ai_pv) as avg_val from cos_wp_analog where insert_timestamp >= '2024-07-26T20:08:44.761Z' and insert_timestamp <= '2024-07-27T02:08:44.761Z' limit 1260;]
 </code></pre>
 
-To specify a different time interval, specify the interval in the JSON Payload.  
-The following example will overwrite the optimized setting with a user defined interval for evet 10 minutes (note also that the Payload includes the trace option enabled):
+To query with a different time interval, specify the interval in the JSON Payload.  
+The following example overwrites the optimized setting with a user defined interval.  
+In the example below, each data point represents 10 minutes interval and provides to Grafana the average min and max values for each 10 minutes (note also that the Payload includes the trace option enabled):
 
 <pre class="code-frame"><code class="language-sql">JSON  
 {
   "type": "increments",
   "time_column": "insert_timestamp",
   "value_column": "chemicalscale4ai_pv",
-  "functions": ["avg"],
+  "functions": ["avg", "min", "max"],
   "grafana": {
     "format_as": "timeseries"
   },
@@ -297,13 +300,17 @@ The following example will overwrite the optimized setting with a user defined i
 }
 </code></pre>
 
-**Considering the Grafana limit:**
-When Grafana issues a query it will include a limit. Users need to make sure that the limit is not lower than the number of points returned.  
-Note that the trace option provides the info on the number of points returned to Grafana. 
+### Considering the Grafana limit  
+When Grafana issues a query it will include a limit. Users need to make sure that the limit is not lower than the number of points returned.    
+Note that the trace option provides the info on the number of points returned to Grafana.
+Using the defaults (and not specifying intervals that overwrite the defaults) with a limit to set to 1000 or higher, will always return all the needed values.
 
+
+## The Period Query
 **Period query** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
-and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
-derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
+and nearest to the end of the time range).    
+The derived time is the latest time with values within the time range. From the derived time, the query will determine 
+a time interval that ends at the derived time and provides the avg, min and max values.         
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
 
 <ol start="1">
