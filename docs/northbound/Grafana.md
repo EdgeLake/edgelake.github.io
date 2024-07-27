@@ -168,6 +168,10 @@ The additional information is provided using a JSON script with the following at
       <td>timezone</td>
       <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard.</td>
     </tr>
+    <tr>
+      <td>interval</td>
+      <td>Overwrite the intervals calculated by the query process. See details in the **increment** function detailed below.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -252,7 +256,52 @@ WHERE
 LIMIT 2128;
 </code></pre>
 
-***Period query*** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
+**Understanding and Tuning Increments queries**
+The increment function allows to push processing to the edge nodes and return summaries. This is a very powerful way to 
+query data for the following reasons:
+1. Rows are processed concurrently by multiple edge nodes.
+2. Only summaries are transferred over the network.
+
+An increment query is executed on each participating node as follows:  
+1. A time range is divided to intervals.
+2. ALl the rows in the time range are visited and evaluated.
+3. For each interval, the query functions are calculated (min, max, average, count, sum).
+4. A single entry is returned for each time interval.
+5. The query node unifies the replies from all the participating nodes to a unified result.
+
+**The number of time points returned:**  
+Unless specified, EdgeLake will determine on optimize the number of points returned based on the time interval.  
+To see the optimized value, add ```"trace_level" : 1``` to the JSON Payload. The Query node displays the increment details.  
+Here is an output example where a point is returned for every 1 hour interval:
+
+<pre class="code-frame"><code class="language-sql">DEBUG 
+Process: [0:Success] Rows: [248] Details: [increments(hour, 1, insert_timestamp)]
+Stmt: [run client () sql cos timezone = local SELECT increments(insert_timestamp), max(insert_timestamp) as timestamp , avg(chemicalscale4ai_pv) as avg_val from cos_wp_analog where insert_timestamp >= '2024-07-26T20:08:44.761Z' and insert_timestamp <= '2024-07-27T02:08:44.761Z' limit 1260;]
+</code></pre>
+
+To specify a different time interval, specify the interval in the JSON Payload.  
+The following example will overwrite the optimized setting with a user defined interval for evet 10 minutes (note also that the Payload includes the trace option enabled):
+
+<pre class="code-frame"><code class="language-sql">JSON  
+{
+  "type": "increments",
+  "time_column": "insert_timestamp",
+  "value_column": "chemicalscale4ai_pv",
+  "functions": ["avg"],
+  "grafana": {
+    "format_as": "timeseries"
+  },
+  "interval" : "10 minutes",
+  "trace_level" : 1
+
+}
+</code></pre>
+
+**Considering the Grafana limit:**
+When Grafana issues a query it will include a limit. Users need to make sure that the limit is not lower than the number of points returned.  
+Note that the trace option provides the info on the number of points returned to Grafana. 
+
+**Period query** is a query to retrieve data values at the end of the provided time range (or, if not available, before 
 and nearest to the end of the time range). The derived time is the latest time with values within the time range. From the 
 derived time, the query will determine a time interval that ends at the derived time and provides the avg, min and max values.    
 To execute a period query, include the key: 'type' and the value: 'period' in the Additional JSON Data section.  
