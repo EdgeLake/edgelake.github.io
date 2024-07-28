@@ -229,16 +229,16 @@ The chart below summarized the attribute names for the JSON payload:
 
 ## SQL Query
 <pre><code class="language-sql">SELECT 
-  updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, 
-  message, action, result, tag, resource, source
+  timestamp, a_current, b_current, c_current 
 FROM 
-  alert 
+  bf 
 WHERE 
-  period(day, 1, now(), timestamp);</code></pre>
+  id = 1 
+ORDER BY 
+  timestamp DESC</code></pre>
 
 <pre><code class="language-json">{
-    "sql": "select updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, message, action, result, tag, resource, source from alert where period(day, 1, now(), timestamp)",
-    "time_range": false
+  "sql": "select timestamp, a_current, b_current, c_current from bf where id = 1 order by timestamp desc;"
 }</code></pre>
 
 <img src="../../../imgs/grafanaa_sql_widget.png" alt="SQL generated table" />
