@@ -228,6 +228,14 @@ The chart below summarized the attribute names for the JSON payload:
 </div>
 
 ## SQL Query
+
+The following SQL query returns the last values ingested by the database.
+Note that without the limit, the entire tables' data is returned, and even if a time range is added, it may include a huge
+number of rows.
+
+The **increment** and **period** pushdown functions detailed below consider all relevant data while also allowing control over the volume of data returned.
+
+Example SQL query:
 <pre><code class="language-sql">SELECT 
   timestamp, a_current, b_current, c_current 
 FROM 
@@ -235,12 +243,15 @@ FROM
 WHERE 
   id = 1 
 ORDER BY 
-  timestamp DESC</code></pre>
+  timestamp DESC
+LIMIT 1</code></pre>
 
+Example JSON Payload:
 <pre><code class="language-json">{
-  "sql": "select timestamp, a_current, b_current, c_current from bf where id = 1 order by timestamp desc;"
+  "sql": "select timestamp, a_current, b_current, c_current from bf where id = 1 order by timestamp desc limit 1;"
 }</code></pre>
 
+Example Bar Graph with latest values:
 <img src="../../../imgs/grafanaa_sql_widget.png" alt="SQL generated table" />
 
 ## The Increment Query
