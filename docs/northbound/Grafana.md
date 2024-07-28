@@ -242,9 +242,7 @@ WHERE
     "sql": "select updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, message, action, result, tag, resource, source from alert where period(day, 1, now(), timestamp)",
     "time_range": false
 }</code></pre></td>
-  </tr>
-  <tr>
-    <td><img src="../../../imgs/grafanaa_sql_widget.png" alt="Increments Graph"   /></td>
+  <td><img src="../../../imgs/grafanaa_sql_widget.png" alt="Increments Graph"   /></td>
   </tr>
 </table>
 
