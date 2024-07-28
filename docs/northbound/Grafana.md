@@ -230,7 +230,7 @@ The chart below summarized the attribute names for the JSON payload:
 ## SQL Query
 
 The following SQL query returns the last values ingested by the database.
-Note that without the limit, the entire tables' data is returned, and even if a time range is added, it may include a huge
+Note that without the limit, the entire table's data is returned, and even if a time range is added, it may include a huge
 number of rows.
 
 The **increment** and **period** pushdown functions detailed below consider all relevant data while also allowing control over the volume of data returned.
