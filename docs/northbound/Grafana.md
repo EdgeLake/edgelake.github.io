@@ -228,6 +228,25 @@ The chart below summarized the attribute names for the JSON payload:
 </div>
 
 ## SQL Query
+<pre><code class="language-sql">SELECT 
+  updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, 
+  message, action, result, tag, resource, source
+FROM 
+  alert 
+WHERE 
+  period(day, 1, now(), timestamp);</code></pre>
+
+<table>
+  <tr>
+    <td><pre><code class="language-json">{
+    "sql": "select updated_timestamp as timestamp, cluster_name, namespace, pod_name as pod, severity, policy_name as policy, message, action, result, tag, resource, source from alert where period(day, 1, now(), timestamp)",
+    "time_range": false
+}</code></pre></td>
+  </tr>
+  <tr>
+    <td><img src="../../../imgs/grafanaa_sql_widget.png" alt="Increments Graph"   /></td>
+  </tr>
+</table>
 
 
 ## The Increment Query
