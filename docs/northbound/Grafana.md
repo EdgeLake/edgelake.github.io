@@ -251,7 +251,7 @@ Example JSON Payload:
   "sql": "select timestamp, a_current, b_current, c_current from bf where id = 1 order by timestamp desc limit 1;"
 }</code></pre>
 
-Example Bar Graph with latest values:
+Example Gauge with latest values:
 <img src="../../../imgs/grafanaa_sql_widget.png" alt="SQL generated table" />
 
 ## The Increment Query
