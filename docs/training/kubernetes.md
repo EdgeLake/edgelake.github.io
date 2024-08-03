@@ -198,21 +198,23 @@ on user-defined configurations. The code has 3 basic options:
 
   <li><i>start</i> - Deploy the Helm chart based on user-defined configuration file, then set up Kubernetes port-forwarding. 
 The script will wait for the deployment to finish before setting up port-forwarding.
-    <pre class="code-frame"><code class="language-shell"># Install volume
-helm install ./edgelake-node-volumes-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}-volume
-<br>
-# Install deployment
-helm install ./edgelake-node-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}
-<br>
-# Declare port forwarding  -  the decision which port(s) to open port-forwaring for depends whether the port is trying to 
-# communicate with things outside the Kubeernetes network. The deploy_node.sh script will open ports for TCP, REST and 
-# Broker (if set).
-<br>
-# example without a specified IP address  
-kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} > /dev/null 2>&1 & 
+  <ul>
+    <li>Install volume
+      <pre class="code-frame"><code class="language-shell">helm install ./edgelake-node-volumes-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}-volume</code></pre>
+    </li>
+    <li>Install deployment
+      <pre class="code-frame"><code class="language-shell">helm install ./edgelake-node-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}</code></pre>
+    </li>
+    <li>Declare port forwarding  -  the decision which port(s) to open port-forwaring for depends whether the port is 
+trying to communicate with things outside the Kubeernetes network. The deploy_node.sh script will open ports for TCP, 
+REST and Broker (if set).
+  <pre class="code-frame"><code class="language-shell"># example without a specified IP address  
+kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} > /dev/null 2>&1 &
 <br>
 # example with a specified IP address 
 kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} --address=${INTERNAL_IP}  &gt /dev/null 2&gt&1 &</code></pre></li>
+    </ul>
+  </li>
   <li><i>stop</i> - Based on used-defined configurations, stop Kubernetes instance and kill port-forwarding process. It will not remove the Helm volumes used by Kubernetes. 
   <pre class="code-frame"><code class="language-shee">helm delete ${APP_NAME}
 kill -15 `ps -ef | grep port-forward | grep ${ANYLOG_SERVER_PORT} | awk -F " " '{print $2}'`</code></pre></li>
