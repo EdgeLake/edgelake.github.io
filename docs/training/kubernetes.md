@@ -49,6 +49,7 @@ Steps to deploy an EdgeLake container using the <a href="https://github.com/Edge
     <pre class="code-frame"><code class="language-shell">git clone https://github.com/EdgeLake/deployment-k8s</code></pre>
   </li>
   <li>Update Configurations - located in <a href="https://github.com/EdgeLake/deployment-k8s/tree/main/configurations" target="_blank">deploymnet-k8s//configurations</a></li>
+  <br/>
   <li>(Optional) build helm package - The Github repository already has a Helm package for both the node and volume.  
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh package deployment-k8s/configurations/edgelake_master.yaml</code></pre>
   </li>
@@ -61,3 +62,125 @@ Steps to deploy an EdgeLake container using the <a href="https://github.com/Edge
 </ol>
 
 
+## Configuration file
+
+EdgeLake is a unified program designed to adapt its behavior dynamically based on its configuration settings. Unlike 
+docker configurations, Kubernetes configuration file also consists of Kubernetes package configruation information.
+
+The configuration is seprated into the 3 parts
+<ul>
+  <li><b>metadata</b> - Kubernetes information such as component names and network service type (ClusterIP)</li>
+  <li><b>image</b> - EdgeLake docker image information</li>
+  <li><b>node_configs</b> - Environment variables used by EdgeLake. The environment variables are broken up into relevant sections</li>
+</ul>
+
+<b>Sample Configuration file for Operataor Node</a>
+<pre class="=code-frame"><code class="language-yaml">metadata:
+  # Kubernetes Instance namespace
+  namespace: default
+  # hostname for deployment
+  hostname: edgelake-operator
+  # deployment application name / Name of the edgelake instance
+  app_name: edgelake-operator
+  service_name: edgelake-operator-service
+  # Configuration file mapping name
+  configmap_name: edgelake-operator-configmap
+  # Allows running Kubernetes remotely. If commented out, code will ignore it
+  node_selector: ""
+  service_type: ClusterIP
+
+image:
+  # Image secret naming
+  secret_name: imagepullsecret
+  # (Docker Hub) Image Path
+  repository: anylogco/edgelake-network
+  # Image version
+  tag: latest
+  # Image pulling policy
+  pull_policy: IfNotPresent
+
+node_configs:
+  general:
+    # Information regarding which edgelake node configurations to enable. By default, even if everything is disabled, edgelake starts TCP and REST connection protocols
+    NODE_TYPE: operator
+    # Name of the edgelake instance
+    NODE_NAME: edgelake-operator
+    # Owner of the edgelake instance
+    COMPANY_NAME: New Company
+
+  networking:
+    # Port address used by edgelake's TCP protocol to communicate with other nodes in the network
+    ANYLOG_SERVER_PORT: 32148
+    # Port address used by edgelake's REST protocol
+    ANYLOG_REST_PORT: 32149
+    # Port value to be used as an MQTT broker, or some other third-party broker
+    ANYLOG_BROKER_PORT: 32150
+    # Internal IP address of the machine the container is running on - if not set, then a unique IP will be used each time
+    OVERLAY_IP: ""
+    # A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+    TCP_BIND: false
+    # A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+    REST_BIND: false
+    # A bool value that determines if to bind to a specific IP and Port (a false value binds to all IPs)
+    BROKER_BIND: false
+
+  database:
+    # Physical database type (sqlite or psql)
+    DB_TYPE: sqlite
+    # Username for SQL database connection
+    DB_USER: ""
+    # Password correlated to database user
+    DB_PASSWD: ""
+    # Database IP address
+    DB_IP: 127.0.0.1
+    # Database port number
+    DB_PORT: 5432
+    # Whether to set autocommit data
+    AUTOCOMMIT: false
+    # Whether to enable NoSQL logical database
+    ENABLE_NOSQL: false
+
+  blockchain:
+    # TCP connection information for Master Node
+    LEDGER_CONN: 127.0.0.1:32048
+
+  operator:
+    # Owner of the cluster
+    CLUSTER_NAME: new-company-cluster1
+    # Logical database name
+    DEFAULT_DBMS: new_company
+
+  mqtt:
+    # Whether to enable the default MQTT process
+    ENABLE_MQTT: false
+
+    # IP address of MQTT broker
+    MQTT_BROKER: 139.144.46.246
+    # Port associated with MQTT broker
+    MQTT_PORT: 1883
+    # User associated with MQTT broker
+    MQTT_USER: edgelakeuser
+    # Password associated with MQTT user
+    MQTT_PASSWD: mqtt4edgelake!
+    # Whether to enable MQTT logging process
+    MQTT_LOG: false
+
+    # Topic to get data for
+    MSG_TOPIC: edgelake-demo
+    # Logical database name
+    MSG_DBMS: new_company
+    # Table where to store data
+    MSG_TABLE: bring [table]
+    # Timestamp column name
+    MSG_TIMESTAMP_COLUMN: now
+    # Value column name
+    MSG_VALUE_COLUMN: bring [value]
+    # Column value type
+    MSG_VALUE_COLUMN_TYPE: float
+
+  advanced:
+    # Whether to automatically run a local (or personalized) script at the end of the process
+    DEPLOY_LOCAL_SCRIPT: false
+    # Whether to monitor the node or not
+    MONITOR_NODES: false
+</code></pre>
