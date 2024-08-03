@@ -1,6 +1,6 @@
 ---
 layout: default
-parent: training
+parent: Training
 title: Advanced Kubernetes
 ---
 # Advanced Kubernetes
