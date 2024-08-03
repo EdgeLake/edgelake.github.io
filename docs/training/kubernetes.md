@@ -19,6 +19,7 @@ to predefine the services for each Pod.
   * [Configuring EdgeLake Node](advanced_kubernetes.md#configuring-the-network-services-on-the-edgelake-node)
   * [Peer-to-peer communication](advanced_kubernetes.md#peer-to-peer-communication)
 * [Volumes](advanced_kubernetes.md#volumes)
+* [Node Policy](advanced_kubernetes.md#sample-node-policy-for-kubernetes)
 
 ## Requirements
 * <a href="https://kubernetes.io/docs/tasks/tools/" target="_blank">Kubernetes Cluster manager</a> - deploy Minikube with [Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/) 
@@ -72,6 +73,9 @@ If an address is not set, then the port-forwarding is done against localhost (12
 
 EdgeLake is a unified program designed to adapt its behavior dynamically based on its configuration settings. Unlike 
 docker configurations, Kubernetes configuration file also consists of Kubernetes package configruation information.
+
+Since Kubernetes containers use a unique internal IP with each deployment, we recommend setting the machine's internal
+IP address as the overlay IP value in the configurations; otherwise a new policy will be declared when the node reboots. 
 
 The configuration is seprated into the 3 parts
 <ul>

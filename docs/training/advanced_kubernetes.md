@@ -18,7 +18,7 @@ and ensures load balancing across the pods in the service.
 
 Since dynamic ClusterIP generates a new IP whenever a pod is deployed, this causes a issue with EdgeLake's metadata 
 (hosted in a blockchain or a master node) as each new IP will generate a new policy. To resolve this issue, and avoid 
-policy updates, specify the host's internal IP as the `OVERLAY_IP` value. 
+policy updates, specify the host's internal IP as the `Virtual IP` value. 
 
 The following chart summarizes the setup:
 <table>
@@ -34,19 +34,19 @@ The following chart summarizes the setup:
     <tr>
       <td style="text-align:center;">TCP</td>
       <td style="text-align:center;">External IP</td>
-      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;">Virtual IP</td>
       <td style="text-align:center;"><code class="language-anylog">run tcp server</code></td>
     </tr>
     <tr>
       <td style="text-align:center;">REST</td>
       <td style="text-align:center;">External IP</td>
-      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;">Virtual IP</td>
       <td style="text-align:center;"><code class="language-anylog">run REST server</code></td>
     </tr>
     <tr>
       <td style="text-align:center;">Message Broker (TCP)</td>
       <td style="text-align:center;">External IP</td>
-      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;">Virtual IP</td>
       <td style="text-align:center;"><code class="language-anylog">run message broker</code></td>
     </tr>
   </tbody>
@@ -69,7 +69,6 @@ port-forwarding for all the ports the Kubernetes instance will be using.
 
 **Note**: When using Kubernetes, makes sure ports are open and accessible across your network. 
 
-
 ## Volumes
 The base deployment has the same general volumes as a docker deployment, and uses <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/" target="_blank">PersistentVolumeClaim</a> - _data_, _blockchain_, _EdgeLake_ and _local-scripts (deployments)_.
 
@@ -86,7 +85,67 @@ elif [[ ! -d $EdgeLake_PATH/deployment-scripts ]] ; then  # if directory DNE
   git clone -b os-dev https://github.com/EdgeLake-co/deployment-scripts
 fi</code></pre>
 
-Once a node is up and running, users can change content in _local-scripts_ using `kubectl exec ${POD_NAME} -- /bin/bash`.
+Once a node is up and running, users can change content in _local-scripts_ using <code class="language-shell">kubectl exec ${POD_NAME} -- /bin/bash</code>s.
 
 Volumes are deployed automatically as part of deploy_node.sh, and remain persistent as long as PersistentVolumeClaims
 are not removed. 
+
+## Sample Node Policy for Kubernetes
+When a node gets deployed, it either generates a new configuration policy or utilizes an existing one. 
+
+Values in the configuration policy are relatively set, that way when a deployment is restarted a new policy will not be 
+declared for the node due to the changing virtual IP. As for the local IP in the (master) node policy, we assume the 
+service name will not change. The configuration policy also consists of calls to scripts that configure the node. The 
+scripts consist of connecting to logical database, declaring policy, associating the EdgeLake instance with 
+master node / blockchain, and declaring node monitoring. 
+
+<pre class="code-frame"><code class="language-json">{'config' : {'name' : 'operator-iotech-configs',
+    'company' : 'AnyLog Co.',
+    'node_type' : 'operator',
+    'ip' : '!external_ip',
+    'local_ip' : '!ip',
+    'port' : '!anylog_server_port.int',
+    'rest_port' : '!anylog_rest_port.int',
+    'broker_port' : '!anylog_broker_port.int',
+    'threads' : '!tcp_threads.int',
+    'tcp_bind' : '!tcp_bind',
+    'rest_threads' : '!rest_threads.int',
+    'rest_timeout' : '!rest_timeout.int',
+    'rest_bind' : '!rest_bind',
+    'broker_threads' : '!broker_threads.int',
+    'broker_bind' : '!broker_bind',
+    'script' : [
+        'process !local_scripts/database/deploy_database.al',
+        'process !local_scripts/policies/cluster_policy.al',
+        'process !local_scripts/policies/operator_policy.al',
+        'run scheduler 1',
+        'process !local_scripts/policies/config_threashold.al',
+        'run streamer',
+        'if !enable_ha == true then run data distributor',
+        'if !enable_ha == true then run data consumer where start_date=!start_data',
+        'if !operator_id then run operator where create_table=!create_table and update_tsd_info=!update_tsd_info and compress_json=!compress_file and compress_sql=!compress_sql and archive_json=!archive and archive_sql=!archive_sql and master_node=!ledger_conn and policy=!operator_id and threads=!operator_threads',
+        'schedule name=remove_archive and time=1 day and task delete archive where days = !archive_delete',
+        'if !monitor_nodes == true then process $ANYLOG_PATH/deployment-scripts/demo-scripts/monitoring_policy.al',
+        'if !enable_mqtt == true then process $ANYLOG_PATH/deployment-scrpts/demo-scripts/basic_msg_client.al',
+        'if !deploy_local_script == true then process !local_scripts/local_script.al'
+    ],
+}}</code></pre>
+
+The sample JSON for (operator) node policy is set to have communication between EdgeLake nodes to be set to binding. 
+When the communication is set to not-binding, the external IP (23.92.28.183) will be set to ip key in the policy, and 
+the Kubernetes service IP (edgelake-operator-service) will be set to local_ip (Kubrnetes internal IP).
+
+
+<pre class="code-frame"><code class="language-json">{'operator' : {'name' : 'anylog-operator1',
+    'company' : 'AnyLog Co.',
+    'ip' : '23.92.28.183',
+    'local_ip' : '192.168.10.23',
+    'port' : 32148,
+    'rest_port' : 32149,
+    'broker_port' : 32150,
+    'cluster' : '4f4b20b76a674bd63d590af850d82143',
+    'loc' : '33.7490,-84.3880',
+    'country' : 'US',
+    'city' : 'Atlanta',
+'}}</code></pre>
+
