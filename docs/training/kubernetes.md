@@ -17,7 +17,7 @@ to predefine the services for each Pod.
 * [Network](advanced_kubernetes.md#networking)
   * [Configuring EdgeLake Node](advanced_kubernetes.md#configuring-the-network-services-on-the-edgelake-node)
   * [Peer-to-peer communication](advanced_kubernetes.md#peer-to-peer-communication)
-* 
+* [Volumes](advanced_kubernetes.md#volumes)
 
 ## Requirements
 * <a href="https://kubernetes.io/docs/tasks/tools/" target="_blank">Kubernetes Cluster manager</a> - deploy Minikube with [Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/) 

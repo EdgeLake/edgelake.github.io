@@ -78,15 +78,13 @@ container image. Therefore, we utilize an `if/else` process to make this data pe
 
 **Note**: we copy the scripts to a persistent volume that is created after the initialization of the Pod.
 
-```shell
-if [[ -d $EdgeLake_PATH/deployment-scripts ]] && [[ -z $(ls -A $EdgeLake_PATH/deployment-scripts) ]]; then # if directory exists but empty
+<pre class="code-frame"><code class="language-shell">if [[ -d $EdgeLake_PATH/deployment-scripts ]] && [[ -z $(ls -A $EdgeLake_PATH/deployment-scripts) ]]; then # if directory exists but empty
   git clone -b os-dev https://github.com/EdgeLake-co/deployment-scripts deployment-scripts-tmp
   mv deployment-scripts-tmp/* deployment-scripts
   rm -rf deployment-scripts-tmp
 elif [[ ! -d $EdgeLake_PATH/deployment-scripts ]] ; then  # if directory DNE
   git clone -b os-dev https://github.com/EdgeLake-co/deployment-scripts
-fi
-```
+fi</code></pre>
 
 Once a node is up and running, users can change content in _local-scripts_ using `kubectl exec ${POD_NAME} -- /bin/bash`.
 
