@@ -75,8 +75,8 @@ The configuration is seprated into the 3 parts
   <li><code>node_configs</code> - Environment variables used by EdgeLake. The environment variables are broken up into relevant sections</li>
 </ul>
 
-<b>Sample Configuration file for Operator Node</a>
-<pre class="=code-frame"><code>metadata:
+<b>Sample Configuration file for Operator Node</b>
+<pre class="=code-frame"><code class="language-yaml">metadata:
   # Kubernetes Instance namespace
   namespace: default
   # hostname for deployment
@@ -183,8 +183,7 @@ node_configs:
     # Whether to automatically run a local (or personalized) script at the end of the process
     DEPLOY_LOCAL_SCRIPT: false
     # Whether to monitor the node or not
-    MONITOR_NODES: false
-</code></pre>
+    MONITOR_NODES: false</code></pre>
 
 ## Deployment Script Explained
 
@@ -193,12 +192,13 @@ on user-defined configurations. The code has 3 basic options:
 
 <ul>
   <li><i>package</i> - Package both the EdgeLake deployment and volume helm charts
-    <pre class="code-frame"><code class="language-shell">helm package edgelake-node/
-    helm package edgelake-node-volume/</code></pre>
+    <pre class="code-frame"><code class="language-shell">helm package edgelake-node
+    helm package edgelake-node-volume</code></pre>
   </li>
+
   <li><i>start</i> - Deploy the Helm chart based on user-defined configuration file, then set up Kubernetes port-forwarding. 
 The script will wait for the deployment to finish before setting up port-forwarding.
-    <pre class="code-frame"><code class="language-shee"># Install volume
+    <pre class="code-frame"><code class="language-shell"># Install volume
 helm install ./edgelake-node-volumes-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}-volume
 
 # Install deployment
