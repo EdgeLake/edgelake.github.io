@@ -14,6 +14,7 @@ to predefine the services for each Pod.
 * [Deploying EdgeLake](#deploy-edgelake)
     * [Configuration file](#configuration-file)
     * [deploy_node.sh Explained](#deployment-script-explained)
+* [Using Node](#using-node)
 * [Network](advanced_kubernetes.md#networking)
   * [Configuring EdgeLake Node](advanced_kubernetes.md#configuring-the-network-services-on-the-edgelake-node)
   * [Peer-to-peer communication](advanced_kubernetes.md#peer-to-peer-communication)
@@ -57,7 +58,8 @@ Steps to deploy an EdgeLake container using the <a href="https://github.com/Edge
   <li>(Optional) build helm package - The Github repository already has a Helm package for both the node and volume.  
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh package deployment-k8s/configurations/edgelake_master.yaml</code></pre>
   </li>
-  <li>Deploy Kubernetes volume and container for EdgeLake Node - the deployment script also enables port-forwarding with an optional specification of which IP to proxy against.  
+  <li>Deploy Kubernetes volume and container for EdgeLake Node - the deployment script also enables port-forwarding with an optional specification of which IP to proxy against. 
+If an address is not set, then the port-forwarding is done against localhost (127.0.0.1).
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh start deployment-k8s/configurations/edgelake_master.yaml [--address={INTERNAL_IP}]</code></pre>
   </li>
   <li>(Optional) Stop deplyment and corresponding proxy process, this will not remove volumes
@@ -226,8 +228,32 @@ kill -15 `ps -ef | grep port-forward | grep ${ANYLOG_SERVER_PORT} | awk -F " " '
 To remove a Helm/Kubernetes volume simply run:
 <pre class="code-frame"><code class="language-shell">helm delete ${VOLUME_NAME}</code></pre>
 
-
-
-
-
-
+## Using Node
+<ul>
+  <li>Attach to EdgeLake CLI   
+<pre class="code-frame"><code class="language-shell"># to detach ctrl-p-q
+kubectl attach -it pod/edgeLake-master-deployment-7b4ff75fb7-mnsxf</code></pre></li>
+  <li>Attach to the shell interface of the node
+<pre class="code-frame"><code class="language-shell"># to detach ctrl-p-q
+kubectl attach -it pod/edgeLake-master-deployment-7b4ff75fb7-mnsxf</code></pre></li>
+  <li>Sample Insert Data - <a href="https://github.com/EdgeLake/edgelake.github.io/tree/main/docs/examples/python_examples/data" target="_blank">Sample Python Code</a>
+<pre class="code-frame"><code class="language-shell">curl -X PUT http://127.0.0.1:32149 \ 
+   -H "type: json" -H "dbms: new_company" \
+   -H "table: rand_data" \
+   -H "mode: streaming" \
+   -H "Content-Type: text/plain" \
+   -H "User-Agent: AnyLog/1.23" \
+   --data-raw "[{\"value\": 50, \"ts\": \"2019-10-14T17:22:13.051101Z\"}, {\"value\": 501, \"ts\": \"2019-10-14T17:22:13.050101Z\"}, {\"value\": 501, \"ts\": \"2019-10-14T17:22:13.050101Z\"}]"</code></pre></li>
+  <li>Check Node Status
+<pre class="code-frame"><code class="language-shell">curl -X GET http://127.0.0.1:32149</code></pre></li>
+  <li>Check data coming in
+<pre class="code-frame"><code class="language-shell"># data being processed
+curl -X GET http://127.0.0.1:32149  -H "command: get streaming"
+# validate data was stored 
+curl -X GET http://127.0.0.1:32149  -H "command: get streaming"</code></pre></li>
+  <li><a href="../commands/query_data.html">Query</a> — notice the request is running against the query node via REST
+<pre class="code-frame"><code class="language-shell">curl -X GET http://127.0.0.1:32349 \
+   -H "command: sql new_company select * from rand_data;" 
+   -H "User-Agent: AnyLog/1.23"
+   -H "destination: network"</code></pre></li>
+</ul>
