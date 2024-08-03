@@ -14,7 +14,8 @@ to predefine the services for each Pod.
 * [Deploying EdgeLake](#deploy-edgelake)
     * [Configuration file](#configuration-file)
     * [deploy_node.sh Explained](#deployment-script-explained)
-* [Network & Volume Configuration](#networking-and-volume-management)
+* [Network](#networking)
+  * 
 
 ## Requirements
 * <a href="https://kubernetes.io/docs/tasks/tools/" target="_blank">Kubernetes Cluster manager</a> - deploy Minikube with [Docker](https://minikube.sigs.k8s.io/docs/drivers/docker/) 
@@ -221,5 +222,50 @@ kill -15 `ps -ef | grep port-forward | grep ${ANYLOG_SERVER_PORT} | awk -F " " '
 </ul>
 
 To remove a Helm/Kubernetes volume simply run:
+<pre class="code-frame"><code class="language-shell">helm delete ${VOLUME_NAME}</code></pre>
 
-<pre class="code-frame"><code class="language-shell">helm delete ${VOLUME_NAME}</code>
+## Networking
+
+EdgeLake uses <a href="https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/" target="_blank">dynamic ClusterIP</a> 
+as it's preferred setup. This means a unique IP address is automatically assigned to the services as they are created 
+and ensures load balancing across the pods in the service.
+
+#### Configuring the network services on the EdgeLake node
+
+Since dynamic ClusterIP generates a new IP whenever a pod is deployed, this causes a issue with EdgeLake's metadata 
+(hosted in a blockchain or a master node) as each new IP will generate a new policy. To resolve this issue, and avoid 
+policy updates, specify the host's internal IP as the `OVERLAY_IP` value. 
+
+The following chart summarizes the setup:
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;">Connection Type</th>
+      <th style="text-align:center;">External IP</th>
+      <th style="text-align:center;">Internal IP</th>
+      <th style="text-align:center;">Config Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center;">TCP</td>
+      <td style="text-align:center;">External IP</td>
+      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;"><code class="language-anylog">run tcp server</code></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">REST</td>
+      <td style="text-align:center;">External IP</td>
+      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;"><code class="language-anylog">run REST server</code></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">Message Broker (TCP)</td>
+      <td style="text-align:center;">External IP</td>
+      <td style="text-align:center;">Overlay IP</td>
+      <td style="text-align:center;"><code class="language-anylog">run message broker</code></td>
+    </tr>
+  </tbody>
+</table>
+
+Additional information on the network configuration are in the [networking section](https://github.com/EdgeLake-co/documentation/blob/master/network%20configuration.md).
