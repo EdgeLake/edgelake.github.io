@@ -12,7 +12,8 @@ to predefine the services for each Pod.
 
 * [Requirements](#requirements)
 * [Deploying EdgeLake](#deploy-edgelake)
-    * [Configurations](#configuration-file)
+    * [Configuration file](#configuration-file)
+    * [deploy_node.sh Explained](#deployment-script-explained)
 * [Network & Volume Configuration](#networking-and-volume-management)
 
 ## Requirements
@@ -69,9 +70,9 @@ docker configurations, Kubernetes configuration file also consists of Kubernetes
 
 The configuration is seprated into the 3 parts
 <ul>
-  <li><b>metadata</b> - Kubernetes information such as component names and network service type (ClusterIP)</li>
-  <li><b>image</b> - EdgeLake docker image information</li>
-  <li><b>node_configs</b> - Environment variables used by EdgeLake. The environment variables are broken up into relevant sections</li>
+  <li><code>metadata</code> - Kubernetes information such as component names and network service type (ClusterIP)</li>
+  <li><code>image</code> - EdgeLake docker image information</li>
+  <li><code>node_configs</code> - Environment variables used by EdgeLake. The environment variables are broken up into relevant sections</li>
 </ul>
 
 <b>Sample Configuration file for Operator Node</a>
@@ -184,3 +185,39 @@ node_configs:
     # Whether to monitor the node or not
     MONITOR_NODES: false
 </code></pre>
+
+## Deployment Script Explained
+
+The <code>deploy_node.sh</code> script is a tool that allows to easily prepare and deploy a Kubernetes deployment based 
+on user-defined configurations. The code has 3 basic options:
+
+<ul>
+  <li><i>package</i> - Package both the EdgeLake deployment and volume helm charts
+    <pre class="code-frame"><code class="language-shell">helm package edgelake-node/
+    helm package edgelake-node-volume/</code></pre>
+  </li>
+  <li><i>start</i> - Deploy the Helm chart based on user-defined configuration file, then set up Kubernetes port-forwarding. 
+The script will wait for the deployment to finish before setting up port-forwarding.
+    <pre class="code-frame"><code class="language-shee"># Install volume
+helm install ./edgelake-node-volumes-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}-volume
+
+# Install deployment
+helm install ./edgelake-node-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}
+
+# Declare port forwarding  -  the decision which port(s) to open port-forwaring for depends whether the port is trying to 
+# communicate with things outside the Kubeernetes network. The deploy_node.sh script will open ports for TCP, REST and 
+# Broker (if set).
+
+# example without a specified IP address  
+kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} > /dev/null 2>&1 & 
+
+# example with a specified IP address 
+kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} --address=${INTERNAL_IP}  &gt /dev/null 2&gt&1 &</code></pre></li>
+  <li><i>stop</i> - Based on used-defined configurations, stop Kubernetes instance and kill port-forwarding process. It will not remove the Helm volumes used by Kubernetes. 
+  <pre class="code-frame"><code class="language-shee">helm delete ${APP_NAME}
+kill -15 `ps -ef | grep port-forward | grep ${ANYLOG_SERVER_PORT} | awk -F " " '{print $2}'`</code></pre></li>
+</ul>
+
+To remove a Helm/Kubernetes volume simply run:
+
+<pre class="code-frame"><code class="language-shell">helm delete ${VOLUME_NAME}</code>
