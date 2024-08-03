@@ -74,8 +74,8 @@ The configuration is seprated into the 3 parts
   <li><b>node_configs</b> - Environment variables used by EdgeLake. The environment variables are broken up into relevant sections</li>
 </ul>
 
-<b>Sample Configuration file for Operataor Node</a>
-<pre class="=code-frame"><code class="language-yaml">metadata:
+<b>Sample Configuration file for Operator Node</a>
+<pre class="=code-frame"><code class="language-shell">metadata:
   # Kubernetes Instance namespace
   namespace: default
   # hostname for deployment
