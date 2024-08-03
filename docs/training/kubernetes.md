@@ -12,7 +12,7 @@ to predefine the services for each Pod.
 
 * [Requirements](#requirements)
 * [Deploying EdgeLake](#deploy-edgelake)
-    * [Validate Connectivity](#using-node)
+    * [Configurations](#configuration-file)
 * [Network & Volume Configuration](#networking-and-volume-management)
 
 ## Requirements
@@ -48,7 +48,7 @@ Steps to deploy an EdgeLake container using the <a href="https://github.com/Edge
   <li>Clone deployment-k8s
     <pre class="code-frame"><code class="language-shell">git clone https://github.com/EdgeLake/deployment-k8s</code></pre>
   </li>
-  <li>Update Configurations - located in <a href="https://github.com/EdgeLake/deployment-k8s/tree/main/configurations" target="_blank">deploymnet-k8s//configurations</a></li>
+  <li>Update <a href="#configuration-file">Configurations</a> - located in <a href="https://github.com/EdgeLake/deployment-k8s/tree/main/configurations" target="_blank">deploymnet-k8s//configurations</a></li>
   <br/>
   <li>(Optional) build helm package - The Github repository already has a Helm package for both the node and volume.  
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh package deployment-k8s/configurations/edgelake_master.yaml</code></pre>
@@ -75,7 +75,7 @@ The configuration is seprated into the 3 parts
 </ul>
 
 <b>Sample Configuration file for Operator Node</a>
-<pre class="=code-frame"><code class="language-shell">metadata:
+<pre class="=code-frame"><code>metadata:
   # Kubernetes Instance namespace
   namespace: default
   # hostname for deployment
