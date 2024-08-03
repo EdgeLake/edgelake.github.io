@@ -193,7 +193,7 @@ on user-defined configurations. The code has 3 basic options:
 <ul>
   <li><i>package</i> - Package both the EdgeLake deployment and volume helm charts
     <pre class="code-frame"><code class="language-shell">helm package edgelake-node
-    helm package edgelake-node-volume</code></pre>
+helm package edgelake-node-volume</code></pre>
   </li>
 
   <li><i>start</i> - Deploy the Helm chart based on user-defined configuration file, then set up Kubernetes port-forwarding. 
