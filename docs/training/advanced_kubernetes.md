@@ -2,6 +2,7 @@
 layout: default
 parent: Training
 title: Advanced Kubernetes
+nav_order: 6
 ---
 # Advanced Kubernetes
 

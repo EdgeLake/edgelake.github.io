@@ -81,7 +81,7 @@ The configuration is seprated into the 3 parts
 </ul>
 
 <b>Sample Configuration file for Operator Node</b>
-<pre class="=code-frame"><code class="language-yaml">metadata:
+<pre class="code-frame"><code class="language-yaml">metadata:
   # Kubernetes Instance namespace
   namespace: default
   # hostname for deployment
