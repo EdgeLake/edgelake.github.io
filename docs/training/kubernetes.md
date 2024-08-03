@@ -2,7 +2,7 @@
 layout: default
 parent: training
 title: Kubernetes
-nav_order: 6
+nav_order: 5
 ---
 # Kubernetes
 
