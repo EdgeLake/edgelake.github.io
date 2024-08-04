@@ -148,10 +148,6 @@ The chart below summarized the attribute names for the JSON payload:
       <td>A list of SQL functions to use which override the default functions.</td>
     </tr>
     <tr>
-      <td>timezone</td>
-      <td>'utc' (default) or 'default' to change time values to local time before the transfer to Grafana.</td>
-    </tr>
-    <tr>
       <td>time_column</td>
       <td>The name of the time column in the Time Series table.</td>
     </tr>
@@ -177,11 +173,19 @@ The chart below summarized the attribute names for the JSON payload:
     </tr>
     <tr>
       <td>timezone</td>
-      <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard.</td>
+      <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard. See details in the **Timezone considerations** section below.</td>
     </tr>
     <tr>
       <td>interval</td>
       <td>Overwrite the intervals calculated by the query process. See details in the <b>increment</b> function detailed below.</td>
+    </tr>
+    <tr>
+      <td>grafana:format_as</td>
+      <td>Determines the format of the returned values.</td>
+    </tr>
+    <tr>
+      <td>grafana:data_points</td>
+      <td>The value <b>fixed</b> presents the returned values using the Grafana Intervals (as detailed in the <b>Query options</b> section. See details in the section **Fixed data points** below.</td>
     </tr>
   </tbody>
 </table>
@@ -189,6 +193,22 @@ The chart below summarized the attribute names for the JSON payload:
 <div class="image-frame">
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
+
+## Timezone considerations
+When a query is issued from the Grafana Dashboard, the timezone is selected by the user (in the dropdown timerange menu).
+The grafana timezone options might not be consistent with the timezones options supported by EdgeLake and if needed, users 
+can specify the timezone in the JSON Payload section.    
+For example, Grafana can issue the value "browser" as a timezone (to indicate that the timezone of the browser is selected).
+However, the query node can be deployed in a different timezone which may lead to inconsistencies.  
+By adding a timezone attribute and a value in the JSON payload, users can associate between the Grafana timezone abbreviation and EdgeLake timezone abbreviation.
+Note that EdgeLake returns the values in the target timezone, and the Grafana timezone needs to represent the same timezone as EdgeLake.    
+The list of timezone abbreviations used by EdgeLake is available [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+The following are additional abbreviation for EdgeLake:
+* **utc** - utc timezone
+* **pt**  - America/Los_Angeles
+* **mt**  - America/Denver
+* **ct**  - America/Chicago
+* **et**  - America/New_York
 
 
 ## Metadata based Visualization - A Network Map
@@ -337,6 +357,29 @@ In the example below, each data point represents 10 minutes interval and provide
 
 }
 </code></pre>
+
+### Fixed data points
+The fixed data points option considers the number of data points specified in the **Grafana Query options**.  
+With this option, the returned data (by an increment function) aligns with the Grafana derived interval (see the **Time Range/max data points** value in the **Query options** of the Grafana dashboard).  
+For every interval, a data point is returned, and if no data point exists in the interval, a null value is returned.    
+
+In the example below, **data_points** are set to **fixed** to indicate a returned value (or null) for each time interval
+and the **interval** attribute maintains the value **dashboard** to indicate that the intervals are to leverage the values from the Grafana dashboard.
+<pre class="code-frame"><code class="language-json">{
+{
+  "type": "increments",
+  "time_column": "insert_timestamp",
+  "value_column": "hw_influent",
+  "functions": ["avg"],
+  "grafana": {
+    "format_as": "timeseries",
+    "data_points" : "fixed"
+  },
+  "1timezone": "pt",
+  "interval" : "dashboard",
+  "trace_level" : 1
+}
+}</code></pre>
 
 ### Considering the Grafana limit  
 When Grafana issues a query it will include a limit. Users need to make sure that the limit is not lower than the number of points returned.    
