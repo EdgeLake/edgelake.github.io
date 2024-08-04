@@ -446,7 +446,9 @@ More information on increments and period types of queries are available in [que
   }
 }</code></pre>
 
-### Trace Options
+## Monitoring and Trace Options
+
+### Tracing Grafana Queries
 
 Users can trace queries that are generated from the Grafana panels as follows:    
 * By setting debug level to 1, the executed query and the number of rows returned are printed on the CLI of the node that services Grafana.   
@@ -463,3 +465,49 @@ Example:
 <pre class="code-frame"><code class="language-json">trace level = 1 grafana</code></pre>
 
 Setting trace level to 0 disables the trace.
+
+### Queries time statistics
+
+Users can view statistics on the queries execution time using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  get queries time
+</code></pre>
+
+Users can reset the statistics using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  reset query timer
+</code></pre>
+
+### Identifying slow queries
+
+Slow queries can be redirected to the query log with the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  set query log profile [n] seconds
+</code></pre>
+
+Whereas **[n]** is a threshold in seconds. Queries with execution time higher than the threshold will be logged to the query log.  
+
+Use the following command to log all queries to the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  set query log
+</code></pre>
+
+Use the following command to retrieve the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  get query log
+</code></pre>
+
+Use the following command to reset the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  reset query log
+</code></pre>
+
+### Info on a query execution
+
+Users can drill to specific queries to find how the query was executed using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  query status
+</code></pre>
+
+Additional information is available int the 
+[Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md) section.
