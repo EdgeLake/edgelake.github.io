@@ -366,7 +366,6 @@ For every interval, a data point is returned, and if no data point exists in the
 In the example below, **data_points** are set to **fixed** to indicate a returned value (or null) for each time interval
 and the **interval** attribute maintains the value **dashboard** to indicate that the intervals are to leverage the values from the Grafana dashboard.
 <pre class="code-frame"><code class="language-json">{
-{
   "type": "increments",
   "time_column": "insert_timestamp",
   "value_column": "hw_influent",
@@ -378,7 +377,6 @@ and the **interval** attribute maintains the value **dashboard** to indicate tha
   "1timezone": "pt",
   "interval" : "dashboard",
   "trace_level" : 1
-}
 }</code></pre>
 
 ### Considering the Grafana limit  
