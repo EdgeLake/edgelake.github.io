@@ -6,7 +6,7 @@ nav_order: 5
 ---
 # Kubernetes
 
-This document demonstrate a deployment of an EdgeLake node as a Kubernetes instance with Minikube and Helm.
+This document demonstrates a deployment of an EdgeLake node as a Kubernetes instance with Minikube and Helm.
 The deployment makes EdgeLake scripts persistent (using PersistentVolumeClaim). In a customer deployment, it is recommended 
 to predefine the services for each Pod.
 
@@ -59,7 +59,7 @@ Steps to deploy an EdgeLake container using the <a href="https://github.com/Edge
   <li>(Optional) build helm package - The Github repository already has a Helm package for both the node and volume.  
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh package deployment-k8s/configurations/edgelake_master.yaml</code></pre>
   </li>
-  <li>Deploy Kubernetes volume and container for EdgeLake Node - the deployment script also enables port-forwarding with an optional specification of which IP to proxy against. 
+  <li>Deploy Kubernetes volume and container for the EdgeLake Node - the deployment script enables port-forwarding with and optional specification of the IP that identifies the proxy. 
 If an address is not set, then the port-forwarding is done against localhost (127.0.0.1).
     <pre class="code-frame"><code class="language-shell">bash deploy_node.sh start deployment-k8s/configurations/edgelake_master.yaml [--address={INTERNAL_IP}]</code></pre>
   </li>
@@ -71,11 +71,8 @@ If an address is not set, then the port-forwarding is done against localhost (12
 
 ## Configuration file
 
-EdgeLake is a unified program designed to adapt its behavior dynamically based on its configuration settings. Unlike 
-docker configurations, Kubernetes configuration file also consists of Kubernetes package configruation information.
-
 Since Kubernetes containers use a unique internal IP with each deployment, we recommend setting the machine's internal
-IP address as the overlay IP value in the configurations; otherwise a new policy will be declared when the node reboots. 
+IP address as the overlay IP value in the configurations; otherwise a new EdgeLake policy will be declared when the EdgeLake node reboots. 
 
 The configuration is seprated into the 3 parts
 <ul>
@@ -214,8 +211,8 @@ The script will wait for the deployment to finish before setting up port-forward
     <li>Install deployment
       <pre class="code-frame"><code class="language-shell">helm install ./edgelake-node-0.0.0.tgz -f ${CONFIG_FILE} --name-template ${APP_NAME}</code></pre>
     </li>
-    <li>Declare port forwarding  -  the decision which port(s) to open port-forwaring for depends whether the port is 
-trying to communicate with things outside the Kubeernetes network. The deploy_node.sh script will open ports for TCP, 
+    <li>Declare port forwarding  -  the port(s) to open for port-forwarding depends on whether the port is 
+trying to communicate with services outside the Kubernetes network. The deploy_node.sh script will open ports for the EdgeLake services: TCP, 
 REST and Broker (if set).
   <pre class="code-frame"><code class="language-shell"># example without a specified IP address  
 kubectl port-forward -n ${NAMESPACE} service/${SERVICE_NAME} ${ANYLOG_SERVER_PORT}:${ANYLOG_SERVER_PORT} > /dev/null 2>&1 &

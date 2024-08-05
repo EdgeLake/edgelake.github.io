@@ -16,9 +16,9 @@ and ensures load balancing across the pods in the service.
 
 ### Configuring the network services on the EdgeLake node
 
-Since dynamic ClusterIP generates a new IP whenever a pod is deployed, this causes a issue with EdgeLake's metadata 
-(hosted in a blockchain or a master node) as each new IP will generate a new policy. To resolve this issue, and avoid 
-policy updates, specify the host's internal IP as the `Virtual IP` value. 
+EdgeLake assumes static IPs as the IPs are registered in the EdgeLake Metadata and serve as a directory to locate the 
+members of the EdgeLake Network.  
+To assign static IPs, specify the host's internal IP as the `Virtual IP` value.
 
 The following chart summarizes the setup:
 <table>
@@ -93,11 +93,12 @@ are not removed.
 ## Sample Node Policy for Kubernetes
 When a node gets deployed, it either generates a new configuration policy or utilizes an existing one. 
 
-Values in the configuration policy are relatively set, that way when a deployment is restarted a new policy will not be 
-declared for the node due to the changing virtual IP. As for the local IP in the (master) node policy, we assume the 
-service name will not change. The configuration policy also consists of calls to scripts that configure the node. The 
-scripts consist of connecting to logical database, declaring policy, associating the EdgeLake instance with 
-master node / blockchain, and declaring node monitoring. 
+Notes:
+1. For EdgeLake Nodes, use static IPs, as these are stored in the shared metadata to serve as a directory to identify and locate nodes in the network.
+2. The IP of the EdgeLake Master Node (if used) serves as an identifier of the network (and needs to be static).
+3. The configuration policy below calls to scripts that are hosted on the local node. These scripts 
+include native EdgeLake commands to declare and connect to database, declare policy, associating the EdgeLake instance with the network
+and declaring local monitoring. 
 
 <pre class="code-frame"><code class="language-json">{'config' : {'name' : 'operator-iotech-configs',
     'company' : 'AnyLog Co.',
@@ -130,22 +131,3 @@ master node / blockchain, and declaring node monitoring.
         'if !deploy_local_script == true then process !local_scripts/local_script.al'
     ],
 }}</code></pre>
-
-The sample JSON for (operator) node policy is set to have communication between EdgeLake nodes to be set to binding. 
-When the communication is set to not-binding, the external IP (23.92.28.183) will be set to ip key in the policy, and 
-the Kubernetes service IP (edgelake-operator-service) will be set to local_ip (Kubrnetes internal IP).
-
-
-<pre class="code-frame"><code class="language-json">{'operator' : {'name' : 'anylog-operator1',
-    'company' : 'AnyLog Co.',
-    'ip' : '23.92.28.183',
-    'local_ip' : '192.168.10.23',
-    'port' : 32148,
-    'rest_port' : 32149,
-    'broker_port' : 32150,
-    'cluster' : '4f4b20b76a674bd63d590af850d82143',
-    'loc' : '33.7490,-84.3880',
-    'country' : 'US',
-    'city' : 'Atlanta',
-'}}</code></pre>
-
