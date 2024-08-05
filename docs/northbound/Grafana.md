@@ -148,10 +148,6 @@ The chart below summarized the attribute names for the JSON payload:
       <td>A list of SQL functions to use which override the default functions.</td>
     </tr>
     <tr>
-      <td>timezone</td>
-      <td>'utc' (default) or 'default' to change time values to local time before the transfer to Grafana.</td>
-    </tr>
-    <tr>
       <td>time_column</td>
       <td>The name of the time column in the Time Series table.</td>
     </tr>
@@ -177,11 +173,19 @@ The chart below summarized the attribute names for the JSON payload:
     </tr>
     <tr>
       <td>timezone</td>
-      <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard.</td>
+      <td>Overwrite the default timezone. Note that the same timezone needs to be set on the Grafana dashboard. See details in the **Timezone considerations** section below.</td>
     </tr>
     <tr>
       <td>interval</td>
       <td>Overwrite the intervals calculated by the query process. See details in the <b>increment</b> function detailed below.</td>
+    </tr>
+    <tr>
+      <td>grafana:format_as</td>
+      <td>Determines the format of the returned values.</td>
+    </tr>
+    <tr>
+      <td>grafana:data_points</td>
+      <td>The value <b>fixed</b> presents the returned values using the Grafana Intervals (as detailed in the <b>Query options</b> section. See details in the section **Fixed data points** below.</td>
     </tr>
   </tbody>
 </table>
@@ -189,6 +193,22 @@ The chart below summarized the attribute names for the JSON payload:
 <div class="image-frame">
     <img src="../../../imgs/grafana_dashboard_layout.png" alt="Grafana Page Layout" />
 </div> 
+
+## Timezone considerations
+When a query is issued from the Grafana Dashboard, the timezone is selected by the user (in the dropdown timerange menu).
+The grafana timezone options might not be consistent with the timezones options supported by EdgeLake and if needed, users 
+can specify the timezone in the JSON Payload section.    
+For example, Grafana can issue the value "browser" as a timezone (to indicate that the timezone of the browser is selected).
+However, the query node can be deployed in a different timezone which may lead to inconsistencies.  
+By adding a timezone attribute and a value in the JSON payload, users can associate between the Grafana timezone abbreviation and EdgeLake timezone abbreviation.
+Note that EdgeLake returns the values in the target timezone, and the Grafana timezone needs to represent the same timezone as EdgeLake.    
+The list of timezone abbreviations used by EdgeLake is available [here](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).  
+The following are additional abbreviation for EdgeLake:
+* **utc** - utc timezone
+* **pt**  - America/Los_Angeles
+* **mt**  - America/Denver
+* **ct**  - America/Chicago
+* **et**  - America/New_York
 
 
 ## Metadata based Visualization - A Network Map
@@ -230,7 +250,7 @@ The chart below summarized the attribute names for the JSON payload:
 ## SQL Query
 
 The following SQL query returns the last values ingested by the database.
-Note that without the limit, the entire tables' data is returned, and even if a time range is added, it may include a huge
+Note that without the limit, the entire table's data is returned, and even if a time range is added, it may include a huge
 number of rows.
 
 The **increment** and **period** pushdown functions detailed below consider all relevant data while also allowing control over the volume of data returned.
@@ -338,6 +358,27 @@ In the example below, each data point represents 10 minutes interval and provide
 }
 </code></pre>
 
+### Fixed data points
+The fixed data points option considers the number of data points specified in the **Grafana Query options**.  
+With this option, the returned data (by an increment function) aligns with the Grafana derived interval (see the **Time Range/max data points** value in the **Query options** of the Grafana dashboard).  
+For every interval, a data point is returned, and if no data point exists in the interval, a null value is returned.    
+
+In the example below, **data_points** are set to **fixed** to indicate a returned value (or null) for each time interval
+and the **interval** attribute maintains the value **dashboard** to indicate that the intervals are to leverage the values from the Grafana dashboard.
+<pre class="code-frame"><code class="language-json">{
+  "type": "increments",
+  "time_column": "insert_timestamp",
+  "value_column": "hw_influent",
+  "functions": ["avg"],
+  "grafana": {
+    "format_as": "timeseries",
+    "data_points" : "fixed"
+  },
+  "1timezone": "pt",
+  "interval" : "dashboard",
+  "trace_level" : 1
+}</code></pre>
+
 ### Considering the Grafana limit  
 When Grafana issues a query it will include a limit. Users need to make sure that the limit is not lower than the number of points returned.    
 Note that the trace option provides the info on the number of points returned to Grafana.
@@ -405,7 +446,9 @@ More information on increments and period types of queries are available in [que
   }
 }</code></pre>
 
-### Trace Options
+## Monitoring and Trace Options
+
+### Tracing Grafana Queries
 
 Users can trace queries that are generated from the Grafana panels as follows:    
 * By setting debug level to 1, the executed query and the number of rows returned are printed on the CLI of the node that services Grafana.   
@@ -422,3 +465,49 @@ Example:
 <pre class="code-frame"><code class="language-json">trace level = 1 grafana</code></pre>
 
 Setting trace level to 0 disables the trace.
+
+### Queries time statistics
+
+Users can view statistics on the queries execution time using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  get queries time
+</code></pre>
+
+Users can reset the statistics using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  reset query timer
+</code></pre>
+
+### Identifying slow queries
+
+Slow queries can be redirected to the query log with the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  set query log profile [n] seconds
+</code></pre>
+
+Whereas **[n]** is a threshold in seconds. Queries with execution time higher than the threshold will be logged to the query log.  
+
+Use the following command to log all queries to the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  set query log
+</code></pre>
+
+Use the following command to retrieve the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  get query log
+</code></pre>
+
+Use the following command to reset the query log:
+<pre class="code-frame"><code class="language-anylog"> 
+  reset query log
+</code></pre>
+
+### Info on a query execution
+
+Users can drill to specific queries to find how the query was executed using the following command:
+<pre class="code-frame"><code class="language-anylog"> 
+  query status
+</code></pre>
+
+Additional information is available int the 
+[Profiling and Monitoring Queries](https://github.com/AnyLog-co/documentation/blob/master/profiling%20and%20monitoring%20queries.md) section.
