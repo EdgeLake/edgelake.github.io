@@ -330,7 +330,13 @@ An increment query is executed on each participating node as follows:
 
 ### The number of time points returned
 
-Unless specified, EdgeLake will determine an optimized number of points returned based on the time interval.  
+The number of points returned to an increment function determines on the time intervals that are considered.  
+With Grafana, 3 options are available:
+1. Not specifying the time intervals - in this case, EdgeLake will determine an optimized time interval.
+2. Specifying a time interval (in the JSON Payload using the attribute key **interval** with the interval value,
+   for example: "interval" : "3 minutes", or in the query statement, for example: **increments(minute,1,timestamp)**).
+3. Using the time intervals provided by Grafana (specify the value: **dashboard** for the key **interval**).  
+
 To see the optimized value, add ```"trace_level" : 1``` to the JSON Payload. The Query node displays the increment details.  
 Here is an output example where a point is returned for every 1 hour interval:
 
