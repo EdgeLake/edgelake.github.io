@@ -144,7 +144,7 @@ The following example receives timestamp / value data from AnyLog's running <i>M
 
 <h3>Other Components of MQTT  / Message Client</h3>
 
-**QoS - Quality of Service**: Technologies that work on a network to control traffic and ensure the performance of critical applications with limited network capacity
+<b>QoS - Quality of Service</b>: Technologies that work on a network to control traffic and ensure the performance of critical applications with limited network capacity
 <ol start="1">
     <ul>
         <li> <b>QoS 0</b>: No guarantee of delivery. The recipient does not acknowledge receipt of the message. The value serves as the default value.</li>
@@ -153,12 +153,13 @@ The following example receives timestamp / value data from AnyLog's running <i>M
     </ul>
 </ol>
 
-The _QoS_ value can be set as part of either the topic information and/or the broker sending the data into EdgeLake. 
+The <i>QoS</i> value can be set as part of either the topic information and/or the broker sending the data into EdgeLake. 
 
-**What is <code class="language-anylog">bring</code> command**: 
 
-The <code class="language-anylog">bring</code> command is an EdgeLake command that extracts data  from a JSON structure. 
-The message data is structured in JSON and the _bring_ command is applied to the message to retrieve the needed data. 
+<b>What is <code class="language-anylog">bring</code> command<b/>: 
+
+The <i>bring</i> command is an EdgeLake command that extracts data  from a JSON structure. 
+The message data is structured in JSON and the <i>bring</i> command is applied to the message to retrieve the needed data. 
 The bring command is used in the same way it is being used in the blockchain commands. The command usage is explained at: 
 <a href="https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation" target="_blaank">JSON Data Transformation</a>>
 
