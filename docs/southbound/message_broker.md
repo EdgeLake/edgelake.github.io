@@ -124,7 +124,7 @@ To connect to a broker, the broker URL is mandatory, and the rest depends on the
     </tr>
     <tr>
         <td>column.name.type</td>
-        <td>The column name and column type that is associated with the data extracted from the message. The column is associated with the bring command that details the rule to extract the column data. Alternatively, users can define column as follows: <code class="language-anylog">column.value=(type=[Value type] and value="bring [key name]")</code></td>
+        <td>The column name and column type that is associated with the data extracted from the message.</td>
         <td><code class="language-anylog">column.column name].[data_type] = "bring [JSON key name]"</code> <br/><br/> <code class="language-anylog">column.column name] = (type=[data_type] and value="bring [JSON key name]")</code></td>
         <td>Supported types: str, float, int and bool</td>
     </tr>
