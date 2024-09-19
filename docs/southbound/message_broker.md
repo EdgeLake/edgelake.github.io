@@ -29,9 +29,9 @@ EdgeLake instance.
 On the EdgeLake instance, messages are mapped to JSON structures and aggregated to files that are treated  according to 
 the configuration of the node. For example, the data can be ingested to a local database or send to a different node. 
 The message data on the AnyLog instance is treated as <b>streaming data</b>, this process is explained at 
-<a href="https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode" target="_blank">File Mode and Streaming Mode</a></pre>
+<a href="https://github.com/AnyLog-co/documentation/blob/master/adding%20data.md#file-mode-and-streaming-mode" target="_blank">File Mode and Streaming Mode</a>
 
-### The Command Structure
+<h3>The Command Structure</h3> 
 <p align="justified">The command <code class="language-javascript">run msg client where ...</code> enables the message
 client process to accept data from the local message broker and / or an third-party message broker. 
 
@@ -173,13 +173,13 @@ dependency on a third party message broker platform.
 The process of using an AnyLog node as a message broker is similar to the process of using a third party message broker 
 and is as follows:
 <ul>
-    <li>Configuring an AnyLog node as a message broker</li>
+    <li>Configuring an EdgeLaake node as a message broker</li>
     <li>Subscribing to the published topics and mapping the data to the needed schema - this process is using the same 
 command options as the <a href="#subscribing-to-a-third-party-broker">Subscribing to a third party broker</a> process.</li>
     <li>The 
 <a href="https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process" target="_blank">Streamer Process</a> 
 needs to be enabled.
-    <pre class="code-frame"><code class="language-anylog">run streamer<br/>
+    <pre class="code-frame"><code class="language-anylog">run streamer
 get streaming</code></pre>
 </li>
 </ul>
