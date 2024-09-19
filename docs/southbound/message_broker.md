@@ -6,7 +6,7 @@ nav_order: 1
 ---
 # Message Broker
 
-EdgeLake has built-in ability to act as both broker and client for message protocols such as _MQTT_ and [_Kafka_](kafka.md). 
+EdgeLake has built-in ability to act as both broker and client for message protocols such as _MQTT_ and [_Kafka_](kafka.html). 
 
 the ability is separated into 3 type of configurations for a given node:
 <ul>
@@ -58,8 +58,10 @@ The subscription details of each topic are enclosed in the parenthesis and inclu
         { other values }
     )&gt;</code></pre>
 
-### Connection Params
+<h3>Connection Params</h3>
+
 To connect to a broker, the broker URL is mandatory, and the rest depends on the type of broker, and the way the broker is configured.
+
 <table>
     <tr>
         <th>Option</th>
@@ -83,7 +85,7 @@ To connect to a broker, the broker URL is mandatory, and the rest depends on the
     </tr>
 </table>
 
-### Configuration & Topic Params
+<h3> Configuration & Topic Params </h3>
 
 <table>
     <tr>
@@ -103,13 +105,12 @@ To connect to a broker, the broker URL is mandatory, and the rest depends on the
     <tr>
         <td>dbms</td>
         <td>The logical database that contains the topic's data or a bring command to extract the dbms name.</td>
-        <td><code class="language-anylog">dbms=value</code> OR <code class="language-anylog">dbms="bring [JSON key name]"</code></td>
+        <td><code class="language-anylog">dbms=value</code> <br/><br/> <code class="language-anylog">dbms="bring [JSON key name]"</code></td>
         <td>Uppercase letters are replaced to lowercase and space is replaced by underscore</td>
     </tr>
     <tr>
         <td>log</td>
         <td>A true/false value to output the broker log messages.</td>
-        <td>Uppercase letters are replaced to lowercase and space is replaced by underscore</td>
     </tr>
     <tr>
         <td>table</td>
@@ -125,12 +126,13 @@ To connect to a broker, the broker URL is mandatory, and the rest depends on the
         <td>column.name.type</td>
         <td>The column name and column type that is associated with the data extracted from the message. The column is associated with the bring command that details the rule to extract the column data. Alternatively, users can define column as follows: <code class="language-anylog">column.value=(type=[Value type] and value="bring [key name]")</code></td>
         <td><code class="language-anylog">column.column name].[data_type] = "bring [JSON key name]"</code> <br/><br/> <code class="language-anylog">column.column name] = (type=[data_type] and value="bring [JSON key name]")</code></td>
-        <td>Supported types: _str_, _float_, _int_ and _bool_</td>
+        <td>Supported types: str, float, int and bool</td>
     </tr>
 </table>
 
-### Sample MQTT Call
-The following example receives timestamp / value data from AnyLog's running _MQTT_ dummy data generator
+<h3>Sample MQTT Call</h3>
+
+The following example receives timestamp / value data from AnyLog's running <i>MQTT</i> dummy data generator
 
 <pre class="code-frame"><code class="language-anylog">&lt;run msg client where broker=139.144.46.246 and port=1883 and user=1883 and password=mqtt4AnyLog! and log=false and topic=(
     name=anylog-demo and
@@ -140,7 +142,7 @@ The following example receives timestamp / value data from AnyLog's running _MQT
     column.value=(type=float and value="bring [value]")
 )&gt;</code></pre>
 
-### Other Components of MQTT  / Message Client
+<h3>Other Components of MQTT  / Message Client</h3>
 
 **QoS - Quality of Service**: Technologies that work on a network to control traffic and ensure the performance of critical applications with limited network capacity
 <ol start="1">
@@ -160,7 +162,6 @@ The message data is structured in JSON and the _bring_ command is applied to the
 The bring command is used in the same way it is being used in the blockchain commands. The command usage is explained at: 
 <a href="https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation" target="_blaank">JSON Data Transformation</a>>
 
- 
 
 ## Configuring an AnyLog node as a message broker
 
