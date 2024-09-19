@@ -162,9 +162,97 @@ The <i>bring</i> command is an EdgeLake command that extracts data  from a JSON 
 The message data is structured in JSON and the <i>bring</i> command is applied to the message to retrieve the needed data. 
 The bring command is used in the same way it is being used in the blockchain commands. The command usage is explained at: 
 <a href="https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation" target="_blaank">JSON Data Transformation</a>
-<br/>
-<br/>
-## Configuring an AnyLog node as a message broker
-<br/>
-<br/>
+
+## Configuring an EdgeLake node as a message broker
+By enabling the EdgeLake <a href="../commands/backgound_services.html#message-broker-services">Message Broker</a> 
+functionality on a particular node, the node can serve as an MQTT Broker. 
+
+By configuring a node as message broker, data can be transferred from a client to an EdgeLake (operator) node without 
+dependency on a third party message broker platform.
+
+The process of using an AnyLog node as a message broker is similar to the process of using a third party message broker 
+and is as follows:
+<ul>
+    <li>Configuring an AnyLog node as a message broker</li>
+    <li>Subscribing to the published topics and mapping the data to the needed schema - this process is using the same 
+command options as the <a href="#subscribing-to-a-third-party-broker">Subscribing to a third party broker</a> process.</li>
+    <li>The 
+<a href="https://github.com/AnyLog-co/documentation/blob/master/background%20processes.md#streamer-process" target="_blank">Streamer Process</a> 
+needs to be enabled.
+    <pre class="code-frame"><code class="language-anylog">run streamer<br/>
+get streaming</code></pre>
+</li>
+</ul>
+A detailed configuration example is available in the examples section - 
+<a href="https://github.com/AnyLog-co/documentation/blob/master/examples/Broker%20Setup.md#setting-anylog-as-a-message-broker" target="_blank">Broker Setup</a>.
+
+<h3>Message Broker Configuration</h3>
+The EdgeLake message broker configuration: 
+<pre class="code-frame"><code class="language-anylog">&lt;run message broker where
+    external_ip=!external_ip and external_port=!anylog_broker_port and
+    internal_ip=!ip and internal_port=!anylog_broker_port and
+    bind=false and threads=6&gt;</code></pre>
+
+Details on the run message broker command are available at the Message Broker section in the 
+<a href="../commands/backgound_services.html#message-broker-services">Background Processes document</a>.
+
+<h3>Subscribe to Message Broker</h3> 
+Subscribe to topics assigned to messages received on the broker and detail the mapping of the messages to the needed 
+structure. This process is identical to the <a href="#subscribing-to-a-third-party-broker">Subscribing to a third 
+party broker</a> whereas rather than specifying an IP and Port of the 3rd party broker, the broker is identified by the 
+keyword local.
+
+<pre class="code-frame"><code class="language-anylog">&lt;run mqtt client where 
+    broker = local and
+    log=false and
+    topic=(
+        name=[Topic name] and
+        dbms=[Database to store data in] and 
+        table=[Logical table name] and
+        column.timestamap.timestamp=[Timestamp key in JSON / now()]
+        { other values }
+    )&gt;</code></pre>
+<b>Note</b>: the key value pair broker=local replace the assignment of an IP and port (when 3rd parties brokers are used).
+
+<h3>Example</h3>
+The following steps should be done within the Operator CLI. 
+<ol start="1">
+    <li>Connect to Message broker, if not set in configurations</li>
+    <pre class="code-frame"><code class="language-anylog">&lt;run message broker where
+    external_ip=!external_ip and external_port=32150 and
+    internal_ip=!ip and internal_port=32150 and
+    bind=false and threads=6&gt;</code></pre>
+    <li>Subscribe to a topic - <i>dummy-local-broekr</i></li>
+    <pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
+    broker = local and 
+    log=false and
+    and topic = (
+        name = dummy-local-broker and 
+        dbms = !default_dbms and 
+        table = "bring [metadata][machine_name] _ [metadata][serial_number]" and 
+        column.timestamp.timestamp = "bring [ts]" and 
+        column.value.int = "bring [value]"
+    )&gt;</code></pre>
+    <li>Define a message</li>
+<pre class="code-frame"><code class="language-json">&lt;message = {"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}}&gt;</code></pre>
+    <li>Publish Message</li>
+    <pre class="code-frame"><code class="language-anylog">&lt;mqtt publish where 
+    broker = !ip and 
+    port = 32150 and 
+    topic = dummy-local-broker and 
+    message = !message&gt;</code></pre>
+</ol>
+
+
+
+
+
+
 ## AnyLog as a broker receiving REST commands 
