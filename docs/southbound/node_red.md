@@ -2,7 +2,7 @@
 layout: default
 title: Node-RED
 parent: Southbound
-nav_order: 1
+nav_order: 2
 ---
 # Node-RED
 [Node-RED](https://nodered.org/) is an open-source flow-based programming tool designed for connecting hardware devices, 

@@ -2,7 +2,7 @@
 layout: default
 title: EdgeX 
 parent: Southbound
-nav_order: 3
+nav_order: 4
 ---
 # Using EdgeX as the data source connector
 

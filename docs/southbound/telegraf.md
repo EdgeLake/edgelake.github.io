@@ -2,7 +2,7 @@
 layout: default
 parent: Southbound
 title: Telegraf
-nav_order: 2
+nav_order: 3
 ---
 # Telegraf 
 
