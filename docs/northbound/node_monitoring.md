@@ -1,3 +1,9 @@
+---
+layout: default
+title: Monitoring
+parent: Commands
+nav_order: 6
+---
 # Monitoring
 Nodes in the network can collect and monitor information on data and state. The collected information can be retrieved 
 from the node, or collected in a database or send to an aggregator node where data from multiple nodes is aggregated and 
