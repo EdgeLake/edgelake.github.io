@@ -179,7 +179,9 @@ To view monitoring, install & configure <a href="remote_cli.html">Remote-CLI</a>
 
 ### Archive Data
 Monitoring data resides on a given query node until it is updated. There's no historical record, instead users can 
-<code class="language-anylog">stream</code> this data into an operator node.
+<code class="language-anylog">stream</code> this data into an operator node. When deploying (default) monitoring with 
+archiving, the data is stored in <code>monitoring.node_insight</code</code>, partitioned by 12 hours and keeps a record 
+of 36 hours (3 partitions). 
 
 **Sample command**: 
 <pre class="code-frame"><code class="language-anylog">stream !node_insight where dbms=monitoring and table=node_insight</code></pre>
@@ -190,3 +192,15 @@ specific node.
 
 <pre class="code-frame"><code class="language-anylog">run client () sql monitoring format=table "select node_name, status, operational_time, processing_time, elapsed_time, new_rows, total_rows, new_errors, total_errors, avg__rows_sec, timestamp, free_space_0x25, cpu_0x25, packets_recv, packets_sent, network_error FROM node_insight;"</code></pre>
 <div class="image-frame"><img src="../../imgs/remoe_cli_home_stream.png" /></div>
+
+
+### Configuration File
+The configuration file for each node has a section called "Node Monitoring", which allows to enable / disable monitoring and 
+sending monitoring data to operator node(s). 
+<pre class="code-frame"><code class="language-anylog">#--- Node Monitoring --
+# Whether to monitor the node or not
+MONITOR_NODES=true
+# Store monitoring in Operator node(s)
+STORE_MONITORING=false
+# Specify operator name to send data to
+MONITORING_OPERATOR=""</code></pre>
