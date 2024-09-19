@@ -12,7 +12,7 @@ the ability is separated into 3 type of configurations for a given node:
 <ul>
     <li><a href="#subscribing-to-a-third-party-broker">External Broker</a> - Subscribe to a third-party MQTT or Kafka broker</li>
     <li><a href="#configuring-an-anylog-node-as-a-message-broker">Message Broker</a> - receiving published data from a client using standard APIs like MQTT.</li>
-    <li><a href="#anylog-as-a-broker-receiving-rest-commands">REST as Message Broker</a> - receiving REST commands and mapping the data to the needed schema based on the provided topic.</li>
+    <li><a href="#edgelake-as-a-broker-receiving-rest-commands">REST as Message Broker</a> - receiving REST commands and mapping the data to the needed schema based on the provided topic.</li>
 </ul>
 
 In all cases, user are able to do the following:
@@ -251,8 +251,57 @@ The following steps should be done within the Operator CLI.
 </ol>
 
 
+## EdgeLake as a broker receiving REST commands 
 
+This option allows mapping of data streamed to EdgeLake using the REST API to the needed schema based on a provided topic. 
+This option requires 2 special settings:
+<ul>
+    <li>The subscription identifies the key broker by the value rest (ex. <code>broker=rest</code>). Data delivered to 
+the REST server using POST command will be mapped as defined in the topic assignment</li>
+    <li>The target API is identified using the user-agent keyword, for example: user-agent=anylog will 
+deliver the call to the EdgeLake native process.</li>
+</ul>
 
-
-
-## AnyLog as a broker receiving REST commands 
+<h3>Example</h3>
+<ol start="0">
+    <li>Enable REST service - this step is done automatically when deploying EdgLake (default for Operator is 32149)</li>
+    <li>Subscribe to the MQTT topic against the REST service</li>
+<pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
+    broker = rest and 
+    user-agent=anylog and
+    topic = (
+        name = test and 
+        dbms = !default_dbms and 
+        table = "bring [metadata][machine_name] _ [metadata][serial_number]" and 
+        column.timestamp.timestamp = "bring [ts]" and 
+        column.value.int = "bring [value]"
+    )&gt;</code></pre>
+    <li>Publish data using REST</li>
+<pre class="code-frame"><code class="language-shell">curl --location --request POST 'http://127.0.0.1:32149' \
+--header 'User-Agent: AnyLog/1.23' \
+--header 'command: data' \
+--header 'topic: test' \
+--header 'Content-Type: text/plain' \
+--data-raw '[{"value":210,
+            "ts":1607959427550,
+            "protocol":"modbus",
+            "measurement":"temp02",
+            "metadata":{
+                    "company":"Anylog",
+                    "machine_name":"cutter 23",
+                    "serial_number":"1234567890"}},
+            {"value":210,
+                        "ts":1607959427550,
+                        "protocol":"modbus",
+                        "measurement":"temp02",
+                        "metadata":{
+                                "company":"Anylog",
+                                "machine_name":"cutter 23",
+                                "serial_number":"1234567890"}}
+            ]'</code></pre>
+    <li>View data coming in</li>
+    <pre class="code-frame"><code class="language-anylog"># Statistics on the REST calls.
+get rest calls 
+# Statistics on the streaming processes.
+get streaming</code></pre>
+</ol>
