@@ -397,6 +397,78 @@ get scheduler 1
 
 **Details:** [View Scheduled Commands](https://github.com/AnyLog-co/documentation/blob/master/alerts%20and%20monitoring.md#view-scheduled-commands).
 
+### Continuous
+
+The command <code class="language-anylog>continuous</code> allows to run (monitoring) commands in a repeatable manner with
+the results to the stdout. If a key on the keyboard is hit, continuous terminates.
+
+<pre class="code-frame"><code class="language-anylog">continuous [time] [list of commands (comma separated commands)]</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command option</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-anylog">cpu</code></td>
+      <td>CPU usage</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">cpu anylog</code></td>
+      <td>CPU usage of AnyLog.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">cpu [process name]</code></td>
+      <td>CPU usage of the named process.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get cpu usage</code></td>
+      <td>Usage per each CPU.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get operator</code></td>
+      <td>The operator status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get operator summary</code></td>
+      <td>Summary of the operator status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get streaming</code></td>
+      <td>The streaming buffers status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get query pool</code></td>
+      <td>The query threads status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get operator pool</code></td>
+      <td>The operator threads status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get rest pool</code></td>
+      <td>The REST threads status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get tcp pool</code></td>
+      <td>The TCP threads status.</td>
+    </tr>
+    <tr>
+      <td><code class="language-anylog">get msg pool</code></td>
+      <td>The message broker threads status.</td>
+    </tr>
+  </tbody>
+</table>
+
+**Examples**: 
+<pre class="code-frame"><code class="language-anylog">continuous cpu, cpu anylog, cpu postgres, get operator summary, get cpu usage</code></pre>
+
+Any command can be listed as a single command. For example, the query below repeats every 10 seconds:
+<pre class="code-frame"><code class="language-anylog">continuous 10 run client () sql edgex select max(timestamp), count(*) from rand_data where timestamp >= NOW() - 5 minutes</code></pre>
+
 
 ## Blob Archiver Services
 The Blob Archiver is a service that manage blob data on the node.
