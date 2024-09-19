@@ -119,9 +119,10 @@ get node info swap_memory free</code></pre>
 
 ## Monitoring Nodes
 Within the default deployment of EdgeLake, the process for node monitoring is automatically deployed as a scheduled policy.
-This data is sent to **all** query node(s) to be viewed via <a href="remote_cli.html">Remote-CLI</a>. A user deploying EdgeLake has
-the option to either disable it **or** store also send the data to an operator node, for it to be queried. The script
-can be found in our <a href="https://github.com/AnyLog-co/deployment-scripts/blob/main/demo-scripts/monitoring_policy.al" target="_blank">deployment-scripts repository</a>.
+This data is sent to **all** query node(s) to be viewed via <a href="remote_cli.html">Remote-CLI</a>. A user deploying 
+EdgeLake has the option to either disable it **or** also send the (monitoring) data to an operator node, for it to be 
+queried. The script can be found in our 
+<a href="https://github.com/AnyLog-co/deployment-scripts/blob/main/demo-scripts/monitoring_policy.al" target="_blank">deployment-scripts repository</a>.
 
 ### The Commands
 Node insights are run in a scheduled process every 30 seconds, and consists of the following information: 
@@ -175,3 +176,17 @@ To view monitoring, install & configure <a href="remote_cli.html">Remote-CLI</a>
     <li>View node insight across the network - A red box indicates the param has dropped below or exceed 50%</li>
 <div class="image-frame"><img src="../../imgs/remoe_cli_home_complete.png" /></div>
 </ol>
+
+### Archive Data
+Monitoring data resides on a given query node until it is updated. There's no historical record, instead users can 
+<code class="language-anylog">stream</code> this data into an operator node.
+
+**Sample command**: 
+<pre class="code-frame"><code class="language-anylog">stream !node_insight where dbms=monitoring and table=node_insight</code></pre>
+
+
+When data is streamed into an Operator node, then users can easily query historical insight about the entire network or a
+specific node. 
+
+<pre class="code-frame"><code class="language-anylog">run client () sql monitoring format=table "select node_name, status, operational_time, processing_time, elapsed_time, new_rows, total_rows, new_errors, total_errors, avg__rows_sec, timestamp, free_space_0x25, cpu_0x25, packets_recv, packets_sent, network_error FROM node_insight;"</code></pre>
+<div class="image-frame"><img src="../../imgs/remoe_cli_home_stream.png" /></div>
