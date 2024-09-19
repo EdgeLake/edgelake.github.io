@@ -157,7 +157,7 @@ The <i>QoS</i> value can be set as part of either the topic information and/or t
 <br/>
 <br/>
 <b>What is <code class="language-anylog">bring</code> command</b>: 
-
+<br/>
 The <i>bring</i> command is an EdgeLake command that extracts data  from a JSON structure. 
 The message data is structured in JSON and the <i>bring</i> command is applied to the message to retrieve the needed data. 
 The bring command is used in the same way it is being used in the blockchain commands. The command usage is explained at: 
