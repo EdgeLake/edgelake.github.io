@@ -399,7 +399,7 @@ get scheduler 1
 
 ### Continuous
 
-The command <code class="language-anylog>continuous</code> allows to run (monitoring) commands in a repeatable manner with
+The command <code class="language-anylog">continuous</code> allows to run (monitoring) commands in a repeatable manner with
 the results to the stdout. If a key on the keyboard is hit, continuous terminates.
 
 <pre class="code-frame"><code class="language-anylog">continuous [time] [list of commands (comma separated commands)]</code></pre>
