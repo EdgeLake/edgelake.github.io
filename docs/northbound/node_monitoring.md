@@ -41,9 +41,11 @@ get operator stat format = [table | json]</code></pre>
 <pre class="code-frame"><code class="language-anylog">get streaming where format=[table | json]</code></pre>
 </ul>
 
-<h3>Query Performance</h3>
+<h3>Query Monitoring</h3>
 Similar to monitor data coming in, users can also monitor the performance of queries. This is done by 2 commands: 
 <ul>
+    <li>Status of the executed query or queries</li>
+<pre class="code-frame"><code class="language-anylog">query status [all/ID]</code></pre>
     <li>Status of query threads assigned.</li>
 <pre class="code-frame"><code class="language-anylog">get query pool</code></pre>
     <li>Statistics on queries execution time</li>
@@ -115,7 +117,32 @@ get node info net_io_counters bytes_recv
 get node info swap_memory free</code></pre>
 </ul>
 
-## Monitoring Node Health 
+## Monitoring Nodes
+Within the default deployment of EdgeLake, the process for node monitoring is automatically deployed as a scheduled policy.
+This data is sent to **all** query node(s) to be viewed via <a href="remote_cli.html">Remote-CLI</a>. A user deploying EdgeLake has
+the option to either disable it **or** store also send the data to an operator node, for it to be queried. The script
+can be found in our <a href="https://github.com/AnyLog-co/deployment-scripts/blob/main/demo-scripts/monitoring_policy.al" target="_blank">deployment-scripts repository</a>.
+
+### The Commands
+Node insights are run in a scheduled process every 30 seconds, and consists of the following information: 
+
+<ul>
+    <li>General statistics on the enabled services</li>
+<pre class="code-frame"><code class="language-anylog">get stats where service = operator and topic = summary  and format = json</code></pre>
+    <li>Free disk percentage</li>
+<pre class="code-frame"><code class="language-anylog">get disk percentage .</code></pre>
+    <li>Used CPU percentage</li>
+<pre class="code-frame"><code class="language-anylog">get node info cpu_percent</code></pre>
+    <li>Network packets received</li>
+<pre class="code-frame"><code class="language-anylog">get node info net_io_counters packets_recv</code></pre>
+    <li>Network packets sent</li>
+<pre class="code-frame"><code class="language-anylog">get node info net_io_counters packets_sent</code></pre>
+    <li>Total Network Error</li>
+<pre class="code-frame"><code class="language-anylog">get node info net_io_counters errin
+get node info net_io_counters errout</code></pre>
+</ul>
+
+**Sample Output**:
 <pre class="code-frame"><code class="language-json">{
     'node name' : 'anylog-query@172.232.20.156:32348',
     'status' : 'Active',
@@ -135,16 +162,16 @@ get node info swap_memory free</code></pre>
     'Network Error' : 0
 }</code></pre>
 
-## Setting Up Monitoring Data
-The monitoring data is executed using a <a href="../commands/backgound_services.md#the-scheduler-services>scheduled process</a>
-The steps for this process automatically as a policy be run using 
-<a href="https://github.com/AnyLog-co/deployment-scripts/blob/main/demo-scripts/monitoring_policy.al" target="_blank">monitoring policy</a>.
-<pre class="code-frame"><code class="language-anylog">process deployment-scripts/demo-scripts/monitoring_policy.al</code></pre> 
+### View Monitoring
+To view monitoring, install & configure <a href="remote_cli.html">Remote-CLI</a>.
 
-### Steps
-<ul>
-    <li>Get List of query ndoes to store data in</li>
-<pre class="code-frame"><code class="language-anylog">monitoring_ips = blockchain get query bring.ip_port</code></pre>
-    <li></li>
-</ul>
-
+**Steps**:
+<ol start="1">
+    <li>Go into Remote-CLI - http://127.0.0.1:31800</li>
+    <li>Press <i>Monitor</i> button - framed in image</li>
+<div class="image-frame"><img src="../../imgs/remoe_cli_home_monitor.png" /></div>
+    <li>Press <i>Pull</i> button - framed in image</li>
+<div class="image-frame"><img src="../../imgs/remoe_cli_home_pull.png" /></div>
+    <li>View node insight across the network - A red box indicates the param has dropped below or exceed 50%</li>
+<div class="image-frame"><img src="../../imgs/remoe_cli_home_complete.png" /></div>
+</ol>
