@@ -24,6 +24,12 @@ One of the ways to monitor said data is by looking at things like row count and 
 <ul>
     <li>View tables in databases, and the number of rows in each table.</li>
 <pre class="code-frame"><code class="language-anylog">get rows count where dbms = [dbms name] and table = [table name] and format = [table | json] and group = [partition/table]</code></pre>
+    <ul><b>Notes</b>
+        <li>If a dbms is not set, then rows for all tables in all local database will be provided</li>
+        <li>If a dbms is set and table is not, then rows for all tables inn the given database will be provided</li>
+        <li><i>group</i> variable determines if rows count are presented for each partition (the default) or aggregated and presented for each table</li>
+    </ul>
+    <br/>
     <li>View ingestion of data by an Operator node</li>
 <pre class="code-frame"><code class="language-anylog"># General command
 get operator
@@ -45,9 +51,71 @@ Similar to monitor data coming in, users can also monitor the performance of que
 </ul>
 
 <h3>Node Monitoring</h3>
+Like operator and query insight, EdgeLake allows to view the state of the node, even from within Docker / Kubernetes 
+deployment.    
+<ul>
+    <li>Base machine platform information</li>
+<pre class="code-frame"><code class="language-anylog">get platform info</code></pre>
+    <li>Breakdown of Memory resources</li>
+<pre class="code-frame"><code class="language-anylog">get memory info</code></pre>
+    <li>Breakdown of CPU insights</li>
+<pre class="code-frame"><code class="language-anylog"># Number of CPUs 
+get cpu info
+# CPU temperature
+get cpu temperature
+# CPU utilization
+get cpu usage</code></pre>
+    <li>Get monitored information on the current node</li>
+<pre class="code-frame"><code class="language-anylog">get node info [OPTIONS]</code></pre>
+</ul>
 
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>cpu_percent</td>
+      <td>A number representing the current system-wide CPU utilization as a percentage.</td>
+    </tr>
+    <tr>
+      <td>cpu_times</td>
+      <td>System CPU times, every attribute represents the seconds the CPU has spent in the given mode.</td>
+    </tr>
+    <tr>
+      <td>cpu_times_percent</td>
+      <td>Utilization percentages for each CPU.</td>
+    </tr>
+    <tr>
+      <td>getloadavg</td>
+      <td>Return the average system load over the last 1, 5 and 15 minutes.</td>
+    </tr>
+    <tr>
+      <td>swap_memory</td>
+      <td>Swap memory statistics.</td>
+    </tr>
+    <tr>
+      <td>disk_io_counters</td>
+      <td>System disk I/O statistics.</td>
+    </tr>
+    <tr>
+      <td>net_io_counters</td>
+      <td>Network I/O statistics.</td>
+    </tr>
+  </tbody>
+</table>
+<ul><b>Examples</b>: 
+<pre class="code-frame"><code class="language-anylog">get node info disk_io_counters
+get node info disk_io_counters read_count
+get node info net_io_counters
+get node info net_io_counters bytes_recv
+get node info swap_memory free</code></pre>
+</ul>
 
-
+## Monitoring Node Health 
 <pre class="code-frame"><code class="language-json">{
     'node name' : 'anylog-query@172.232.20.156:32348',
     'status' : 'Active',
@@ -66,9 +134,6 @@ Similar to monitor data coming in, users can also monitor the performance of que
     'Packets Sent' : 201552,
     'Network Error' : 0
 }</code></pre>
-
-
-## Monitoring Node Health 
 
 ## Setting Up Monitoring Data
 The monitoring data is executed using a <a href="../commands/backgound_services.md#the-scheduler-services>scheduled process</a>
