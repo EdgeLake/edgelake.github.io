@@ -154,9 +154,9 @@ The following example receives timestamp / value data from AnyLog's running <i>M
 </ol>
 
 The <i>QoS</i> value can be set as part of either the topic information and/or the broker sending the data into EdgeLake. 
-
-
-<b>What is <code class="language-anylog">bring</code> command<b/>: 
+<br/>
+<br/>
+<b>What is <code class="language-anylog">bring</code> command</b>: 
 
 The <i>bring</i> command is an EdgeLake command that extracts data  from a JSON structure. 
 The message data is structured in JSON and the <i>bring</i> command is applied to the message to retrieve the needed data. 
