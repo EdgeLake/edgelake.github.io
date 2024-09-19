@@ -215,34 +215,40 @@ keyword local.
 <b>Note</b>: the key value pair broker=local replace the assignment of an IP and port (when 3rd parties brokers are used).
 
 <h3>Example</h3>
-The following steps should be done within the Operator CLI. 
-<ol start="1">
-    <li>Connect to Message broker, if not set in configurations</li>
+<p>The following steps should be done within the Operator CLI.</p>
+<ol>
+    <li>Connect to Message broker, if not set in configurations:</li>
     <pre class="code-frame"><code class="language-anylog">&lt;run message broker where
     external_ip=!external_ip and external_port=32150 and
     internal_ip=!ip and internal_port=32150 and
     bind=false and threads=6&gt;</code></pre>
-    <li>Subscribe to a topic - <i>dummy-local-broekr</i></li>
+    
+    <li>Subscribe to a topic - <i>dummy-local-broker</i>:</li>
     <pre class="code-frame"><code class="language-anylog">&lt;run msg client where 
     broker = local and 
     log=false and
-    and topic = (
+    topic = (
         name = dummy-local-broker and 
         dbms = !default_dbms and 
         table = "bring [metadata][machine_name] _ [metadata][serial_number]" and 
         column.timestamp.timestamp = "bring [ts]" and 
         column.value.int = "bring [value]"
     )&gt;</code></pre>
-    <li>Define a message</li>
-<pre class="code-frame"><code class="language-json">&lt;message = {"value":210,
-            "ts":1607959427550,
-            "protocol":"modbus",
-            "measurement":"temp02",
-            "metadata":{
-                    "company":"Anylog",
-                    "machine_name":"cutter 23",
-                    "serial_number":"1234567890"}}&gt;</code></pre>
-    <li>Publish Message</li>
+    
+    <li>Define a message:</li>
+    <pre class="code-frame"><code class="language-json">{
+        "value": 210,
+        "ts": 1607959427550,
+        "protocol": "modbus",
+        "measurement": "temp02",
+        "metadata": {
+            "company": "Anylog",
+            "machine_name": "cutter 23",
+            "serial_number": "1234567890"
+        }
+    }</code></pre>
+    
+    <li>Publish Message:</li>
     <pre class="code-frame"><code class="language-anylog">&lt;mqtt publish where 
     broker = !ip and 
     port = 32150 and 
@@ -250,17 +256,15 @@ The following steps should be done within the Operator CLI.
     message = !message&gt;</code></pre>
 </ol>
 
+<h3>EdgeLake as a Broker Receiving REST Commands</h3>
 
-## EdgeLake as a broker receiving REST commands 
-
-This option allows mapping of data streamed to EdgeLake using the REST API to the needed schema based on a provided topic. 
-This option requires 2 special settings:
+<p>This option allows mapping of data streamed to EdgeLake using the REST API to the needed schema based on a provided topic. 
+This option requires two special settings:</p>
 <ul>
-    <li>The subscription identifies the key broker by the value rest (ex. <code>broker=rest</code>). Data delivered to 
-the REST server using POST command will be mapped as defined in the topic assignment</li>
-    <li>The target API is identified using the user-agent keyword, for example: user-agent=anylog will 
-deliver the call to the EdgeLake native process.</li>
+    <li>The subscription identifies the key broker by the value <code>rest</code> (e.g., <code>broker=rest</code>). Data delivered to the REST server using the POST command will be mapped as defined in the topic assignment.</li>
+    <li>The target API is identified using the user-agent keyword, for example: <code>user-agent=anylog</code> will deliver the call to the EdgeLake native process.</li>
 </ul>
+
 
 <h3>Example</h3>
 <ol start="0">
