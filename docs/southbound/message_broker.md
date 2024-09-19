@@ -161,8 +161,7 @@ The <i>QoS</i> value can be set as part of either the topic information and/or t
 The <i>bring</i> command is an EdgeLake command that extracts data  from a JSON structure. 
 The message data is structured in JSON and the <i>bring</i> command is applied to the message to retrieve the needed data. 
 The bring command is used in the same way it is being used in the blockchain commands. The command usage is explained at: 
-<a href="https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation" target="_blaank">JSON Data Transformation</a>>
-
+<a href="https://github.com/AnyLog-co/documentation/blob/master/json%20data%20transformation.md#json-data-transformation" target="_blaank">JSON Data Transformation</a>
 
 ## Configuring an AnyLog node as a message broker
 
