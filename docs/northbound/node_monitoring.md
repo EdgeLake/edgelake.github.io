@@ -34,9 +34,9 @@ One of the ways to monitor said data is by looking at things like row count and 
 <pre class="code-frame"><code class="language-anylog"># General command
 get operator
 # Operator statistics
-get operator stat format = [table | json]</code></pre> 
+get operator summary</code></pre> 
     <li>Lists the Operator nodes in the network and the tables supported on each node</li>
-<pre class="code-frame"><code class="language-anylog">get data nodes where format=[table | json]</code></pre>
+<pre class="code-frame"><code class="language-anylog">get data nodes</code></pre>
     <li>The streaming buffers status</li>
 <pre class="code-frame"><code class="language-anylog">get streaming where format=[table | json]</code></pre>
 </ul>
@@ -49,7 +49,7 @@ Similar to monitor data coming in, users can also monitor the performance of que
     <li>Status of query threads assigned.</li>
 <pre class="code-frame"><code class="language-anylog">get query pool</code></pre>
     <li>Statistics on queries execution time</li>
-<pre class="code-frame"><code class="language-anylog">get queries time where format=[table | json]</code></pre>
+<pre class="code-frame"><code class="language-anylog">get queries time</code></pre>
 </ul>
 
 <h3>Node Monitoring</h3>
