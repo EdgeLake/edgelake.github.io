@@ -12,7 +12,7 @@ This document lists the steps to deploy a network of 4 nodes (master, query and 
 A detailed description of every step is available in the [Session II](Session%20II%20(Deployment).md) Deployment document
 .
 <div class="video-container">
-  <iframe width="1206" height="678" src="https://www.youtube.com/embed/LNPJCbj3dJY" title="How to Leverage EdgeLake Virtual Data Lake with Power BI and other BI tools" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/DwoE9PUKZRI" title="Installing EdgeLake - Virtual Data Lake at the Edge" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 ## Requirements 

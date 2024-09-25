@@ -10,7 +10,7 @@ The following provides insight as to how to generate graphs and images using [Mi
 The same process can be done with _Excel_ and other Microsoft tools. 
 
 <div class="video-container">
-  <iframe width="1206" height="678" src="https://www.youtube.com/embed/LNPJCbj3dJY" title="How to Leverage EdgeLake Virtual Data Lake with Power BI and other BI tools" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/pvaNv5QtWv0" title="How to Leverage EdgeLake Virtual Data Lake with Power BI and other BI tools" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 
