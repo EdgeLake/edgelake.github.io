@@ -9,6 +9,8 @@ nav_order: 3
 The following provides insight as to how to generate graphs and images using [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/downloads/) with data from EdgeLake. 
 The same process can be done with _Excel_ and other Microsoft tools. 
 
+<iframe width="1206" height="678" src="https://www.youtube.com/embed/LNPJCbj3dJY" title="How to Leverage EdgeLake Virtual Data Lake with Power BI and other BI tools" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+
 ## Sample REST request
 In order to support PowerBI, return data as a list of JSON values without the statistical information.
 
